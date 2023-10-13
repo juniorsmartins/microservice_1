@@ -60,14 +60,33 @@ class PessoaControllerIntegrationTest {
             .andDo(MockMvcResultHandlers.print());
     }
 
+
 //    @Test
 //    void pesquisar() {
 //    }
-//
-//    @Test
-//    void editar() {
-//    }
-//
+
+
+    @Test
+    @Order(3)
+    @DisplayName("Http 200")
+    void deveRetornarHttp200_quandoEditar() throws Exception {
+
+        var pessoaEntity = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
+        var pessoaSalva = this.pessoaRepository.save(pessoaEntity);
+
+        var pessoaEditarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
+                .chave(pessoaSalva.getChave())
+                .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + pessoaEditarDtoIn.chave())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding(UTF8)
+                        .content(TestConverterUtil.converterObjetoParaJson(pessoaEditarDtoIn))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isNoContent())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
 
     @Test
     @Order(4)
@@ -78,8 +97,8 @@ class PessoaControllerIntegrationTest {
         var pessoaSalva = this.pessoaRepository.save(pessoaEntity);
 
         mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + pessoaSalva.getChave()))
-                .andExpect(MockMvcResultMatchers.status().isNoContent())
-                .andDo(MockMvcResultHandlers.print());
+            .andExpect(MockMvcResultMatchers.status().isNoContent())
+            .andDo(MockMvcResultHandlers.print());
     }
 }
 
