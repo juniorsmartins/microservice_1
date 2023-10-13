@@ -29,7 +29,8 @@ public class PessoaController {
 
     @GetMapping
     public ResponseEntity<Page<PessoaDtoOut>> pesquisar(@Valid final PessoaDtoFiltro dtoFiltro,
-                                                        @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, page = 0, size = 10) final Pageable paginacao) {
+        @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, page = 0, size = 10)
+        final Pageable paginacao) {
 
 
         return ResponseEntity
