@@ -23,7 +23,7 @@ public class PessoaController {
 
 
         return ResponseEntity
-                .created(URI.create("/api/v1/pessoas/" + 1)
+                .created(URI.create("/api/v1/pessoas/" + 1))
                 .body(null);
     }
 
