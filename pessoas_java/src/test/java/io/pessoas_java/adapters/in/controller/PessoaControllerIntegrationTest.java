@@ -68,8 +68,18 @@ class PessoaControllerIntegrationTest {
 //    void editar() {
 //    }
 //
-//    @Test
-//    void deletar() {
-//    }
+
+    @Test
+    @Order(4)
+    @DisplayName("Http 204")
+    void deveRetornarHttp204_quandoDeletar() throws Exception {
+
+        var pessoaEntity = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
+        var pessoaSalva = this.pessoaRepository.save(pessoaEntity);
+
+        mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + pessoaSalva.getChave()))
+                .andExpect(MockMvcResultMatchers.status().isNoContent())
+                .andDo(MockMvcResultHandlers.print());
+    }
 }
 

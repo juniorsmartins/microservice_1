@@ -23,8 +23,8 @@ public class PessoaController {
 
 
         return ResponseEntity
-                .created(URI.create("/api/v1/pessoas/" + 1))
-                .body(null);
+            .created(URI.create("/api/v1/pessoas/" + 1))
+            .body(null);
     }
 
     @GetMapping
@@ -34,8 +34,8 @@ public class PessoaController {
 
 
         return ResponseEntity
-                .ok()
-                .body(null);
+            .ok()
+            .body(null);
     }
 
     @PutMapping(path = "/{chave}")
@@ -44,8 +44,8 @@ public class PessoaController {
 
 
         return ResponseEntity
-                .ok()
-                .body(null);
+            .ok()
+            .body(null);
     }
 
     @DeleteMapping(path = "/{chave}")
@@ -53,8 +53,8 @@ public class PessoaController {
 
 
         return ResponseEntity
-                .noContent()
-                .build();
+            .noContent()
+            .build();
     }
 }
 
