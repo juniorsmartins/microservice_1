@@ -1,5 +1,7 @@
 package io.pessoas_java.config.exceptions;
 
+import io.pessoas_java.config.exceptions.http_400.RequiredObjectIsNullException;
+import io.pessoas_java.config.exceptions.http_500.FailedToSaveException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +16,35 @@ import java.time.Instant;
 public class TratamentoExceptions extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<RetornoException> handleAllExceptions(Exception ex, WebRequest webRequest) {
+    public final ResponseEntity<RetornoException> handlerAllExceptions(Exception ex, WebRequest webRequest) {
+
+        var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        var tipoDeErroEnum = TipoDeErroEnum.PROBLEMA_INTERNO_SERVIDOR;
+        var detalhe = ex.getMessage();
+
+        var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
+
+        return new ResponseEntity<>(retornoException, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(RequiredObjectIsNullException.class)
+    public final ResponseEntity<RetornoException> handlerRequiredObjectIsNullException(RequiredObjectIsNullException req, WebRequest webRequest) {
 
         var httpStatus = HttpStatus.BAD_REQUEST;
         var tipoDeErroEnum = TipoDeErroEnum.REQUISICAO_MAL_FORMULADA;
-        var detalhe = ex.getMessage();
+        var detalhe = req.getMessage();
+
+        var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
+
+        return new ResponseEntity<>(retornoException, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(FailedToSaveException.class)
+    public final ResponseEntity<RetornoException> handlerFailedToSaveException(FailedToSaveException fail, WebRequest webRequest) {
+
+        var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        var tipoDeErroEnum = TipoDeErroEnum.PROBLEMA_INTERNO_SERVIDOR;
+        var detalhe = fail.getMessage();
 
         var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
 
