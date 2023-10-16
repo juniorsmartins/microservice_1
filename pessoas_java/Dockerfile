@@ -12,7 +12,7 @@ COPY ./src ./src
 RUN ./mvnw clean package -DskipTests
 
 
-FROM amazoncorretto:21.0.0-al2023
+FROM amazoncorretto:21.0.0-al2023-headless
 
 ARG DIRETORIO_TRABALHO=pessoas
 WORKDIR /$DIRETORIO_TRABALHO
