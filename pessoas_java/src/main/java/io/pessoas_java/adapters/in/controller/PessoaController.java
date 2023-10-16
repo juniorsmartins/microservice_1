@@ -43,7 +43,7 @@ public class PessoaController {
                 .orElseThrow();
 
         return ResponseEntity
-            .created(URI.create("/api/v1/pessoas/" + 1))
+            .created(URI.create("/api/v1/pessoas/" + dtoOut.chave()))
             .body(dtoOut);
     }
 

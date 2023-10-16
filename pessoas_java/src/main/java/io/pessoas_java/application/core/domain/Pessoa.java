@@ -6,7 +6,7 @@ public final class Pessoa {
 
     private Long id;
 
-    private UUID chave;
+    private UUID chave = UUID.randomUUID();
 
     private String nome;
 
