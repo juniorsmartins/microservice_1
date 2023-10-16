@@ -4,6 +4,7 @@ import io.pessoas_java.PessoasJavaApplication;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
 import io.pessoas_java.util.CriadorDeBuilders;
 import io.pessoas_java.util.TestConverterUtil;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,30 @@ class PessoaControllerIntegrationTest {
                 .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isCreated())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(2)
+    @DisplayName("Http 201")
+    void deveRetornarValoresIguais_quandoCadastrar() throws Exception {
+
+        var dtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .characterEncoding(UTF8)
+                    .content(TestConverterUtil.converterObjetoParaJson(dtoIn))
+                    .accept(MediaType.APPLICATION_JSON))
+            .andExpectAll(MockMvcResultMatchers.status().isCreated(),
+                    MockMvcResultMatchers.jsonPath("$.nome", Matchers.equalToIgnoringCase(dtoIn.nome())),
+                    MockMvcResultMatchers.jsonPath("$.sobrenome", Matchers.equalTo(dtoIn.sobrenome())),
+                    MockMvcResultMatchers.jsonPath("$.cpf", Matchers.equalTo(dtoIn.cpf())),
+                    MockMvcResultMatchers.jsonPath("$.dataNascimento", Matchers.equalTo(dtoIn.dataNascimento())),
+                    MockMvcResultMatchers.jsonPath("$.sexo", Matchers.equalTo(dtoIn.sexo())),
+                    MockMvcResultMatchers.jsonPath("$.genero", Matchers.equalTo(dtoIn.genero())),
+                    MockMvcResultMatchers.jsonPath("$.nivelEducacional", Matchers.equalTo(dtoIn.nivelEducacional())),
+                    MockMvcResultMatchers.jsonPath("$.nacionalidade", Matchers.equalTo(dtoIn.nacionalidade())))
             .andDo(MockMvcResultHandlers.print());
     }
 
