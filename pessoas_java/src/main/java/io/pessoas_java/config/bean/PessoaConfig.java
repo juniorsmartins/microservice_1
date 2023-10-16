@@ -1,5 +1,6 @@
 package io.pessoas_java.config.bean;
 
+import io.pessoas_java.adapters.out.PessoaCadastrarAdapter;
 import io.pessoas_java.application.core.usecase.PessoaCadastrarUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class PessoaConfig {
 
     @Bean
-    public PessoaCadastrarUseCase pessoaCadastrarUseCase() {
-        return new PessoaCadastrarUseCase();
+    public PessoaCadastrarUseCase pessoaCadastrarUseCase(PessoaCadastrarAdapter pessoaCadastrarAdapter) {
+        return new PessoaCadastrarUseCase(pessoaCadastrarAdapter);
     }
 }
 
