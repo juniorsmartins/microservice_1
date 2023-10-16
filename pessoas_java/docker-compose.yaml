@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  postgres_pessoas:
+    container_name: postgres_pessoas
+    image: postgres:16beta3-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pessoas
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - rede-pessoas
+
+  pessoas:
+    container_name: pessoas
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8101:8101"
+    environment:
+      PORT: 8101
+      DB_HOST: postgres_pessoas:5432
+      DB_DATABASE: pessoas
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+    restart: always
+    networks:
+      - rede-pessoas
+    depends_on:
+      - postgres_pessoas
+
+volumes:
+  data-postgres:
+    name: data-postgres
+
+networks:
+  rede-pessoas:
+    name: rede-pessoas
+    driver: bridge
+

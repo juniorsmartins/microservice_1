@@ -18,9 +18,11 @@ ARG DIRETORIO_TRABALHO=pessoas
 WORKDIR /$DIRETORIO_TRABALHO
 
 COPY --from=builder /$DIRETORIO_TRABALHO/target/*.jar pessoas.jar
+COPY wait-for-it.sh wait-for-it.sh
+RUN chmod +x wait-for-it.sh
 
 ENV PORT 8101
 EXPOSE $PORT
 
-ENTRYPOINT ["java", "-jar", "pessoas.jar"]
+ENTRYPOINT ["./wait-for-it.sh", "postgres_pessoas:5432", "--", "java", "-jar", "pessoas.jar"]
 
