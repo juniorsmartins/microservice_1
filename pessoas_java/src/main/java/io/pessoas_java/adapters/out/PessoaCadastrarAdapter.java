@@ -5,7 +5,7 @@ import io.pessoas_java.adapters.out.repository.PessoaRepository;
 import io.pessoas_java.application.core.domain.Pessoa;
 import io.pessoas_java.application.ports.out.PessoaCadastrarOutputPort;
 import io.pessoas_java.config.exceptions.http_500.FailedToSaveException;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

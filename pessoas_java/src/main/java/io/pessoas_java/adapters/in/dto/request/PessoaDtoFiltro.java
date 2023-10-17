@@ -1,6 +1,10 @@
 package io.pessoas_java.adapters.in.dto.request;
 
+import java.util.UUID;
+
 public record PessoaDtoFiltro(
+
+        UUID chave,
 
         String nome,
 

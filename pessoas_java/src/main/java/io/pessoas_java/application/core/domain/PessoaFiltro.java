@@ -4,8 +4,6 @@ import java.util.UUID;
 
 public final class PessoaFiltro {
 
-    private Long id;
-
     private UUID chave;
 
     private String nome;
@@ -23,14 +21,6 @@ public final class PessoaFiltro {
     private String nivelEducacional;
 
     private String nacionalidade;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public UUID getChave() {
         return chave;
