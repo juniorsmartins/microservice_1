@@ -1,6 +1,7 @@
 package io.pessoas_java.config.exceptions;
 
 import io.pessoas_java.config.exceptions.http_400.RequiredObjectIsNullException;
+import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
 import io.pessoas_java.config.exceptions.http_500.FailedToSaveException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -27,8 +28,20 @@ public class TratamentoExceptions extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(retornoException, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(ErroInternoQualquerException.class)
+    public final ResponseEntity<RetornoException> tratarErroDoServidor(ErroInternoQualquerException err, WebRequest webRequest) {
+
+        var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        var tipoDeErroEnum = TipoDeErroEnum.PROBLEMA_INTERNO_SERVIDOR;
+        var detalhe = err.getMessage();
+
+        var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
+
+        return new ResponseEntity<>(retornoException, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(RequiredObjectIsNullException.class)
-    public final ResponseEntity<RetornoException> handlerRequiredObjectIsNullException(RequiredObjectIsNullException req, WebRequest webRequest) {
+    public final ResponseEntity<RetornoException> tratarExceptionDeObjetoNulo(RequiredObjectIsNullException req, WebRequest webRequest) {
 
         var httpStatus = HttpStatus.BAD_REQUEST;
         var tipoDeErroEnum = TipoDeErroEnum.REQUISICAO_MAL_FORMULADA;

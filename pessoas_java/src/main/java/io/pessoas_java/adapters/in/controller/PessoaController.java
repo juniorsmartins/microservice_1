@@ -7,6 +7,7 @@ import io.pessoas_java.adapters.in.dto.response.PessoaDtoOut;
 import io.pessoas_java.adapters.in.mapper.PessoaDtoInMapper;
 import io.pessoas_java.adapters.in.mapper.PessoaDtoOutMapper;
 import io.pessoas_java.application.ports.in.PessoaCadastrarInputPort;
+import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,7 +41,7 @@ public class PessoaController {
                 .map(this.pessoaDtoInMapper::toPessoa)
                 .map(this.pessoaCadastrarInputPort::cadastrar)
                 .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
-                .orElseThrow();
+                .orElseThrow(ErroInternoQualquerException::new);
 
         return ResponseEntity
             .created(URI.create("/api/v1/pessoas/" + dtoOut.chave()))
