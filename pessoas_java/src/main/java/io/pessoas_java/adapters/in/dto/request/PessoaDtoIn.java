@@ -18,6 +18,7 @@ public record PessoaDtoIn(
 
         @NotBlank
         @Length(max = 11)
+        @CPF
         String cpf,
 
         @NotBlank
