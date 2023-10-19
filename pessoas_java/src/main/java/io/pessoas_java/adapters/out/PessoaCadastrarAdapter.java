@@ -10,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Component
 public class PessoaCadastrarAdapter implements PessoaCadastrarOutputPort {
+
+    private final Logger logger = Logger.getLogger(PessoaCadastrarAdapter.class.getName());
 
     @Autowired
     private PessoaRepository pessoaRepository;
@@ -24,11 +27,17 @@ public class PessoaCadastrarAdapter implements PessoaCadastrarOutputPort {
     @Override
     public Pessoa salvar(Pessoa pessoa) {
 
-        return Optional.of(pessoa)
+        logger.info("Adapter - iniciado processo de salvar uma pessoa.");
+
+        var pessoaSalva = Optional.of(pessoa)
             .map(this.pessoaEntityMapper::toPessoaEntity)
             .map(this.pessoaRepository::save)
             .map(this.pessoaEntityMapper::toPessoa)
             .orElseThrow(FailedToSaveException::new);
+
+        logger.info("Adapter - finalizado processo de salvar uma pessoa.");
+
+        return pessoaSalva;
     }
 }
 

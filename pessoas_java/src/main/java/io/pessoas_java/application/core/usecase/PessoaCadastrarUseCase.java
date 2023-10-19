@@ -21,11 +21,15 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
     @Override
     public Pessoa cadastrar(Pessoa pessoa) {
 
-        logger.info("Creating one person!");
+        logger.info("UseCase - iniciado serviço de cadastrar uma pessoa.");
 
         if (ObjectUtils.isEmpty(pessoa)) throw new RequiredObjectIsNullException();
 
-        return this.pessoaCadastrarOutputPort.salvar(pessoa);
+        var pessoaCadastrada = this.pessoaCadastrarOutputPort.salvar(pessoa);
+
+        logger.info("UseCase - finalizado serviço de cadastrar uma pessoa.");
+
+        return pessoaCadastrada;
     }
 }
 

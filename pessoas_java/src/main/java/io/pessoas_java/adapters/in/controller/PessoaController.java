@@ -22,10 +22,13 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path = "/api/v1/pessoas")
 public class PessoaController {
+
+    private final Logger logger = Logger.getLogger(PessoaController.class.getName());
 
     @Autowired
     private PessoaCadastrarInputPort pessoaCadastrarInputPort;
@@ -45,11 +48,15 @@ public class PessoaController {
     @PostMapping
     public ResponseEntity<PessoaDtoOut> cadastrar(@RequestBody @Valid PessoaDtoIn dtoIn) {
 
+        logger.info("Controller - recebida requisição para cadastrar uma pessoa.");
+
         var dtoOut = Optional.of(dtoIn)
             .map(this.pessoaDtoInMapper::toPessoa)
             .map(this.pessoaCadastrarInputPort::cadastrar)
             .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
             .orElseThrow(ErroInternoQualquerException::new);
+
+        logger.info("Controller - concluído cadastro de uma pessoa.");
 
         return ResponseEntity
             .created(URI.create("/api/v1/pessoas/" + dtoOut.chave()))
