@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface PessoaDtoOutMapper {
 
+    @Mapping(source = "chave", target = "key")
     PessoaDtoOut toPessoaDtoOut(Pessoa pessoa);
 }
 

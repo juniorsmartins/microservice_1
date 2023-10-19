@@ -59,7 +59,7 @@ public class PessoaController {
         logger.info("Controller - concluído cadastro de uma pessoa.");
 
         return ResponseEntity
-            .created(URI.create("/api/v1/pessoas/" + dtoOut.chave()))
+            .created(URI.create("/api/v1/pessoas/" + dtoOut.getKey()))
             .body(dtoOut);
     }
 
