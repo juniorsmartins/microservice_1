@@ -1,12 +1,15 @@
 package io.pessoas_java.config.exceptions;
 
 import io.pessoas_java.config.exceptions.http_400.RequiredObjectIsNullException;
+import io.pessoas_java.config.exceptions.http_400.RequisicaoMalFormuladaException;
 import io.pessoas_java.config.exceptions.http_404.ResourceNotFoundException;
+import io.pessoas_java.config.exceptions.http_409.RegraDeNegocioVioladaException;
 import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
 import io.pessoas_java.config.exceptions.http_500.FailedToSaveException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -27,6 +30,30 @@ public class TratamentoExceptions extends ResponseEntityExceptionHandler {
         var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
 
         return new ResponseEntity<>(retornoException, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(RequisicaoMalFormuladaException.class)
+    public final ResponseEntity<RetornoException> tratarRequisicaoMalFormulada(RequisicaoMalFormuladaException ex, WebRequest webRequest) {
+
+        var httpStatus = HttpStatus.BAD_REQUEST;
+        var tipoDeErroEnum = TipoDeErroEnum.REQUISICAO_MAL_FORMULADA;
+        var detalhe = ex.getMessage();
+
+        var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
+
+        return new ResponseEntity<>(retornoException, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(RegraDeNegocioVioladaException.class)
+    public final ResponseEntity<RetornoException> tratarRegraViolada(RegraDeNegocioVioladaException ex, WebRequest webRequest) {
+
+        var httpStatus = HttpStatus.CONFLICT;
+        var tipoDeErroEnum = TipoDeErroEnum.REGRA_NEGOCIO_VIOLADA;
+        var detalhe = ex.getMessage();
+
+        var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
+
+        return new ResponseEntity<>(retornoException, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(ErroInternoQualquerException.class)

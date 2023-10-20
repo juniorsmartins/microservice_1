@@ -16,9 +16,9 @@ public record PessoaDtoIn(
         @Length(max = 50)
         String sobrenome,
 
+        @CPF
         @NotBlank
         @Length(max = 11)
-        @CPF
         String cpf,
 
         @NotBlank
