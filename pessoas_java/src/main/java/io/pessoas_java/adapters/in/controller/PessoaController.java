@@ -50,6 +50,9 @@ public class PessoaController {
     @Autowired
     private PessoaDtoFiltroMapper pessoaDtoFiltroMapper;
 
+    @Autowired
+    private ProdutorHateoas produtorHateoas;
+
     @PostMapping
     public ResponseEntity<PessoaDtoOut> cadastrar(@RequestBody @Valid PessoaDtoIn dtoIn) {
 
@@ -59,7 +62,7 @@ public class PessoaController {
             .map(this.pessoaDtoInMapper::toPessoa)
             .map(this.pessoaCadastrarInputPort::cadastrar)
             .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
-            .map(ProdutorHateoas::post)
+            .map(this.produtorHateoas::post)
             .orElseThrow(ErroInternoQualquerException::new);
 
         logger.info("Controller - concluído cadastro de uma pessoa.");
