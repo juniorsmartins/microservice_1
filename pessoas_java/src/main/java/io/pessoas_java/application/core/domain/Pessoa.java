@@ -1,5 +1,7 @@
 package io.pessoas_java.application.core.domain;
 
+import io.pessoas_java.application.core.domain.value_object.CadastroPessoaFisica;
+
 import java.util.UUID;
 
 public final class Pessoa {
@@ -12,7 +14,7 @@ public final class Pessoa {
 
     private String sobrenome;
 
-    private String cpf;
+    private CadastroPessoaFisica cpf;
 
     private String dataNascimento;
 
@@ -57,11 +59,11 @@ public final class Pessoa {
     }
 
     public String getCpf() {
-        return cpf;
+        return this.cpf.getCpf();
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        this.cpf = new CadastroPessoaFisica(cpf);
     }
 
     public String getDataNascimento() {

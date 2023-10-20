@@ -12,7 +12,7 @@ public final class RequiredObjectIsNullException extends RuntimeException {
     }
 
     public RequiredObjectIsNullException() {
-        this("It is not allowed to persist a null object!");
+        this("Objetos nulos são inválidos.");
     }
 }
 

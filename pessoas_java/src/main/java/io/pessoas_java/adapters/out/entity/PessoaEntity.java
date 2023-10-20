@@ -1,7 +1,6 @@
 package io.pessoas_java.adapters.out.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.io.Serial;
@@ -34,7 +33,7 @@ public final class PessoaEntity implements Serializable {
     @Column(name = "sobrenome", nullable = false, length = 50)
     private String sobrenome;
 
-    @Column(name = "cpf", nullable = false, length = 11)
+    @Column(name = "cpf", nullable = false, unique = true, length = 11)
     private String cpf;
 
     @Column(name = "data_nascimento", nullable = false)
