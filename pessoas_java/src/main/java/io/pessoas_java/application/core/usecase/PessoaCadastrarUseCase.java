@@ -4,10 +4,8 @@ import io.pessoas_java.application.core.domain.Pessoa;
 import io.pessoas_java.application.ports.in.PessoaCadastrarInputPort;
 import io.pessoas_java.application.ports.out.PessoaCadastrarOutputPort;
 import io.pessoas_java.application.ports.out.PessoaConsultarPorCpfOutputPort;
-import io.pessoas_java.config.exceptions.http_400.CpfInvalidoException;
 import io.pessoas_java.config.exceptions.http_400.CpfNaoUnicoException;
 import io.pessoas_java.config.exceptions.http_400.RequiredObjectIsNullException;
-import io.pessoas_java.config.exceptions.http_404.PessoaNaoEncontradaPorCpfException;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Optional;
