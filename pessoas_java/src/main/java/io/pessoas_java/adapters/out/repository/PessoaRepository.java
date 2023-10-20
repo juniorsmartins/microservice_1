@@ -11,5 +11,7 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Long>,
         JpaSpecificationExecutor<PessoaEntity> {
 
     Optional<PessoaEntity> findByChave(UUID chave);
+
+    Optional<PessoaEntity> findByCpf(String cpf);
 }
 

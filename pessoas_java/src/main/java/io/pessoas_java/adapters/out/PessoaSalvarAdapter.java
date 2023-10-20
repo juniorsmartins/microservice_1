@@ -5,17 +5,17 @@ import io.pessoas_java.adapters.out.repository.PessoaRepository;
 import io.pessoas_java.application.core.domain.Pessoa;
 import io.pessoas_java.application.ports.out.PessoaCadastrarOutputPort;
 import io.pessoas_java.config.exceptions.http_500.FailedToSaveException;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.logging.Logger;
 
 @Component
-public class PessoaCadastrarAdapter implements PessoaCadastrarOutputPort {
+public class PessoaSalvarAdapter implements PessoaCadastrarOutputPort {
 
-    private final Logger logger = Logger.getLogger(PessoaCadastrarAdapter.class.getName());
+    private final Logger logger = Logger.getLogger(PessoaSalvarAdapter.class.getName());
 
     @Autowired
     private PessoaRepository pessoaRepository;

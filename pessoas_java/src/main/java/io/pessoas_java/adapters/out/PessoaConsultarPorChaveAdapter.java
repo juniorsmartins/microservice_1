@@ -4,12 +4,11 @@ import io.pessoas_java.adapters.out.mapper.PessoaEntityMapper;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
 import io.pessoas_java.application.core.domain.Pessoa;
 import io.pessoas_java.application.ports.out.PessoaConsultarPorChaveOutputPort;
-import io.pessoas_java.config.exceptions.http_404.ResourceNotFoundException;
+import io.pessoas_java.config.exceptions.http_404.PessoaNaoEncontradaPorChaveException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -32,7 +31,7 @@ public class PessoaConsultarPorChaveAdapter implements PessoaConsultarPorChaveOu
 
         var pessoaEncontrada = this.pessoaRepository.findByChave(chave)
             .map(this.pessoaEntityMapper::toPessoa)
-            .orElseThrow(() -> new ResourceNotFoundException(chave));
+            .orElseThrow(() -> new PessoaNaoEncontradaPorChaveException(chave));
 
         logger.info("Adapter - finalizado processo de buscar uma pessoa no banco de dados.");
 
