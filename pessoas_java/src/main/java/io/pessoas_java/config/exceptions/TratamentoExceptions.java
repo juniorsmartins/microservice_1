@@ -1,6 +1,7 @@
 package io.pessoas_java.config.exceptions;
 
 import io.pessoas_java.config.exceptions.http_400.RequiredObjectIsNullException;
+import io.pessoas_java.config.exceptions.http_404.ResourceNotFoundException;
 import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
 import io.pessoas_java.config.exceptions.http_500.FailedToSaveException;
 import org.springframework.http.HttpStatus;
@@ -62,6 +63,18 @@ public class TratamentoExceptions extends ResponseEntityExceptionHandler {
         var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
 
         return new ResponseEntity<>(retornoException, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public final ResponseEntity<RetornoException> tratarResourceNotFound(ResourceNotFoundException res, WebRequest webRequest) {
+
+        var httpStatus = HttpStatus.NOT_FOUND;
+        var tipoDeErroEnum = TipoDeErroEnum.RECURSO_NAO_ENCONTRADO;
+        var detalhe = res.getMessage();
+
+        var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
+
+        return new ResponseEntity<>(retornoException, HttpStatus.NOT_FOUND);
     }
 
     // Método para construção da mensagem de retorno
