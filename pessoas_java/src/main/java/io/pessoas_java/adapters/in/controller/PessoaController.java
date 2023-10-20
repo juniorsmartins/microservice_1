@@ -55,8 +55,8 @@ public class PessoaController {
     private ProdutorHateoas produtorHateoas;
 
     @PostMapping(
-        consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-        produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+        consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"},
+        produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
     public ResponseEntity<PessoaDtoOut> cadastrar(@RequestBody @Valid PessoaDtoIn dtoIn) {
 
         logger.info("Controller - recebida requisição para cadastrar uma pessoa.");
