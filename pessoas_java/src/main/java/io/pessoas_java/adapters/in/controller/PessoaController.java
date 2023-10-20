@@ -9,6 +9,7 @@ import io.pessoas_java.adapters.in.mapper.PessoaDtoInMapper;
 import io.pessoas_java.adapters.in.mapper.PessoaDtoOutMapper;
 import io.pessoas_java.adapters.in.utilitarios.ProdutorHateoas;
 import io.pessoas_java.application.ports.in.PessoaCadastrarInputPort;
+import io.pessoas_java.application.ports.in.PessoaConsultarPorChaveInputPort;
 import io.pessoas_java.application.ports.in.PessoaPesquisarInputPort;
 import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
 import jakarta.validation.Valid;
@@ -36,6 +37,9 @@ public class PessoaController {
 
     @Autowired
     private PessoaPesquisarInputPort pessoaPesquisarInputPort;
+
+    @Autowired
+    private PessoaConsultarPorChaveInputPort pessoaConsultarPorChaveInputPort;
 
     @Autowired
     private PessoaDtoInMapper pessoaDtoInMapper;
@@ -79,6 +83,23 @@ public class PessoaController {
         return ResponseEntity
             .ok()
             .body(paginaDtoOut);
+    }
+
+    @GetMapping(path = "/{chave}")
+    public ResponseEntity<PessoaDtoOut> consultarPorChave(@PathVariable(name = "chave") final UUID chave) {
+
+        logger.info("Controller - recebida requisição para consultar pessoa por chave.");
+
+        var dtoOut = Optional.of(chave)
+            .map(this.pessoaConsultarPorChaveInputPort::consultarPorChave)
+            .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
+            .orElseThrow(ErroInternoQualquerException::new);
+
+        logger.info("Controller - concluído consultar pessoa por chave.");
+
+        return ResponseEntity
+            .ok()
+            .body(dtoOut);
     }
 
     @PutMapping(path = "/{chave}")
