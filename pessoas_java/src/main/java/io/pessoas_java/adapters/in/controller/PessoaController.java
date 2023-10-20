@@ -7,6 +7,7 @@ import io.pessoas_java.adapters.in.dto.response.PessoaDtoOut;
 import io.pessoas_java.adapters.in.mapper.PessoaDtoFiltroMapper;
 import io.pessoas_java.adapters.in.mapper.PessoaDtoInMapper;
 import io.pessoas_java.adapters.in.mapper.PessoaDtoOutMapper;
+import io.pessoas_java.adapters.in.utilitarios.ProdutorHateoas;
 import io.pessoas_java.application.ports.in.PessoaCadastrarInputPort;
 import io.pessoas_java.application.ports.in.PessoaPesquisarInputPort;
 import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
@@ -54,6 +55,7 @@ public class PessoaController {
             .map(this.pessoaDtoInMapper::toPessoa)
             .map(this.pessoaCadastrarInputPort::cadastrar)
             .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
+            .map(ProdutorHateoas::post)
             .orElseThrow(ErroInternoQualquerException::new);
 
         logger.info("Controller - concluído cadastro de uma pessoa.");
