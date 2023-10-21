@@ -6,6 +6,7 @@ import io.pessoas_java.config.exceptions.http_404.PessoaNaoEncontradaPorChaveExc
 import io.pessoas_java.config.exceptions.http_404.RecursoNaoEncontradoException;
 import io.pessoas_java.config.exceptions.http_409.RegraDeNegocioVioladaException;
 import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
+import io.pessoas_java.config.exceptions.http_500.FailedToEditException;
 import io.pessoas_java.config.exceptions.http_500.FailedToSaveException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -98,6 +99,18 @@ public class TratamentoExceptions extends ResponseEntityExceptionHandler {
         var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         var tipoDeErroEnum = TipoDeErroEnum.PROBLEMA_INTERNO_SERVIDOR;
         var detalhe = fail.getMessage();
+
+        var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
+
+        return new ResponseEntity<>(retornoException, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(FailedToEditException.class)
+    public final ResponseEntity<RetornoException> handlerFailedToEditException(FailedToEditException ex, WebRequest webRequest) {
+
+        var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        var tipoDeErroEnum = TipoDeErroEnum.PROBLEMA_INTERNO_SERVIDOR;
+        var detalhe = ex.getMessage();
 
         var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
 

@@ -2,10 +2,11 @@ package io.pessoas_java.application.core.usecase;
 
 import io.pessoas_java.application.core.domain.Pessoa;
 import io.pessoas_java.application.ports.in.PessoaCadastrarInputPort;
-import io.pessoas_java.application.ports.out.PessoaCadastrarOutputPort;
 import io.pessoas_java.application.ports.out.PessoaConsultarPorCpfOutputPort;
+import io.pessoas_java.application.ports.out.PessoaSalvarOutputPort;
 import io.pessoas_java.config.exceptions.http_400.CpfNaoUnicoException;
 import io.pessoas_java.config.exceptions.http_400.RequiredObjectIsNullException;
+import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Optional;
@@ -15,13 +16,13 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
 
     private final Logger logger = Logger.getLogger(PessoaCadastrarUseCase.class.getName());
 
-    private final PessoaCadastrarOutputPort pessoaCadastrarOutputPort;
+    private final PessoaSalvarOutputPort pessoaSalvarOutputPort;
 
     private final PessoaConsultarPorCpfOutputPort pessoaConsultarPorCpfOutputPort;
 
-    public PessoaCadastrarUseCase(PessoaCadastrarOutputPort pessoaCadastrarOutputPort,
+    public PessoaCadastrarUseCase(PessoaSalvarOutputPort pessoaSalvarOutputPort,
                                   PessoaConsultarPorCpfOutputPort pessoaConsultarPorCpfOutputPort) {
-        this.pessoaCadastrarOutputPort = pessoaCadastrarOutputPort;
+        this.pessoaSalvarOutputPort = pessoaSalvarOutputPort;
         this.pessoaConsultarPorCpfOutputPort = pessoaConsultarPorCpfOutputPort;
     }
 
@@ -34,8 +35,8 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
 
         var pessoaCadastrada = Optional.of(pessoa)
             .map(this::verificarRegraCpfUnico)
-            .map(this.pessoaCadastrarOutputPort::salvar)
-            .orElseThrow();
+            .map(this.pessoaSalvarOutputPort::salvar)
+            .orElseThrow(ErroInternoQualquerException::new);
 
         logger.info("UseCase - finalizado serviço de cadastrar uma pessoa.");
 

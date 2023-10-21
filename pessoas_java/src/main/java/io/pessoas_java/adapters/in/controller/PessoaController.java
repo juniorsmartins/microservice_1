@@ -7,11 +7,9 @@ import io.pessoas_java.adapters.in.dto.response.PessoaDtoOut;
 import io.pessoas_java.adapters.in.mapper.PessoaDtoFiltroMapper;
 import io.pessoas_java.adapters.in.mapper.PessoaDtoInMapper;
 import io.pessoas_java.adapters.in.mapper.PessoaDtoOutMapper;
+import io.pessoas_java.adapters.in.mapper.PessoaEditarDtoInMapper;
 import io.pessoas_java.adapters.in.utilitarios.ProdutorHateoas;
-import io.pessoas_java.application.ports.in.PessoaCadastrarInputPort;
-import io.pessoas_java.application.ports.in.PessoaConsultarPorChaveInputPort;
-import io.pessoas_java.application.ports.in.PessoaDeletarPorChaveInputPort;
-import io.pessoas_java.application.ports.in.PessoaPesquisarInputPort;
+import io.pessoas_java.application.ports.in.*;
 import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +45,9 @@ public class PessoaController {
     private PessoaDeletarPorChaveInputPort pessoaDeletarPorChaveInputPort;
 
     @Autowired
+    private PessoaEditarInputPort pessoaEditarInputPort;
+
+    @Autowired
     private PessoaDtoInMapper pessoaDtoInMapper;
 
     @Autowired
@@ -54,6 +55,9 @@ public class PessoaController {
 
     @Autowired
     private PessoaDtoFiltroMapper pessoaDtoFiltroMapper;
+
+    @Autowired
+    private PessoaEditarDtoInMapper pessoaEditarDtoInMapper;
 
     @Autowired
     private ProdutorHateoas produtorHateoas;
@@ -119,13 +123,25 @@ public class PessoaController {
             .body(dtoOut);
     }
 
-    @PutMapping(path = "/{chave}")
-    public ResponseEntity<PessoaDtoOut> editar(@PathVariable(name = "chave") final UUID chave,
-                                               @RequestBody @Valid PessoaEditarDtoIn dtoIn) {
+    @PutMapping(
+        consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"},
+        produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
+    public ResponseEntity<PessoaDtoOut> editar(@RequestBody @Valid PessoaEditarDtoIn editarDtoIn) {
+
+        logger.info("Controller - recebida requisição para editar uma pessoa.");
+
+        var dtoOut = Optional.of(editarDtoIn)
+            .map(this.pessoaEditarDtoInMapper::toPessoa)
+            .map(this.pessoaEditarInputPort::editar)
+            .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
+            .map(this.produtorHateoas::links)
+            .orElseThrow(ErroInternoQualquerException::new);
+
+        logger.info("Controller - concluído editar pessoa.");
 
         return ResponseEntity
             .ok()
-            .body(null);
+            .body(dtoOut);
     }
 
     @DeleteMapping(path = "/{chave}")
