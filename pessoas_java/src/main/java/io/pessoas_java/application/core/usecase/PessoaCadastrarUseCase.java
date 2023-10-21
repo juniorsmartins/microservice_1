@@ -44,7 +44,7 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
 
     private Pessoa verificarRegraCpfUnico(Pessoa pessoa) {
 
-        logger.info("UseCase - iniciada verificação de regra de CPF único.");
+        logger.info("Verificação de regra de CPF único.");
 
         var pessoaPersistida = this.pessoaConsultarPorCpfOutputPort.consultarPorCpf(pessoa.getCpf());
         if (pessoaPersistida.isPresent() &&
@@ -52,7 +52,7 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
             throw new CpfNaoUnicoException(pessoa.getCpf());
         }
 
-        logger.info("UseCase - finalizada com sucesso verificação de CPF único.");
+        logger.info("CPF verificado como único.");
 
         return pessoa;
     }

@@ -14,9 +14,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Component
 public class PessoaPesquisarAdapter implements PessoaPesquisarOutputPort {
+
+    private final Logger logger = Logger.getLogger(PessoaPesquisarAdapter.class.getName());
 
     @Autowired
     private PessoaRepository pessoaRepository;
@@ -28,10 +31,16 @@ public class PessoaPesquisarAdapter implements PessoaPesquisarOutputPort {
     @Override
     public Page<Pessoa> pesquisar(final PessoaFiltro pessoaFiltro, final Pageable paginacao) {
 
-        return Optional.of(pessoaFiltro)
+        logger.info("Adapter - iniciado processo de pesquisar pessoas.");
+
+        var paginaPessoas = Optional.of(pessoaFiltro)
             .map(parametros -> this.pessoaRepository.findAll(PessoaSpec.consultarDinamicamente(parametros), paginacao))
             .map(pagina -> pagina.map(this.pessoaEntityMapper::toPessoa))
             .orElseThrow(FailedToSearchException::new);
+
+        logger.info("Adapter - finalizado processo de pesquisar pessoas.");
+
+        return paginaPessoas;
     }
 }
 
