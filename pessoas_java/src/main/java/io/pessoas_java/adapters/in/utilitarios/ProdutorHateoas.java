@@ -12,6 +12,10 @@ public final class ProdutorHateoas {
 
         dtoOut.add(WebMvcLinkBuilder.linkTo(
             WebMvcLinkBuilder.methodOn(PessoaController.class).consultarPorChave(dtoOut.getKey())).withSelfRel());
+
+        dtoOut.add(WebMvcLinkBuilder.linkTo(
+            WebMvcLinkBuilder.methodOn(PessoaController.class).deletarPorChave(dtoOut.getKey())).withRel("delete"));
+
         return dtoOut;
     }
 }
