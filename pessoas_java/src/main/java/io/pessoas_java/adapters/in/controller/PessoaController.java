@@ -75,7 +75,7 @@ public class PessoaController {
             .body(dtoOut);
     }
 
-    @GetMapping
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
     public ResponseEntity<Page<PessoaDtoOut>> pesquisar(@Valid final PessoaDtoFiltro dtoFiltro,
         @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, page = 0, size = 10)
         final Pageable paginacao) {
@@ -84,6 +84,7 @@ public class PessoaController {
             .map(this.pessoaDtoFiltroMapper::toPessoaFiltro)
             .map(filtro -> this.pessoaPesquisarInputPort.pesquisar(filtro, paginacao))
             .map(pagina -> pagina.map(this.pessoaDtoOutMapper::toPessoaDtoOut))
+            .map(pagina -> pagina.map(this.produtorHateoas::links))
             .orElseThrow(ErroInternoQualquerException::new);
 
         return ResponseEntity
