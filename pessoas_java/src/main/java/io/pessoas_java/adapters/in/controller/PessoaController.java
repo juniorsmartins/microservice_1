@@ -65,7 +65,7 @@ public class PessoaController {
             .map(this.pessoaDtoInMapper::toPessoa)
             .map(this.pessoaCadastrarInputPort::cadastrar)
             .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
-            .map(this.produtorHateoas::post)
+            .map(this.produtorHateoas::links)
             .orElseThrow(ErroInternoQualquerException::new);
 
         logger.info("Controller - concluído cadastro de uma pessoa.");
@@ -91,7 +91,8 @@ public class PessoaController {
             .body(paginaDtoOut);
     }
 
-    @GetMapping(path = "/{chave}")
+    @GetMapping(path = "/{chave}",
+        produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
     public ResponseEntity<PessoaDtoOut> consultarPorChave(@PathVariable(name = "chave") final UUID chave) {
 
         logger.info("Controller - recebida requisição para consultar pessoa por chave.");
@@ -99,6 +100,7 @@ public class PessoaController {
         var dtoOut = Optional.of(chave)
             .map(this.pessoaConsultarPorChaveInputPort::consultarPorChave)
             .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
+            .map(this.produtorHateoas::links)
             .orElseThrow(ErroInternoQualquerException::new);
 
         logger.info("Controller - concluído consultar pessoa por chave.");
