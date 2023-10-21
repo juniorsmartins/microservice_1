@@ -8,10 +8,14 @@ import org.springframework.stereotype.Component;
 @Component
 public final class ProdutorHateoas {
 
-    public PessoaDtoOut post(PessoaDtoOut dtoOut) {
+    public PessoaDtoOut links(PessoaDtoOut dtoOut) {
 
         dtoOut.add(WebMvcLinkBuilder.linkTo(
             WebMvcLinkBuilder.methodOn(PessoaController.class).consultarPorChave(dtoOut.getKey())).withSelfRel());
+
+        dtoOut.add(WebMvcLinkBuilder.linkTo(
+            WebMvcLinkBuilder.methodOn(PessoaController.class).deletarPorChave(dtoOut.getKey())).withRel("delete"));
+
         return dtoOut;
     }
 }

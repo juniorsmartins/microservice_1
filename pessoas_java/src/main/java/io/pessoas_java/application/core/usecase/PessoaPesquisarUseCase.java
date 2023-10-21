@@ -7,7 +7,11 @@ import io.pessoas_java.application.ports.out.PessoaPesquisarOutputPort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.logging.Logger;
+
 public class PessoaPesquisarUseCase implements PessoaPesquisarInputPort {
+
+    private final Logger logger = Logger.getLogger(PessoaPesquisarUseCase.class.getName());
 
     private final PessoaPesquisarOutputPort pessoaPesquisarOutputPort;
 
@@ -18,7 +22,13 @@ public class PessoaPesquisarUseCase implements PessoaPesquisarInputPort {
     @Override
     public Page<Pessoa> pesquisar(final PessoaFiltro pessoaFiltro, final Pageable paginacao) {
 
-        return this.pessoaPesquisarOutputPort.pesquisar(pessoaFiltro, paginacao);
+        logger.info("UseCase - iniciado serviço de pesquisar pessoas.");
+
+        var pagina = this.pessoaPesquisarOutputPort.pesquisar(pessoaFiltro, paginacao);
+
+        logger.info("UseCase - finalizado serviço de pesquisar pessoas.");
+
+        return pagina;
     }
 }
 
