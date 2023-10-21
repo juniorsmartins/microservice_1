@@ -80,12 +80,16 @@ public class PessoaController {
         @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, page = 0, size = 10)
         final Pageable paginacao) {
 
+        logger.info("Controller - recebida requisição para pesquisar pessoas.");
+
         var paginaDtoOut = Optional.of(dtoFiltro)
             .map(this.pessoaDtoFiltroMapper::toPessoaFiltro)
             .map(filtro -> this.pessoaPesquisarInputPort.pesquisar(filtro, paginacao))
             .map(pagina -> pagina.map(this.pessoaDtoOutMapper::toPessoaDtoOut))
             .map(pagina -> pagina.map(this.produtorHateoas::links))
             .orElseThrow(ErroInternoQualquerException::new);
+
+        logger.info("Controller - concluído pesquisar pessoas.");
 
         return ResponseEntity
             .ok()
