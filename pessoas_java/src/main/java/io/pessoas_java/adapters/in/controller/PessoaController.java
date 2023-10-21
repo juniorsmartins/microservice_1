@@ -10,6 +10,7 @@ import io.pessoas_java.adapters.in.mapper.PessoaDtoOutMapper;
 import io.pessoas_java.adapters.in.utilitarios.ProdutorHateoas;
 import io.pessoas_java.application.ports.in.PessoaCadastrarInputPort;
 import io.pessoas_java.application.ports.in.PessoaConsultarPorChaveInputPort;
+import io.pessoas_java.application.ports.in.PessoaDeletarPorChaveInputPort;
 import io.pessoas_java.application.ports.in.PessoaPesquisarInputPort;
 import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
 import jakarta.validation.Valid;
@@ -41,6 +42,9 @@ public class PessoaController {
 
     @Autowired
     private PessoaConsultarPorChaveInputPort pessoaConsultarPorChaveInputPort;
+
+    @Autowired
+    private PessoaDeletarPorChaveInputPort pessoaDeletarPorChaveInputPort;
 
     @Autowired
     private PessoaDtoInMapper pessoaDtoInMapper;
@@ -119,15 +123,19 @@ public class PessoaController {
     public ResponseEntity<PessoaDtoOut> editar(@PathVariable(name = "chave") final UUID chave,
                                                @RequestBody @Valid PessoaEditarDtoIn dtoIn) {
 
-
         return ResponseEntity
             .ok()
             .body(null);
     }
 
     @DeleteMapping(path = "/{chave}")
-    public ResponseEntity<Void> deletar(@PathVariable(name = "chave") final UUID chave) {
+    public ResponseEntity<Void> deletarPorChave(@PathVariable(name = "chave") final UUID chave) {
 
+        logger.info("Controller - recebida requisição para deletar uma pessoa por chave.");
+
+        this.pessoaDeletarPorChaveInputPort.deletar(chave);
+
+        logger.info("Controller - concluído deletar uma pessoa por chave.");
 
         return ResponseEntity
             .noContent()
