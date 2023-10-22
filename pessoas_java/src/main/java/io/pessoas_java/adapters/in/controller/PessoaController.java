@@ -10,7 +10,14 @@ import io.pessoas_java.adapters.in.mapper.PessoaDtoOutMapper;
 import io.pessoas_java.adapters.in.mapper.PessoaEditarDtoInMapper;
 import io.pessoas_java.adapters.in.utilitarios.ProdutorHateoas;
 import io.pessoas_java.application.ports.in.*;
+import io.pessoas_java.config.exceptions.RetornoException;
 import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,6 +35,7 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path = "/api/v1/pessoas")
+@Tag(name = "Pessoa", description = "Endpoints para gerenciar Pessoas.")
 public class PessoaController {
 
     private final Logger logger = Logger.getLogger(PessoaController.class.getName());
@@ -84,6 +92,21 @@ public class PessoaController {
     }
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
+    @Operation(summary = "Pesquisar Pessoas", description = "Pesquisar Pessoas",
+        tags = {"Pessoa"},
+            responses = {
+                @ApiResponse(description = "Success", responseCode = "200", content = {
+                    @Content(mediaType = "application/json",
+                        array = @ArraySchema(schema = @Schema(implementation = PessoaDtoOut.class)))
+                }),
+                @ApiResponse(description = "Bad Request", responseCode = "400", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
     public ResponseEntity<Page<PessoaDtoOut>> pesquisar(@Valid final PessoaDtoFiltro dtoFiltro,
         @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, page = 0, size = 10)
         final Pageable paginacao) {
@@ -106,6 +129,21 @@ public class PessoaController {
 
     @GetMapping(path = "/{chave}",
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
+    @Operation(summary = "Consultar uma Pessoa por chave", description = "Consultar uma Pessoa por chave",
+        tags = {"Pessoa"},
+            responses = {
+                @ApiResponse(description = "Success", responseCode = "200", content = {
+                    @Content(schema = @Schema(implementation = PessoaDtoOut.class))
+                }),
+                @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                @ApiResponse(description = "Bad Request", responseCode = "400", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
     public ResponseEntity<PessoaDtoOut> consultarPorChave(@PathVariable(name = "chave") final UUID chave) {
 
         logger.info("Controller - recebida requisição para consultar pessoa por chave.");
