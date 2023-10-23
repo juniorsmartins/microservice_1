@@ -1,8 +1,6 @@
 package io.pessoas_java.adapters.in.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.pessoas_java.PessoasJavaApplication;
-import io.pessoas_java.adapters.in.dto.response.PessoaDtoOut;
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
 import io.pessoas_java.util.CriadorDeBuilders;
@@ -19,8 +17,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = PessoasJavaApplication.class)
 @AutoConfigureMockMvc
@@ -183,16 +179,16 @@ class PessoaControllerIntegrationTest {
         var pessoaSalva = this.pessoaRepository.save(pessoaEntity);
 
         var pessoaEditarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
-                .chave(pessoaSalva.getChave())
-                .build();
+            .chave(pessoaSalva.getChave())
+            .build();
 
         mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + pessoaEditarDtoIn.chave())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding(UTF8)
-                        .content(TestConverterUtil.converterObjetoParaJson(pessoaEditarDtoIn))
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isNoContent())
-                .andDo(MockMvcResultHandlers.print());
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaEditarDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isNoContent())
+            .andDo(MockMvcResultHandlers.print());
     }
 
 
