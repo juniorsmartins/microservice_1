@@ -13,6 +13,7 @@ import io.pessoas_java.application.ports.in.*;
 import io.pessoas_java.config.exceptions.RetornoException;
 import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -73,7 +74,26 @@ public class PessoaController {
     @PostMapping(
         consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"},
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
-    public ResponseEntity<PessoaDtoOut> cadastrar(@RequestBody @Valid PessoaDtoIn dtoIn) {
+    @Operation(summary = "Criar uma Pessoa", description = "Criar uma Pessoa",
+        tags = {"Pessoa"},
+            responses = {
+                @ApiResponse(description = "Created", responseCode = "201", content = {
+                    @Content(schema = @Schema(implementation = PessoaDtoOut.class))
+                }),
+                @ApiResponse(description = "Bad Request", responseCode = "400", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Unauthorized", responseCode = "401", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Internal Server Error", responseCode = "500", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                })
+            }
+    )
+    public ResponseEntity<PessoaDtoOut> cadastrar(
+        @Parameter(name = "Teste de Nome", description = "DTO para transporte de dados.", required = true)
+        @RequestBody @Valid PessoaDtoIn dtoIn) {
 
         logger.info("Controller - recebida requisição para cadastrar uma pessoa.");
 
@@ -102,9 +122,15 @@ public class PessoaController {
                 @ApiResponse(description = "Bad Request", responseCode = "400", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
                 }),
-                @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
-                @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
-                @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+                @ApiResponse(description = "Unauthorized", responseCode = "401", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Not Found", responseCode = "404", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Internal Server Error", responseCode = "500", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                })
             }
     )
     public ResponseEntity<Page<PessoaDtoOut>> pesquisar(@Valid final PessoaDtoFiltro dtoFiltro,
@@ -135,16 +161,23 @@ public class PessoaController {
                 @ApiResponse(description = "Success", responseCode = "200", content = {
                     @Content(schema = @Schema(implementation = PessoaDtoOut.class))
                 }),
-                @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
                 @ApiResponse(description = "Bad Request", responseCode = "400", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
                 }),
-                @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
-                @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
-                @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+                @ApiResponse(description = "Unauthorized", responseCode = "401", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Not Found", responseCode = "404", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Internal Server Error", responseCode = "500", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                })
             }
     )
-    public ResponseEntity<PessoaDtoOut> consultarPorChave(@PathVariable(name = "chave") final UUID chave) {
+    public ResponseEntity<PessoaDtoOut> consultarPorChave(
+        @Parameter(name = "chave", description = "UUID da Pessoa", example = "53c81a54-dad5-4b5f-a5e4-584c0b1fbdc3", required = true)
+        @PathVariable(name = "chave") final UUID chave) {
 
         logger.info("Controller - recebida requisição para consultar pessoa por chave.");
 
@@ -164,7 +197,30 @@ public class PessoaController {
     @PutMapping(
         consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"},
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
-    public ResponseEntity<PessoaDtoOut> editar(@RequestBody @Valid PessoaEditarDtoIn editarDtoIn) {
+    @Operation(summary = "Editar uma Pessoa por chave", description = "Editar uma Pessoa por chave",
+        tags = {"Pessoa"},
+            responses = {
+                @ApiResponse(description = "Success", responseCode = "200", content = {
+                    @Content(schema = @Schema(implementation = PessoaDtoOut.class))
+                }),
+                @ApiResponse(description = "Bad Request", responseCode = "400", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Unauthorized", responseCode = "401", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Not Found", responseCode = "404", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Internal Server Error", responseCode = "500", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                })
+            }
+    )
+    public ResponseEntity<PessoaDtoOut> editar(
+        @Parameter(name = "PessoaEditarDtoIn", description = "DTO de transporte de dados para edição de Pessoa.",
+            required = true, schema = @Schema(implementation = PessoaEditarDtoIn.class))
+        @RequestBody @Valid PessoaEditarDtoIn editarDtoIn) {
 
         logger.info("Controller - recebida requisição para editar uma pessoa.");
 
@@ -183,7 +239,29 @@ public class PessoaController {
     }
 
     @DeleteMapping(path = "/{chave}")
-    public ResponseEntity<Void> deletarPorChave(@PathVariable(name = "chave") final UUID chave) {
+    @Operation(summary = "Apagar uma Pessoa por chave", description = "Apagar uma Pessoa por chave",
+        tags = {"Pessoa"},
+            responses = {
+                @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                @ApiResponse(description = "Bad Request", responseCode = "400", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Unauthorized", responseCode = "401", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Not Found", responseCode = "404", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Internal Server Error", responseCode = "500", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                })
+            }
+    )
+    public ResponseEntity<Void> deletarPorChave(
+        @PathVariable(name = "chave")
+        @Parameter(name = "chave", description = "UUID da Pessoa",
+                example = "53c81a54-dad5-4b5f-a5e4-584c0b1fbdc3", required = true)
+        final UUID chave) {
 
         logger.info("Controller - recebida requisição para deletar uma pessoa por chave.");
 
