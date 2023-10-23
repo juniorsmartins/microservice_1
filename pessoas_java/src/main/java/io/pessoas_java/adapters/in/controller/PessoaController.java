@@ -74,7 +74,7 @@ public class PessoaController {
     @PostMapping(
         consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"},
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
-    @Operation(summary = "Criar uma Pessoa", description = "Criar uma Pessoa",
+    @Operation(summary = "Criar uma Pessoa", description = "Criar uma Pessoa enviando JSon, XML ou YAML.",
         tags = {"Pessoa"},
             responses = {
                 @ApiResponse(description = "Created", responseCode = "201", content = {
@@ -86,13 +86,15 @@ public class PessoaController {
                 @ApiResponse(description = "Unauthorized", responseCode = "401", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
                 }),
+                @ApiResponse(description = "Forbidden", responseCode = "403", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
                 @ApiResponse(description = "Internal Server Error", responseCode = "500", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
                 })
             }
     )
     public ResponseEntity<PessoaDtoOut> cadastrar(
-        @Parameter(name = "Teste de Nome", description = "DTO para transporte de dados.", required = true)
         @RequestBody @Valid PessoaDtoIn dtoIn) {
 
         logger.info("Controller - recebida requisição para cadastrar uma pessoa.");
@@ -125,7 +127,7 @@ public class PessoaController {
                 @ApiResponse(description = "Unauthorized", responseCode = "401", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
                 }),
-                @ApiResponse(description = "Not Found", responseCode = "404", content = {
+                @ApiResponse(description = "Forbidden", responseCode = "403", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
                 }),
                 @ApiResponse(description = "Internal Server Error", responseCode = "500", content = {
@@ -167,6 +169,9 @@ public class PessoaController {
                 @ApiResponse(description = "Unauthorized", responseCode = "401", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
                 }),
+                @ApiResponse(description = "Forbidden", responseCode = "403", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
                 @ApiResponse(description = "Not Found", responseCode = "404", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
                 }),
@@ -197,7 +202,7 @@ public class PessoaController {
     @PutMapping(
         consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"},
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
-    @Operation(summary = "Editar uma Pessoa por chave", description = "Editar uma Pessoa por chave",
+    @Operation(summary = "Editar uma Pessoa por chave", description = "Editar uma Pessoa por chave enviando JSon, XML ou YAML.",
         tags = {"Pessoa"},
             responses = {
                 @ApiResponse(description = "Success", responseCode = "200", content = {
@@ -207,6 +212,9 @@ public class PessoaController {
                     @Content(schema = @Schema(implementation = RetornoException.class))
                 }),
                 @ApiResponse(description = "Unauthorized", responseCode = "401", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Forbidden", responseCode = "403", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
                 }),
                 @ApiResponse(description = "Not Found", responseCode = "404", content = {
@@ -247,6 +255,9 @@ public class PessoaController {
                     @Content(schema = @Schema(implementation = RetornoException.class))
                 }),
                 @ApiResponse(description = "Unauthorized", responseCode = "401", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Forbidden", responseCode = "403", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
                 }),
                 @ApiResponse(description = "Not Found", responseCode = "404", content = {
