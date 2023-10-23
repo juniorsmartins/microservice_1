@@ -30,6 +30,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -104,7 +105,7 @@ public class PessoaController {
             .map(this.pessoaCadastrarInputPort::cadastrar)
             .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
             .map(this.produtorHateoas::links)
-            .orElseThrow(ErroInternoQualquerException::new);
+            .orElseThrow(NoSuchElementException::new);
 
         logger.info("Controller - concluído cadastro de uma pessoa.");
 
@@ -146,7 +147,7 @@ public class PessoaController {
             .map(filtro -> this.pessoaPesquisarInputPort.pesquisar(filtro, paginacao))
             .map(pagina -> pagina.map(this.pessoaDtoOutMapper::toPessoaDtoOut))
             .map(pagina -> pagina.map(this.produtorHateoas::links))
-            .orElseThrow(ErroInternoQualquerException::new);
+            .orElseThrow(NoSuchElementException::new);
 
         logger.info("Controller - concluído pesquisar pessoas.");
 
@@ -190,7 +191,7 @@ public class PessoaController {
             .map(this.pessoaConsultarPorChaveInputPort::consultarPorChave)
             .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
             .map(this.produtorHateoas::links)
-            .orElseThrow(ErroInternoQualquerException::new);
+            .orElseThrow(NoSuchElementException::new);
 
         logger.info("Controller - concluído consultar pessoa por chave.");
 
@@ -237,7 +238,7 @@ public class PessoaController {
             .map(this.pessoaEditarInputPort::editar)
             .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
             .map(this.produtorHateoas::links)
-            .orElseThrow(ErroInternoQualquerException::new);
+            .orElseThrow(NoSuchElementException::new);
 
         logger.info("Controller - concluído editar pessoa.");
 

@@ -8,6 +8,7 @@ import io.pessoas_java.application.ports.out.PessoaSalvarOutputPort;
 import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -36,7 +37,7 @@ public class PessoaEditarUseCase implements PessoaEditarInputPort {
                 return people;
             })
             .map(this.pessoaEditarOutputPort::editar)
-            .orElseThrow(ErroInternoQualquerException::new);
+            .orElseThrow(NoSuchElementException::new);
 
         logger.info("UseCase - finalizado serviço de editar uma pessoa.");
 

@@ -93,42 +93,6 @@ public class TratamentoExceptions extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(retornoException, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(FailedToSaveException.class)
-    public final ResponseEntity<RetornoException> handlerFailedToSaveException(FailedToSaveException fail, WebRequest webRequest) {
-
-        var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-        var tipoDeErroEnum = TipoDeErroEnum.PROBLEMA_INTERNO_SERVIDOR;
-        var detalhe = fail.getMessage();
-
-        var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
-
-        return new ResponseEntity<>(retornoException, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @ExceptionHandler(FailedToEditException.class)
-    public final ResponseEntity<RetornoException> handlerFailedToEditException(FailedToEditException ex, WebRequest webRequest) {
-
-        var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-        var tipoDeErroEnum = TipoDeErroEnum.PROBLEMA_INTERNO_SERVIDOR;
-        var detalhe = ex.getMessage();
-
-        var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
-
-        return new ResponseEntity<>(retornoException, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @ExceptionHandler(PessoaNaoEncontradaPorChaveException.class)
-    public final ResponseEntity<RetornoException> tratarResourceNotFound(PessoaNaoEncontradaPorChaveException res, WebRequest webRequest) {
-
-        var httpStatus = HttpStatus.NOT_FOUND;
-        var tipoDeErroEnum = TipoDeErroEnum.RECURSO_NAO_ENCONTRADO;
-        var detalhe = res.getMessage();
-
-        var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
-
-        return new ResponseEntity<>(retornoException, HttpStatus.NOT_FOUND);
-    }
-
     // Método para construção da mensagem de retorno
     private RetornoException.RetornoExceptionBuilder criarMensagemParaRetornarException(
             HttpStatusCode httpStatusCode, TipoDeErroEnum tipoDeErroEnum, String detalhe) {

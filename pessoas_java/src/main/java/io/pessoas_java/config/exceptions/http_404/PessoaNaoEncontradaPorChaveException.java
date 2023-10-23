@@ -5,12 +5,8 @@ import java.util.UUID;
 
 public final class PessoaNaoEncontradaPorChaveException extends RecursoNaoEncontradoException {
 
-    public PessoaNaoEncontradaPorChaveException(String mensagem) {
-        super(mensagem);
-    }
-
     public PessoaNaoEncontradaPorChaveException(UUID chave) {
-        this(String.format("Não encontrado recurso com a chave: %s", chave));
+        super(String.format("Não encontrada Pessoa com a chave: %s", chave));
     }
 }
 
