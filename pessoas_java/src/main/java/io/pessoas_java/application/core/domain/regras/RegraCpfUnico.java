@@ -2,7 +2,7 @@ package io.pessoas_java.application.core.domain.regras;
 
 import io.pessoas_java.application.core.domain.Pessoa;
 import io.pessoas_java.application.ports.out.PessoaConsultarPorCpfOutputPort;
-import io.pessoas_java.config.exceptions.http_400.CpfNaoUnicoException;
+import io.pessoas_java.config.exceptions.http_409.RegraCpfNaoUnicoException;
 
 public class RegraCpfUnico implements RegrasEditar, RegrasCadastrar {
 
@@ -18,7 +18,7 @@ public class RegraCpfUnico implements RegrasEditar, RegrasCadastrar {
         this.pessoaConsultarPorCpfOutputPort.consultarPorCpf(pessoa.getCpf())
             .filter(pessoaPersistida -> !pessoa.getChave().equals(pessoaPersistida.getChave()))
             .ifPresent(p -> {
-                throw new CpfNaoUnicoException(pessoa.getCpf());
+                throw new RegraCpfNaoUnicoException(pessoa.getCpf());
             });
     }
 }

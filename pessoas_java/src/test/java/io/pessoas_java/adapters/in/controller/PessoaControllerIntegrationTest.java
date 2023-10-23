@@ -1,6 +1,7 @@
 package io.pessoas_java.adapters.in.controller;
 
 import io.pessoas_java.PessoasJavaApplication;
+import io.pessoas_java.adapters.out.entity.PessoaEntity;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
 import io.pessoas_java.util.CriadorDeBuilders;
 import io.pessoas_java.util.TestConverterUtil;
@@ -35,8 +36,13 @@ class PessoaControllerIntegrationTest {
     @Autowired
     private PessoaRepository pessoaRepository;
 
+    private PessoaEntity pessoaEntity;
+
     @BeforeEach
     void setUp() {
+
+        pessoaEntity = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
+        pessoaEntity = this.pessoaRepository.save(pessoaEntity);
     }
 
     @AfterEach
@@ -47,7 +53,7 @@ class PessoaControllerIntegrationTest {
 
     @Test
     @Order(1)
-    @DisplayName("Http 201")
+    @DisplayName("Cadastrar - Http 201")
     void deveRetornarHttp201_quandoCadastrar() throws Exception {
 
         var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().build();
@@ -63,7 +69,7 @@ class PessoaControllerIntegrationTest {
 
     @Test
     @Order(2)
-    @DisplayName("Valores Iguais")
+    @DisplayName("Cadastrar - Valores Iguais")
     void deveRetornarValoresIguais_quandoCadastrar() throws Exception {
 
         var dtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().build();
@@ -86,21 +92,47 @@ class PessoaControllerIntegrationTest {
             .andDo(MockMvcResultHandlers.print());
     }
 
-//    @Test
-//    @Order(1)
-//    @DisplayName("Capitalizar Nome")
-//    void deveRetornarNomeCapitalizado_quandoCadastrar() throws Exception {
-//
-//        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().build();
-//
-//        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .characterEncoding(UTF8)
-//                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
-//                .accept(MediaType.APPLICATION_JSON))
-//            .andExpect(MockMvcResultMatchers.status().isCreated())
-//            .andDo(MockMvcResultHandlers.print());
-//    }
+    @Test
+    @Order(3)
+    @DisplayName("Cadastrar - Capitalizar Nome Completo")
+    void deveRetornarNomeCompletoCapitalizado_quandoCadastrar() throws Exception {
+
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .nome("arie")
+            .sobrenome("van bennekum")
+            .build();
+
+        var nomeCapitalizado = "Arie";
+        var sobrenomeCapitalizado = "Van Bennekum";
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpectAll(
+                MockMvcResultMatchers.jsonPath("$.nome", Matchers.equalTo(nomeCapitalizado)),
+                MockMvcResultMatchers.jsonPath("$.sobrenome", Matchers.equalTo(sobrenomeCapitalizado)))
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(10)
+    @DisplayName("Cadastrar - Http 409 por CPF Não Único")
+    void deveRetornarHttp409_quandoCadastrarComCpfNaoUnico() throws Exception {
+
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .cpf(pessoaEntity.getCpf())
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isConflict())
+            .andDo(MockMvcResultHandlers.print());
+    }
 
 
 //    @Test
@@ -109,8 +141,8 @@ class PessoaControllerIntegrationTest {
 
 
     @Test
-    @Order(3)
-    @DisplayName("Http 200")
+    @Order(50)
+    @DisplayName("Editar - Http 200")
     void deveRetornarHttp200_quandoEditar() throws Exception {
 
         var pessoaEntity = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
@@ -131,8 +163,8 @@ class PessoaControllerIntegrationTest {
 
 
     @Test
-    @Order(4)
-    @DisplayName("Http 204")
+    @Order(80)
+    @DisplayName("Deletar - Http 204")
     void deveRetornarHttp204_quandoDeletar() throws Exception {
 
         var pessoaEntity = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
