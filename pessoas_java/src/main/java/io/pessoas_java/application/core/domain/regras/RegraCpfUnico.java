@@ -4,7 +4,7 @@ import io.pessoas_java.application.core.domain.Pessoa;
 import io.pessoas_java.application.ports.out.PessoaConsultarPorCpfOutputPort;
 import io.pessoas_java.config.exceptions.http_400.CpfNaoUnicoException;
 
-public class RegraCpfUnico implements RegrasEditar {
+public class RegraCpfUnico implements RegrasEditar, RegrasCadastrar {
 
     private final PessoaConsultarPorCpfOutputPort pessoaConsultarPorCpfOutputPort;
 

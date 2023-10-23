@@ -2,6 +2,7 @@ package io.pessoas_java.application.core.usecase;
 
 import io.pessoas_java.application.core.domain.Pessoa;
 import io.pessoas_java.application.core.domain.regras.RegrasEditar;
+import io.pessoas_java.application.core.domain.utils.Util;
 import io.pessoas_java.application.ports.in.PessoaEditarInputPort;
 import io.pessoas_java.application.ports.out.PessoaEditarOutputPort;
 import io.pessoas_java.application.ports.out.PessoaSalvarOutputPort;
@@ -20,10 +21,14 @@ public class PessoaEditarUseCase implements PessoaEditarInputPort {
 
     private final List<RegrasEditar> listaRegrasEditar;
 
+    private final Util util;
+
     public PessoaEditarUseCase(PessoaEditarOutputPort pessoaEditarOutputPort,
-                               RegrasEditar regrasCpfUnico) {
+                               RegrasEditar regrasCpfUnico,
+                               Util util) {
         this.pessoaEditarOutputPort = pessoaEditarOutputPort;
         this.listaRegrasEditar = List.of(regrasCpfUnico);
+        this.util = util;
     }
 
     @Override
@@ -36,12 +41,23 @@ public class PessoaEditarUseCase implements PessoaEditarInputPort {
                 this.listaRegrasEditar.forEach(regra -> regra.executar(people));
                 return people;
             })
+            .map(this::capitalizarNomeCompleto)
             .map(this.pessoaEditarOutputPort::editar)
             .orElseThrow(NoSuchElementException::new);
 
         logger.info("UseCase - finalizado serviço de editar uma pessoa.");
 
         return pessoaEditada;
+    }
+
+    private Pessoa capitalizarNomeCompleto(Pessoa pessoa) {
+        var nomeCapitalizado = this.util.capitalizar(pessoa.getNome());
+        pessoa.setNome(nomeCapitalizado);
+
+        var sobrenomeCapitalizado = this.util.capitalizar(pessoa.getSobrenome());
+        pessoa.setSobrenome(sobrenomeCapitalizado);
+
+        return pessoa;
     }
 }
 

@@ -1,14 +1,14 @@
 package io.pessoas_java.application.core.usecase;
 
 import io.pessoas_java.application.core.domain.Pessoa;
+import io.pessoas_java.application.core.domain.regras.RegrasCadastrar;
+import io.pessoas_java.application.core.domain.utils.Util;
 import io.pessoas_java.application.ports.in.PessoaCadastrarInputPort;
-import io.pessoas_java.application.ports.out.PessoaConsultarPorCpfOutputPort;
 import io.pessoas_java.application.ports.out.PessoaSalvarOutputPort;
-import io.pessoas_java.config.exceptions.http_400.CpfNaoUnicoException;
 import io.pessoas_java.config.exceptions.http_400.RequiredObjectIsNullException;
-import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
 import org.apache.commons.lang3.ObjectUtils;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -19,12 +19,16 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
 
     private final PessoaSalvarOutputPort pessoaSalvarOutputPort;
 
-    private final PessoaConsultarPorCpfOutputPort pessoaConsultarPorCpfOutputPort;
+    private final List<RegrasCadastrar> listaRegrasCadastrar;
+
+    private final Util util;
 
     public PessoaCadastrarUseCase(PessoaSalvarOutputPort pessoaSalvarOutputPort,
-                                  PessoaConsultarPorCpfOutputPort pessoaConsultarPorCpfOutputPort) {
+                                  RegrasCadastrar regrasCpfUnico,
+                                  Util util) {
         this.pessoaSalvarOutputPort = pessoaSalvarOutputPort;
-        this.pessoaConsultarPorCpfOutputPort = pessoaConsultarPorCpfOutputPort;
+        this.listaRegrasCadastrar = List.of(regrasCpfUnico);
+        this.util = util;
     }
 
     @Override
@@ -35,7 +39,11 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
         if (ObjectUtils.isEmpty(pessoa)) throw new RequiredObjectIsNullException();
 
         var pessoaCadastrada = Optional.of(pessoa)
-            .map(this::verificarRegraCpfUnico)
+            .map(people -> {
+                this.listaRegrasCadastrar.forEach(regra -> regra.executar(people));
+                return people;
+            })
+            .map(this::capitalizarNomeCompleto)
             .map(this.pessoaSalvarOutputPort::salvar)
             .orElseThrow(NoSuchElementException::new);
 
@@ -44,17 +52,12 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
         return pessoaCadastrada;
     }
 
-    private Pessoa verificarRegraCpfUnico(Pessoa pessoa) {
+    private Pessoa capitalizarNomeCompleto(Pessoa pessoa) {
+        var nomeCapitalizado = this.util.capitalizar(pessoa.getNome());
+        pessoa.setNome(nomeCapitalizado);
 
-        logger.info("Verificação de regra de CPF único.");
-
-        var pessoaPersistida = this.pessoaConsultarPorCpfOutputPort.consultarPorCpf(pessoa.getCpf());
-        if (pessoaPersistida.isPresent() &&
-                (!pessoa.getChave().equals(pessoaPersistida.get().getChave()))) {
-            throw new CpfNaoUnicoException(pessoa.getCpf());
-        }
-
-        logger.info("CPF verificado como único.");
+        var sobrenomeCapitalizado = this.util.capitalizar(pessoa.getSobrenome());
+        pessoa.setSobrenome(sobrenomeCapitalizado);
 
         return pessoa;
     }
