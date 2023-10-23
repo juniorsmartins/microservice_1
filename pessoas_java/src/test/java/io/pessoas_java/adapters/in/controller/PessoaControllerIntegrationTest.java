@@ -1,6 +1,8 @@
 package io.pessoas_java.adapters.in.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.pessoas_java.PessoasJavaApplication;
+import io.pessoas_java.adapters.in.dto.response.PessoaDtoOut;
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
 import io.pessoas_java.util.CriadorDeBuilders;
@@ -114,6 +116,38 @@ class PessoaControllerIntegrationTest {
                 MockMvcResultMatchers.jsonPath("$.nome", Matchers.equalTo(nomeCapitalizado)),
                 MockMvcResultMatchers.jsonPath("$.sobrenome", Matchers.equalTo(sobrenomeCapitalizado)))
             .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("Cadastrar - Persistência")
+    void deveRetornarValoresIguaisPersistidos_quandoCadastrar() throws Exception {
+
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .nome("Arie")
+            .sobrenome("Van Bennekum")
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isCreated())
+            .andDo(MockMvcResultHandlers.print());
+
+        var pessoaPersistida = this.pessoaRepository.findByCpf(pessoaDtoIn.cpf()).get();
+
+        Assertions.assertNotNull(pessoaPersistida.getId());
+        Assertions.assertNotNull(pessoaPersistida.getChave());
+        Assertions.assertEquals(pessoaDtoIn.nome(), pessoaPersistida.getNome());
+        Assertions.assertEquals(pessoaDtoIn.sobrenome(), pessoaPersistida.getSobrenome());
+        Assertions.assertEquals(pessoaDtoIn.cpf(), pessoaPersistida.getCpf());
+        Assertions.assertEquals(pessoaDtoIn.sexo(), pessoaPersistida.getSexo());
+        Assertions.assertEquals(pessoaDtoIn.genero(), pessoaPersistida.getGenero());
+        Assertions.assertEquals(pessoaDtoIn.dataNascimento(), pessoaPersistida.getDataNascimento());
+        Assertions.assertEquals(pessoaDtoIn.nivelEducacional(), pessoaPersistida.getNivelEducacional());
+        Assertions.assertEquals(pessoaDtoIn.nacionalidade(), pessoaPersistida.getNacionalidade());
     }
 
     @Test
