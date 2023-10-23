@@ -11,7 +11,6 @@ import io.pessoas_java.adapters.in.mapper.PessoaEditarDtoInMapper;
 import io.pessoas_java.adapters.in.utilitarios.ProdutorHateoas;
 import io.pessoas_java.application.ports.in.*;
 import io.pessoas_java.config.exceptions.RetornoException;
-import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -226,10 +225,7 @@ public class PessoaController {
                 })
             }
     )
-    public ResponseEntity<PessoaDtoOut> editar(
-        @Parameter(name = "PessoaEditarDtoIn", description = "DTO de transporte de dados para edição de Pessoa.",
-            required = true, schema = @Schema(implementation = PessoaEditarDtoIn.class))
-        @RequestBody @Valid PessoaEditarDtoIn editarDtoIn) {
+    public ResponseEntity<PessoaDtoOut> editar(@RequestBody @Valid PessoaEditarDtoIn editarDtoIn) {
 
         logger.info("Controller - recebida requisição para editar uma pessoa.");
 
@@ -270,10 +266,8 @@ public class PessoaController {
             }
     )
     public ResponseEntity<Void> deletarPorChave(
-        @PathVariable(name = "chave")
-        @Parameter(name = "chave", description = "UUID da Pessoa",
-                example = "53c81a54-dad5-4b5f-a5e4-584c0b1fbdc3", required = true)
-        final UUID chave) {
+        @PathVariable(name = "chave") @Parameter(name = "chave", description = "UUID da Pessoa",
+            example = "53c81a54-dad5-4b5f-a5e4-584c0b1fbdc3", required = true) final UUID chave) {
 
         logger.info("Controller - recebida requisição para deletar uma pessoa por chave.");
 
