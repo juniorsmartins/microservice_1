@@ -9,6 +9,7 @@ import io.pessoas_java.config.exceptions.http_400.RequiredObjectIsNullException;
 import io.pessoas_java.config.exceptions.http_500.ErroInternoQualquerException;
 import org.apache.commons.lang3.ObjectUtils;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -36,7 +37,7 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
         var pessoaCadastrada = Optional.of(pessoa)
             .map(this::verificarRegraCpfUnico)
             .map(this.pessoaSalvarOutputPort::salvar)
-            .orElseThrow(ErroInternoQualquerException::new);
+            .orElseThrow(NoSuchElementException::new);
 
         logger.info("UseCase - finalizado serviço de cadastrar uma pessoa.");
 

@@ -4,12 +4,14 @@ import io.pessoas_java.adapters.out.mapper.PessoaEntityMapper;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
 import io.pessoas_java.application.core.domain.Pessoa;
 import io.pessoas_java.application.ports.out.PessoaDeletarOutputPort;
+import io.pessoas_java.config.exceptions.http_500.FailedToDeleteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -35,7 +37,8 @@ public class PessoaDeletarAdapter implements PessoaDeletarOutputPort {
             .map(entidade -> {
                 this.pessoaRepository.delete(entidade);
                 return true;
-            });
+            })
+            .orElseThrow(FailedToDeleteException::new);
 
         logger.info("Adapter - finalizado processo de deletar uma pessoa por chave.");
     }
