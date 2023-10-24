@@ -1,7 +1,6 @@
 package io.pessoas_java.application.core.usecase;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,10 +17,5 @@ class PessoaCadastrarUseCaseUnitTest {
     void setUpMocks() throws Exception {
 
     }
-
-//    @Test
-//    void testPesquisar() {
-//
-//    }
 }
 
