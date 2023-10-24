@@ -19,9 +19,9 @@ class PessoaCadastrarUseCaseUnitTest {
 
     }
 
-    @Test
-    void testPesquisar() {
-
-    }
+//    @Test
+//    void testPesquisar() {
+//
+//    }
 }
 
