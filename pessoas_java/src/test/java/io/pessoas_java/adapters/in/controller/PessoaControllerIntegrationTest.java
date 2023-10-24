@@ -258,13 +258,63 @@ class PessoaControllerIntegrationTest {
 
 
 
-//    @Test
-//    void pesquisar() {
-//    }
+
+    @Test
+    @Order(30)
+    @DisplayName("Pesquisar - Http 200")
+    void deveRetornarHttp200_quandoPesquisar() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.get(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(31)
+    @DisplayName("Pesquisar - retorna dois objetos")
+    void deveRetornarDoisObjetos_quandoPesquisarTodos() throws Exception {
+
+        var pessoa = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
+        this.pessoaRepository.save(pessoa);
+
+        mockMvc.perform(MockMvcRequestBuilders.get(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.totalElements", Matchers.equalTo(2)))
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(32)
+    @DisplayName("Pesquisar - por chave")
+    void deveRetornarUmObjetoComChaveIgual_quandoPesquisarPorChave() throws Exception {
+
+        var pessoa = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
+        this.pessoaRepository.save(pessoa);
+
+        var chave = pessoaEntity.getChave();
+
+        mockMvc.perform(MockMvcRequestBuilders.get(END_POINT)
+                .param("chave", chave.toString())
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpectAll(
+                MockMvcResultMatchers.jsonPath("$.content[0].chave", Matchers.equalTo(chave.toString())),
+                MockMvcResultMatchers.jsonPath("$.totalElements", Matchers.equalTo(1)),
+                MockMvcResultMatchers.status().isOk())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+
 
 
     @Test
-    @Order(40)
+    @Order(50)
     @DisplayName("Editar - Http 200")
     void deveRetornarHttp200_quandoEditar() throws Exception {
 
@@ -285,7 +335,7 @@ class PessoaControllerIntegrationTest {
     }
 
     @Test
-    @Order(41)
+    @Order(51)
     @DisplayName("Editar - Valores Iguais")
     void deveRetornarValoresIguais_quandoEditar() throws Exception {
 
@@ -315,7 +365,7 @@ class PessoaControllerIntegrationTest {
     }
 
     @Test
-    @Order(42)
+    @Order(52)
     @DisplayName("Editar - Capitalizar nome completo")
     void deveRetornarNomeCompletoCapitalizado_quandoEditar() throws Exception {
 
@@ -343,7 +393,7 @@ class PessoaControllerIntegrationTest {
     }
 
     @Test
-    @Order(43)
+    @Order(53)
     @DisplayName("Editar - Persistência")
     void deveRetornarValoresIguaisPersistidos_quandoEditar() throws Exception {
 
@@ -382,7 +432,7 @@ class PessoaControllerIntegrationTest {
     }
 
     @Test
-    @Order(44)
+    @Order(54)
     @DisplayName("Editar - Http 409 por CPF não único")
     void deveRetornarHttp409_quandoEditarComCpfNaoUnico() throws Exception {
 
@@ -404,7 +454,7 @@ class PessoaControllerIntegrationTest {
     }
 
     @Test
-    @Order(45)
+    @Order(55)
     @DisplayName("Editar - Http 400 por CPF inválido")
     void deveRetornarHttp400_quandoEditarComCpfInválido() throws Exception {
 
@@ -426,7 +476,7 @@ class PessoaControllerIntegrationTest {
     }
 
     @Test
-    @Order(46)
+    @Order(56)
     @DisplayName("Editar - Http 400 nome nulo")
     void deveRetornarHttp400_quandoEditarComNomeNulo() throws Exception {
 
@@ -445,7 +495,7 @@ class PessoaControllerIntegrationTest {
     }
 
     @Test
-    @Order(47)
+    @Order(57)
     @DisplayName("Editar - Http 400 sobrenome vazio")
     void deveRetornarHttp400_quandoEditarComSobrenomeVazio() throws Exception {
 
@@ -464,7 +514,7 @@ class PessoaControllerIntegrationTest {
     }
 
     @Test
-    @Order(48)
+    @Order(58)
     @DisplayName("Editar - Http 400 nivel educacional nulo")
     void deveRetornarHttp400_quandoEditarComNivelEducacionalNulo() throws Exception {
 
@@ -483,7 +533,7 @@ class PessoaControllerIntegrationTest {
     }
 
     @Test
-    @Order(49)
+    @Order(59)
     @DisplayName("Editar - Http 400 nacionalidade vazio")
     void deveRetornarHttp400_quandoEditarComNacionalidadeVazio() throws Exception {
 
