@@ -92,7 +92,7 @@ class PessoaControllerIntegrationTest {
 
     @Test
     @Order(3)
-    @DisplayName("Cadastrar - Capitalizar Nome Completo")
+    @DisplayName("Cadastrar - Capitalizar nome completo")
     void deveRetornarNomeCompletoCapitalizado_quandoCadastrar() throws Exception {
 
         var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
@@ -148,7 +148,7 @@ class PessoaControllerIntegrationTest {
 
     @Test
     @Order(10)
-    @DisplayName("Cadastrar - Http 409 por CPF Não Único")
+    @DisplayName("Cadastrar - Http 409 por CPF não único")
     void deveRetornarHttp409_quandoCadastrarComCpfNaoUnico() throws Exception {
 
         var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
@@ -161,6 +161,60 @@ class PessoaControllerIntegrationTest {
                 .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isConflict())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(11)
+    @DisplayName("Cadastrar - Http 400 por CPF inválido")
+    void deveRetornarHttp400_quandoCadastrarComCpfInválido() throws Exception {
+
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .cpf("99944455577")
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(12)
+    @DisplayName("Cadastrar - Http 400 nome nulo")
+    void deveRetornarHttp400_quandoCadastrarComNomeNulo() throws Exception {
+
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .nome(null)
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(13)
+    @DisplayName("Cadastrar - Http 400 sobrenome vazio")
+    void deveRetornarHttp400_quandoCadastrarComSobrenomeVazio() throws Exception {
+
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .sobrenome(" ")
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
             .andDo(MockMvcResultHandlers.print());
     }
 
