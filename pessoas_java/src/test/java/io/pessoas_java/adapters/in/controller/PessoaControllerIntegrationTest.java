@@ -310,6 +310,28 @@ class PessoaControllerIntegrationTest {
             .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @Order(33)
+    @DisplayName("Pesquisar - por CPF")
+    void deveRetornarUmObjetoComCPFIgual_quandoPesquisarPorCPF() throws Exception {
+
+        var pessoa = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
+        this.pessoaRepository.save(pessoa);
+
+        var cpf = pessoaEntity.getCpf();
+
+        mockMvc.perform(MockMvcRequestBuilders.get(END_POINT)
+                .param("cpf", cpf)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpectAll(
+                MockMvcResultMatchers.jsonPath("$.content[0].cpf", Matchers.equalTo(cpf)),
+                MockMvcResultMatchers.jsonPath("$.totalElements", Matchers.equalTo(1)),
+                MockMvcResultMatchers.status().isOk())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
 
 
 
@@ -550,7 +572,6 @@ class PessoaControllerIntegrationTest {
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
             .andDo(MockMvcResultHandlers.print());
     }
-
 
 
 
