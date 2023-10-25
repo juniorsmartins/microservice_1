@@ -14,9 +14,9 @@ import java.util.stream.Stream;
 @ContextConfiguration(initializers = AbstractIntegrationTest.Initializer.class)
 public class AbstractIntegrationTest {
 
-    public class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+    public static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-        static PostgreSQLContainer<?> posgresql = new PostgreSQLContainer<>("postgres:16.0");
+        public static PostgreSQLContainer<?> posgresql = new PostgreSQLContainer<>("postgres:16.0");
 
         private static void startContainers() {
             Startables.deepStart(Stream.of(posgresql)).join();
@@ -25,15 +25,16 @@ public class AbstractIntegrationTest {
         @SuppressWarnings({"unchecked", "rawtypes"})
         @Override
         public void initialize(ConfigurableApplicationContext applicationContext) {
-
             startContainers();
+
             ConfigurableEnvironment environment = applicationContext.getEnvironment();
+
             MapPropertySource testcontainers = new MapPropertySource(
                     "testcontainers", (Map) createConnectionConfiguration());
             environment.getPropertySources().addFirst(testcontainers);
         }
 
-        private Map<String, String> createConnectionConfiguration() {
+        private static Map<String, String> createConnectionConfiguration() {
 
             return Map.of("spring.datasource.url", posgresql.getJdbcUrl(),
                     "spring.datasource.username", posgresql.getUsername(),
