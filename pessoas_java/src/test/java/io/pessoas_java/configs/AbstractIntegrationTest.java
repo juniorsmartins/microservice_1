@@ -1,4 +1,4 @@
-package io.pessoas_java.integration;
+package io.pessoas_java.configs;
 
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;

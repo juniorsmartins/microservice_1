@@ -1,7 +1,7 @@
 package io.pessoas_java.adapters.in.controller;
 
 import io.pessoas_java.configs.TestConfigs;
-import io.pessoas_java.integration.AbstractIntegrationTest;
+import io.pessoas_java.configs.AbstractIntegrationTest;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
