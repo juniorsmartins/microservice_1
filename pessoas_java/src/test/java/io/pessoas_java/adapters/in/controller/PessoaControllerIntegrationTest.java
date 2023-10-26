@@ -1,6 +1,7 @@
 package io.pessoas_java.adapters.in.controller;
 
 import io.pessoas_java.PessoasJavaApplication;
+import io.pessoas_java.adapters.in.dto.response.PessoaDtoOut;
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
 import io.pessoas_java.configs.AbstractIntegrationTest;
@@ -18,6 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.DeserializationFeature;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.UUID;
 
@@ -127,26 +130,32 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
             .sobrenome("Van Bennekum")
             .build();
 
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+        var resposta = mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding(UTF8)
                 .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isCreated())
-            .andDo(MockMvcResultHandlers.print());
+            .andDo(MockMvcResultHandlers.print())
+            .andReturn();
+
+        var responseBody = resposta.getResponse().getContentAsString();
+        var objectMapper = new ObjectMapper();
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        var pessoaDtoOut = objectMapper.readValue(responseBody, PessoaDtoOut.class);
 
         var pessoaPersistida = this.pessoaRepository.findByCpf(pessoaDtoIn.cpf()).get();
 
         Assertions.assertNotNull(pessoaPersistida.getId());
         Assertions.assertNotNull(pessoaPersistida.getChave());
-        Assertions.assertEquals(pessoaDtoIn.nome(), pessoaPersistida.getNome());
-        Assertions.assertEquals(pessoaDtoIn.sobrenome(), pessoaPersistida.getSobrenome());
-        Assertions.assertEquals(pessoaDtoIn.cpf(), pessoaPersistida.getCpf());
-        Assertions.assertEquals(pessoaDtoIn.sexo(), pessoaPersistida.getSexo());
-        Assertions.assertEquals(pessoaDtoIn.genero(), pessoaPersistida.getGenero());
-        Assertions.assertEquals(pessoaDtoIn.dataNascimento(), pessoaPersistida.getDataNascimento());
-        Assertions.assertEquals(pessoaDtoIn.nivelEducacional(), pessoaPersistida.getNivelEducacional());
-        Assertions.assertEquals(pessoaDtoIn.nacionalidade(), pessoaPersistida.getNacionalidade());
+        Assertions.assertEquals(pessoaDtoOut.getNome(), pessoaPersistida.getNome());
+        Assertions.assertEquals(pessoaDtoOut.getSobrenome(), pessoaPersistida.getSobrenome());
+        Assertions.assertEquals(pessoaDtoOut.getCpf(), pessoaPersistida.getCpf());
+        Assertions.assertEquals(pessoaDtoOut.getSexo(), pessoaPersistida.getSexo());
+        Assertions.assertEquals(pessoaDtoOut.getGenero(), pessoaPersistida.getGenero());
+        Assertions.assertEquals(pessoaDtoOut.getDataNascimento(), pessoaPersistida.getDataNascimento());
+        Assertions.assertEquals(pessoaDtoOut.getNivelEducacional(), pessoaPersistida.getNivelEducacional());
+        Assertions.assertEquals(pessoaDtoOut.getNacionalidade(), pessoaPersistida.getNacionalidade());
     }
 
     @Test
@@ -432,13 +441,19 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
         var nomeCapitalizado = "Arie";
         var sobrenomeCapitalizado = "Van Bennekum";
 
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+        var resposta = mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding(UTF8)
                 .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isCreated())
-            .andDo(MockMvcResultHandlers.print());
+            .andDo(MockMvcResultHandlers.print())
+            .andReturn();
+
+        var responseBody = resposta.getResponse().getContentAsString();
+        var objectMapper = new ObjectMapper();
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        var pessoaDtoOut = objectMapper.readValue(responseBody, PessoaDtoOut.class);
 
         var pessoaPersistida = this.pessoaRepository.findByCpf(editarDtoIn.cpf()).get();
 
@@ -446,12 +461,12 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
         Assertions.assertNotNull(pessoaPersistida.getChave());
         Assertions.assertEquals(nomeCapitalizado, pessoaPersistida.getNome());
         Assertions.assertEquals(sobrenomeCapitalizado, pessoaPersistida.getSobrenome());
-        Assertions.assertEquals(editarDtoIn.cpf(), pessoaPersistida.getCpf());
-        Assertions.assertEquals(editarDtoIn.sexo(), pessoaPersistida.getSexo());
-        Assertions.assertEquals(editarDtoIn.genero(), pessoaPersistida.getGenero());
-        Assertions.assertEquals(editarDtoIn.dataNascimento(), pessoaPersistida.getDataNascimento());
-        Assertions.assertEquals(editarDtoIn.nivelEducacional(), pessoaPersistida.getNivelEducacional());
-        Assertions.assertEquals(editarDtoIn.nacionalidade(), pessoaPersistida.getNacionalidade());
+        Assertions.assertEquals(pessoaDtoOut.getCpf(), pessoaPersistida.getCpf());
+        Assertions.assertEquals(pessoaDtoOut.getSexo(), pessoaPersistida.getSexo());
+        Assertions.assertEquals(pessoaDtoOut.getGenero(), pessoaPersistida.getGenero());
+        Assertions.assertEquals(pessoaDtoOut.getDataNascimento(), pessoaPersistida.getDataNascimento());
+        Assertions.assertEquals(pessoaDtoOut.getNivelEducacional(), pessoaPersistida.getNivelEducacional());
+        Assertions.assertEquals(pessoaDtoOut.getNacionalidade(), pessoaPersistida.getNacionalidade());
     }
 
     @Test
