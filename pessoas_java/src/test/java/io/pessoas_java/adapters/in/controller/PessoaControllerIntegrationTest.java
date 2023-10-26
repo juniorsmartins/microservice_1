@@ -3,6 +3,7 @@ package io.pessoas_java.adapters.in.controller;
 import io.pessoas_java.PessoasJavaApplication;
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
+import io.pessoas_java.configs.AbstractIntegrationTest;
 import io.pessoas_java.util.CriadorDeBuilders;
 import io.pessoas_java.util.TestConverterUtil;
 import org.hamcrest.Matchers;
@@ -24,7 +25,7 @@ import java.util.UUID;
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class PessoaControllerIntegrationTest {
+class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
 
     public static final String END_POINT = "/api/v1/pessoas";
 
