@@ -113,5 +113,72 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
         Assertions.assertNotNull(content);
         Assertions.assertEquals("Invalid CORS request", content);
     }
+
+    @Test
+    @Order(3)
+    @DisplayName("Cors - Get 200")
+    public void testeConsultarPorChave() throws IOException {
+
+        specification = new RequestSpecBuilder()
+            .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_TESTE_POSITIVO)
+            .setBasePath("/api/v1/pessoas")
+            .setPort(TestConfigs.SERVER_PORT)
+                .addFilter(new RequestLoggingFilter(LogDetail.ALL))
+                .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
+            .build();
+
+        var content = RestAssured.given()
+            .spec(specification)
+            .contentType(TestConfigs.CONTENT_TYPE_JSON)
+                .pathParam("chave", pessoaDtoOut.getChave())
+            .when()
+                .get("{chave}")
+            .then()
+                .statusCode(200)
+            .extract()
+                .body()
+                    .asString();
+
+        var pessoaDeSaida = objectMapper.readValue(content, PessoaDtoOut.class);
+
+        Assertions.assertEquals(pessoaDtoOut.getChave(), pessoaDeSaida.getChave());
+        Assertions.assertEquals(pessoaDtoOut.getNome(), pessoaDeSaida.getNome());
+        Assertions.assertEquals(pessoaDtoOut.getSobrenome(), pessoaDeSaida.getSobrenome());
+        Assertions.assertEquals(pessoaDtoOut.getCpf(), pessoaDeSaida.getCpf());
+        Assertions.assertEquals(pessoaDtoOut.getSexo(), pessoaDeSaida.getSexo());
+        Assertions.assertEquals(pessoaDtoOut.getGenero(), pessoaDeSaida.getGenero());
+        Assertions.assertEquals(pessoaDtoOut.getDataNascimento(), pessoaDeSaida.getDataNascimento());
+        Assertions.assertEquals(pessoaDtoOut.getNivelEducacional(), pessoaDeSaida.getNivelEducacional());
+        Assertions.assertEquals(pessoaDtoOut.getNacionalidade(), pessoaDeSaida.getNacionalidade());
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("Cors - Get 403")
+    public void testeConsultarPorChaveException() {
+
+        specification = new RequestSpecBuilder()
+            .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_TESTE_NEGATIVO)
+            .setBasePath("/api/v1/pessoas")
+            .setPort(TestConfigs.SERVER_PORT)
+                .addFilter(new RequestLoggingFilter(LogDetail.ALL))
+                .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
+            .build();
+
+        var content = RestAssured.given()
+            .spec(specification)
+            .contentType(TestConfigs.CONTENT_TYPE_JSON)
+                .pathParam("chave", pessoaDtoOut.getChave())
+            .when()
+                .get("{chave}")
+            .then()
+              .statusCode(403)
+            .extract()
+                .body()
+                    .asString();
+
+        Assertions.assertNotNull(content);
+        Assertions.assertEquals("Invalid CORS request", content);
+    }
 }
 
