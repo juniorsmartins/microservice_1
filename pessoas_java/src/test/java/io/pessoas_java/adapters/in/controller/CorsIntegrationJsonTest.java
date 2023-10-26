@@ -48,11 +48,11 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
 
     @Test
     @Order(1)
-    @DisplayName("Cors - Post")
+    @DisplayName("Cors - Post 201")
     public void testeCreate() throws IOException {
 
         specification = new RequestSpecBuilder()
-            .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, "https://teste.com.br")
+            .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_TESTE_POSITIVO)
             .setBasePath("/api/v1/pessoas")
             .setPort(TestConfigs.SERVER_PORT)
                 .addFilter(new RequestLoggingFilter(LogDetail.ALL))
@@ -63,7 +63,7 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
             .spec(specification)
             .contentType(TestConfigs.CONTENT_TYPE_JSON)
                 .body(pessoaDtoIn)
-                .when()
+            .when()
                 .post()
             .then()
                 .statusCode(201)
@@ -83,6 +83,35 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
         Assertions.assertEquals(pessoaDtoIn.dataNascimento(), pessoaDeSaida.getDataNascimento());
         Assertions.assertEquals(pessoaDtoIn.nivelEducacional(), pessoaDeSaida.getNivelEducacional());
         Assertions.assertEquals(pessoaDtoIn.nacionalidade(), pessoaDeSaida.getNacionalidade());
+    }
+
+    @Test
+    @Order(2)
+    @DisplayName("Cors - Post 403")
+    public void testeCreateException() {
+
+        specification = new RequestSpecBuilder()
+            .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_TESTE_NEGATIVO)
+            .setBasePath("/api/v1/pessoas")
+            .setPort(TestConfigs.SERVER_PORT)
+                .addFilter(new RequestLoggingFilter(LogDetail.ALL))
+                .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
+            .build();
+
+        var content = RestAssured.given()
+            .spec(specification)
+            .contentType(TestConfigs.CONTENT_TYPE_JSON)
+                .body(pessoaDtoIn)
+            .when()
+                .post()
+            .then()
+                .statusCode(403)
+            .extract()
+                .body()
+                    .asString();
+
+        Assertions.assertNotNull(content);
+        Assertions.assertEquals("Invalid CORS request", content);
     }
 }
 

@@ -12,6 +12,10 @@ public class TestConfigs {
 
     public static final String CONTENT_TYPE_YML = "application/x-yaml";
 
+    public static final String ORIGIN_TESTE_POSITIVO = "https://teste.com.br";
+
+    public static final String ORIGIN_TESTE_NEGATIVO = "https://teste-negativo.com.br";
+
     //    public static final String HEADER_PARAM_AUTHORIZATION = "Authorization";
 }
 
