@@ -4,6 +4,7 @@ import io.pessoas_java.configs.TestConfigs;
 import io.pessoas_java.configs.AbstractIntegrationTest;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -11,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class SwaggerIntegrationTest extends AbstractIntegrationTest {
 
     @Test
+    @DisplayName("Swagger - Get")
     public void testarDisplaySwaggerUiPage() {
 
         var content = RestAssured.given()
