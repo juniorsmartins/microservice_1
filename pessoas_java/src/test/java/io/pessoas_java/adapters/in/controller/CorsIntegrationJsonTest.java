@@ -1,8 +1,8 @@
 package io.pessoas_java.adapters.in.controller;
 
+import io.pessoas_java.adapters.in.dto.request.PessoaDtoIn;
 import io.pessoas_java.configs.AbstractIntegrationTest;
 import io.pessoas_java.configs.TestConfigs;
-import io.pessoas_java.dtos.PessoaDtoIn;
 import io.pessoas_java.dtos.PessoaDtoOut;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -52,7 +52,7 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
     public void testeCreate() throws IOException {
 
         specification = new RequestSpecBuilder()
-            .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, "https://erudio.com.br")
+            .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, "https://teste.com.br")
             .setBasePath("/api/v1/pessoas")
             .setPort(TestConfigs.SERVER_PORT)
                 .addFilter(new RequestLoggingFilter(LogDetail.ALL))
