@@ -10,7 +10,8 @@ public enum TipoDeErroEnum {
   REQUISICAO_MAL_FORMULADA("Requisição mal formulada.", "/requisicao-mal-formulada"),
   DADOS_INVALIDOS("Dados inválidos.", "/dados-invalidos"),
   MIDIA_NAO_SUPORTADA("Tipo de mídia não suportada.", "/midia-nao-suportada"),
-  PROBLEMA_INTERNO_SERVIDOR("Problema interno no servidor.", "/problema-interno-servidor");
+  PROBLEMA_INTERNO_SERVIDOR("Problema interno no servidor.", "/problema-interno-servidor"),
+  FORBIDDEN("Autenticação bem-sucedida, mas Usuário sem acesso.", "/autenticacao-bem-sucedida-mas-usuario-sem-acesso");
 
   private String titulo;
 

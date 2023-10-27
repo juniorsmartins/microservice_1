@@ -27,7 +27,7 @@ public class PessoaSalvarAdapter implements PessoaSalvarOutputPort {
     @Override
     public Pessoa salvar(Pessoa pessoa) {
 
-        logger.info("Adapter - iniciado processo de salvar uma pessoa.");
+        logger.info("Adapter - iniciado processo de salvar uma Pessoa.");
 
         var pessoaSalva = Optional.of(pessoa)
             .map(this.pessoaEntityMapper::toPessoaEntity)
@@ -35,7 +35,7 @@ public class PessoaSalvarAdapter implements PessoaSalvarOutputPort {
             .map(this.pessoaEntityMapper::toPessoa)
             .orElseThrow(FailedToSaveException::new);
 
-        logger.info("Adapter - finalizado processo de salvar uma pessoa.");
+        logger.info("Adapter - finalizado processo de salvar uma Pessoa.");
 
         return pessoaSalva;
     }
