@@ -25,6 +25,8 @@
 		<mockito.version>5.6.0</mockito.version>
 		<testcontainers.version>1.19.1</testcontainers.version>
 		<rest-assured.version>5.3.2</rest-assured.version>
+<!--		<java-jwt.version>3.18.3</java-jwt.version>-->
+		<java-jwt.version>4.4.0</java-jwt.version>
 	</properties>
 
 
@@ -34,6 +36,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+
+		<!-- Security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 
