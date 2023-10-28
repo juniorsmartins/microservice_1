@@ -1,4 +1,4 @@
-package io.pessoas_java.config.security.usecase;
+package io.pessoas_java.config.security.service;
 
 import io.pessoas_java.application.core.domain.User;
 

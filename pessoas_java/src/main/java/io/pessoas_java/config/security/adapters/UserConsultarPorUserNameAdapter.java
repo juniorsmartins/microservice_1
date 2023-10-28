@@ -4,7 +4,7 @@ import io.pessoas_java.adapters.out.UserSalvarAdapter;
 import io.pessoas_java.application.core.domain.User;
 import io.pessoas_java.config.security.converter.UserEntityMapper;
 import io.pessoas_java.config.security.repository.UserRepository;
-import io.pessoas_java.config.security.usecase.UserConsultarPorUserNameOutputPort;
+import io.pessoas_java.config.security.service.UserConsultarPorUserNameOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,18 +1,18 @@
-package io.pessoas_java.config.security.usecase;
+package io.pessoas_java.config.security.service;
 
 import io.pessoas_java.config.exceptions.http_404.UserNaoEncontradoPorUserNameException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;
 
-@Component
-public class UserConsultarPorUserNameUseCase implements UserDetailsService {
+@Service
+public class UserConsultarPorUserName implements UserDetailsService {
 
-    private final Logger logger = Logger.getLogger(UserConsultarPorUserNameUseCase.class.getName());
+    private final Logger logger = Logger.getLogger(UserConsultarPorUserName.class.getName());
 
     @Autowired
     private UserConsultarPorUserNameOutputPort userConsultarPorUserNameOutputPort;
