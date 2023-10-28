@@ -21,104 +21,104 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
-@Service
-public class JwtTokenProvider {
-
-    @Value("${security.jwt.token.secret-key:secret}")
-    private String secretKey = "secret";
-
-    @Value("${security.jwt.token.expire-length:3600000}")
-    private long validityInMilliseconds = 3600000; // 1 hora
-
-    private final UserDetailsService userDetailsService;
-
-    @Autowired
-    public JwtTokenProvider(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
-
-    Algorithm algorithm = null;
-
-    @PostConstruct
-    protected void init() {
-        this.secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
-        this.algorithm = Algorithm.HMAC256(secretKey.getBytes());
-    }
-
-    public TokenDto createAccessToken(String username, List<String> roles) {
-        Date dataAgora = new Date();
-        Date dataDaquiUmaHora = new Date(dataAgora.getTime() + validityInMilliseconds);
-        var accessToken = getAccessToken(username, roles, dataAgora, dataDaquiUmaHora);
-        var refreshToken = getRefreshToken(username, roles, dataAgora);
-
-        return new TokenDto(username, true, dataAgora, dataDaquiUmaHora, accessToken, refreshToken);
-    }
-
-    private String getAccessToken(String username, List<String> roles, Date dataAgora, Date dataDaquiUmaHora) {
-
-        String issuerUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-
-        return JWT.create()
-            .withClaim("roles", roles)
-            .withIssuedAt(dataAgora)
-            .withExpiresAt(dataDaquiUmaHora)
-            .withSubject(username)
-            .withIssuer(issuerUrl)
-            .sign(algorithm)
-            .strip();
-    }
-
-    private String getRefreshToken(String username, List<String> roles, Date dataAgora) {
-
-        Date dataEmTresHoras = new Date(dataAgora.getTime() + (validityInMilliseconds * 3));
-
-        return JWT.create()
-            .withClaim("roles", roles)
-            .withIssuedAt(dataAgora)
-            .withExpiresAt(dataEmTresHoras)
-            .withSubject(username)
-            .sign(algorithm)
-            .strip();
-    }
-
-    public Authentication getAuthentication(String token) {
-
-        DecodedJWT decodedJWT = decodedToken(token);
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(decodedJWT.getSubject());
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
-    }
-
-    private DecodedJWT decodedToken(String token) {
-
-        Algorithm algorithm2 = Algorithm.HMAC256(secretKey.getBytes());
-        JWTVerifier verifier = JWT.require(algorithm2).build();
-        DecodedJWT decodedJWT = verifier.verify(token);
-        return decodedJWT;
-    }
-
-    public String resolveToken(HttpServletRequest req) {
-        final String BEARER = "Bearer ";
-
-        String bearerToken = req.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith(BEARER)) {
-            return bearerToken.substring(BEARER.length());
-        }
-        return null;
-    }
-
-    // Método para validar token
-    public boolean validateToken(String token) {
-
-        DecodedJWT decodedJWT = decodedToken(token);
-
-        try {
-            if (decodedJWT.getExpiresAt().before(new Date())) {
-                return false;
-            }
-            return true;
-        } catch (Exception e) {
-            throw new InvalidJwtAuthenticationException("Expired or invalid JWT token!");
-        }
-    }
-}
+//@Service
+//public class JwtTokenProvider {
+//
+//    @Value("${security.jwt.token.secret-key:secret}")
+//    private String secretKey = "secret";
+//
+//    @Value("${security.jwt.token.expire-length:3600000}")
+//    private long validityInMilliseconds = 3600000; // 1 hora
+//
+//    private final UserDetailsService userDetailsService;
+//
+//    @Autowired
+//    public JwtTokenProvider(UserDetailsService userDetailsService) {
+//        this.userDetailsService = userDetailsService;
+//    }
+//
+//    Algorithm algorithm = null;
+//
+//    @PostConstruct
+//    protected void init() {
+//        this.secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+//        this.algorithm = Algorithm.HMAC256(secretKey.getBytes());
+//    }
+//
+//    public TokenDto createAccessToken(String username, List<String> roles) {
+//        Date dataAgora = new Date();
+//        Date dataDaquiUmaHora = new Date(dataAgora.getTime() + validityInMilliseconds);
+//        var accessToken = getAccessToken(username, roles, dataAgora, dataDaquiUmaHora);
+//        var refreshToken = getRefreshToken(username, roles, dataAgora);
+//
+//        return new TokenDto(username, true, dataAgora, dataDaquiUmaHora, accessToken, refreshToken);
+//    }
+//
+//    private String getAccessToken(String username, List<String> roles, Date dataAgora, Date dataDaquiUmaHora) {
+//
+//        String issuerUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+//
+//        return JWT.create()
+//            .withClaim("roles", roles)
+//            .withIssuedAt(dataAgora)
+//            .withExpiresAt(dataDaquiUmaHora)
+//            .withSubject(username)
+//            .withIssuer(issuerUrl)
+//            .sign(algorithm)
+//            .strip();
+//    }
+//
+//    private String getRefreshToken(String username, List<String> roles, Date dataAgora) {
+//
+//        Date dataEmTresHoras = new Date(dataAgora.getTime() + (validityInMilliseconds * 3));
+//
+//        return JWT.create()
+//            .withClaim("roles", roles)
+//            .withIssuedAt(dataAgora)
+//            .withExpiresAt(dataEmTresHoras)
+//            .withSubject(username)
+//            .sign(algorithm)
+//            .strip();
+//    }
+//
+//    public Authentication getAuthentication(String token) {
+//
+//        DecodedJWT decodedJWT = decodedToken(token);
+//        UserDetails userDetails = this.userDetailsService.loadUserByUsername(decodedJWT.getSubject());
+//        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+//    }
+//
+//    private DecodedJWT decodedToken(String token) {
+//
+//        Algorithm algorithm2 = Algorithm.HMAC256(secretKey.getBytes());
+//        JWTVerifier verifier = JWT.require(algorithm2).build();
+//        DecodedJWT decodedJWT = verifier.verify(token);
+//        return decodedJWT;
+//    }
+//
+//    public String resolveToken(HttpServletRequest req) {
+//        final String BEARER = "Bearer ";
+//
+//        String bearerToken = req.getHeader("Authorization");
+//        if (bearerToken != null && bearerToken.startsWith(BEARER)) {
+//            return bearerToken.substring(BEARER.length());
+//        }
+//        return null;
+//    }
+//
+//    // Método para validar token
+//    public boolean validateToken(String token) {
+//
+//        DecodedJWT decodedJWT = decodedToken(token);
+//
+//        try {
+//            if (decodedJWT.getExpiresAt().before(new Date())) {
+//                return false;
+//            }
+//            return true;
+//        } catch (Exception e) {
+//            throw new InvalidJwtAuthenticationException("Expired or invalid JWT token!");
+//        }
+//    }
+//}
 
