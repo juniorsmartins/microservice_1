@@ -1,9 +1,7 @@
 package io.pessoas_java.config.security.entity;
 
 import io.pessoas_java.config.security.entity.value_object.UserRole;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,6 +25,8 @@ public final class UserEntity implements Serializable, UserDetails {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(name = "login", length = 150, unique = true, nullable = false)

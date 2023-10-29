@@ -1,18 +1,15 @@
 package io.pessoas_java.config.security.entity.value_object;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public enum UserRole {
 
     ADMIN("Admin"),
     USER("User");
 
-    private String role;
-
-    UserRole(String role) {
-        this.role = role;
-    }
-
-    public String getRole() {
-        return this.role;
-    }
+    private final String role;
 }
 
