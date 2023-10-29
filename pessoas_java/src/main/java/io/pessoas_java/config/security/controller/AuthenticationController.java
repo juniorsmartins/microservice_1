@@ -3,7 +3,6 @@ package io.pessoas_java.config.security.controller;
 import io.pessoas_java.config.security.dto.AuthenticationDto;
 import io.pessoas_java.config.security.dto.RegisterDto;
 import io.pessoas_java.config.security.entity.UserEntity;
-import io.pessoas_java.config.security.entity.value_object.UserRole;
 import io.pessoas_java.config.security.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
