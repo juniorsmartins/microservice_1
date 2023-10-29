@@ -35,9 +35,15 @@ public final class UserEntity implements Serializable, UserDetails {
     @Column(name = "password", length = 512, nullable = false)
     private String password;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "role", length = 50, nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    public UserEntity(String login, String password, UserRole role) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
