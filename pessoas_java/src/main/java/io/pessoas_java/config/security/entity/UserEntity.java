@@ -36,6 +36,7 @@ public final class UserEntity implements Serializable, UserDetails {
     private String password;
 
     @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     @Override
