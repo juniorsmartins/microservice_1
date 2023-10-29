@@ -2,6 +2,7 @@ package io.pessoas_java.config.exceptions;
 
 import io.pessoas_java.config.exceptions.http_400.RequiredObjectIsNullException;
 import io.pessoas_java.config.exceptions.http_400.RequisicaoMalFormuladaException;
+import io.pessoas_java.config.exceptions.http_403.InvalidJwtAuthenticationException;
 import io.pessoas_java.config.exceptions.http_404.PessoaNaoEncontradaPorChaveException;
 import io.pessoas_java.config.exceptions.http_404.RecursoNaoEncontradoException;
 import io.pessoas_java.config.exceptions.http_409.RegraDeNegocioVioladaException;
@@ -95,7 +96,7 @@ public class TratamentoExceptions extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(RecursoNaoEncontradoException.class)
-    public final ResponseEntity<RetornoException> tratarRRecursoNaoEncontrado(RecursoNaoEncontradoException ex, WebRequest webRequest) {
+    public final ResponseEntity<RetornoException> tratarRecursoNaoEncontrado(RecursoNaoEncontradoException ex, WebRequest webRequest) {
 
         var httpStatus = HttpStatus.NOT_FOUND;
         var tipoDeErroEnum = TipoDeErroEnum.RECURSO_NAO_ENCONTRADO;
@@ -104,6 +105,18 @@ public class TratamentoExceptions extends ResponseEntityExceptionHandler {
         var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
 
         return new ResponseEntity<>(retornoException, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InvalidJwtAuthenticationException.class)
+    public final ResponseEntity<RetornoException> tratarJwtInvalido(InvalidJwtAuthenticationException ex, WebRequest webRequest) {
+
+        var httpStatus = HttpStatus.FORBIDDEN;
+        var tipoDeErroEnum = TipoDeErroEnum.FORBIDDEN;
+        var detalhe = ex.getMessage();
+
+        var retornoException = this.criarMensagemParaRetornarException(httpStatus, tipoDeErroEnum, detalhe).build();
+
+        return new ResponseEntity<>(retornoException, HttpStatus.FORBIDDEN);
     }
 
     // Método para construção da mensagem de retorno
