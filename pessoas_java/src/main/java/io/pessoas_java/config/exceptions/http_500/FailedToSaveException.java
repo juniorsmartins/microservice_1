@@ -8,7 +8,7 @@ public final class FailedToSaveException extends ErroInternoQualquerException {
     private static final long serialVersionUID = 1L;
 
     public FailedToSaveException() {
-        super("Falha ao tentar salvar Pessoa no banco de dados.");
+        super("Falha ao tentar salvar no banco de dados.");
     }
 }
 

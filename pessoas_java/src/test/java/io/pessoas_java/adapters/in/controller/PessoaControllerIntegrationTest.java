@@ -1,10 +1,10 @@
 package io.pessoas_java.adapters.in.controller;
 
 import io.pessoas_java.PessoasJavaApplication;
-import io.pessoas_java.adapters.in.dto.response.PessoaDtoOut;
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
 import io.pessoas_java.configs.AbstractIntegrationTest;
+import io.pessoas_java.dtos.PessoaDtoOut;
 import io.pessoas_java.util.CriadorDeBuilders;
 import io.pessoas_java.util.TestConverterUtil;
 import org.hamcrest.Matchers;
@@ -41,6 +41,8 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     private PessoaRepository pessoaRepository;
 
     private PessoaEntity pessoaEntity;
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeEach
     void setUp() {
@@ -140,7 +142,6 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
             .andReturn();
 
         var responseBody = resposta.getResponse().getContentAsString();
-        var objectMapper = new ObjectMapper();
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         var pessoaDtoOut = objectMapper.readValue(responseBody, PessoaDtoOut.class);
 
@@ -342,11 +343,52 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
             .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @Order(34)
+    @DisplayName("Pesquisar - por Nacionalidade")
+    void deveRetornarUmObjetoComNacionalidadeIgual_quandoPesquisarPorNacionalidade() throws Exception {
+
+        var pessoa = CriadorDeBuilders.gerarPessoaEntityBuilder()
+            .nacionalidade("Americano")
+            .build();
+        this.pessoaRepository.save(pessoa);
+
+        var nacionalidade = pessoaEntity.getNacionalidade();
+
+        mockMvc.perform(MockMvcRequestBuilders.get(END_POINT)
+                .param("nacionalidade", nacionalidade)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpectAll(
+                MockMvcResultMatchers.jsonPath("$.content[0].nacionalidade", Matchers.equalTo(nacionalidade)),
+                MockMvcResultMatchers.jsonPath("$.totalElements", Matchers.equalTo(1)),
+                MockMvcResultMatchers.status().isOk())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
 
 
 
     @Test
     @Order(50)
+    @DisplayName("Consultar Por Chave - Http 200")
+    void deveRetornarHttp200_quandoConsultarPorChave() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.get(END_POINT)
+            .param("chave", pessoaEntity.getChave().toString())
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+
+
+
+    @Test
+    @Order(80)
     @DisplayName("Editar - Http 200")
     void deveRetornarHttp200_quandoEditar() throws Exception {
 
@@ -367,7 +409,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(51)
+    @Order(81)
     @DisplayName("Editar - Valores Iguais")
     void deveRetornarValoresIguais_quandoEditar() throws Exception {
 
@@ -397,7 +439,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(52)
+    @Order(82)
     @DisplayName("Editar - Capitalizar nome completo")
     void deveRetornarNomeCompletoCapitalizado_quandoEditar() throws Exception {
 
@@ -425,7 +467,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(53)
+    @Order(83)
     @DisplayName("Editar - Persistência")
     void deveRetornarValoresIguaisPersistidos_quandoEditar() throws Exception {
 
@@ -451,7 +493,6 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
             .andReturn();
 
         var responseBody = resposta.getResponse().getContentAsString();
-        var objectMapper = new ObjectMapper();
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         var pessoaDtoOut = objectMapper.readValue(responseBody, PessoaDtoOut.class);
 
@@ -470,7 +511,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(54)
+    @Order(84)
     @DisplayName("Editar - Http 409 por CPF não único")
     void deveRetornarHttp409_quandoEditarComCpfNaoUnico() throws Exception {
 
@@ -492,7 +533,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(55)
+    @Order(85)
     @DisplayName("Editar - Http 400 por CPF inválido")
     void deveRetornarHttp400_quandoEditarComCpfInválido() throws Exception {
 
@@ -514,7 +555,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(56)
+    @Order(86)
     @DisplayName("Editar - Http 400 nome nulo")
     void deveRetornarHttp400_quandoEditarComNomeNulo() throws Exception {
 
@@ -533,7 +574,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(57)
+    @Order(87)
     @DisplayName("Editar - Http 400 sobrenome vazio")
     void deveRetornarHttp400_quandoEditarComSobrenomeVazio() throws Exception {
 
@@ -552,7 +593,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(58)
+    @Order(88)
     @DisplayName("Editar - Http 400 nivel educacional nulo")
     void deveRetornarHttp400_quandoEditarComNivelEducacionalNulo() throws Exception {
 
@@ -571,7 +612,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(59)
+    @Order(89)
     @DisplayName("Editar - Http 400 nacionalidade vazio")
     void deveRetornarHttp400_quandoEditarComNacionalidadeVazio() throws Exception {
 
@@ -593,7 +634,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
 
 
     @Test
-    @Order(80)
+    @Order(110)
     @DisplayName("Deletar - Http 204")
     void deveRetornarHttp204_quandoDeletar() throws Exception {
 
@@ -606,8 +647,8 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(81)
-    @DisplayName("Deletar - Http 204")
+    @Order(111)
+    @DisplayName("Deletar - apagar no database")
     void deveConfirmarApagarNoDatabase_quandoDeletar() throws Exception {
 
         var listaAntes = this.pessoaRepository.findAll();
@@ -622,7 +663,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(82)
+    @Order(112)
     @DisplayName("Deletar - Http 404")
     void deveRetornarHttp404_quandoDeletar() throws Exception {
 
