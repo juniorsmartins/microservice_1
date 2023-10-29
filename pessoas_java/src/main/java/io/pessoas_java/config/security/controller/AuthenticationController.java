@@ -1,9 +1,11 @@
 package io.pessoas_java.config.security.controller;
 
 import io.pessoas_java.config.security.dto.AuthenticationDto;
+import io.pessoas_java.config.security.dto.LoginResponseDto;
 import io.pessoas_java.config.security.dto.RegisterDto;
 import io.pessoas_java.config.security.entity.UserEntity;
 import io.pessoas_java.config.security.repository.UserRepository;
+import io.pessoas_java.config.security.service.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,15 +27,19 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping(path = "/login")
-    public ResponseEntity<Void> login(@RequestBody @Valid AuthenticationDto dto) {
+    public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid AuthenticationDto dto) {
 
         var usernamePassword = new UsernamePasswordAuthenticationToken(dto.login(), dto.password());
         var auth = authenticationManager.authenticate(usernamePassword);
 
+        var token = this.tokenService.generateToken((UserEntity) auth.getPrincipal());
+
         return ResponseEntity
-            .ok()
-            .build();
+            .ok(new LoginResponseDto(token));
     }
 
     @PostMapping(path = "/register")
