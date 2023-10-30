@@ -26,8 +26,8 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
             return JWT.create()
-                .withIssuer(ORIGIN)
-                .withSubject(userEntity.getLogin())
+                .withIssuer(ORIGIN) // Quem criou/emissor
+                .withSubject(userEntity.getLogin()) // Salva o login no Token para saber quem fez a requisição
                 .withExpiresAt(this.generateExpirationDate())
                 .sign(algorithm);
 
