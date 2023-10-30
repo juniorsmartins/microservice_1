@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -28,11 +30,14 @@ import java.util.UUID;
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@WithMockUser(username = "abc", password = "123", roles = "ADMIN")
 class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
 
     public static final String END_POINT = "/api/v1/pessoas";
 
     public static final String UTF8 = "UTF-8";
+
+    private static ObjectMapper objectMapper;
 
     @Autowired
     private MockMvc mockMvc;
@@ -42,7 +47,11 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
 
     private PessoaEntity pessoaEntity;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    @BeforeAll
+    static void setUpGeral() {
+        objectMapper = new ObjectMapper();
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+    }
 
     @BeforeEach
     void setUp() {
@@ -59,6 +68,23 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
 
     @Test
     @Order(1)
+    @WithAnonymousUser
+    @DisplayName("Cadastrar - Http 403 não autorizado")
+    void deveRetornarNaoAutorizado_quandoCadastrar() throws Exception {
+
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isForbidden())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(2)
     @DisplayName("Cadastrar - Http 201")
     void deveRetornarHttp201_quandoCadastrar() throws Exception {
 
@@ -74,7 +100,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(2)
+    @Order(3)
     @DisplayName("Cadastrar - Valores Iguais")
     void deveRetornarValoresIguais_quandoCadastrar() throws Exception {
 
@@ -99,7 +125,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(3)
+    @Order(4)
     @DisplayName("Cadastrar - Capitalizar nome completo")
     void deveRetornarNomeCompletoCapitalizado_quandoCadastrar() throws Exception {
 
@@ -123,7 +149,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     @DisplayName("Cadastrar - Persistência")
     void deveRetornarValoresIguaisPersistidos_quandoCadastrar() throws Exception {
 
@@ -142,7 +168,6 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
             .andReturn();
 
         var responseBody = resposta.getResponse().getContentAsString();
-        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         var pessoaDtoOut = objectMapper.readValue(responseBody, PessoaDtoOut.class);
 
         var pessoaPersistida = this.pessoaRepository.findByCpf(pessoaDtoIn.cpf()).get();
@@ -493,7 +518,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
             .andReturn();
 
         var responseBody = resposta.getResponse().getContentAsString();
-        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+//        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         var pessoaDtoOut = objectMapper.readValue(responseBody, PessoaDtoOut.class);
 
         var pessoaPersistida = this.pessoaRepository.findByCpf(editarDtoIn.cpf()).get();
