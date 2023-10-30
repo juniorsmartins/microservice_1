@@ -16,6 +16,6 @@ public class TestConfigs {
 
     public static final String ORIGIN_TESTE_NEGATIVO = "https://teste-negativo.com.br";
 
-    //    public static final String HEADER_PARAM_AUTHORIZATION = "Authorization";
+    public static final String HEADER_PARAM_AUTHORIZATION = "Authorization";
 }
 

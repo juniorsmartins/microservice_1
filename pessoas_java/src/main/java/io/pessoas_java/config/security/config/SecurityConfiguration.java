@@ -32,8 +32,11 @@ public class SecurityConfiguration {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api-docs/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
+
+                // Permitir todos os verbos para Swagger UI e OpenAPI
+                .requestMatchers(req -> req.getRequestURI().startsWith("/swagger-ui/")).permitAll()
+                .requestMatchers(req -> req.getRequestURI().startsWith("/v3/api-docs")).permitAll()
+
                 .requestMatchers(HttpMethod.POST, "/api/v1/pessoas")
                     .hasRole("ADMIN")
                     .anyRequest()
