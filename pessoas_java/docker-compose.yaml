@@ -3,7 +3,7 @@ version: '3.9'
 services:
   postgres_pessoas:
     container_name: postgres_pessoas
-    image: postgres:16.0
+    image: postgres:15
     ports:
       - "5555:5432"
     environment:

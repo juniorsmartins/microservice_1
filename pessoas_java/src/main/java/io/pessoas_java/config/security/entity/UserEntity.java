@@ -11,6 +11,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -27,7 +28,7 @@ public final class UserEntity implements Serializable, UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     @Column(name = "login", length = 150, unique = true, nullable = false)
     private String login;
