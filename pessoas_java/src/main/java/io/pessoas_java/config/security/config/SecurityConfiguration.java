@@ -38,7 +38,7 @@ public class SecurityConfiguration {
                     .hasRole("ADMIN")
                     .anyRequest()
                     .authenticated())
-            .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(this.securityFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
     }
 
