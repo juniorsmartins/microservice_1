@@ -1,17 +1,17 @@
 package io.pessoas_java.adapters.in.controller;
 
-import io.pessoas_java.configs.TestConfigs;
 import io.pessoas_java.configs.AbstractIntegrationTest;
+import io.pessoas_java.configs.TestConfigs;
 import io.restassured.RestAssured;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SwaggerIntegrationTest extends AbstractIntegrationTest {
 
     @Test
+    @Order(1)
     @DisplayName("Swagger - Get")
     public void testarDisplaySwaggerUiPage() {
 
