@@ -12,6 +12,10 @@ public record AuthenticationDto(
     @NotBlank
     @Length(max = 512)
     String password
+
+//    @NotBlank
+//    @Email(regexp = "^[a-z0-9_+.]+@[a-z0-9.-]+\\.[a-z]{2,}$")
+//    String email
 ) {
 }
 

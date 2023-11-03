@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        var origensPermitidas = corsOriginPatterns.split(",");
+        var origensPermitidas = this.corsOriginPatterns.split(",");
         registry.addMapping("/**")
 //            .allowedMethods("GET", "POST", "PUT", "DELETE") // Você pode escolher quais verbos são permitidos
             .allowedMethods("*") // Ou pode liberar todos os verbos
