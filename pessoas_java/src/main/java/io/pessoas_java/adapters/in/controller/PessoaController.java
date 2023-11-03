@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -36,40 +36,31 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path = "/api/v1/pessoas")
+@RequiredArgsConstructor
 @Tag(name = "Pessoa", description = "Endpoints para gerenciar Pessoas.")
 public class PessoaController {
 
     private final Logger logger = Logger.getLogger(PessoaController.class.getName());
 
-    @Autowired
-    private PessoaCadastrarInputPort pessoaCadastrarInputPort;
+    private final PessoaCadastrarInputPort pessoaCadastrarInputPort;
 
-    @Autowired
-    private PessoaPesquisarInputPort pessoaPesquisarInputPort;
+    private final PessoaPesquisarInputPort pessoaPesquisarInputPort;
 
-    @Autowired
-    private PessoaConsultarPorChaveInputPort pessoaConsultarPorChaveInputPort;
+    private final PessoaConsultarPorChaveInputPort pessoaConsultarPorChaveInputPort;
 
-    @Autowired
-    private PessoaDeletarPorChaveInputPort pessoaDeletarPorChaveInputPort;
+    private final PessoaDeletarPorChaveInputPort pessoaDeletarPorChaveInputPort;
 
-    @Autowired
-    private PessoaEditarInputPort pessoaEditarInputPort;
+    private final PessoaEditarInputPort pessoaEditarInputPort;
 
-    @Autowired
-    private PessoaDtoInMapper pessoaDtoInMapper;
+    private final PessoaDtoInMapper pessoaDtoInMapper;
 
-    @Autowired
-    private PessoaDtoOutMapper pessoaDtoOutMapper;
+    private final PessoaDtoOutMapper pessoaDtoOutMapper;
 
-    @Autowired
-    private PessoaDtoFiltroMapper pessoaDtoFiltroMapper;
+    private final PessoaDtoFiltroMapper pessoaDtoFiltroMapper;
 
-    @Autowired
-    private PessoaEditarDtoInMapper pessoaEditarDtoInMapper;
+    private final PessoaEditarDtoInMapper pessoaEditarDtoInMapper;
 
-    @Autowired
-    private ProdutorHateoas produtorHateoas;
+    private final ProdutorHateoas produtorHateoas;
 
     @PostMapping(
         consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"},

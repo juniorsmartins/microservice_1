@@ -1,6 +1,7 @@
 package io.pessoas_java.config.bean;
 
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +20,12 @@ public class OpenApiConfig {
                 .termsOfService("http://teste.com.br/terms-of-service") // Colocarei uma url fictícia. O certo é colocar uma que leve aos termos.
                 .license(new License()
                     .name("Apache 2.0")
-                    .url("http://teste.com.br/license"))); // Colocarei uma url fictícia. O certo é colocar uma que leve à licença.
+                    .url("https://www.apache.org/licenses/LICENSE-2.0"))
+                .contact(new Contact()
+                    .name("Junior Martins")
+                    .email("teste@email.com")
+                    .url("https://www.linkedin.com/in/juniorsmartins/"))
+            );
     }
 }
 
