@@ -11,6 +11,6 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
     Optional<UsuarioEntity> findByUsername(String username);
 
     @Query("select u.role from Usuario u where u.username like :username")
-    UsuarioEntity.Role findRoleByUsername(String username);
+    Optional<UsuarioEntity.Role> findRoleByUsername(String username);
 }
 
