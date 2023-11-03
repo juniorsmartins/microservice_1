@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(path = "/api/v1")
+@RequestMapping(path = "/api/v1/auth")
 public class LoginController {
 
     private final JwtUserDetailsService jwtUserDetailsService;
     private final AuthenticationManager authenticationManager;
 
-    @PostMapping(path = "/auth")
+    @PostMapping
     public ResponseEntity<?> autenticar(@RequestBody @Valid UsuarioLoginDto loginDto, HttpServletRequest request) {
 
         log.info("Processo de autenticação pelo login '{}'", loginDto.getUsername());

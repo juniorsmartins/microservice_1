@@ -1,6 +1,7 @@
 package io.pessoas_java.application.core.domain;
 
 import io.pessoas_java.application.core.domain.value_object.CadastroPessoaFisica;
+import io.pessoas_java.config.security.dto.UsuarioLogin;
 
 import java.util.UUID;
 
@@ -25,6 +26,8 @@ public final class Pessoa {
     private String nivelEducacional;
 
     private String nacionalidade;
+
+    private UsuarioLogin usuario;
 
     public Long getId() {
         return id;

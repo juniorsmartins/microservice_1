@@ -11,7 +11,7 @@ import java.util.Locale;
 public class LocaleConfig {
 
     @Bean
-    public LocaleResolver localeResolver() {
+    public LocaleResolver localeResolverOrigin() {
         AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
         localeResolver.setDefaultLocale(Locale.US); // Defina o Locale padrão aqui
         return localeResolver;
