@@ -1,5 +1,6 @@
 package io.pessoas_java.config.security.controller;
 
+import io.pessoas_java.config.exceptions.ErrorMessage;
 import io.pessoas_java.config.security.dto.UsuarioLoginDto;
 import io.pessoas_java.config.security.jwt.JwtUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;

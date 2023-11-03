@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS pessoas (
   genero VARCHAR(10) NOT NULL,
   nivel_educacional VARCHAR(40) NOT NULL,
   nacionalidade VARCHAR(40) NOT NULL,
-  PRIMARY KEY (id)
+  usuario_id INT UNIQUE,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 

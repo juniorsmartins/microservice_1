@@ -1,5 +1,6 @@
 package io.pessoas_java.adapters.out.entity;
 
+import io.pessoas_java.config.security.entity.UsuarioEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -51,5 +52,9 @@ public final class PessoaEntity implements Serializable {
 
     @Column(name = "nacionalidade", nullable = false)
     private String nacionalidade;
+
+    @OneToOne
+    @JoinColumn(name = "usuario_id", unique = true)
+    private UsuarioEntity usuario;
 }
 
