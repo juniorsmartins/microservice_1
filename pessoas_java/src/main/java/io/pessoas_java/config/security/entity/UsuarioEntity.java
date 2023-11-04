@@ -30,7 +30,7 @@ public final class UsuarioEntity implements Serializable {
     @Column(name = "password", nullable = false, length = 200)
     private String password;
 
-    @Column(name = "role", nullable = false, length = 25)
+    @Column(name = "role", nullable = false, length = 50)
     @Enumerated(EnumType.STRING)
     private Role role = Role.ROLE_CLIENTE;
 

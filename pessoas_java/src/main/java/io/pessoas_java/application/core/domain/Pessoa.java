@@ -1,7 +1,7 @@
 package io.pessoas_java.application.core.domain;
 
 import io.pessoas_java.application.core.domain.value_object.CadastroPessoaFisica;
-import io.pessoas_java.config.security.dto.UsuarioLogin;
+import io.pessoas_java.config.security.dto.Usuario;
 import lombok.ToString;
 
 import java.util.UUID;
@@ -29,7 +29,7 @@ public final class Pessoa {
 
     private String nacionalidade;
 
-    private UsuarioLogin usuario;
+    private Usuario usuario;
 
     public Long getId() {
         return id;
@@ -111,11 +111,11 @@ public final class Pessoa {
         this.nacionalidade = nacionalidade;
     }
 
-    public UsuarioLogin getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioLogin usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 }

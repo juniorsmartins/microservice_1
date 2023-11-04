@@ -53,7 +53,7 @@ public final class PessoaEntity implements Serializable {
     @Column(name = "nacionalidade", nullable = false)
     private String nacionalidade;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id", unique = true)
     private UsuarioEntity usuario;
 }

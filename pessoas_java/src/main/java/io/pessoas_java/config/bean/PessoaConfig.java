@@ -6,6 +6,7 @@ import io.pessoas_java.application.core.domain.utils.UtilImpl;
 import io.pessoas_java.application.core.usecase.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class PessoaConfig {
@@ -13,8 +14,9 @@ public class PessoaConfig {
     @Bean
     public PessoaCadastrarUseCase pessoaCadastrarUseCase(PessoaSalvarAdapter pessoaSalvarAdapter,
                                                          RegraCpfUnico regraCpfUnico,
+                                                         PasswordEncoder passwordEncoder,
                                                          UtilImpl utilImpl) {
-        return new PessoaCadastrarUseCase(pessoaSalvarAdapter, regraCpfUnico, utilImpl);
+        return new PessoaCadastrarUseCase(pessoaSalvarAdapter, regraCpfUnico, passwordEncoder, utilImpl);
     }
 
     @Bean
