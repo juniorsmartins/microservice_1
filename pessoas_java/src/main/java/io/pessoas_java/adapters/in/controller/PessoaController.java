@@ -94,15 +94,7 @@ public class PessoaController {
 
         var dtoOut = Optional.of(dtoIn)
             .map(this.pessoaDtoInMapper::toPessoa)
-                .map(pes -> {
-                    System.out.println(pes.toString());
-                    return pes;
-                })
             .map(this.pessoaCadastrarInputPort::cadastrar)
-                .map(pes -> {
-                    System.out.println(pes.toString());
-                    return pes;
-                })
             .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
             .map(this.produtorHateoas::links)
             .orElseThrow(NoSuchElementException::new);

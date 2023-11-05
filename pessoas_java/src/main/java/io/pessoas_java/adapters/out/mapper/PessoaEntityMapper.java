@@ -12,6 +12,7 @@ public interface PessoaEntityMapper {
     @Mapping(source = "usuario.password", target = "usuario.password")
     PessoaEntity toPessoaEntity(Pessoa pessoa);
 
+    @Mapping(source = "usuario.username", target = "usuario.username")
     Pessoa toPessoa(PessoaEntity pessoaEntity);
 }
 

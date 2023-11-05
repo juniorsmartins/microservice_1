@@ -38,8 +38,9 @@ public class PessoaConfig {
     @Bean
     public PessoaEditarUseCase pessoaEditarUseCase(PessoaEditarAdapter pessoaEditarAdapter,
                                                    RegraCpfUnico regraCpfUnico,
+                                                   PasswordEncoder passwordEncoder,
                                                    UtilImpl utilImpl) {
-        return new PessoaEditarUseCase(pessoaEditarAdapter, regraCpfUnico, utilImpl);
+        return new PessoaEditarUseCase(pessoaEditarAdapter, regraCpfUnico, passwordEncoder, utilImpl);
     }
 }
 
