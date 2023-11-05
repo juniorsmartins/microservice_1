@@ -1,7 +1,7 @@
 package io.pessoas_java.config.security.dto;
 
-public record LoginResponseDto(
+public record UsuarioDtoOut(
 
-    String token
+    String username
 ) { }
 

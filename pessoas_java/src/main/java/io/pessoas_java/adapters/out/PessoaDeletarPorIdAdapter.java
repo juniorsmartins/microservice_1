@@ -2,23 +2,19 @@ package io.pessoas_java.adapters.out;
 
 import io.pessoas_java.adapters.out.mapper.PessoaEntityMapper;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
-import io.pessoas_java.application.core.domain.Pessoa;
-import io.pessoas_java.application.ports.out.PessoaDeletarOutputPort;
-import io.pessoas_java.config.exceptions.http_500.FailedToDeleteException;
+import io.pessoas_java.application.ports.out.PessoaDeletarPorIdOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 @Component
-public class PessoaDeletarAdapter implements PessoaDeletarOutputPort {
+public class PessoaDeletarPorIdAdapter implements PessoaDeletarPorIdOutputPort {
 
-    private final Logger logger = Logger.getLogger(PessoaDeletarAdapter.class.getName());
+    private final Logger logger = Logger.getLogger(PessoaDeletarPorIdAdapter.class.getName());
 
     @Autowired
     private PessoaRepository pessoaRepository;
@@ -28,18 +24,10 @@ public class PessoaDeletarAdapter implements PessoaDeletarOutputPort {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
     @Override
-    public void deletar(final Pessoa pessoa) {
+    public void deletarPorId(final Long id) {
 
         logger.info("Adapter - iniciado processo de deletar uma pessoa por chave.");
-
-        Optional.of(pessoa)
-            .map(this.pessoaEntityMapper::toPessoaEntity)
-            .map(entidade -> {
-                this.pessoaRepository.delete(entidade);
-                return true;
-            })
-            .orElseThrow(FailedToDeleteException::new);
-
+        this.pessoaRepository.deleteById(id);
         logger.info("Adapter - finalizado processo de deletar uma pessoa por chave.");
     }
 }

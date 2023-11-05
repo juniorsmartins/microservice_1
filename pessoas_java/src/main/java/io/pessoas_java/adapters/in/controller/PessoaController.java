@@ -90,12 +90,16 @@ public class PessoaController {
 
         logger.info("Controller - recebida requisição para cadastrar uma pessoa.");
 
+        System.out.println(dtoIn.toString());
+
         var dtoOut = Optional.of(dtoIn)
             .map(this.pessoaDtoInMapper::toPessoa)
             .map(this.pessoaCadastrarInputPort::cadastrar)
             .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
             .map(this.produtorHateoas::links)
             .orElseThrow(NoSuchElementException::new);
+
+        System.out.println(dtoOut.toString());
 
         logger.info("Controller - concluído cadastro de uma pessoa.");
 

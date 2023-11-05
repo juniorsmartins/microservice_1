@@ -1,6 +1,9 @@
 package io.pessoas_java.adapters.in.dto.request;
 
+import io.pessoas_java.config.security.dto.UsuarioDtoIn;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
@@ -33,6 +36,10 @@ public record PessoaDtoIn(
         String nivelEducacional,
 
         @NotBlank
-        String nacionalidade
+        String nacionalidade,
+
+        @NotNull
+        @Valid
+        UsuarioDtoIn usuario
 ) { }
 

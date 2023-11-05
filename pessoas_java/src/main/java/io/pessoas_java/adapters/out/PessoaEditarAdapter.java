@@ -32,6 +32,7 @@ public class PessoaEditarAdapter implements PessoaEditarOutputPort {
         var pessoaEditada = this.pessoaRepository.findByChave(pessoa.getChave())
             .map(people -> {
                 BeanUtils.copyProperties(pessoa, people, "id", "chave");
+                BeanUtils.copyProperties(pessoa.getUsuario(), people.getUsuario(), "id");
                 return people;
             })
             .map(this.pessoaEntityMapper::toPessoa)
