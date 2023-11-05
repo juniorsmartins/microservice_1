@@ -3,6 +3,7 @@ package io.pessoas_java.adapters.in.dto.response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import io.pessoas_java.config.security.dto.UsuarioDtoOut;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 
@@ -17,7 +18,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"chave", "nome", "sobrenome", "cpf", "dataNascimento", "sexo", "genero", "nivelEducacional", "nacionalidade"})
+@JsonPropertyOrder({"chave", "nome", "sobrenome", "cpf", "dataNascimento", "sexo", "genero", "nivelEducacional", "nacionalidade", "usuario"})
 public class PessoaDtoOut extends RepresentationModel<PessoaDtoOut> implements Serializable {
 
     @Serial
@@ -41,5 +42,7 @@ public class PessoaDtoOut extends RepresentationModel<PessoaDtoOut> implements S
     private String nivelEducacional;
 
     private String nacionalidade;
+
+    private UsuarioDtoOut usuario;
 }
 
