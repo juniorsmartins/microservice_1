@@ -31,7 +31,7 @@ public class PessoaConfig {
 
     @Bean
     public PessoaDeletarPorChaveUseCase pessoaDeletarPorChaveUseCase(PessoaConsultarPorChaveAdapter pessoaConsultarPorChaveAdapter,
-                                                                     PessoaDeletarAdapter pessoaDeletarPorChaveAdapter) {
+                                                                     PessoaDeletarPorIdAdapter pessoaDeletarPorChaveAdapter) {
         return new PessoaDeletarPorChaveUseCase(pessoaConsultarPorChaveAdapter, pessoaDeletarPorChaveAdapter);
     }
 
