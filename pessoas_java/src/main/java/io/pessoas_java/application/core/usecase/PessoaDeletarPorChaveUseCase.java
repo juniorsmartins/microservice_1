@@ -2,7 +2,7 @@ package io.pessoas_java.application.core.usecase;
 
 import io.pessoas_java.application.ports.in.PessoaDeletarPorChaveInputPort;
 import io.pessoas_java.application.ports.out.PessoaConsultarPorChaveOutputPort;
-import io.pessoas_java.application.ports.out.PessoaDeletarOutputPort;
+import io.pessoas_java.application.ports.out.PessoaDeletarPorIdOutputPort;
 import io.pessoas_java.config.exceptions.http_404.PessoaNaoEncontradaPorChaveException;
 
 import java.util.UUID;
@@ -14,12 +14,12 @@ public class PessoaDeletarPorChaveUseCase implements PessoaDeletarPorChaveInputP
 
     private final PessoaConsultarPorChaveOutputPort pessoaConsultarPorChaveOutputPort;
 
-    private final PessoaDeletarOutputPort pessoaDeletarOutputPort;
+    private final PessoaDeletarPorIdOutputPort pessoaDeletarPorIdOutputPort;
 
     public PessoaDeletarPorChaveUseCase(PessoaConsultarPorChaveOutputPort pessoaConsultarPorChaveOutputPort,
-                                        PessoaDeletarOutputPort pessoaDeletarOutputPort) {
+                                        PessoaDeletarPorIdOutputPort pessoaDeletarPorIdOutputPort) {
         this.pessoaConsultarPorChaveOutputPort = pessoaConsultarPorChaveOutputPort;
-        this.pessoaDeletarOutputPort = pessoaDeletarOutputPort;
+        this.pessoaDeletarPorIdOutputPort = pessoaDeletarPorIdOutputPort;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class PessoaDeletarPorChaveUseCase implements PessoaDeletarPorChaveInputP
 
         this.pessoaConsultarPorChaveOutputPort.consultarPorChave(chave)
             .map(pessoa -> {
-                this.pessoaDeletarOutputPort.deletar(pessoa);
+                this.pessoaDeletarPorIdOutputPort.deletarPorId(pessoa.getId());
                 return true;
             })
             .orElseThrow(() -> new PessoaNaoEncontradaPorChaveException(chave));
