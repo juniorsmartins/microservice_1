@@ -10,6 +10,12 @@ CREATE TABLE IF NOT EXISTS pessoas (
   nivel_educacional VARCHAR(40) NOT NULL,
   nacionalidade VARCHAR(40) NOT NULL,
   usuario_id INT UNIQUE,
+
+  data_criacao TIMESTAMP,
+  criado_por VARCHAR(100),
+  data_modificacao TIMESTAMP,
+  modificado_por VARCHAR(100),
+
   PRIMARY KEY (id),
   CONSTRAINT fk_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
