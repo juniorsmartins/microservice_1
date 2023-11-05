@@ -26,6 +26,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -109,6 +110,7 @@ public class PessoaController {
     }
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Pesquisar Pessoas", description = "Pesquisar Pessoas",
         tags = {"Pessoa"},
             responses = {
@@ -152,6 +154,7 @@ public class PessoaController {
 
     @GetMapping(path = "/{chave}",
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Consultar uma Pessoa por chave", description = "Consultar uma Pessoa por chave",
         tags = {"Pessoa"},
             responses = {
@@ -197,6 +200,7 @@ public class PessoaController {
     @PutMapping(
         consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"},
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Editar uma Pessoa por chave", description = "Editar uma Pessoa por chave enviando JSon, XML ou YAML.",
         tags = {"Pessoa"},
             responses = {
@@ -239,6 +243,7 @@ public class PessoaController {
     }
 
     @DeleteMapping(path = "/{chave}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Apagar uma Pessoa por chave", description = "Apagar uma Pessoa por chave",
         tags = {"Pessoa"},
             responses = {
