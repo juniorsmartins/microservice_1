@@ -1,7 +1,5 @@
 package io.pessoas_java.adapters.in.dto.request;
 
-import io.pessoas_java.config.security.dto.UsuarioDtoIn;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -41,10 +39,6 @@ public record PessoaEditarDtoIn(
         String nivelEducacional,
 
         @NotBlank
-        String nacionalidade,
-
-        @NotNull
-        @Valid
-        UsuarioDtoIn usuario
+        String nacionalidade
 ) { }
 

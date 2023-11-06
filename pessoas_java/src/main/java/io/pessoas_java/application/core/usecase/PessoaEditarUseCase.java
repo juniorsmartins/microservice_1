@@ -5,7 +5,6 @@ import io.pessoas_java.application.core.domain.regras.RegrasEditar;
 import io.pessoas_java.application.core.domain.utils.Util;
 import io.pessoas_java.application.ports.in.PessoaEditarInputPort;
 import io.pessoas_java.application.ports.out.PessoaEditarOutputPort;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -20,17 +19,13 @@ public class PessoaEditarUseCase implements PessoaEditarInputPort {
 
     private final List<RegrasEditar> listaRegrasEditar;
 
-    private final PasswordEncoder passwordEncoder;
-
     private final Util util;
 
     public PessoaEditarUseCase(PessoaEditarOutputPort pessoaEditarOutputPort,
                                RegrasEditar regrasCpfUnico,
-                               PasswordEncoder passwordEncoder,
                                Util util) {
         this.pessoaEditarOutputPort = pessoaEditarOutputPort;
         this.listaRegrasEditar = List.of(regrasCpfUnico);
-        this.passwordEncoder = passwordEncoder;
         this.util = util;
     }
 
@@ -42,8 +37,6 @@ public class PessoaEditarUseCase implements PessoaEditarInputPort {
         var pessoaEditada = Optional.of(pessoa)
             .map(people -> {
                 this.listaRegrasEditar.forEach(regra -> regra.executar(people));
-
-                pessoa.getUsuario().setPassword(this.passwordEncoder.encode(people.getUsuario().getPassword()));
                 return people;
             })
             .map(this::capitalizarNomeCompleto)

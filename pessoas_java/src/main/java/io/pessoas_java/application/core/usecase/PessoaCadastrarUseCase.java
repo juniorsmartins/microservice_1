@@ -7,7 +7,6 @@ import io.pessoas_java.application.ports.in.PessoaCadastrarInputPort;
 import io.pessoas_java.application.ports.out.PessoaSalvarOutputPort;
 import io.pessoas_java.config.exceptions.http_400.RequiredObjectIsNullException;
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -22,17 +21,13 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
 
     private final List<RegrasCadastrar> listaRegrasCadastrar;
 
-    private final PasswordEncoder passwordEncoder;
-
     private final Util util;
 
     public PessoaCadastrarUseCase(PessoaSalvarOutputPort pessoaSalvarOutputPort,
                                   RegrasCadastrar regrasCpfUnico,
-                                  PasswordEncoder passwordEncoder,
                                   Util util) {
         this.pessoaSalvarOutputPort = pessoaSalvarOutputPort;
         this.listaRegrasCadastrar = List.of(regrasCpfUnico);
-        this.passwordEncoder = passwordEncoder;
         this.util = util;
     }
 
@@ -46,8 +41,6 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
         var pessoaCadastrada = Optional.of(pessoa)
             .map(people -> {
                 this.listaRegrasCadastrar.forEach(regra -> regra.executar(people));
-
-                people.getUsuario().setPassword(this.passwordEncoder.encode(people.getUsuario().getPassword()));
                 return people;
             })
             .map(this::capitalizarNomeCompleto)
