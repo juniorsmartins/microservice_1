@@ -1,11 +1,9 @@
 package io.pessoas_java.application.core.domain;
 
 import io.pessoas_java.application.core.domain.value_object.CadastroPessoaFisica;
-import lombok.ToString;
 
 import java.util.UUID;
 
-@ToString
 public final class Pessoa {
 
     private Long id;
@@ -27,8 +25,6 @@ public final class Pessoa {
     private String nivelEducacional;
 
     private String nacionalidade;
-
-    private Usuario usuario;
 
     public Long getId() {
         return id;
@@ -108,14 +104,6 @@ public final class Pessoa {
 
     public void setNacionalidade(String nacionalidade) {
         this.nacionalidade = nacionalidade;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 }
 

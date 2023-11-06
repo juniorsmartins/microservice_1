@@ -41,7 +41,5 @@ public class PessoaDtoOut extends RepresentationModel<PessoaDtoOut> implements S
     private String nivelEducacional;
 
     private String nacionalidade;
-
-    private UsuarioDtoOut usuario;
 }
 
