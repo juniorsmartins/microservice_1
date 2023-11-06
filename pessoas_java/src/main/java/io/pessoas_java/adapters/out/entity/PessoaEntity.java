@@ -67,11 +67,11 @@ public final class PessoaEntity implements Serializable {
     // Auditoria
 
     @CreatedDate
-    @Column(name = "data_criacao")
+    @Column(name = "data_criacao", updatable = false)
     private LocalDateTime dataCriacao;
 
     @CreatedBy
-    @Column(name = "criado_por")
+    @Column(name = "criado_por", updatable = false)
     private String criadoPor;
 
     @LastModifiedDate
