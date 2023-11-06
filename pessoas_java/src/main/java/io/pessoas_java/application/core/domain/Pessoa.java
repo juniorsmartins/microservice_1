@@ -1,7 +1,6 @@
 package io.pessoas_java.application.core.domain;
 
 import io.pessoas_java.application.core.domain.value_object.CadastroPessoaFisica;
-import io.pessoas_java.config.security.dto.Usuario;
 import lombok.ToString;
 
 import java.util.UUID;
