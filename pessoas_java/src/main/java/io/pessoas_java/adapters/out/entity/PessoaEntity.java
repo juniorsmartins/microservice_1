@@ -1,17 +1,10 @@
 package io.pessoas_java.adapters.out.entity;
 
-import io.pessoas_java.config.security.entity.UsuarioEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -23,7 +16,6 @@ import java.util.UUID;
 @Setter
 @ToString
 @EqualsAndHashCode(of = {"id"})
-@EntityListeners(AuditingEntityListener.class)
 public final class PessoaEntity implements Serializable {
 
     @Serial
@@ -59,27 +51,5 @@ public final class PessoaEntity implements Serializable {
 
     @Column(name = "nacionalidade", nullable = false)
     private String nacionalidade;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id", unique = true)
-    private UsuarioEntity usuario;
-
-    // Auditoria
-
-    @CreatedDate
-    @Column(name = "data_criacao", updatable = false)
-    private LocalDateTime dataCriacao;
-
-    @CreatedBy
-    @Column(name = "criado_por", updatable = false)
-    private String criadoPor;
-
-    @LastModifiedDate
-    @Column(name = "data_modificacao")
-    private LocalDateTime dataModificacao;
-
-    @LastModifiedBy
-    @Column(name = "modificado_por")
-    private String modificadoPor;
 }
 

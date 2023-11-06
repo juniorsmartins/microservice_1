@@ -9,7 +9,6 @@ import org.mapstruct.Mapping;
 public interface PessoaDtoOutMapper {
 
     @Mapping(source = "chave", target = "key")
-    @Mapping(source = "usuario.username", target = "usuario.username")
     PessoaDtoOut toPessoaDtoOut(Pessoa pessoa);
 }
 

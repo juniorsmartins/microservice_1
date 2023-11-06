@@ -6,11 +6,9 @@ import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public final class PessoaSpec {
 

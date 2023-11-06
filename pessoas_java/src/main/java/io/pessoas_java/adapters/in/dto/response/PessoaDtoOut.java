@@ -3,7 +3,6 @@ package io.pessoas_java.adapters.in.dto.response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.pessoas_java.config.security.dto.UsuarioDtoOut;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 
@@ -42,7 +41,5 @@ public class PessoaDtoOut extends RepresentationModel<PessoaDtoOut> implements S
     private String nivelEducacional;
 
     private String nacionalidade;
-
-    private UsuarioDtoOut usuario;
 }
 
