@@ -85,8 +85,7 @@ public class PessoaController {
                 })
             }
     )
-    public ResponseEntity<PessoaDtoOut> cadastrar(
-        @RequestBody @Valid PessoaDtoIn dtoIn) {
+    public ResponseEntity<PessoaDtoOut> cadastrar(@RequestBody @Valid PessoaDtoIn dtoIn) {
 
         logger.info("Controller - recebida requisição para cadastrar uma pessoa.");
 

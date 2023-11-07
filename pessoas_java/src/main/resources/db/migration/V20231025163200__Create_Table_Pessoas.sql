@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS pessoas (
   genero VARCHAR(10) NOT NULL,
   nivel_educacional VARCHAR(40) NOT NULL,
   nacionalidade VARCHAR(40) NOT NULL,
+  estado_civil VARCHAR(20) NOT NULL,
   PRIMARY KEY (id)
 );
 
