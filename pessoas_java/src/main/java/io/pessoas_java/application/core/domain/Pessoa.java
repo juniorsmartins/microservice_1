@@ -1,5 +1,6 @@
 package io.pessoas_java.application.core.domain;
 
+import io.pessoas_java.application.core.domain.enums.EstadoCivilEnum;
 import io.pessoas_java.application.core.domain.value_object.CadastroPessoaFisica;
 
 import java.util.UUID;
@@ -25,6 +26,8 @@ public final class Pessoa {
     private String nivelEducacional;
 
     private String nacionalidade;
+
+    private EstadoCivilEnum estadoCivil;
 
     public Long getId() {
         return id;
@@ -104,6 +107,14 @@ public final class Pessoa {
 
     public void setNacionalidade(String nacionalidade) {
         this.nacionalidade = nacionalidade;
+    }
+
+    public EstadoCivilEnum getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(EstadoCivilEnum estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
 }
 

@@ -1,6 +1,7 @@
 package io.pessoas_java.adapters.in.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
@@ -33,6 +34,9 @@ public record PessoaDtoIn(
         String nivelEducacional,
 
         @NotBlank
-        String nacionalidade
+        String nacionalidade,
+
+        @NotNull
+        String estadoCivil
 ) { }
 
