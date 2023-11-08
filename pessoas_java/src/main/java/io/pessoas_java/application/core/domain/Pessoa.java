@@ -5,6 +5,7 @@ import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
 import io.pessoas_java.application.core.domain.enums.SexoEnum;
 import io.pessoas_java.application.core.domain.value_object.CadastroPessoaFisica;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public final class Pessoa {
@@ -19,7 +20,7 @@ public final class Pessoa {
 
     private CadastroPessoaFisica cpf;
 
-    private String dataNascimento;
+    private LocalDate dataNascimento;
 
     private SexoEnum sexo;
 
@@ -71,11 +72,11 @@ public final class Pessoa {
         this.cpf = new CadastroPessoaFisica(cpf);
     }
 
-    public String getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

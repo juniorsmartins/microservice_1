@@ -9,13 +9,23 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Mapper(componentModel = "spring")
 public interface PessoaDtoInMapper {
 
+    @Mapping(target = "dataNascimento", source = "dataNascimento", qualifiedByName = "dataNascimentoStringToLocalDate")
     @Mapping(target = "estadoCivil", source = "estadoCivil", qualifiedByName = "estadoCivilStringToEnum")
     @Mapping(target = "sexo", source = "sexo", qualifiedByName = "sexoStringToEnum")
     @Mapping(target = "nivelEducacional", source = "nivelEducacional", qualifiedByName = "nivelEducacionalStringToEnum")
     Pessoa toPessoa(PessoaDtoIn pessoaDtoIn);
+
+    @Named("dataNascimentoStringToLocalDate")
+    default LocalDate dataNascimentoStringToLocalDate(String dataNascimento) {
+        var formatoEntrada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(dataNascimento, formatoEntrada);
+    }
 
     @Named("sexoStringToEnum")
     default SexoEnum sexoStringToEnum(String sexo) {

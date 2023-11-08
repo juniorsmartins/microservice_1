@@ -8,6 +8,7 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -41,7 +42,7 @@ public final class PessoaEntity implements Serializable {
     private String cpf;
 
     @Column(name = "data_nascimento", nullable = false)
-    private String dataNascimento;
+    private LocalDate dataNascimento;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "sexo", nullable = false, length = 10)

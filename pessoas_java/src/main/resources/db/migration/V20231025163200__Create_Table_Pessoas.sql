@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS pessoas (
   nome VARCHAR(30) NOT NULL,
   sobrenome VARCHAR(50) NOT NULL,
   cpf VARCHAR(11) UNIQUE NOT NULL,
-  data_nascimento VARCHAR(10) NOT NULL,
+  data_nascimento DATE NOT NULL,
   sexo VARCHAR(10) NOT NULL,
   genero VARCHAR(10),
   nivel_educacional VARCHAR(40) NOT NULL,
