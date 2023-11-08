@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS pessoas (
   cpf VARCHAR(11) UNIQUE NOT NULL,
   data_nascimento VARCHAR(10) NOT NULL,
   sexo VARCHAR(10) NOT NULL,
-  genero VARCHAR(10) NOT NULL,
+  genero VARCHAR(10),
   nivel_educacional VARCHAR(40) NOT NULL,
   nacionalidade VARCHAR(40) NOT NULL,
   estado_civil VARCHAR(20) NOT NULL,

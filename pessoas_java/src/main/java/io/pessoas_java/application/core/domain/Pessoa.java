@@ -1,6 +1,8 @@
 package io.pessoas_java.application.core.domain;
 
 import io.pessoas_java.application.core.domain.enums.EstadoCivilEnum;
+import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
+import io.pessoas_java.application.core.domain.enums.SexoEnum;
 import io.pessoas_java.application.core.domain.value_object.CadastroPessoaFisica;
 
 import java.util.UUID;
@@ -19,11 +21,11 @@ public final class Pessoa {
 
     private String dataNascimento;
 
-    private String sexo;
+    private SexoEnum sexo;
 
     private String genero;
 
-    private String nivelEducacional;
+    private NivelEducacionalEnum nivelEducacional;
 
     private String nacionalidade;
 
@@ -77,11 +79,11 @@ public final class Pessoa {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getSexo() {
+    public SexoEnum getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(SexoEnum sexo) {
         this.sexo = sexo;
     }
 
@@ -93,11 +95,11 @@ public final class Pessoa {
         this.genero = genero;
     }
 
-    public String getNivelEducacional() {
+    public NivelEducacionalEnum getNivelEducacional() {
         return nivelEducacional;
     }
 
-    public void setNivelEducacional(String nivelEducacional) {
+    public void setNivelEducacional(NivelEducacionalEnum nivelEducacional) {
         this.nivelEducacional = nivelEducacional;
     }
 
