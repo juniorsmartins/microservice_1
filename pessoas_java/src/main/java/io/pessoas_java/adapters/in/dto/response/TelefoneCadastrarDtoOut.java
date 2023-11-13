@@ -1,12 +1,25 @@
 package io.pessoas_java.adapters.in.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
+import java.io.Serial;
+import java.io.Serializable;
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public record TelefoneCadastrarDtoOut(
+public final class TelefoneCadastrarDtoOut implements Serializable {
 
-    Long id,
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-    String numero
-) { }
+    private Long id;
+
+    private String numero;
+}
 

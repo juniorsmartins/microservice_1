@@ -35,7 +35,7 @@ public class CriadorDeBuilders {
             .dataNascimento("01/01/2020")
             .sexo(sexo.getTipo())
             .genero(faker.lorem().characters(5, 10))
-            .nivelEducacional(nivelEducacional.getNivel())
+            .nivelEducacional(NivelEducacionalEnum.MESTRADO_COMPLETO.getNivel())
             .nacionalidade(faker.lorem().characters(5, 10))
             .estadoCivil(estadoCivil.getTipo());
     }

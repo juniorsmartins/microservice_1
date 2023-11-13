@@ -63,7 +63,7 @@ public final class PessoaEntity implements Serializable {
     @Column(name = "estado_civil", nullable = false, length = 20)
     private EstadoCivilEnum estadoCivil;
 
-    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "pessoa_id")
     private Set<TelefoneEntity> telefones;
 }
