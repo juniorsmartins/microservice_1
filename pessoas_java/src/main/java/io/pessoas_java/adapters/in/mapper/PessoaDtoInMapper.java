@@ -1,6 +1,6 @@
 package io.pessoas_java.adapters.in.mapper;
 
-import io.pessoas_java.adapters.in.dto.request.PessoaDtoIn;
+import io.pessoas_java.adapters.in.dto.request.PessoaCadastrarDtoIn;
 import io.pessoas_java.application.core.domain.Pessoa;
 import io.pessoas_java.application.core.domain.enums.EstadoCivilEnum;
 import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
@@ -19,7 +19,7 @@ public interface PessoaDtoInMapper {
     @Mapping(target = "estadoCivil", source = "estadoCivil", qualifiedByName = "estadoCivilStringToEnum")
     @Mapping(target = "sexo", source = "sexo", qualifiedByName = "sexoStringToEnum")
     @Mapping(target = "nivelEducacional", source = "nivelEducacional", qualifiedByName = "nivelEducacionalStringToEnum")
-    Pessoa toPessoa(PessoaDtoIn pessoaDtoIn);
+    Pessoa toPessoa(PessoaCadastrarDtoIn pessoaCadastrarDtoIn);
 
     @Named("dataNascimentoStringToLocalDate")
     default LocalDate dataNascimentoStringToLocalDate(String dataNascimento) {

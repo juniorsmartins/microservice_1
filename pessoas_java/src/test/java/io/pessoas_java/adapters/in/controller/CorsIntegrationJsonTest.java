@@ -1,6 +1,6 @@
 package io.pessoas_java.adapters.in.controller;
 
-import io.pessoas_java.adapters.in.dto.request.PessoaDtoIn;
+import io.pessoas_java.adapters.in.dto.request.PessoaCadastrarDtoIn;
 import io.pessoas_java.configs.AbstractIntegrationTest;
 import io.pessoas_java.configs.TestConfigs;
 import io.pessoas_java.dtos.PessoaDtoOut;
@@ -25,7 +25,7 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
 
     private static ObjectMapper objectMapper;
 
-    private static PessoaDtoIn pessoaDtoIn;
+    private static PessoaCadastrarDtoIn pessoaCadastrarDtoIn;
 
     private static PessoaDtoOut pessoaDtoOut;
 
@@ -34,7 +34,7 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
         objectMapper = new ObjectMapper();
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
-        pessoaDtoIn = PessoaDtoIn.builder()
+        pessoaCadastrarDtoIn = PessoaCadastrarDtoIn.builder()
             .nome("Richard")
             .sobrenome("Stallman")
             .cpf("53028054051")
@@ -62,7 +62,7 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
         var content = RestAssured.given()
             .spec(specification)
             .contentType(TestConfigs.CONTENT_TYPE_JSON)
-                .body(pessoaDtoIn)
+                .body(pessoaCadastrarDtoIn)
             .when()
                 .post()
             .then()
@@ -75,14 +75,14 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
         pessoaDtoOut = pessoaDeSaida;
 
         Assertions.assertNotNull(pessoaDeSaida.getChave());
-        Assertions.assertEquals(pessoaDtoIn.nome(), pessoaDeSaida.getNome());
-        Assertions.assertEquals(pessoaDtoIn.sobrenome(), pessoaDeSaida.getSobrenome());
-        Assertions.assertEquals(pessoaDtoIn.cpf(), pessoaDeSaida.getCpf());
-        Assertions.assertEquals(pessoaDtoIn.sexo(), pessoaDeSaida.getSexo());
-        Assertions.assertEquals(pessoaDtoIn.genero(), pessoaDeSaida.getGenero());
-        Assertions.assertEquals(pessoaDtoIn.dataNascimento(), pessoaDeSaida.getDataNascimento());
-        Assertions.assertEquals(pessoaDtoIn.nivelEducacional(), pessoaDeSaida.getNivelEducacional());
-        Assertions.assertEquals(pessoaDtoIn.nacionalidade(), pessoaDeSaida.getNacionalidade());
+        Assertions.assertEquals(pessoaCadastrarDtoIn.nome(), pessoaDeSaida.getNome());
+        Assertions.assertEquals(pessoaCadastrarDtoIn.sobrenome(), pessoaDeSaida.getSobrenome());
+        Assertions.assertEquals(pessoaCadastrarDtoIn.cpf(), pessoaDeSaida.getCpf());
+        Assertions.assertEquals(pessoaCadastrarDtoIn.sexo(), pessoaDeSaida.getSexo());
+        Assertions.assertEquals(pessoaCadastrarDtoIn.genero(), pessoaDeSaida.getGenero());
+        Assertions.assertEquals(pessoaCadastrarDtoIn.dataNascimento(), pessoaDeSaida.getDataNascimento());
+        Assertions.assertEquals(pessoaCadastrarDtoIn.nivelEducacional(), pessoaDeSaida.getNivelEducacional());
+        Assertions.assertEquals(pessoaCadastrarDtoIn.nacionalidade(), pessoaDeSaida.getNacionalidade());
     }
 
     @Test
@@ -101,7 +101,7 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
         var content = RestAssured.given()
             .spec(specification)
             .contentType(TestConfigs.CONTENT_TYPE_JSON)
-                .body(pessoaDtoIn)
+                .body(pessoaCadastrarDtoIn)
             .when()
                 .post()
             .then()

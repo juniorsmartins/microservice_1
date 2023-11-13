@@ -11,6 +11,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Set;
 import java.util.UUID;
 
 @Builder
@@ -21,7 +22,7 @@ import java.util.UUID;
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"chave", "nome", "sobrenome", "cpf", "dataNascimento", "sexo", "genero", "nivelEducacional", "nacionalidade", "usuario"})
-public class PessoaDtoOut extends RepresentationModel<PessoaDtoOut> implements Serializable {
+public class PessoaCadastrarDtoOut extends RepresentationModel<PessoaCadastrarDtoOut> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -46,5 +47,7 @@ public class PessoaDtoOut extends RepresentationModel<PessoaDtoOut> implements S
     private String nacionalidade;
 
     private EstadoCivilEnum estadoCivil;
+
+    private Set<TelefoneCadastrarDtoOut> telefones;
 }
 

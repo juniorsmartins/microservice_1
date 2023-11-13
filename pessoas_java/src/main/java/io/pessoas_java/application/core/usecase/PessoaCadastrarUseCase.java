@@ -6,10 +6,8 @@ import io.pessoas_java.application.core.domain.utils.Util;
 import io.pessoas_java.application.ports.in.PessoaCadastrarInputPort;
 import io.pessoas_java.application.ports.out.PessoaSalvarOutputPort;
 import io.pessoas_java.config.exceptions.http_400.RequiredObjectIsNullException;
-import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -36,20 +34,19 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
 
         logger.info("UseCase - iniciado serviço de cadastrar uma pessoa.");
 
-        if (ObjectUtils.isEmpty(pessoa)) throw new RequiredObjectIsNullException();
-
-        var pessoaCadastrada = Optional.of(pessoa)
-            .map(people -> {
-                this.listaRegrasCadastrar.forEach(regra -> regra.executar(people));
-                return people;
-            })
-            .map(this::capitalizarNomeCompleto)
-            .map(this.pessoaSalvarOutputPort::salvar)
-            .orElseThrow(NoSuchElementException::new);
+        Optional.ofNullable(pessoa)
+            .ifPresentOrElse(
+                people -> {
+                    this.listaRegrasCadastrar.forEach(regra -> regra.executar(people));
+                    this.capitalizarNomeCompleto(people);
+                    this.pessoaSalvarOutputPort.salvar(people);
+                },
+                () -> {throw new RequiredObjectIsNullException();}
+            );
 
         logger.info("UseCase - finalizado serviço de cadastrar uma pessoa.");
 
-        return pessoaCadastrada;
+        return pessoa;
     }
 
     private Pessoa capitalizarNomeCompleto(Pessoa pessoa) {
@@ -58,6 +55,8 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
 
         var sobrenomeCapitalizado = this.util.capitalizar(pessoa.getSobrenome());
         pessoa.setSobrenome(sobrenomeCapitalizado);
+
+        System.out.println("Capitalizar: " + pessoa);
 
         return pessoa;
     }

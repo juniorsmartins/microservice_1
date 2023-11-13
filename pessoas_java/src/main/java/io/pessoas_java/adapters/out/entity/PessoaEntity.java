@@ -9,6 +9,7 @@ import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -61,5 +62,9 @@ public final class PessoaEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "estado_civil", nullable = false, length = 20)
     private EstadoCivilEnum estadoCivil;
+
+    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @JoinColumn(name = "pessoa_id")
+    private Set<TelefoneEntity> telefones;
 }
 

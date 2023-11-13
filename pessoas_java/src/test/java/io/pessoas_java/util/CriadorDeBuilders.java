@@ -1,7 +1,7 @@
 package io.pessoas_java.util;
 
 import com.github.javafaker.Faker;
-import io.pessoas_java.adapters.in.dto.request.PessoaDtoIn;
+import io.pessoas_java.adapters.in.dto.request.PessoaCadastrarDtoIn;
 import io.pessoas_java.adapters.in.dto.request.PessoaEditarDtoIn;
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
 import io.pessoas_java.application.core.domain.enums.EstadoCivilEnum;
@@ -26,9 +26,23 @@ public class CriadorDeBuilders {
 
     private static EstadoCivilEnum estadoCivil;
 
-    public static PessoaDtoIn.PessoaDtoInBuilder gerarPessoaDtoInBuilder() {
+    public static PessoaCadastrarDtoIn.PessoaCadastrarDtoInBuilder gerarPessoaDtoInBuilder() {
 
-        return PessoaDtoIn.builder()
+        return PessoaCadastrarDtoIn.builder()
+            .nome(faker.name().firstName())
+            .sobrenome(faker.name().lastName())
+            .cpf(cpfGenerator.cpf(false))
+            .dataNascimento("01/01/2020")
+            .sexo(sexo.getTipo())
+            .genero(faker.lorem().characters(5, 10))
+            .nivelEducacional(nivelEducacional.getNivel())
+            .nacionalidade(faker.lorem().characters(5, 10))
+            .estadoCivil(estadoCivil.getTipo());
+    }
+
+    public static PessoaEditarDtoIn.PessoaEditarDtoInBuilder gerarPessoaEditarDtoInBuilder() {
+
+        return PessoaEditarDtoIn.builder()
             .nome(faker.name().firstName())
             .sobrenome(faker.name().lastName())
             .cpf(cpfGenerator.cpf(false))
@@ -37,19 +51,6 @@ public class CriadorDeBuilders {
             .genero(faker.lorem().characters(5, 10))
             .nivelEducacional("Superior")
             .nacionalidade(faker.lorem().characters(5, 10));
-    }
-
-    public static PessoaEditarDtoIn.PessoaEditarDtoInBuilder gerarPessoaEditarDtoInBuilder() {
-
-        return PessoaEditarDtoIn.builder()
-                .nome(faker.name().firstName())
-                .sobrenome(faker.name().lastName())
-                .cpf(cpfGenerator.cpf(false))
-                .dataNascimento("01/01/2020")
-                .sexo(faker.dog().gender())
-                .genero(faker.lorem().characters(5, 10))
-                .nivelEducacional("Superior")
-                .nacionalidade(faker.lorem().characters(5, 10));
     }
 
     public static PessoaEntity.PessoaEntityBuilder gerarPessoaEntityBuilder() {

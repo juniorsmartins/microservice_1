@@ -7,8 +7,10 @@ import lombok.Builder;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
+import java.util.Set;
+
 @Builder
-public record PessoaDtoIn(
+public record PessoaCadastrarDtoIn(
 
         @NotBlank
         @Length(max = 30)
@@ -39,6 +41,8 @@ public record PessoaDtoIn(
         String nacionalidade,
 
         @NotNull
-        String estadoCivil
+        String estadoCivil,
+
+        Set<TelefoneCadastrarDtoIn> telefones
 ) { }
 

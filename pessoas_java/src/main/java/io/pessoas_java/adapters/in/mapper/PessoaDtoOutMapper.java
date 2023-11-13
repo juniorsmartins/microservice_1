@@ -1,6 +1,6 @@
 package io.pessoas_java.adapters.in.mapper;
 
-import io.pessoas_java.adapters.in.dto.response.PessoaDtoOut;
+import io.pessoas_java.adapters.in.dto.response.PessoaCadastrarDtoOut;
 import io.pessoas_java.application.core.domain.Pessoa;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,7 +14,7 @@ public interface PessoaDtoOutMapper {
 
     @Mapping(source = "chave", target = "key")
     @Mapping(target = "dataNascimento", source = "dataNascimento", qualifiedByName = "dataNascimentoLocalDateToString")
-    PessoaDtoOut toPessoaDtoOut(Pessoa pessoa);
+    PessoaCadastrarDtoOut toPessoaDtoOut(Pessoa pessoa);
 
     @Named("dataNascimentoLocalDateToString")
     default String dataNascimentoLocalDateToString(LocalDate dataNascimento) {

@@ -4,8 +4,10 @@ import io.pessoas_java.application.core.domain.enums.EstadoCivilEnum;
 import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
 import io.pessoas_java.application.core.domain.enums.SexoEnum;
 import io.pessoas_java.application.core.domain.value_object.CadastroPessoaFisica;
+import io.pessoas_java.application.core.domain.value_object.Telefone;
 
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 public final class Pessoa {
@@ -31,6 +33,8 @@ public final class Pessoa {
     private String nacionalidade;
 
     private EstadoCivilEnum estadoCivil;
+
+    private Set<Telefone> telefones;
 
     public Long getId() {
         return id;
@@ -118,6 +122,32 @@ public final class Pessoa {
 
     public void setEstadoCivil(EstadoCivilEnum estadoCivil) {
         this.estadoCivil = estadoCivil;
+    }
+
+    public Set<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(Set<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", chave=" + chave +
+                ", nome='" + nome + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", cpf=" + cpf +
+                ", dataNascimento=" + dataNascimento +
+                ", sexo=" + sexo +
+                ", genero='" + genero + '\'' +
+                ", nivelEducacional=" + nivelEducacional +
+                ", nacionalidade='" + nacionalidade + '\'' +
+                ", estadoCivil=" + estadoCivil +
+                ", telefones=" + telefones +
+                '}';
     }
 }
 
