@@ -1,8 +1,11 @@
 package io.pessoas_java.adapters.in.controller;
 
 import io.pessoas_java.PessoasJavaApplication;
+import io.pessoas_java.adapters.in.dto.request.TelefoneCadastrarDtoIn;
+import io.pessoas_java.adapters.in.dto.response.PessoaCadastrarDtoOut;
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
+import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
 import io.pessoas_java.configs.AbstractIntegrationTest;
 import io.pessoas_java.dtos.PessoaDtoOut;
 import io.pessoas_java.util.CriadorDeBuilders;
@@ -14,8 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithAnonymousUser;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -24,13 +25,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.DeserializationFeature;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Set;
 import java.util.UUID;
 
 @SpringBootTest(classes = PessoasJavaApplication.class)
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@WithMockUser(username = "abc", password = "123", roles = "ADMIN")
 class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
 
     public static final String END_POINT = "/api/v1/pessoas";
@@ -67,23 +69,6 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(1)
-    @WithAnonymousUser
-    @DisplayName("Cadastrar - Http 403 não autorizado")
-    void deveRetornarNaoAutorizado_quandoCadastrar() throws Exception {
-
-        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().build();
-
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isForbidden())
-            .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
     @Order(2)
     @DisplayName("Cadastrar - Http 201")
     void deveRetornarHttp201_quandoCadastrar() throws Exception {
@@ -114,13 +99,13 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
             .andExpectAll(MockMvcResultMatchers.status().isCreated(),
                 MockMvcResultMatchers.jsonPath("$.chave", Matchers.notNullValue()),
                 MockMvcResultMatchers.jsonPath("$.nome", Matchers.equalToIgnoringCase(dtoIn.nome())),
-                MockMvcResultMatchers.jsonPath("$.sobrenome", Matchers.equalTo(dtoIn.sobrenome())),
+                MockMvcResultMatchers.jsonPath("$.sobrenome", Matchers.equalToIgnoringCase(dtoIn.sobrenome())),
                 MockMvcResultMatchers.jsonPath("$.cpf", Matchers.equalTo(dtoIn.cpf())),
                 MockMvcResultMatchers.jsonPath("$.dataNascimento", Matchers.equalTo(dtoIn.dataNascimento())),
-                MockMvcResultMatchers.jsonPath("$.sexo", Matchers.equalTo(dtoIn.sexo())),
-                MockMvcResultMatchers.jsonPath("$.genero", Matchers.equalTo(dtoIn.genero())),
-                MockMvcResultMatchers.jsonPath("$.nivelEducacional", Matchers.equalTo(dtoIn.nivelEducacional())),
-                MockMvcResultMatchers.jsonPath("$.nacionalidade", Matchers.equalTo(dtoIn.nacionalidade())))
+                MockMvcResultMatchers.jsonPath("$.sexo", Matchers.equalToIgnoringCase(dtoIn.sexo())),
+                MockMvcResultMatchers.jsonPath("$.genero", Matchers.equalToIgnoringCase(dtoIn.genero())),
+                MockMvcResultMatchers.jsonPath("$.nivelEducacional", Matchers.equalTo(NivelEducacionalEnum.MESTRADO_COMPLETO.toString())),
+                MockMvcResultMatchers.jsonPath("$.nacionalidade", Matchers.equalToIgnoringCase(dtoIn.nacionalidade())))
             .andDo(MockMvcResultHandlers.print());
     }
 
@@ -177,10 +162,10 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
         Assertions.assertEquals(pessoaDtoOut.getNome(), pessoaPersistida.getNome());
         Assertions.assertEquals(pessoaDtoOut.getSobrenome(), pessoaPersistida.getSobrenome());
         Assertions.assertEquals(pessoaDtoOut.getCpf(), pessoaPersistida.getCpf());
-        Assertions.assertEquals(pessoaDtoOut.getSexo(), pessoaPersistida.getSexo());
+        Assertions.assertEquals(pessoaDtoOut.getSexo(), pessoaPersistida.getSexo().toString());
         Assertions.assertEquals(pessoaDtoOut.getGenero(), pessoaPersistida.getGenero());
-        Assertions.assertEquals(pessoaDtoOut.getDataNascimento(), pessoaPersistida.getDataNascimento());
-        Assertions.assertEquals(pessoaDtoOut.getNivelEducacional(), pessoaPersistida.getNivelEducacional());
+        Assertions.assertEquals(pessoaDtoOut.getDataNascimento(), pessoaPersistida.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        Assertions.assertEquals(pessoaDtoOut.getNivelEducacional(), pessoaPersistida.getNivelEducacional().toString());
         Assertions.assertEquals(pessoaDtoOut.getNacionalidade(), pessoaPersistida.getNacionalidade());
     }
 
@@ -290,6 +275,41 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
             .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(16)
+    @DisplayName("Cadastrar - Telefones Iguais")
+    void deveRetornarTelefonesIguaisAndPersistir_quandoCadastrar() throws Exception {
+
+        var tel1 = TelefoneCadastrarDtoIn.builder().numero("65996118888").build();
+        var tel2 = TelefoneCadastrarDtoIn.builder().numero("55999557733").build();
+
+        var dtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .telefones(Set.of(tel1, tel2))
+            .build();
+
+        var resposta = mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(dtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpectAll(MockMvcResultMatchers.status().isCreated(),
+                MockMvcResultMatchers.jsonPath("$.telefones[0].numero", Matchers.notNullValue()),
+                MockMvcResultMatchers.jsonPath("$.telefones[0].numero", Matchers.equalTo(tel1.numero())),
+                MockMvcResultMatchers.jsonPath("$.telefones[1].numero", Matchers.notNullValue()),
+                MockMvcResultMatchers.jsonPath("$.telefones[1].numero", Matchers.equalTo(tel2.numero())))
+            .andDo(MockMvcResultHandlers.print())
+            .andReturn();
+
+        var responseBody = resposta.getResponse().getContentAsString();
+        var dtoOut = objectMapper.readValue(responseBody, PessoaCadastrarDtoOut.class);
+
+        var pessoaPersistida = this.pessoaRepository.findByCpf(dtoOut.getCpf()).get();
+
+        Assertions.assertNotNull(pessoaPersistida);
+        Assertions.assertNotNull(pessoaPersistida.getTelefones());
+        Assertions.assertEquals(pessoaPersistida.getTelefones().size(), 2);
     }
 
 

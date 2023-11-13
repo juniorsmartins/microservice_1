@@ -1,9 +1,9 @@
 package io.pessoas_java.adapters.in.controller;
 
 import io.pessoas_java.adapters.in.dto.request.PessoaDtoFiltro;
-import io.pessoas_java.adapters.in.dto.request.PessoaDtoIn;
+import io.pessoas_java.adapters.in.dto.request.PessoaCadastrarDtoIn;
 import io.pessoas_java.adapters.in.dto.request.PessoaEditarDtoIn;
-import io.pessoas_java.adapters.in.dto.response.PessoaDtoOut;
+import io.pessoas_java.adapters.in.dto.response.PessoaCadastrarDtoOut;
 import io.pessoas_java.adapters.in.mapper.PessoaDtoFiltroMapper;
 import io.pessoas_java.adapters.in.mapper.PessoaDtoInMapper;
 import io.pessoas_java.adapters.in.mapper.PessoaDtoOutMapper;
@@ -69,7 +69,7 @@ public class PessoaController {
         tags = {"Pessoa"},
             responses = {
                 @ApiResponse(description = "Created", responseCode = "201", content = {
-                    @Content(schema = @Schema(implementation = PessoaDtoOut.class))
+                    @Content(schema = @Schema(implementation = PessoaCadastrarDtoOut.class))
                 }),
                 @ApiResponse(description = "Bad Request", responseCode = "400", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
@@ -85,11 +85,9 @@ public class PessoaController {
                 })
             }
     )
-    public ResponseEntity<PessoaDtoOut> cadastrar(@RequestBody @Valid PessoaDtoIn dtoIn) {
+    public ResponseEntity<PessoaCadastrarDtoOut> cadastrar(@RequestBody @Valid PessoaCadastrarDtoIn dtoIn) {
 
         logger.info("Controller - recebida requisição para cadastrar uma pessoa.");
-
-        System.out.println(dtoIn.toString());
 
         var dtoOut = Optional.of(dtoIn)
             .map(this.pessoaDtoInMapper::toPessoa)
@@ -97,8 +95,6 @@ public class PessoaController {
             .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
             .map(this.produtorHateoas::links)
             .orElseThrow(NoSuchElementException::new);
-
-        System.out.println(dtoOut.toString());
 
         logger.info("Controller - concluído cadastro de uma pessoa.");
 
@@ -113,7 +109,7 @@ public class PessoaController {
             responses = {
                 @ApiResponse(description = "Success", responseCode = "200", content = {
                     @Content(mediaType = "application/json",
-                        array = @ArraySchema(schema = @Schema(implementation = PessoaDtoOut.class)))
+                        array = @ArraySchema(schema = @Schema(implementation = PessoaCadastrarDtoOut.class)))
                 }),
                 @ApiResponse(description = "Bad Request", responseCode = "400", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
@@ -129,8 +125,8 @@ public class PessoaController {
                 })
             }
     )
-    public ResponseEntity<Page<PessoaDtoOut>> pesquisar(@Valid final PessoaDtoFiltro dtoFiltro,
-        @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, page = 0, size = 10)
+    public ResponseEntity<Page<PessoaCadastrarDtoOut>> pesquisar(@Valid final PessoaDtoFiltro dtoFiltro,
+                                                                 @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, page = 0, size = 10)
         final Pageable paginacao) {
 
         logger.info("Controller - recebida requisição para pesquisar pessoas.");
@@ -155,7 +151,7 @@ public class PessoaController {
         tags = {"Pessoa"},
             responses = {
                 @ApiResponse(description = "Success", responseCode = "200", content = {
-                    @Content(schema = @Schema(implementation = PessoaDtoOut.class))
+                    @Content(schema = @Schema(implementation = PessoaCadastrarDtoOut.class))
                 }),
                 @ApiResponse(description = "Bad Request", responseCode = "400", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
@@ -174,7 +170,7 @@ public class PessoaController {
                 })
             }
     )
-    public ResponseEntity<PessoaDtoOut> consultarPorChave(
+    public ResponseEntity<PessoaCadastrarDtoOut> consultarPorChave(
         @Parameter(name = "chave", description = "UUID da Pessoa", example = "53c81a54-dad5-4b5f-a5e4-584c0b1fbdc3", required = true)
         @PathVariable(name = "chave") final UUID chave) {
 
@@ -200,7 +196,7 @@ public class PessoaController {
         tags = {"Pessoa"},
             responses = {
                 @ApiResponse(description = "Success", responseCode = "200", content = {
-                    @Content(schema = @Schema(implementation = PessoaDtoOut.class))
+                    @Content(schema = @Schema(implementation = PessoaCadastrarDtoOut.class))
                 }),
                 @ApiResponse(description = "Bad Request", responseCode = "400", content = {
                     @Content(schema = @Schema(implementation = RetornoException.class))
@@ -219,7 +215,7 @@ public class PessoaController {
                 })
             }
     )
-    public ResponseEntity<PessoaDtoOut> editar(@RequestBody @Valid PessoaEditarDtoIn editarDtoIn) {
+    public ResponseEntity<PessoaCadastrarDtoOut> editar(@RequestBody @Valid PessoaEditarDtoIn editarDtoIn) {
 
         logger.info("Controller - recebida requisição para editar uma pessoa.");
 

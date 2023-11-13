@@ -1,8 +1,13 @@
 package io.pessoas_java.application.core.domain;
 
 import io.pessoas_java.application.core.domain.enums.EstadoCivilEnum;
+import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
+import io.pessoas_java.application.core.domain.enums.SexoEnum;
 import io.pessoas_java.application.core.domain.value_object.CadastroPessoaFisica;
+import io.pessoas_java.application.core.domain.value_object.Telefone;
 
+import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 public final class Pessoa {
@@ -17,17 +22,19 @@ public final class Pessoa {
 
     private CadastroPessoaFisica cpf;
 
-    private String dataNascimento;
+    private LocalDate dataNascimento;
 
-    private String sexo;
+    private SexoEnum sexo;
 
     private String genero;
 
-    private String nivelEducacional;
+    private NivelEducacionalEnum nivelEducacional;
 
     private String nacionalidade;
 
     private EstadoCivilEnum estadoCivil;
+
+    private Set<Telefone> telefones;
 
     public Long getId() {
         return id;
@@ -69,19 +76,19 @@ public final class Pessoa {
         this.cpf = new CadastroPessoaFisica(cpf);
     }
 
-    public String getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getSexo() {
+    public SexoEnum getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(SexoEnum sexo) {
         this.sexo = sexo;
     }
 
@@ -93,11 +100,11 @@ public final class Pessoa {
         this.genero = genero;
     }
 
-    public String getNivelEducacional() {
+    public NivelEducacionalEnum getNivelEducacional() {
         return nivelEducacional;
     }
 
-    public void setNivelEducacional(String nivelEducacional) {
+    public void setNivelEducacional(NivelEducacionalEnum nivelEducacional) {
         this.nivelEducacional = nivelEducacional;
     }
 
@@ -115,6 +122,32 @@ public final class Pessoa {
 
     public void setEstadoCivil(EstadoCivilEnum estadoCivil) {
         this.estadoCivil = estadoCivil;
+    }
+
+    public Set<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(Set<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", chave=" + chave +
+                ", nome='" + nome + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", cpf=" + cpf +
+                ", dataNascimento=" + dataNascimento +
+                ", sexo=" + sexo +
+                ", genero='" + genero + '\'' +
+                ", nivelEducacional=" + nivelEducacional +
+                ", nacionalidade='" + nacionalidade + '\'' +
+                ", estadoCivil=" + estadoCivil +
+                ", telefones=" + telefones +
+                '}';
     }
 }
 

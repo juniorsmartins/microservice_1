@@ -1,11 +1,15 @@
 package io.pessoas_java.adapters.out.entity;
 
 import io.pessoas_java.application.core.domain.enums.EstadoCivilEnum;
+import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
+import io.pessoas_java.application.core.domain.enums.SexoEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -39,22 +43,28 @@ public final class PessoaEntity implements Serializable {
     private String cpf;
 
     @Column(name = "data_nascimento", nullable = false)
-    private String dataNascimento;
+    private LocalDate dataNascimento;
 
-    @Column(name = "sexo", nullable = false)
-    private String sexo;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sexo", nullable = false, length = 10)
+    private SexoEnum sexo;
 
-    @Column(name = "genero", nullable = false)
+    @Column(name = "genero", nullable = true, length = 10)
     private String genero;
 
-    @Column(name = "nivel_educacional", nullable = false)
-    private String nivelEducacional;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "nivel_educacional", nullable = false, length = 40)
+    private NivelEducacionalEnum nivelEducacional;
 
-    @Column(name = "nacionalidade", nullable = false)
+    @Column(name = "nacionalidade", nullable = false, length = 40)
     private String nacionalidade;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado_civil", nullable = false, length = 20)
     private EstadoCivilEnum estadoCivil;
+
+    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "pessoa_id")
+    private Set<TelefoneEntity> telefones;
 }
 
