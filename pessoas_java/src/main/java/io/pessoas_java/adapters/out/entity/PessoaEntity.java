@@ -71,8 +71,7 @@ public final class PessoaEntity implements Serializable {
     @JoinColumn(name = "pessoa_id")
     private Set<EmailEntity> emails;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true, targetEntity = EnderecoEntity.class)
-    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
     private EnderecoEntity endereco;
 }
 

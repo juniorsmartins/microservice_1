@@ -46,5 +46,8 @@ public final class EnderecoEntity implements Serializable {
 
     @Column(name = "complemento", length = 250)
     private String complemento;
+
+    @OneToOne(mappedBy = "endereco")
+    private PessoaEntity pessoa;
 }
 

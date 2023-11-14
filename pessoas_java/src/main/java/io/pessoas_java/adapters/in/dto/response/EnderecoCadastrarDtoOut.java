@@ -21,6 +21,8 @@ public record EnderecoCadastrarDtoOut(
 
     String numero,
 
-    String complemento
+    String complemento,
+
+    PessoaCadastrarDtoOut pessoa
 ) { }
 
