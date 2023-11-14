@@ -103,48 +103,6 @@ public class PessoaController {
             .body(dtoOut);
     }
 
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
-    @Operation(summary = "Pesquisar Pessoas", description = "Pesquisar Pessoas",
-        tags = {"Pessoa"},
-            responses = {
-                @ApiResponse(description = "Success", responseCode = "200", content = {
-                    @Content(mediaType = "application/json",
-                        array = @ArraySchema(schema = @Schema(implementation = PessoaCadastrarDtoOut.class)))
-                }),
-                @ApiResponse(description = "Bad Request", responseCode = "400", content = {
-                    @Content(schema = @Schema(implementation = RetornoException.class))
-                }),
-                @ApiResponse(description = "Unauthorized", responseCode = "401", content = {
-                    @Content(schema = @Schema(implementation = RetornoException.class))
-                }),
-                @ApiResponse(description = "Forbidden", responseCode = "403", content = {
-                    @Content(schema = @Schema(implementation = RetornoException.class))
-                }),
-                @ApiResponse(description = "Internal Server Error", responseCode = "500", content = {
-                    @Content(schema = @Schema(implementation = RetornoException.class))
-                })
-            }
-    )
-    public ResponseEntity<Page<PessoaCadastrarDtoOut>> pesquisar(@Valid final PessoaDtoFiltro dtoFiltro,
-                                                                 @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, page = 0, size = 10)
-        final Pageable paginacao) {
-
-        logger.info("Controller - recebida requisição para pesquisar pessoas.");
-
-        var paginaDtoOut = Optional.of(dtoFiltro)
-            .map(this.pessoaDtoFiltroMapper::toPessoaFiltro)
-            .map(filtro -> this.pessoaPesquisarInputPort.pesquisar(filtro, paginacao))
-            .map(pagina -> pagina.map(this.pessoaDtoOutMapper::toPessoaDtoOut))
-            .map(pagina -> pagina.map(this.produtorHateoas::links))
-            .orElseThrow(NoSuchElementException::new);
-
-        logger.info("Controller - concluído pesquisar pessoas.");
-
-        return ResponseEntity
-            .ok()
-            .body(paginaDtoOut);
-    }
-
     @GetMapping(path = "/{chave}",
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
     @Operation(summary = "Consultar uma Pessoa por chave", description = "Consultar uma Pessoa por chave",
@@ -187,6 +145,48 @@ public class PessoaController {
         return ResponseEntity
             .ok()
             .body(dtoOut);
+    }
+
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
+    @Operation(summary = "Pesquisar Pessoas", description = "Pesquisar Pessoas",
+        tags = {"Pessoa"},
+            responses = {
+                @ApiResponse(description = "Success", responseCode = "200", content = {
+                    @Content(mediaType = "application/json",
+                        array = @ArraySchema(schema = @Schema(implementation = PessoaCadastrarDtoOut.class)))
+                }),
+                @ApiResponse(description = "Bad Request", responseCode = "400", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Unauthorized", responseCode = "401", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Forbidden", responseCode = "403", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                }),
+                @ApiResponse(description = "Internal Server Error", responseCode = "500", content = {
+                    @Content(schema = @Schema(implementation = RetornoException.class))
+                })
+            }
+    )
+    public ResponseEntity<Page<PessoaCadastrarDtoOut>> pesquisar(@Valid final PessoaDtoFiltro dtoFiltro,
+                                                                 @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, page = 0, size = 10)
+        final Pageable paginacao) {
+
+        logger.info("Controller - recebida requisição para pesquisar pessoas.");
+
+        var paginaDtoOut = Optional.of(dtoFiltro)
+            .map(this.pessoaDtoFiltroMapper::toPessoaFiltro)
+            .map(filtro -> this.pessoaPesquisarInputPort.pesquisar(filtro, paginacao))
+            .map(pagina -> pagina.map(this.pessoaDtoOutMapper::toPessoaDtoOut))
+            .map(pagina -> pagina.map(this.produtorHateoas::links))
+            .orElseThrow(NoSuchElementException::new);
+
+        logger.info("Controller - concluído pesquisar pessoas.");
+
+        return ResponseEntity
+            .ok()
+            .body(paginaDtoOut);
     }
 
     @PutMapping(

@@ -36,18 +36,5 @@ public final class CorreioEletronico implements Serializable {
   public boolean ehValido() {
     return EMAIL_PATTERN.matcher(email).matches();
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CorreioEletronico that = (CorreioEletronico) o;
-    return Objects.equals(getEmail(), that.getEmail());
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(getEmail());
-  }
 }
 
