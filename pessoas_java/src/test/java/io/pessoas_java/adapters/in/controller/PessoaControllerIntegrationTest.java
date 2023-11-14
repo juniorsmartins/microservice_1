@@ -1,6 +1,7 @@
 package io.pessoas_java.adapters.in.controller;
 
 import io.pessoas_java.PessoasJavaApplication;
+import io.pessoas_java.adapters.in.dto.request.EmailCadastrarDtoIn;
 import io.pessoas_java.adapters.in.dto.request.TelefoneCadastrarDtoIn;
 import io.pessoas_java.adapters.in.dto.response.PessoaCadastrarDtoOut;
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
@@ -279,11 +280,11 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
 
     @Test
     @Order(16)
-    @DisplayName("Cadastrar - Telefones Iguais")
-    void deveRetornarTelefonesIguaisAndPersistir_quandoCadastrar() throws Exception {
+    @DisplayName("Cadastrar - Telefones Iguais e Persistidos")
+    void deveRetornarTelefonesIguaisAndPersistidos_quandoCadastrar() throws Exception {
 
-        var tel1 = TelefoneCadastrarDtoIn.builder().numero("65996118888").build();
-        var tel2 = TelefoneCadastrarDtoIn.builder().numero("55999557733").build();
+        var tel1 = TelefoneCadastrarDtoIn.builder().numero("11933334444").build();
+        var tel2 = TelefoneCadastrarDtoIn.builder().numero("65922227777").build();
 
         var dtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
             .telefones(Set.of(tel1, tel2))
@@ -311,6 +312,180 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
         Assertions.assertNotNull(pessoaPersistida.getTelefones());
         Assertions.assertEquals(pessoaPersistida.getTelefones().size(), 2);
     }
+
+    @Test
+    @Order(17)
+    @DisplayName("Cadastrar - Http 400 por telefone inválido")
+    void deveRetornarHttp400_quandoCadastrarComTelefoneInvalido() throws Exception {
+
+        var tel1 = TelefoneCadastrarDtoIn.builder().numero("").build();
+
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .telefones(Set.of(tel1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        tel1 = TelefoneCadastrarDtoIn.builder().numero("  ").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+                .telefones(Set.of(tel1))
+                .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        tel1 = TelefoneCadastrarDtoIn.builder().numero("6599999").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .telefones(Set.of(tel1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        tel1 = TelefoneCadastrarDtoIn.builder().numero("659888877771111").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .telefones(Set.of(tel1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        tel1 = TelefoneCadastrarDtoIn.builder().numero("659888866tt").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .telefones(Set.of(tel1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(18)
+    @DisplayName("Cadastrar - Emails Iguais e Persistidos")
+    void deveRetornarEmailsIguaisAndPersistidos_quandoCadastrar() throws Exception {
+
+        var email1 = EmailCadastrarDtoIn.builder().email("teste1@email.com").build();
+        var email2 = EmailCadastrarDtoIn.builder().email("teste2@email.com").build();
+
+        var dtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .emails(Set.of(email1, email2))
+            .build();
+
+        var resposta = mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(dtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpectAll(MockMvcResultMatchers.status().isCreated(),
+                MockMvcResultMatchers.jsonPath("$.emails[0].email", Matchers.notNullValue()),
+                MockMvcResultMatchers.jsonPath("$.emails[0].email", Matchers.equalTo(email2.email())),
+                MockMvcResultMatchers.jsonPath("$.emails[1].email", Matchers.notNullValue()),
+                MockMvcResultMatchers.jsonPath("$.emails[1].email", Matchers.equalTo(email1.email())))
+            .andDo(MockMvcResultHandlers.print())
+            .andReturn();
+
+        var responseBody = resposta.getResponse().getContentAsString();
+        var dtoOut = objectMapper.readValue(responseBody, PessoaCadastrarDtoOut.class);
+
+        var pessoaPersistida = this.pessoaRepository.findByCpf(dtoOut.getCpf()).get();
+
+        Assertions.assertNotNull(pessoaPersistida);
+        Assertions.assertNotNull(pessoaPersistida.getEmails());
+        Assertions.assertEquals(pessoaPersistida.getEmails().size(), 2);
+    }
+
+    @Test
+    @Order(19)
+    @DisplayName("Cadastrar - Http 400 por email inválido")
+    void deveRetornarHttp400_quandoCadastrarComEmailInvalido() throws Exception {
+
+        var email1 = EmailCadastrarDtoIn.builder().email(null).build();
+
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .emails(Set.of(email1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        email1 = EmailCadastrarDtoIn.builder().email("").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .emails(Set.of(email1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        email1 = EmailCadastrarDtoIn.builder().email(" ").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .emails(Set.of(email1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        email1 = EmailCadastrarDtoIn.builder().email("invalid@email").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .emails(Set.of(email1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
 
 
 

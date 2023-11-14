@@ -44,6 +44,7 @@ public record PessoaCadastrarDtoIn(
         @NotBlank
         String estadoCivil,
 
+        @Valid
         Set<TelefoneCadastrarDtoIn> telefones,
 
         @NotEmpty
