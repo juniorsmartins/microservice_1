@@ -1,6 +1,7 @@
 package io.pessoas_java.adapters.in.controller;
 
 import io.pessoas_java.PessoasJavaApplication;
+import io.pessoas_java.adapters.in.dto.request.EmailCadastrarDtoIn;
 import io.pessoas_java.adapters.in.dto.request.TelefoneCadastrarDtoIn;
 import io.pessoas_java.adapters.in.dto.response.PessoaCadastrarDtoOut;
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
@@ -279,11 +280,11 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
 
     @Test
     @Order(16)
-    @DisplayName("Cadastrar - Telefones Iguais")
-    void deveRetornarTelefonesIguaisAndPersistir_quandoCadastrar() throws Exception {
+    @DisplayName("Cadastrar - Telefones Iguais e Persistidos")
+    void deveRetornarTelefonesIguaisAndPersistidos_quandoCadastrar() throws Exception {
 
-        var tel1 = TelefoneCadastrarDtoIn.builder().numero("65996118888").build();
-        var tel2 = TelefoneCadastrarDtoIn.builder().numero("55999557733").build();
+        var tel1 = TelefoneCadastrarDtoIn.builder().numero("11933334444").build();
+        var tel2 = TelefoneCadastrarDtoIn.builder().numero("65922227777").build();
 
         var dtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
             .telefones(Set.of(tel1, tel2))
@@ -312,11 +313,479 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
         Assertions.assertEquals(pessoaPersistida.getTelefones().size(), 2);
     }
 
+    @Test
+    @Order(17)
+    @DisplayName("Cadastrar - Http 400 por telefone inválido")
+    void deveRetornarHttp400_quandoCadastrarComTelefoneInvalido() throws Exception {
+
+        var tel1 = TelefoneCadastrarDtoIn.builder().numero("").build();
+
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .telefones(Set.of(tel1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        tel1 = TelefoneCadastrarDtoIn.builder().numero("  ").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .telefones(Set.of(tel1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        tel1 = TelefoneCadastrarDtoIn.builder().numero("6599999").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .telefones(Set.of(tel1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        tel1 = TelefoneCadastrarDtoIn.builder().numero("659888877771111").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .telefones(Set.of(tel1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        tel1 = TelefoneCadastrarDtoIn.builder().numero("659888866tt").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .telefones(Set.of(tel1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(18)
+    @DisplayName("Cadastrar - Emails Iguais e Persistidos")
+    void deveRetornarEmailsIguaisAndPersistidos_quandoCadastrar() throws Exception {
+
+        var email1 = EmailCadastrarDtoIn.builder().email("teste1@email.com").build();
+        var email2 = EmailCadastrarDtoIn.builder().email("teste2@email.com").build();
+
+        var dtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .emails(Set.of(email1, email2))
+            .build();
+
+        var resposta = mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(dtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpectAll(MockMvcResultMatchers.status().isCreated(),
+                MockMvcResultMatchers.jsonPath("$.emails[0].email", Matchers.notNullValue()),
+                MockMvcResultMatchers.jsonPath("$.emails[0].email", Matchers.equalTo(email2.email())),
+                MockMvcResultMatchers.jsonPath("$.emails[1].email", Matchers.notNullValue()),
+                MockMvcResultMatchers.jsonPath("$.emails[1].email", Matchers.equalTo(email1.email())))
+            .andDo(MockMvcResultHandlers.print())
+            .andReturn();
+
+        var responseBody = resposta.getResponse().getContentAsString();
+        var dtoOut = objectMapper.readValue(responseBody, PessoaCadastrarDtoOut.class);
+
+        var pessoaPersistida = this.pessoaRepository.findByCpf(dtoOut.getCpf()).get();
+
+        Assertions.assertNotNull(pessoaPersistida);
+        Assertions.assertNotNull(pessoaPersistida.getEmails());
+        Assertions.assertEquals(pessoaPersistida.getEmails().size(), 2);
+    }
+
+    @Test
+    @Order(19)
+    @DisplayName("Cadastrar - Http 400 por email inválido")
+    void deveRetornarHttp400_quandoCadastrarComEmailInvalido() throws Exception {
+
+        var email1 = EmailCadastrarDtoIn.builder().email(null).build();
+
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .emails(Set.of(email1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        email1 = EmailCadastrarDtoIn.builder().email("").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .emails(Set.of(email1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        email1 = EmailCadastrarDtoIn.builder().email(" ").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .emails(Set.of(email1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        email1 = EmailCadastrarDtoIn.builder().email("invalid@email").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .emails(Set.of(email1))
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(20)
+    @DisplayName("Cadastrar - Endereço Igual e Persistido")
+    void deveRetornarEnderecoIgualAndPersistido_quandoCadastrar() throws Exception {
+
+        var dtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .build();
+
+        var resposta = mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(dtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpectAll(MockMvcResultMatchers.status().isCreated(),
+                MockMvcResultMatchers.jsonPath("$.endereco.pais", Matchers.equalTo(dtoIn.endereco().pais())),
+                MockMvcResultMatchers.jsonPath("$.endereco.cep", Matchers.equalTo(dtoIn.endereco().cep())),
+                MockMvcResultMatchers.jsonPath("$.endereco.estado", Matchers.equalTo(dtoIn.endereco().estado())),
+                MockMvcResultMatchers.jsonPath("$.endereco.cidade", Matchers.equalTo(dtoIn.endereco().cidade())),
+                MockMvcResultMatchers.jsonPath("$.endereco.bairro", Matchers.equalTo(dtoIn.endereco().bairro())),
+                MockMvcResultMatchers.jsonPath("$.endereco.logradouro", Matchers.equalTo(dtoIn.endereco().logradouro())),
+                MockMvcResultMatchers.jsonPath("$.endereco.numero", Matchers.equalTo(dtoIn.endereco().numero())),
+                MockMvcResultMatchers.jsonPath("$.endereco.complemento", Matchers.equalTo(dtoIn.endereco().complemento())))
+            .andDo(MockMvcResultHandlers.print())
+            .andReturn();
+
+        var responseBody = resposta.getResponse().getContentAsString();
+        var dtoOut = objectMapper.readValue(responseBody, PessoaCadastrarDtoOut.class);
+
+        var pessoaPersistida = this.pessoaRepository.findByCpf(dtoOut.getCpf()).get();
+
+        Assertions.assertNotNull(pessoaPersistida);
+        Assertions.assertNotNull(pessoaPersistida.getEndereco());
+        Assertions.assertEquals(dtoIn.endereco().pais(), pessoaPersistida.getEndereco().getPais());
+        Assertions.assertEquals(dtoIn.endereco().cep(), pessoaPersistida.getEndereco().getCep());
+        Assertions.assertEquals(dtoIn.endereco().estado(), pessoaPersistida.getEndereco().getEstado());
+        Assertions.assertEquals(dtoIn.endereco().cidade(), pessoaPersistida.getEndereco().getCidade());
+        Assertions.assertEquals(dtoIn.endereco().bairro(), pessoaPersistida.getEndereco().getBairro());
+        Assertions.assertEquals(dtoIn.endereco().logradouro(), pessoaPersistida.getEndereco().getLogradouro());
+        Assertions.assertEquals(dtoIn.endereco().numero(), pessoaPersistida.getEndereco().getNumero());
+        Assertions.assertEquals(dtoIn.endereco().complemento(), pessoaPersistida.getEndereco().getComplemento());
+    }
+
+    @Test
+    @Order(21)
+    @DisplayName("Cadastrar - Http 400 por endereço inválido")
+    void deveRetornarHttp400_quandoCadastrarComEnderecoInvalido() throws Exception {
+
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .endereco(null)
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        var end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .pais(null)
+            .build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .endereco(end1)
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .pais("República Federativas do Brasil Bananolândia da Corrupção, do Estelionato e da Fraude.")
+            .build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .endereco(end1)
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .cep(null).build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().endereco(end1).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .cep("123").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().endereco(end1).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .cep("12345678910444444444444441234567891044444444444444").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().endereco(end1).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .estado("   ").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().endereco(end1).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .estado("Estado da Roubalheira da Maranhão de Flávio Dinossauro da Silva").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().endereco(end1).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .cidade("   ").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().endereco(end1).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .cidade("Cidade da Maracutaia do Rio de Janeiro Controlada por Crime Organizado").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().endereco(end1).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .bairro(null).build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().endereco(end1).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .bairro("Favela da Rocinha dominada pelo crime organizado").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().endereco(end1).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .logradouro(null).build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().endereco(end1).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .logradouro("Avenida do Líder da Facção Criminosa do PCC, Fulano da Silva Beltrano, da matança e do tráfico internacional.").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().endereco(end1).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .numero("1234567890123456789012").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().endereco(end1).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+
+        end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
+            .complemento("Entre pela lateral esquerda da edificação, depois dobre a direita, depois a esquerda, depois siga em frente e encontrará uma porta dourada nos fundos. Lá apertará a campainha duas vezes seguida, esperar 5 segundos, apertar mais duas vezes, então esperar 10 segundos e apertar mais uma vez rapidamente.").build();
+
+        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().endereco(end1).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
 
 
 
     @Test
     @Order(30)
+    @DisplayName("Consultar Por Chave - Http 200")
+    void deveRetornarHttp200_quandoConsultarPorChave() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.get(END_POINT)
+                .param("chave", pessoaEntity.getChave().toString())
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(31)
+    @DisplayName("Consultar Por Chave - Http 400")
+    void deveRetornarHttp400_quandoConsultarPorChaveInvalida() throws Exception {
+
+        var chave = "17768530-82ef-11ee-b962-0242ac12ttt2";
+
+        mockMvc.perform(MockMvcRequestBuilders.get(END_POINT)
+                .param("chave", chave)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+
+
+
+
+    @Test
+    @Order(50)
     @DisplayName("Pesquisar - Http 200")
     void deveRetornarHttp200_quandoPesquisar() throws Exception {
 
@@ -329,7 +798,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(31)
+    @Order(51)
     @DisplayName("Pesquisar - retorna dois objetos")
     void deveRetornarDoisObjetos_quandoPesquisarTodos() throws Exception {
 
@@ -345,7 +814,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(32)
+    @Order(52)
     @DisplayName("Pesquisar - por chave")
     void deveRetornarUmObjetoComChaveIgual_quandoPesquisarPorChave() throws Exception {
 
@@ -367,7 +836,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(33)
+    @Order(53)
     @DisplayName("Pesquisar - por CPF")
     void deveRetornarUmObjetoComCPFIgual_quandoPesquisarPorCPF() throws Exception {
 
@@ -389,7 +858,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    @Order(34)
+    @Order(54)
     @DisplayName("Pesquisar - por Nacionalidade")
     void deveRetornarUmObjetoComNacionalidadeIgual_quandoPesquisarPorNacionalidade() throws Exception {
 
@@ -412,22 +881,6 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
             .andDo(MockMvcResultHandlers.print());
     }
 
-
-
-
-    @Test
-    @Order(50)
-    @DisplayName("Consultar Por Chave - Http 200")
-    void deveRetornarHttp200_quandoConsultarPorChave() throws Exception {
-
-        mockMvc.perform(MockMvcRequestBuilders.get(END_POINT)
-            .param("chave", pessoaEntity.getChave().toString())
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andDo(MockMvcResultHandlers.print());
-    }
 
 
 

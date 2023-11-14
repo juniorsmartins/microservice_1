@@ -4,6 +4,8 @@ import io.pessoas_java.application.core.domain.enums.EstadoCivilEnum;
 import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
 import io.pessoas_java.application.core.domain.enums.SexoEnum;
 import io.pessoas_java.application.core.domain.value_object.CadastroPessoaFisica;
+import io.pessoas_java.application.core.domain.value_object.CorreioEletronico;
+import io.pessoas_java.application.core.domain.value_object.Endereco;
 import io.pessoas_java.application.core.domain.value_object.Telefone;
 
 import java.time.LocalDate;
@@ -35,6 +37,10 @@ public final class Pessoa {
     private EstadoCivilEnum estadoCivil;
 
     private Set<Telefone> telefones;
+
+    private Set<CorreioEletronico> correioEletronicos;
+
+    private Endereco endereco;
 
     public Long getId() {
         return id;
@@ -132,6 +138,22 @@ public final class Pessoa {
         this.telefones = telefones;
     }
 
+    public Set<CorreioEletronico> getEmails() {
+        return correioEletronicos;
+    }
+
+    public void setEmails(Set<CorreioEletronico> correioEletronicos) {
+        this.correioEletronicos = correioEletronicos;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
     @Override
     public String toString() {
         return "Pessoa{" +
@@ -147,6 +169,8 @@ public final class Pessoa {
                 ", nacionalidade='" + nacionalidade + '\'' +
                 ", estadoCivil=" + estadoCivil +
                 ", telefones=" + telefones +
+                ", correioEletronicos=" + correioEletronicos +
+                ", endereco=" + endereco +
                 '}';
     }
 }

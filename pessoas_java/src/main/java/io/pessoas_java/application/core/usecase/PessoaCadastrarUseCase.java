@@ -29,6 +29,7 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
         this.util = util;
     }
 
+//    @Transactional
     @Override
     public Pessoa cadastrar(Pessoa pessoa) {
 
@@ -39,7 +40,7 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
                 people -> {
                     this.listaRegrasCadastrar.forEach(regra -> regra.executar(people));
                     this.capitalizarNomeCompleto(people);
-                    this.pessoaSalvarOutputPort.salvar(people);
+                     this.pessoaSalvarOutputPort.salvar(people);
                 },
                 () -> {throw new RequiredObjectIsNullException();}
             );
@@ -55,8 +56,6 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
 
         var sobrenomeCapitalizado = this.util.capitalizar(pessoa.getSobrenome());
         pessoa.setSobrenome(sobrenomeCapitalizado);
-
-        System.out.println("Capitalizar: " + pessoa);
 
         return pessoa;
     }
