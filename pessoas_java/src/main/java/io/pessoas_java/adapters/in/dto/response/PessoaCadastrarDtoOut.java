@@ -49,5 +49,7 @@ public class PessoaCadastrarDtoOut extends RepresentationModel<PessoaCadastrarDt
     private EstadoCivilEnum estadoCivil;
 
     private Set<TelefoneCadastrarDtoOut> telefones;
+
+    private Set<EmailCadastrarDtoOut> emails;
 }
 
