@@ -7,25 +7,24 @@ import io.pessoas_java.application.core.domain.Pessoa;
 import io.pessoas_java.application.core.domain.PessoaFiltro;
 import io.pessoas_java.application.ports.out.PessoaPesquisarOutputPort;
 import io.pessoas_java.config.exceptions.http_500.FailedToSearchException;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.logging.Logger;
 
-@Component
+@Repository
+@RequiredArgsConstructor
 public class PessoaPesquisarAdapter implements PessoaPesquisarOutputPort {
 
     private final Logger logger = Logger.getLogger(PessoaPesquisarAdapter.class.getName());
 
-    @Autowired
-    private PessoaRepository pessoaRepository;
+    private final PessoaRepository pessoaRepository;
 
-    @Autowired
-    private PessoaEntityMapper pessoaEntityMapper;
+    private final PessoaEntityMapper pessoaEntityMapper;
 
     @Transactional(readOnly = true)
     @Override

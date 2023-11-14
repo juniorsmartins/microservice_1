@@ -30,9 +30,9 @@ public final class CadastroPessoaFisica implements Serializable {
   }
 
   public boolean ehValido(String cpf) {
-
     // Remove qualquer caractere que não seja dígito (0-9)
-    cpf = cpf.replaceAll("\\D", "");
+    cpf = cpf.replaceAll("[^0-9]", "");
+
 
     // Verifica se o CPF possui 11 dígitos após a remoção de caracteres não numéricos
     if (cpf.length() != 11) {
@@ -40,33 +40,48 @@ public final class CadastroPessoaFisica implements Serializable {
     }
 
     // Verifica se todos os dígitos são iguais (não é um CPF válido)
-    if (cpf.matches("(\\d)\\1{10}")) {
-      return false;
+    char firstDigit = cpf.charAt(0);
+    for (char digit : cpf.toCharArray()) {
+      if (digit != firstDigit) {
+        break;  // Pelo menos um dígito é diferente
+      }
     }
 
     // Calcula o primeiro dígito verificador
     int sum = 0;
+    int weight = 10;
     for (int i = 0; i < 9; i++) {
-      sum += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
+      sum += Character.getNumericValue(cpf.charAt(i)) * weight--;
     }
-    int remainder = sum % 11;
-    int firstVerifier = (remainder < 2) ? 0 : 11 - remainder;
+    int firstVerifier = 11 - (sum % 11);
 
     // Verifica o primeiro dígito verificador
+    if (firstVerifier > 9) {
+      firstVerifier = 0;
+    }
     if (Character.getNumericValue(cpf.charAt(9)) != firstVerifier) {
       return false;
     }
 
     // Calcula o segundo dígito verificador
     sum = 0;
+    weight = 11;
     for (int i = 0; i < 10; i++) {
-      sum += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
+      sum += Character.getNumericValue(cpf.charAt(i)) * weight--;
     }
-    remainder = sum % 11;
-    int secondVerifier = (remainder < 2) ? 0 : 11 - remainder;
+    int secondVerifier = 11 - (sum % 11);
 
     // Verifica o segundo dígito verificador
-    return Character.getNumericValue(cpf.charAt(10)) == secondVerifier;
+    if (secondVerifier > 9) {
+      secondVerifier = 0;
+    }
+    if (Character.getNumericValue(cpf.charAt(10)) != secondVerifier) {
+      return false;
+    }
+
+    // Se passou por todas as verificações, o CPF é válido
+    return true;
   }
+
 }
 

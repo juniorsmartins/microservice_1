@@ -1,7 +1,5 @@
 package io.pessoas_java.application.core.domain.value_object;
 
-import io.pessoas_java.application.core.domain.Pessoa;
-
 import java.util.Objects;
 
 public final class Endereco {
@@ -23,8 +21,6 @@ public final class Endereco {
     private String numero;
 
     private String complemento;
-
-    private Pessoa pessoa;
 
     public Long getId() {
         return id;
@@ -98,14 +94,6 @@ public final class Endereco {
         this.complemento = complemento;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -131,7 +119,6 @@ public final class Endereco {
                 ", logradouro='" + logradouro + '\'' +
                 ", numero='" + numero + '\'' +
                 ", complemento='" + complemento + '\'' +
-                ", pessoa=" + pessoa +
                 '}';
     }
 }
