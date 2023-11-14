@@ -335,8 +335,8 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
         tel1 = TelefoneCadastrarDtoIn.builder().numero("  ").build();
 
         pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
-                .telefones(Set.of(tel1))
-                .build();
+            .telefones(Set.of(tel1))
+            .build();
 
         mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -601,6 +601,22 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
                 .characterEncoding(UTF8)
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk())
+            .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @Order(51)
+    @DisplayName("Consultar Por Chave - Http 400")
+    void deveRetornarHttp400_quandoConsultarPorChaveInvalida() throws Exception {
+
+        var chave = "17768530-82ef-11ee-b962-0242ac12ttt2";
+
+        mockMvc.perform(MockMvcRequestBuilders.get(END_POINT)
+                .param("chave", chave)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
             .andDo(MockMvcResultHandlers.print());
     }
 

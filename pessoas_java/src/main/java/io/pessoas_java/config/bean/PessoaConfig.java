@@ -28,9 +28,9 @@ public class PessoaConfig {
     }
 
     @Bean
-    public PessoaDeletarPorChaveUseCase pessoaDeletarPorChaveUseCase(PessoaConsultarPorChaveAdapter pessoaConsultarPorChaveAdapter,
+    public PessoaDeletarPorChaveUseCase pessoaDeletarPorChaveUseCase(PessoaConsultarPorChaveUseCase pessoaConsultarPorChaveUseCase,
                                                                      PessoaDeletarPorIdAdapter pessoaDeletarPorChaveAdapter) {
-        return new PessoaDeletarPorChaveUseCase(pessoaConsultarPorChaveAdapter, pessoaDeletarPorChaveAdapter);
+        return new PessoaDeletarPorChaveUseCase(pessoaConsultarPorChaveUseCase, pessoaDeletarPorChaveAdapter);
     }
 
     @Bean

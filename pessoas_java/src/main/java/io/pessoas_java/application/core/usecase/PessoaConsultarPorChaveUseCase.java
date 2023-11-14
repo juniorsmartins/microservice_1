@@ -3,7 +3,6 @@ package io.pessoas_java.application.core.usecase;
 import io.pessoas_java.application.core.domain.Pessoa;
 import io.pessoas_java.application.ports.in.PessoaConsultarPorChaveInputPort;
 import io.pessoas_java.application.ports.out.PessoaConsultarPorChaveOutputPort;
-import io.pessoas_java.config.exceptions.http_404.PessoaNaoEncontradaPorChaveException;
 
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -23,8 +22,7 @@ public class PessoaConsultarPorChaveUseCase implements PessoaConsultarPorChaveIn
 
         logger.info("UseCase - iniciado serviço de consultar pessoa por chave.");
 
-        var pessoaEncontrada = this.pessoaConsultarPorChaveOutputPort.consultarPorChave(chave)
-                .orElseThrow(() -> new PessoaNaoEncontradaPorChaveException(chave));
+        var pessoaEncontrada = this.pessoaConsultarPorChaveOutputPort.consultarPorChave(chave);
 
         logger.info("UseCase - finalizado serviço de consultar pessoa por chave.");
 

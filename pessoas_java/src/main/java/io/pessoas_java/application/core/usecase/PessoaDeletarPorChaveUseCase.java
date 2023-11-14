@@ -1,10 +1,11 @@
 package io.pessoas_java.application.core.usecase;
 
+import io.pessoas_java.application.ports.in.PessoaConsultarPorChaveInputPort;
 import io.pessoas_java.application.ports.in.PessoaDeletarPorChaveInputPort;
-import io.pessoas_java.application.ports.out.PessoaConsultarPorChaveOutputPort;
 import io.pessoas_java.application.ports.out.PessoaDeletarPorIdOutputPort;
 import io.pessoas_java.config.exceptions.http_404.PessoaNaoEncontradaPorChaveException;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -12,13 +13,13 @@ public class PessoaDeletarPorChaveUseCase implements PessoaDeletarPorChaveInputP
 
     private final Logger logger = Logger.getLogger(PessoaDeletarPorChaveUseCase.class.getName());
 
-    private final PessoaConsultarPorChaveOutputPort pessoaConsultarPorChaveOutputPort;
+    private final PessoaConsultarPorChaveInputPort pessoaConsultarPorChaveInputPort;
 
     private final PessoaDeletarPorIdOutputPort pessoaDeletarPorIdOutputPort;
 
-    public PessoaDeletarPorChaveUseCase(PessoaConsultarPorChaveOutputPort pessoaConsultarPorChaveOutputPort,
+    public PessoaDeletarPorChaveUseCase(PessoaConsultarPorChaveInputPort pessoaConsultarPorChaveInputPort,
                                         PessoaDeletarPorIdOutputPort pessoaDeletarPorIdOutputPort) {
-        this.pessoaConsultarPorChaveOutputPort = pessoaConsultarPorChaveOutputPort;
+        this.pessoaConsultarPorChaveInputPort = pessoaConsultarPorChaveInputPort;
         this.pessoaDeletarPorIdOutputPort = pessoaDeletarPorIdOutputPort;
     }
 
@@ -27,12 +28,14 @@ public class PessoaDeletarPorChaveUseCase implements PessoaDeletarPorChaveInputP
 
         logger.info("UseCase - iniciado serviço de deletar uma pessoa por chave.");
 
-        this.pessoaConsultarPorChaveOutputPort.consultarPorChave(chave)
-            .map(pessoa -> {
-                this.pessoaDeletarPorIdOutputPort.deletarPorId(pessoa.getId());
-                return true;
-            })
-            .orElseThrow(() -> new PessoaNaoEncontradaPorChaveException(chave));
+        Optional.ofNullable(chave)
+            .ifPresentOrElse(
+                key -> {
+                    var pessoa = this.pessoaConsultarPorChaveInputPort.consultarPorChave(key);
+                    this.pessoaDeletarPorIdOutputPort.deletarPorId(pessoa.getId());
+                },
+                () -> {throw new PessoaNaoEncontradaPorChaveException(chave);}
+            );
 
         logger.info("UseCase - finalizado serviço de deletar uma pessoa por chave.");
     }
