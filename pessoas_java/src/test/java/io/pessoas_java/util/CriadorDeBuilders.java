@@ -1,10 +1,7 @@
 package io.pessoas_java.util;
 
 import com.github.javafaker.Faker;
-import io.pessoas_java.adapters.in.dto.request.EmailCadastrarDtoIn;
-import io.pessoas_java.adapters.in.dto.request.PessoaCadastrarDtoIn;
-import io.pessoas_java.adapters.in.dto.request.PessoaEditarDtoIn;
-import io.pessoas_java.adapters.in.dto.request.TelefoneCadastrarDtoIn;
+import io.pessoas_java.adapters.in.dto.request.*;
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
 import io.pessoas_java.application.core.domain.enums.EstadoCivilEnum;
 import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
@@ -37,6 +34,17 @@ public class CriadorDeBuilders {
         var email1 = EmailCadastrarDtoIn.builder().email("teste1@email.com").build();
         var email2 = EmailCadastrarDtoIn.builder().email("teste2@email.com").build();
 
+        var endereco = EnderecoCadastrarDtoIn.builder()
+            .pais("Brasil")
+            .cep("78000000")
+            .estado("São Paulo")
+            .cidade("São Paulo")
+            .bairro("Centro")
+            .logradouro("Avenida General Medici")
+            .numero("2505")
+            .complemento("Entrada pela porta na lateral direita.")
+            .build();
+
         return PessoaCadastrarDtoIn.builder()
             .nome(faker.name().firstName())
             .sobrenome(faker.name().lastName())
@@ -48,7 +56,8 @@ public class CriadorDeBuilders {
             .nacionalidade(faker.lorem().characters(5, 10))
             .estadoCivil(estadoCivil.getTipo())
             .telefones(Set.of(tel1, tel2))
-            .emails(Set.of(email1, email2));
+            .emails(Set.of(email1, email2))
+            .endereco(endereco);
     }
 
     public static PessoaEditarDtoIn.PessoaEditarDtoInBuilder gerarPessoaEditarDtoInBuilder() {

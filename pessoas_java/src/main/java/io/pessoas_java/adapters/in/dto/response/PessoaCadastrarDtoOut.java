@@ -21,7 +21,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"chave", "nome", "sobrenome", "cpf", "dataNascimento", "sexo", "genero", "nivelEducacional", "nacionalidade", "usuario"})
+@JsonPropertyOrder({"chave", "nome", "sobrenome", "cpf", "dataNascimento", "sexo", "genero", "nivelEducacional", "nacionalidade", "estadoCivil", "telefones", "emails", "endereco"})
 public class PessoaCadastrarDtoOut extends RepresentationModel<PessoaCadastrarDtoOut> implements Serializable {
 
     @Serial
@@ -51,5 +51,7 @@ public class PessoaCadastrarDtoOut extends RepresentationModel<PessoaCadastrarDt
     private Set<TelefoneCadastrarDtoOut> telefones;
 
     private Set<EmailCadastrarDtoOut> emails;
+
+    private EnderecoCadastrarDtoOut endereco;
 }
 

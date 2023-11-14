@@ -486,6 +486,42 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
             .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    @Order(20)
+    @DisplayName("Cadastrar - Endereço Igual e Persistido")
+    void deveRetornarEnderecoIgualAndPersistido_quandoCadastrar() throws Exception {
+
+        var dtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .build();
+
+        var resposta = mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(UTF8)
+                .content(TestConverterUtil.converterObjetoParaJson(dtoIn))
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpectAll(MockMvcResultMatchers.status().isCreated(),
+                MockMvcResultMatchers.jsonPath("$.endereco.id", Matchers.notNullValue()),
+                MockMvcResultMatchers.jsonPath("$.endereco.pais", Matchers.equalTo(dtoIn.endereco().pais())),
+                MockMvcResultMatchers.jsonPath("$.endereco.cep", Matchers.equalTo(dtoIn.endereco().cep())),
+                MockMvcResultMatchers.jsonPath("$.endereco.estado", Matchers.equalTo(dtoIn.endereco().estado())),
+                MockMvcResultMatchers.jsonPath("$.endereco.cidade", Matchers.equalTo(dtoIn.endereco().cidade())),
+                MockMvcResultMatchers.jsonPath("$.endereco.bairro", Matchers.equalTo(dtoIn.endereco().bairro())),
+                MockMvcResultMatchers.jsonPath("$.endereco.logradouro", Matchers.equalTo(dtoIn.endereco().logradouro())),
+                MockMvcResultMatchers.jsonPath("$.endereco.numero", Matchers.equalTo(dtoIn.endereco().numero())),
+                MockMvcResultMatchers.jsonPath("$.endereco.complemento", Matchers.equalTo(dtoIn.endereco().complemento())))
+            .andDo(MockMvcResultHandlers.print())
+            .andReturn();
+
+        var responseBody = resposta.getResponse().getContentAsString();
+        var dtoOut = objectMapper.readValue(responseBody, PessoaCadastrarDtoOut.class);
+
+        var pessoaPersistida = this.pessoaRepository.findByCpf(dtoOut.getCpf()).get();
+
+        Assertions.assertNotNull(pessoaPersistida);
+        Assertions.assertNotNull(pessoaPersistida);
+        Assertions.assertEquals(pessoaPersistida.getEmails().size(), 2);
+    }
+
 
 
 
