@@ -12,7 +12,7 @@ public record EnderecoCadastrarDtoIn(
     String pais,
 
     @NotBlank
-    @Size(max = 40)
+    @Size(min = 5, max = 40)
     String cep,
 
     @NotBlank
@@ -31,7 +31,7 @@ public record EnderecoCadastrarDtoIn(
     @Size(max = 100)
     String logradouro,
 
-    @Size(max = 20)
+    @Size(max = 10)
     String numero,
 
     @Size(max = 250)

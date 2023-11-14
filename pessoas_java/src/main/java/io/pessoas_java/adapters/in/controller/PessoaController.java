@@ -89,8 +89,6 @@ public class PessoaController {
 
         logger.info("Controller - recebida requisição para cadastrar uma pessoa.");
 
-        System.out.println("Controller: " + dtoIn);
-
         var dtoOut = Optional.of(dtoIn)
             .map(this.pessoaDtoInMapper::toPessoa)
             .map(this.pessoaCadastrarInputPort::cadastrar)
@@ -99,8 +97,6 @@ public class PessoaController {
             .orElseThrow(NoSuchElementException::new);
 
         logger.info("Controller - concluído cadastro de uma pessoa.");
-
-        System.out.println("Controller: " + dtoOut);
 
         return ResponseEntity
             .created(URI.create("/api/v1/pessoas/" + dtoOut.getKey()))

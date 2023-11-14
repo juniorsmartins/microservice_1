@@ -1,28 +1,36 @@
 package io.pessoas_java.adapters.in.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode(of = {"id"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public record EnderecoCadastrarDtoOut(
+public final class EnderecoCadastrarDtoOut {
 
-    Long id,
+    private Long id;
 
-    String pais,
+    private String pais;
 
-    String cep,
+    private String cep;
 
-    String estado,
+    private String estado;
 
-    String cidade,
+    private String cidade;
 
-    String bairro,
+    private String bairro;
 
-    String logradouro,
+    private String logradouro;
 
-    String numero,
+    private String numero;
 
-    String complemento,
+    private String complemento;
 
-    PessoaCadastrarDtoOut pessoa
-) { }
+    private PessoaCadastrarDtoOut pessoa;
+}
 

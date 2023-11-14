@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "enderecos")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -41,7 +42,7 @@ public final class EnderecoEntity implements Serializable {
     @Column(name = "logradouro", nullable = false, length = 100)
     private String logradouro;
 
-    @Column(name = "numero", length = 20)
+    @Column(name = "numero", length = 10)
     private String numero;
 
     @Column(name = "complemento", length = 250)

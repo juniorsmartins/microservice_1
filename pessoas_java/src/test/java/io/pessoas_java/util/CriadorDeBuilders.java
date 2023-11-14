@@ -34,16 +34,7 @@ public class CriadorDeBuilders {
         var email1 = EmailCadastrarDtoIn.builder().email("teste1@email.com").build();
         var email2 = EmailCadastrarDtoIn.builder().email("teste2@email.com").build();
 
-        var endereco = EnderecoCadastrarDtoIn.builder()
-            .pais("Brasil")
-            .cep("78000000")
-            .estado("São Paulo")
-            .cidade("São Paulo")
-            .bairro("Centro")
-            .logradouro("Avenida General Medici")
-            .numero("2505")
-            .complemento("Entrada pela porta na lateral direita.")
-            .build();
+        var endereco = gerarEnderecoCadastrarDtoInBuilder().build();
 
         return PessoaCadastrarDtoIn.builder()
             .nome(faker.name().firstName())
@@ -88,6 +79,19 @@ public class CriadorDeBuilders {
             .nivelEducacional(nivelEducacional)
             .nacionalidade(faker.lorem().characters(5, 10))
             .estadoCivil(estadoCivil);
+    }
+
+    public static EnderecoCadastrarDtoIn.EnderecoCadastrarDtoInBuilder gerarEnderecoCadastrarDtoInBuilder() {
+
+        return EnderecoCadastrarDtoIn.builder()
+            .pais("Brasil")
+            .cep("78000000")
+            .estado("São Paulo")
+            .cidade("São Paulo")
+            .bairro("Centro")
+            .logradouro("Avenida General Medici")
+            .numero("2505")
+            .complemento("Entrada pela porta na lateral direita.");
     }
 
     private static void gerarEnumsAleatorios() {
