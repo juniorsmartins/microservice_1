@@ -3,7 +3,7 @@ FROM amazoncorretto:21.0.0-al2023 AS build-stage
 
 # Define a variável de ambiente DIRETORIO_TRABALHO com o valor padrão 'pessoas', que, neste caso, define o nome do diretório de trabalho.
 ARG DIRETORIO_TRABALHO=pessoas
-WORKDIR /$DIRETORIO_TRABALHO
+WORKDIR /${DIRETORIO_TRABALHO}
 
 # Copia o Maven Wrapper e o pom.xml para o diretório de trabalho
 COPY ./.mvn ./.mvn
@@ -25,10 +25,10 @@ FROM amazoncorretto:21.0.0-al2023-headless AS production-stage
 
 # Define a variável de ambiente DIRETORIO_TRABALHO com o valor padrão 'pessoas', que, neste caso, define o nome do diretório de trabalho.
 ARG DIRETORIO_TRABALHO=pessoas
-WORKDIR /$DIRETORIO_TRABALHO
+WORKDIR /${DIRETORIO_TRABALHO}
 
 # Copia o arquivo JAR gerado na fase de construção anterior para a imagem
-COPY --from=build-stage /$DIRETORIO_TRABALHO/target/*.jar pessoas.jar
+COPY --from=build-stage /${DIRETORIO_TRABALHO}/target/*.jar pessoas.jar
 # Copia o script 'wait-for-it.sh' para a imagem (O script wait-for-it.sh é utilizado para aguardar a disponibilidade do banco de dados PostgreSQL antes de iniciar o aplicativo Java.)
 COPY wait-for-it.sh wait-for-it.sh
 RUN chmod +x wait-for-it.sh
