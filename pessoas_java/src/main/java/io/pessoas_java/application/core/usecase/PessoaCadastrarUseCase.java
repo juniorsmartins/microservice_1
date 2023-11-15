@@ -29,7 +29,6 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
         this.util = util;
     }
 
-//    @Transactional
     @Override
     public Pessoa cadastrar(Pessoa pessoa) {
 
