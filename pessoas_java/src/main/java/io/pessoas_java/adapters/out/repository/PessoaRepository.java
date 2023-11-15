@@ -13,5 +13,9 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Long>,
     Optional<PessoaEntity> findByChave(UUID chave);
 
     Optional<PessoaEntity> findByCpf(String cpf);
+
+    boolean existsByChave(UUID chave);
+
+    void deleteByChave(UUID chave);
 }
 
