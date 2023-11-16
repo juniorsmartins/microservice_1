@@ -1,6 +1,8 @@
 package io.pessoas_java.adapters.out.spec;
 
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
+import io.pessoas_java.application.core.domain.enums.EstadoCivilEnum;
+import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
 import io.pessoas_java.application.core.domain.enums.SexoEnum;
 import io.pessoas_java.application.core.domain.filtro.PessoaFiltro;
 import jakarta.persistence.criteria.Predicate;
@@ -51,30 +53,46 @@ public final class PessoaSpec {
             }
 
             if (ObjectUtils.isNotEmpty(filtro.getSexo())) {
-                if (Arrays.stream(SexoEnum.values()).anyMatch(e -> e.name().equalsIgnoreCase(filtro.getSexo()))) {
+                if (Arrays.stream(SexoEnum.values())
+                    .anyMatch(e -> e.name().equalsIgnoreCase(filtro.getSexo()))) {
+
                     SexoEnum sexoEnum = SexoEnum.valueOf(filtro.getSexo());
                     predicados.add(criteriaBuilder.equal(root.get("sexo"), sexoEnum));
                 }
             }
 
             if (ObjectUtils.isNotEmpty(filtro.getGenero())) {
-                predicados.add(criteriaBuilder.equal(root.get("genero"), filtro.getGenero()));
+                predicados.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get("genero")), filtro.getGenero().toLowerCase()));
             }
 
             if (ObjectUtils.isNotEmpty(filtro.getNivelEducacional())) {
-                predicados.add(criteriaBuilder.equal(root.get("nivelEducacional"), filtro.getNivelEducacional()));
+                var nivelEducacional = filtro.getNivelEducacional().trim().toUpperCase().replace(" ", "_");
+
+                if (Arrays.stream(NivelEducacionalEnum.values())
+                    .anyMatch(e -> e.name().equalsIgnoreCase(nivelEducacional))) {
+
+                    NivelEducacionalEnum nivelEducacionalEnum = NivelEducacionalEnum.valueOf(nivelEducacional);
+                    predicados.add(criteriaBuilder.equal(root.get("nivelEducacional"), nivelEducacionalEnum));
+                }
             }
 
             if (ObjectUtils.isNotEmpty(filtro.getNacionalidade())) {
-                predicados.add(criteriaBuilder.equal(root.get("nacionalidade"), filtro.getNacionalidade()));
+                predicados.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get("nacionalidade")), filtro.getNacionalidade().toLowerCase()));
             }
 
             if (ObjectUtils.isNotEmpty(filtro.getEstadoCivil())) {
-                predicados.add(criteriaBuilder.equal(root.get("estadoCivil"), filtro.getEstadoCivil()));
+                var estadoCivil = filtro.getEstadoCivil().trim().toUpperCase().replace(" ", "_");
+
+                if (Arrays.stream(EstadoCivilEnum.values())
+                    .anyMatch(e -> e.name().equalsIgnoreCase(estadoCivil))) {
+
+                    EstadoCivilEnum estadoCivilEnum = EstadoCivilEnum.valueOf(estadoCivil);
+                    predicados.add(criteriaBuilder.equal(root.get("estadoCivil"), estadoCivilEnum));
+                }
             }
 
             if (ObjectUtils.isNotEmpty(filtro.getTelefone()) && ObjectUtils.isNotEmpty(filtro.getTelefone().getNumero())) {
-                predicados.add(criteriaBuilder.like(root.get("telefone.numero"), "%" + filtro.getTelefone().getNumero() + "%"));
+                predicados.add(criteriaBuilder.equal(root.join("telefone").get("numero"), filtro.getTelefone().getNumero()));
             }
 
             return criteriaBuilder.and(predicados.toArray(new Predicate[0]));
