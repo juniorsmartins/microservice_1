@@ -1,7 +1,7 @@
 package io.pessoas_java.application.core.usecase;
 
 import io.pessoas_java.application.core.domain.Pessoa;
-import io.pessoas_java.application.core.domain.PessoaFiltro;
+import io.pessoas_java.application.core.domain.filtro.PessoaFiltro;
 import io.pessoas_java.application.ports.in.PessoaPesquisarInputPort;
 import io.pessoas_java.application.ports.out.PessoaPesquisarOutputPort;
 import org.springframework.data.domain.Page;

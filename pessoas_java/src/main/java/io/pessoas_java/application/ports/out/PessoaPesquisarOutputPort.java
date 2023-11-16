@@ -1,7 +1,7 @@
 package io.pessoas_java.application.ports.out;
 
 import io.pessoas_java.application.core.domain.Pessoa;
-import io.pessoas_java.application.core.domain.PessoaFiltro;
+import io.pessoas_java.application.core.domain.filtro.PessoaFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

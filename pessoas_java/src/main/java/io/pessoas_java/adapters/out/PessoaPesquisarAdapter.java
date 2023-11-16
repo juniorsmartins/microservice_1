@@ -4,7 +4,7 @@ import io.pessoas_java.adapters.out.mapper.PessoaEntityMapper;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
 import io.pessoas_java.adapters.out.spec.PessoaSpec;
 import io.pessoas_java.application.core.domain.Pessoa;
-import io.pessoas_java.application.core.domain.PessoaFiltro;
+import io.pessoas_java.application.core.domain.filtro.PessoaFiltro;
 import io.pessoas_java.application.ports.out.PessoaPesquisarOutputPort;
 import io.pessoas_java.config.exceptions.http_500.FailedToSearchException;
 import lombok.RequiredArgsConstructor;

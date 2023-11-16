@@ -1,7 +1,7 @@
 package io.pessoas_java.adapters.out.spec;
 
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
-import io.pessoas_java.application.core.domain.PessoaFiltro;
+import io.pessoas_java.application.core.domain.filtro.PessoaFiltro;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.domain.Specification;

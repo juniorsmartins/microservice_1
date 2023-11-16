@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Mapper(componentModel = "spring")
-public interface PessoaDtoInMapper {
+public interface PessoaCadastrarDtoInMapper {
 
     @Mapping(target = "dataNascimento", source = "dataNascimento", qualifiedByName = "dataNascimentoStringToLocalDate")
     @Mapping(target = "estadoCivil", source = "estadoCivil", qualifiedByName = "estadoCivilStringToEnum")

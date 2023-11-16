@@ -1,4 +1,4 @@
-package io.pessoas_java.application.core.domain;
+package io.pessoas_java.application.core.domain.filtro;
 
 import java.util.UUID;
 
@@ -21,6 +21,14 @@ public final class PessoaFiltro {
     private String nivelEducacional;
 
     private String nacionalidade;
+
+    private String estadoCivil;
+
+    private TelefoneFiltro telefone;
+
+    private EmailFiltro email;
+
+    private EnderecoFiltro endereco;
 
     public UUID getChave() {
         return chave;
@@ -92,6 +100,38 @@ public final class PessoaFiltro {
 
     public void setNacionalidade(String nacionalidade) {
         this.nacionalidade = nacionalidade;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public TelefoneFiltro getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(TelefoneFiltro telefone) {
+        this.telefone = telefone;
+    }
+
+    public EmailFiltro getEmail() {
+        return email;
+    }
+
+    public void setEmail(EmailFiltro email) {
+        this.email = email;
+    }
+
+    public EnderecoFiltro getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoFiltro endereco) {
+        this.endereco = endereco;
     }
 }
 
