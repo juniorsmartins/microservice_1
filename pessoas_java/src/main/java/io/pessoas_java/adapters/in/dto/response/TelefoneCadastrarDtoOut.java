@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode(of = {"id"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public final class TelefoneCadastrarDtoOut implements Serializable {
 

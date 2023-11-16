@@ -20,6 +20,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode(of = {"cpf"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"chave", "nome", "sobrenome", "cpf", "dataNascimento", "sexo", "genero", "nivelEducacional", "nacionalidade", "estadoCivil", "telefones", "emails", "endereco"})
 public class PessoaPesquisarDtoOut extends RepresentationModel<PessoaPesquisarDtoOut> implements Serializable {
@@ -48,10 +49,10 @@ public class PessoaPesquisarDtoOut extends RepresentationModel<PessoaPesquisarDt
 
     private EstadoCivilEnum estadoCivil;
 
-    private Set<TelefoneCadastrarDtoOut> telefones;
+    private Set<TelefonePesquisarDtoOut> telefones;
 
-    private Set<EmailCadastrarDtoOut> emails;
+    private Set<EmailPesquisarDtoOut> emails;
 
-    private EnderecoCadastrarDtoOut endereco;
+    private EnderecoPesquisarDtoOut endereco;
 }
 

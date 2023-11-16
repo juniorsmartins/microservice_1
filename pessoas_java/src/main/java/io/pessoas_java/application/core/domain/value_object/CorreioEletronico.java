@@ -16,9 +16,12 @@ public final class CorreioEletronico implements Serializable {
 
   private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
+  private Long id;
+
   private String email;
 
-  public CorreioEletronico(String email) {
+  public CorreioEletronico(Long id, String email) {
+    setId(id);
     setEmail(email);
   }
 
@@ -35,6 +38,14 @@ public final class CorreioEletronico implements Serializable {
 
   public boolean ehValido() {
     return EMAIL_PATTERN.matcher(email).matches();
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 }
 
