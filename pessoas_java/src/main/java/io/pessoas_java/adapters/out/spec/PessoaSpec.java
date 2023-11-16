@@ -99,6 +99,18 @@ public final class PessoaSpec {
                 predicados.add(criteriaBuilder.equal(root.join("emails").get("email"), filtro.getEmails().getEmail()));
             }
 
+            if (ObjectUtils.isNotEmpty(filtro.getEndereco()) && ObjectUtils.isNotEmpty(filtro.getEndereco().getPais())) {
+                predicados.add(criteriaBuilder.like(criteriaBuilder.lower(root.join("endereco").get("pais")), "%" + filtro.getEndereco().getPais().toLowerCase() + "%"));
+            }
+
+            if (ObjectUtils.isNotEmpty(filtro.getEndereco()) && ObjectUtils.isNotEmpty(filtro.getEndereco().getEstado())) {
+                predicados.add(criteriaBuilder.like(criteriaBuilder.lower(root.join("endereco").get("estado")), "%" + filtro.getEndereco().getEstado().toLowerCase() + "%"));
+            }
+
+            if (ObjectUtils.isNotEmpty(filtro.getEndereco()) && ObjectUtils.isNotEmpty(filtro.getEndereco().getCidade())) {
+                predicados.add(criteriaBuilder.like(criteriaBuilder.lower(root.join("endereco").get("cidade")), "%" + filtro.getEndereco().getCidade().toLowerCase() + "%"));
+            }
+
             return criteriaBuilder.and(predicados.toArray(new Predicate[0]));
         });
     }
