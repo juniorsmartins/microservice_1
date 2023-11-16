@@ -12,8 +12,6 @@ public record PessoaDtoFiltro(
 
         String cpf,
 
-        String dataNascimento,
-
         String sexo,
 
         String genero,

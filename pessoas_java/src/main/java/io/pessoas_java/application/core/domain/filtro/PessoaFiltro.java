@@ -12,8 +12,6 @@ public final class PessoaFiltro {
 
     private String cpf;
 
-    private String dataNascimento;
-
     private String sexo;
 
     private String genero;
@@ -60,14 +58,6 @@ public final class PessoaFiltro {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
     }
 
     public String getSexo() {
