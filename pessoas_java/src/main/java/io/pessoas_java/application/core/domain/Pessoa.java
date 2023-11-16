@@ -38,7 +38,7 @@ public final class Pessoa {
 
     private Set<Telefone> telefones;
 
-    private Set<CorreioEletronico> correioEletronicos;
+    private Set<CorreioEletronico> emails;
 
     private Endereco endereco;
 
@@ -139,11 +139,11 @@ public final class Pessoa {
     }
 
     public Set<CorreioEletronico> getEmails() {
-        return correioEletronicos;
+        return emails;
     }
 
-    public void setEmails(Set<CorreioEletronico> correioEletronicos) {
-        this.correioEletronicos = correioEletronicos;
+    public void setEmails(Set<CorreioEletronico> emails) {
+        this.emails = emails;
     }
 
     public Endereco getEndereco() {
@@ -169,7 +169,7 @@ public final class Pessoa {
                 ", nacionalidade='" + nacionalidade + '\'' +
                 ", estadoCivil=" + estadoCivil +
                 ", telefones=" + telefones +
-                ", correioEletronicos=" + correioEletronicos +
+                ", emails=" + emails +
                 ", endereco=" + endereco +
                 '}';
     }

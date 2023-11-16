@@ -14,7 +14,7 @@ import java.io.Serializable;
 @ToString
 @EqualsAndHashCode(of = {"id"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public final class EnderecoCadastrarDtoOut implements Serializable {
+public final class EnderecoPesquisarDtoOut implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;

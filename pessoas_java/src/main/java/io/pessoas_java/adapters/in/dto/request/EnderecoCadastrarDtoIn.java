@@ -35,8 +35,6 @@ public record EnderecoCadastrarDtoIn(
     String numero,
 
     @Size(max = 250)
-    String complemento,
-
-    PessoaCadastrarDtoIn pessoa
+    String complemento
 ) { }
 

@@ -1,7 +1,7 @@
 package io.pessoas_java.adapters.in.mapper;
 
-import io.pessoas_java.adapters.in.dto.request.PessoaDtoFiltro;
-import io.pessoas_java.application.core.domain.PessoaFiltro;
+import io.pessoas_java.adapters.in.dto.filtro.PessoaDtoFiltro;
+import io.pessoas_java.application.core.domain.filtro.PessoaFiltro;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

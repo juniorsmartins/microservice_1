@@ -1,4 +1,4 @@
-package io.pessoas_java.application.core.domain;
+package io.pessoas_java.application.core.domain.filtro;
 
 import java.util.UUID;
 
@@ -12,8 +12,6 @@ public final class PessoaFiltro {
 
     private String cpf;
 
-    private String dataNascimento;
-
     private String sexo;
 
     private String genero;
@@ -21,6 +19,14 @@ public final class PessoaFiltro {
     private String nivelEducacional;
 
     private String nacionalidade;
+
+    private String estadoCivil;
+
+    private TelefoneFiltro telefones;
+
+    private EmailFiltro emails;
+
+    private EnderecoFiltro endereco;
 
     public UUID getChave() {
         return chave;
@@ -54,14 +60,6 @@ public final class PessoaFiltro {
         this.cpf = cpf;
     }
 
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
     public String getSexo() {
         return sexo;
     }
@@ -92,6 +90,38 @@ public final class PessoaFiltro {
 
     public void setNacionalidade(String nacionalidade) {
         this.nacionalidade = nacionalidade;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public TelefoneFiltro getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(TelefoneFiltro telefones) {
+        this.telefones = telefones;
+    }
+
+    public EmailFiltro getEmails() {
+        return emails;
+    }
+
+    public void setEmails(EmailFiltro emails) {
+        this.emails = emails;
+    }
+
+    public EnderecoFiltro getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoFiltro endereco) {
+        this.endereco = endereco;
     }
 }
 

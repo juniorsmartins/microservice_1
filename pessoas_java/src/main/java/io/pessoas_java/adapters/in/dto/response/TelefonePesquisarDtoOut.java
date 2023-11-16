@@ -12,29 +12,13 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = {"numero"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public final class EnderecoCadastrarDtoOut implements Serializable {
+public final class TelefonePesquisarDtoOut implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private Long id;
-
-    private String pais;
-
-    private String cep;
-
-    private String estado;
-
-    private String cidade;
-
-    private String bairro;
-
-    private String logradouro;
-
     private String numero;
-
-    private String complemento;
 }
 

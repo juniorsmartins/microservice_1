@@ -29,25 +29,23 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
         this.util = util;
     }
 
-//    @Transactional
     @Override
     public Pessoa cadastrar(Pessoa pessoa) {
 
         logger.info("UseCase - iniciado serviço de cadastrar uma pessoa.");
 
-        Optional.ofNullable(pessoa)
-            .ifPresentOrElse(
-                people -> {
-                    this.listaRegrasCadastrar.forEach(regra -> regra.executar(people));
-                    this.capitalizarNomeCompleto(people);
-                     this.pessoaSalvarOutputPort.salvar(people);
-                },
-                () -> {throw new RequiredObjectIsNullException();}
-            );
+        var pessoaCadastrada = Optional.of(pessoa)
+            .map(people -> {
+                this.listaRegrasCadastrar.forEach(regra -> regra.executar(people));
+                return people;
+            })
+            .map(this::capitalizarNomeCompleto)
+            .map(this.pessoaSalvarOutputPort::salvar)
+            .orElseThrow(RequiredObjectIsNullException::new);
 
         logger.info("UseCase - finalizado serviço de cadastrar uma pessoa.");
 
-        return pessoa;
+        return pessoaCadastrada;
     }
 
     private Pessoa capitalizarNomeCompleto(Pessoa pessoa) {

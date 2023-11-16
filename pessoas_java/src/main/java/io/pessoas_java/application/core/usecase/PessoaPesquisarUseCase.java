@@ -1,7 +1,7 @@
 package io.pessoas_java.application.core.usecase;
 
 import io.pessoas_java.application.core.domain.Pessoa;
-import io.pessoas_java.application.core.domain.PessoaFiltro;
+import io.pessoas_java.application.core.domain.filtro.PessoaFiltro;
 import io.pessoas_java.application.ports.in.PessoaPesquisarInputPort;
 import io.pessoas_java.application.ports.out.PessoaPesquisarOutputPort;
 import org.springframework.data.domain.Page;
@@ -22,11 +22,11 @@ public class PessoaPesquisarUseCase implements PessoaPesquisarInputPort {
     @Override
     public Page<Pessoa> pesquisar(final PessoaFiltro pessoaFiltro, final Pageable paginacao) {
 
-        logger.info("UseCase - iniciado serviço de pesquisar pessoas.");
+        logger.info("UseCase - iniciado serviço de pesquisar Pessoas.");
 
         var pagina = this.pessoaPesquisarOutputPort.pesquisar(pessoaFiltro, paginacao);
 
-        logger.info("UseCase - finalizado serviço de pesquisar pessoas.");
+        logger.info("UseCase - finalizado serviço de pesquisar Pessoas.");
 
         return pagina;
     }

@@ -1,13 +1,11 @@
 package io.pessoas_java.adapters.in.controller;
 
-import io.pessoas_java.adapters.in.dto.request.PessoaDtoFiltro;
+import io.pessoas_java.adapters.in.dto.filtro.PessoaDtoFiltro;
 import io.pessoas_java.adapters.in.dto.request.PessoaCadastrarDtoIn;
 import io.pessoas_java.adapters.in.dto.request.PessoaEditarDtoIn;
 import io.pessoas_java.adapters.in.dto.response.PessoaCadastrarDtoOut;
-import io.pessoas_java.adapters.in.mapper.PessoaDtoFiltroMapper;
-import io.pessoas_java.adapters.in.mapper.PessoaDtoInMapper;
-import io.pessoas_java.adapters.in.mapper.PessoaDtoOutMapper;
-import io.pessoas_java.adapters.in.mapper.PessoaEditarDtoInMapper;
+import io.pessoas_java.adapters.in.dto.response.PessoaPesquisarDtoOut;
+import io.pessoas_java.adapters.in.mapper.*;
 import io.pessoas_java.adapters.in.utilitarios.ProdutorHateoas;
 import io.pessoas_java.application.ports.in.*;
 import io.pessoas_java.config.exceptions.RetornoException;
@@ -44,17 +42,19 @@ public class PessoaController {
 
     private final PessoaCadastrarInputPort pessoaCadastrarInputPort;
 
-    private final PessoaPesquisarInputPort pessoaPesquisarInputPort;
-
     private final PessoaConsultarPorChaveInputPort pessoaConsultarPorChaveInputPort;
+
+    private final PessoaPesquisarInputPort pessoaPesquisarInputPort;
 
     private final PessoaDeletarPorChaveInputPort pessoaDeletarPorChaveInputPort;
 
     private final PessoaEditarInputPort pessoaEditarInputPort;
 
-    private final PessoaDtoInMapper pessoaDtoInMapper;
+    private final PessoaCadastrarDtoInMapper pessoaCadastrarDtoInMapper;
 
-    private final PessoaDtoOutMapper pessoaDtoOutMapper;
+    private final PessoaCadastrarDtoOutMapper pessoaCadastrarDtoOutMapper;
+
+    private final PessoaPesquisarDtoOutMapper pessoaPesquisarDtoOutMapper;
 
     private final PessoaDtoFiltroMapper pessoaDtoFiltroMapper;
 
@@ -90,9 +90,9 @@ public class PessoaController {
         logger.info("Controller - recebida requisição para cadastrar uma pessoa.");
 
         var dtoOut = Optional.of(dtoIn)
-            .map(this.pessoaDtoInMapper::toPessoa)
+            .map(this.pessoaCadastrarDtoInMapper::toPessoa)
             .map(this.pessoaCadastrarInputPort::cadastrar)
-            .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
+            .map(this.pessoaCadastrarDtoOutMapper::toPessoaCadastrarDtoOut)
             .map(this.produtorHateoas::links)
             .orElseThrow(NoSuchElementException::new);
 
@@ -136,7 +136,7 @@ public class PessoaController {
 
         var dtoOut = Optional.of(chave)
             .map(this.pessoaConsultarPorChaveInputPort::consultarPorChave)
-            .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
+            .map(this.pessoaCadastrarDtoOutMapper::toPessoaCadastrarDtoOut)
             .map(this.produtorHateoas::links)
             .orElseThrow(NoSuchElementException::new);
 
@@ -169,16 +169,15 @@ public class PessoaController {
                 })
             }
     )
-    public ResponseEntity<Page<PessoaCadastrarDtoOut>> pesquisar(@Valid final PessoaDtoFiltro dtoFiltro,
-                                                                 @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, page = 0, size = 10)
-        final Pageable paginacao) {
+    public ResponseEntity<Page<PessoaPesquisarDtoOut>> pesquisar(@Valid final PessoaDtoFiltro dtoFiltro,
+        @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, page = 0, size = 10) final Pageable paginacao) {
 
         logger.info("Controller - recebida requisição para pesquisar pessoas.");
 
         var paginaDtoOut = Optional.of(dtoFiltro)
             .map(this.pessoaDtoFiltroMapper::toPessoaFiltro)
             .map(filtro -> this.pessoaPesquisarInputPort.pesquisar(filtro, paginacao))
-            .map(pagina -> pagina.map(this.pessoaDtoOutMapper::toPessoaDtoOut))
+            .map(pagina -> pagina.map(this.pessoaPesquisarDtoOutMapper::toPessoaPesquisarDtoOut))
             .map(pagina -> pagina.map(this.produtorHateoas::links))
             .orElseThrow(NoSuchElementException::new);
 
@@ -222,7 +221,7 @@ public class PessoaController {
         var dtoOut = Optional.of(editarDtoIn)
             .map(this.pessoaEditarDtoInMapper::toPessoa)
             .map(this.pessoaEditarInputPort::editar)
-            .map(this.pessoaDtoOutMapper::toPessoaDtoOut)
+            .map(this.pessoaCadastrarDtoOutMapper::toPessoaCadastrarDtoOut)
             .map(this.produtorHateoas::links)
             .orElseThrow(NoSuchElementException::new);
 

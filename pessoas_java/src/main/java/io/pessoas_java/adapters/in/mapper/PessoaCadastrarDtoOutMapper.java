@@ -10,11 +10,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Mapper(componentModel = "spring")
-public interface PessoaDtoOutMapper {
+public interface PessoaCadastrarDtoOutMapper {
 
     @Mapping(source = "chave", target = "key")
     @Mapping(target = "dataNascimento", source = "dataNascimento", qualifiedByName = "dataNascimentoLocalDateToString")
-    PessoaCadastrarDtoOut toPessoaDtoOut(Pessoa pessoa);
+    PessoaCadastrarDtoOut toPessoaCadastrarDtoOut(Pessoa pessoa);
 
     @Named("dataNascimentoLocalDateToString")
     default String dataNascimentoLocalDateToString(LocalDate dataNascimento) {
