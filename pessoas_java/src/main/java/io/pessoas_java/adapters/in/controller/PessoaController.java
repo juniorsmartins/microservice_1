@@ -1,7 +1,7 @@
 package io.pessoas_java.adapters.in.controller;
 
-import io.pessoas_java.adapters.in.dto.request.PessoaDtoFiltro;
 import io.pessoas_java.adapters.in.dto.request.PessoaCadastrarDtoIn;
+import io.pessoas_java.adapters.in.dto.filtro.PessoaDtoFiltro;
 import io.pessoas_java.adapters.in.dto.request.PessoaEditarDtoIn;
 import io.pessoas_java.adapters.in.dto.response.PessoaCadastrarDtoOut;
 import io.pessoas_java.adapters.in.mapper.PessoaDtoFiltroMapper;
@@ -44,9 +44,9 @@ public class PessoaController {
 
     private final PessoaCadastrarInputPort pessoaCadastrarInputPort;
 
-    private final PessoaPesquisarInputPort pessoaPesquisarInputPort;
-
     private final PessoaConsultarPorChaveInputPort pessoaConsultarPorChaveInputPort;
+
+    private final PessoaPesquisarInputPort pessoaPesquisarInputPort;
 
     private final PessoaDeletarPorChaveInputPort pessoaDeletarPorChaveInputPort;
 
@@ -170,8 +170,7 @@ public class PessoaController {
             }
     )
     public ResponseEntity<Page<PessoaCadastrarDtoOut>> pesquisar(@Valid final PessoaDtoFiltro dtoFiltro,
-                                                                 @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, page = 0, size = 10)
-        final Pageable paginacao) {
+        @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, page = 0, size = 10) final Pageable paginacao) {
 
         logger.info("Controller - recebida requisição para pesquisar pessoas.");
 

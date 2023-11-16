@@ -22,11 +22,11 @@ public class PessoaPesquisarUseCase implements PessoaPesquisarInputPort {
     @Override
     public Page<Pessoa> pesquisar(final PessoaFiltro pessoaFiltro, final Pageable paginacao) {
 
-        logger.info("UseCase - iniciado serviço de pesquisar pessoas.");
+        logger.info("UseCase - iniciado serviço de pesquisar Pessoas.");
 
         var pagina = this.pessoaPesquisarOutputPort.pesquisar(pessoaFiltro, paginacao);
 
-        logger.info("UseCase - finalizado serviço de pesquisar pessoas.");
+        logger.info("UseCase - finalizado serviço de pesquisar Pessoas.");
 
         return pagina;
     }

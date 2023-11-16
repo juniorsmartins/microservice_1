@@ -1,4 +1,4 @@
-package io.pessoas_java.adapters.in.dto.request;
+package io.pessoas_java.adapters.in.dto.filtro;
 
 import java.util.UUID;
 
@@ -20,6 +20,14 @@ public record PessoaDtoFiltro(
 
         String nivelEducacional,
 
-        String nacionalidade
+        String nacionalidade,
+
+        String estadoCivil,
+
+        TelefoneDtoFiltro telefone,
+
+        EmailDtoFiltro email,
+
+        EnderecoDtoFiltro endereco
 ) { }
 
