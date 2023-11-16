@@ -91,8 +91,8 @@ public final class PessoaSpec {
                 }
             }
 
-            if (ObjectUtils.isNotEmpty(filtro.getTelefone()) && ObjectUtils.isNotEmpty(filtro.getTelefone().getNumero())) {
-                predicados.add(criteriaBuilder.equal(root.join("telefone").get("numero"), filtro.getTelefone().getNumero()));
+            if (ObjectUtils.isNotEmpty(filtro.getTelefones()) && ObjectUtils.isNotEmpty(filtro.getTelefones().getNumero())) {
+                predicados.add(criteriaBuilder.equal(root.join("telefones").get("numero"), filtro.getTelefones().getNumero()));
             }
 
             return criteriaBuilder.and(predicados.toArray(new Predicate[0]));

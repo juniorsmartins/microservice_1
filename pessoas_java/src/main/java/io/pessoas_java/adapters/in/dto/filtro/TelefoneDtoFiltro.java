@@ -1,7 +1,22 @@
 package io.pessoas_java.adapters.in.dto.filtro;
 
-public record TelefoneDtoFiltro(
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    String numero
-) { }
+import java.io.Serial;
+import java.io.Serializable;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public final class TelefoneDtoFiltro implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    private String numero;
+}
 

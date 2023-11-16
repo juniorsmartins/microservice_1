@@ -1,31 +1,45 @@
 package io.pessoas_java.adapters.in.dto.filtro;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.UUID;
 
-public record PessoaDtoFiltro(
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public final class PessoaDtoFiltro implements Serializable {
 
-        UUID chave,
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-        String nome,
+    private UUID chave;
 
-        String sobrenome,
+    private String nome;
 
-        String cpf,
+    private String sobrenome;
 
-        String sexo,
+    private String cpf;
 
-        String genero,
+    private String sexo;
 
-        String nivelEducacional,
+    private String genero;
 
-        String nacionalidade,
+    private String nivelEducacional;
 
-        String estadoCivil,
+    private String nacionalidade;
 
-        TelefoneDtoFiltro telefone,
+    private String estadoCivil;
 
-        EmailDtoFiltro email,
+    private TelefoneDtoFiltro telefones;
 
-        EnderecoDtoFiltro endereco
-) { }
+    private EmailDtoFiltro emails;
+
+    private EnderecoDtoFiltro endereco;
+}
 

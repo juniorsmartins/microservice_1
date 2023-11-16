@@ -22,9 +22,9 @@ public final class PessoaFiltro {
 
     private String estadoCivil;
 
-    private TelefoneFiltro telefone;
+    private TelefoneFiltro telefones;
 
-    private EmailFiltro email;
+    private EmailFiltro emails;
 
     private EnderecoFiltro endereco;
 
@@ -100,20 +100,20 @@ public final class PessoaFiltro {
         this.estadoCivil = estadoCivil;
     }
 
-    public TelefoneFiltro getTelefone() {
-        return telefone;
+    public TelefoneFiltro getTelefones() {
+        return telefones;
     }
 
-    public void setTelefone(TelefoneFiltro telefone) {
-        this.telefone = telefone;
+    public void setTelefones(TelefoneFiltro telefones) {
+        this.telefones = telefones;
     }
 
-    public EmailFiltro getEmail() {
-        return email;
+    public EmailFiltro getEmails() {
+        return emails;
     }
 
-    public void setEmail(EmailFiltro email) {
-        this.email = email;
+    public void setEmails(EmailFiltro emails) {
+        this.emails = emails;
     }
 
     public EnderecoFiltro getEndereco() {
