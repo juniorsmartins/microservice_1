@@ -1,7 +1,22 @@
 package io.pessoas_java.adapters.in.dto.filtro;
 
-public record EmailDtoFiltro(
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    String email
-) { }
+import java.io.Serial;
+import java.io.Serializable;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public final class EmailDtoFiltro implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    private String email;
+}
 

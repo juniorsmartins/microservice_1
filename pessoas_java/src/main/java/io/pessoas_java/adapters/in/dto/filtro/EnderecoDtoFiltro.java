@@ -1,21 +1,26 @@
 package io.pessoas_java.adapters.in.dto.filtro;
 
-public record EnderecoDtoFiltro(
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    String pais,
+import java.io.Serial;
+import java.io.Serializable;
 
-    String cep,
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public final class EnderecoDtoFiltro implements Serializable {
 
-    String estado,
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-    String cidade,
+    private String pais;
 
-    String bairro,
+    private String estado;
 
-    String logradouro,
-
-    String numero,
-
-    String complemento
-) { }
+    private String cidade;
+}
 
