@@ -2,7 +2,10 @@ package io.pessoas_java.util;
 
 import com.github.javafaker.Faker;
 import io.pessoas_java.adapters.in.dto.request.*;
+import io.pessoas_java.adapters.out.entity.EmailEntity;
+import io.pessoas_java.adapters.out.entity.EnderecoEntity;
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
+import io.pessoas_java.adapters.out.entity.TelefoneEntity;
 import io.pessoas_java.application.core.domain.enums.EstadoCivilEnum;
 import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
 import io.pessoas_java.application.core.domain.enums.SexoEnum;
@@ -36,6 +39,8 @@ public class CriadorDeBuilders {
 
         var endereco = gerarEnderecoCadastrarDtoInBuilder().build();
 
+        gerarEnumsAleatorios();
+
         return PessoaCadastrarDtoIn.builder()
             .nome(faker.name().firstName())
             .sobrenome(faker.name().lastName())
@@ -53,18 +58,37 @@ public class CriadorDeBuilders {
 
     public static PessoaEditarDtoIn.PessoaEditarDtoInBuilder gerarPessoaEditarDtoInBuilder() {
 
+        var tel1 = TelefoneEditarDtoIn.builder().numero("1122222222").build();
+        var tel2 = TelefoneEditarDtoIn.builder().numero("2133333333").build();
+
+        var email1 = EmailEditarDtoIn.builder().email("atual1@email.com").build();
+        var email2 = EmailEditarDtoIn.builder().email("atual2@email.com").build();
+
+        var endereco = gerarEnderecoEditarDtoInBuilder().build();
+
+        gerarEnumsAleatorios();
+
         return PessoaEditarDtoIn.builder()
             .nome(faker.name().firstName())
             .sobrenome(faker.name().lastName())
             .cpf(cpfGenerator.cpf(false))
             .dataNascimento("01/01/2020")
-            .sexo(faker.dog().gender())
-            .genero(faker.lorem().characters(5, 10))
-            .nivelEducacional("Superior")
-            .nacionalidade(faker.lorem().characters(5, 10));
+            .sexo(sexo.getTipo())
+            .genero(faker.lorem().characters(2, 5))
+            .nivelEducacional(NivelEducacionalEnum.ANALFABETO.getNivel())
+            .nacionalidade(faker.lorem().characters(5, 10))
+            .estadoCivil(estadoCivil.getTipo())
+            .telefones(Set.of(tel1, tel2))
+            .emails(Set.of(email1, email2))
+            .endereco(endereco);
     }
 
     public static PessoaEntity.PessoaEntityBuilder gerarPessoaEntityBuilder() {
+
+        var tel = TelefoneEntity.builder().numero("2190909090").build();
+        var email = EmailEntity.builder().email("atual@email.com").build();
+
+        var endereco = gerarEnderecoEntityBuilder().build();
 
         gerarEnumsAleatorios();
 
@@ -78,12 +102,41 @@ public class CriadorDeBuilders {
             .genero(faker.lorem().characters(5, 10))
             .nivelEducacional(nivelEducacional)
             .nacionalidade(faker.lorem().characters(5, 10))
-            .estadoCivil(estadoCivil);
+            .estadoCivil(estadoCivil)
+            .telefones(Set.of(tel))
+            .emails(Set.of(email))
+            .endereco(endereco);
     }
 
     public static EnderecoCadastrarDtoIn.EnderecoCadastrarDtoInBuilder gerarEnderecoCadastrarDtoInBuilder() {
 
         return EnderecoCadastrarDtoIn.builder()
+            .pais("Brasil")
+            .cep("78000000")
+            .estado("São Paulo")
+            .cidade("São Paulo")
+            .bairro("Centro")
+            .logradouro("Avenida General Medici")
+            .numero("2505")
+            .complemento("Entrada pela porta na lateral direita.");
+    }
+
+    public static EnderecoEditarDtoIn.EnderecoEditarDtoInBuilder gerarEnderecoEditarDtoInBuilder() {
+
+        return EnderecoEditarDtoIn.builder()
+            .pais("Brasil")
+            .cep("78000000")
+            .estado("São Paulo")
+            .cidade("São Paulo")
+            .bairro("Centro")
+            .logradouro("Avenida General Medici")
+            .numero("2505")
+            .complemento("Entrada pela porta na lateral direita.");
+    }
+
+    public static EnderecoEntity.EnderecoEntityBuilder gerarEnderecoEntityBuilder() {
+
+        return EnderecoEntity.builder()
             .pais("Brasil")
             .cep("78000000")
             .estado("São Paulo")

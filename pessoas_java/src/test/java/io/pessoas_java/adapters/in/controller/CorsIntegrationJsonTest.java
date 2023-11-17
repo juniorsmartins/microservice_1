@@ -1,9 +1,9 @@
 package io.pessoas_java.adapters.in.controller;
 
 import io.pessoas_java.adapters.in.dto.request.PessoaCadastrarDtoIn;
+import io.pessoas_java.adapters.in.dto.response.PessoaCadastrarDtoOut;
 import io.pessoas_java.configs.AbstractIntegrationTest;
 import io.pessoas_java.configs.TestConfigs;
-import io.pessoas_java.dtos.PessoaDtoOut;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -27,7 +27,7 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
 
     private static PessoaCadastrarDtoIn pessoaCadastrarDtoIn;
 
-    private static PessoaDtoOut pessoaDtoOut;
+    private static PessoaCadastrarDtoOut pessoaDtoOut;
 
     @BeforeAll
     public static void setup() {
@@ -71,10 +71,10 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
                 .body()
                     .asString();
 
-        var pessoaDeSaida = objectMapper.readValue(content, PessoaDtoOut.class);
+        var pessoaDeSaida = objectMapper.readValue(content, PessoaCadastrarDtoOut.class);
         pessoaDtoOut = pessoaDeSaida;
 
-        Assertions.assertNotNull(pessoaDeSaida.getChave());
+        Assertions.assertNotNull(pessoaDeSaida.getKey());
         Assertions.assertEquals(pessoaCadastrarDtoIn.nome(), pessoaDeSaida.getNome());
         Assertions.assertEquals(pessoaCadastrarDtoIn.sobrenome(), pessoaDeSaida.getSobrenome());
         Assertions.assertEquals(pessoaCadastrarDtoIn.cpf(), pessoaDeSaida.getCpf());
@@ -130,7 +130,7 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
         var content = RestAssured.given()
             .spec(specification)
             .contentType(TestConfigs.CONTENT_TYPE_JSON)
-                .pathParam("chave", pessoaDtoOut.getChave())
+                .pathParam("chave", pessoaDtoOut.getKey())
             .when()
                 .get("{chave}")
             .then()
@@ -139,9 +139,9 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
                 .body()
                     .asString();
 
-        var pessoaDeSaida = objectMapper.readValue(content, PessoaDtoOut.class);
+        var pessoaDeSaida = objectMapper.readValue(content, PessoaCadastrarDtoOut.class);
 
-        Assertions.assertEquals(pessoaDtoOut.getChave(), pessoaDeSaida.getChave());
+        Assertions.assertEquals(pessoaDtoOut.getKey(), pessoaDeSaida.getKey());
         Assertions.assertEquals(pessoaDtoOut.getNome(), pessoaDeSaida.getNome());
         Assertions.assertEquals(pessoaDtoOut.getSobrenome(), pessoaDeSaida.getSobrenome());
         Assertions.assertEquals(pessoaDtoOut.getCpf(), pessoaDeSaida.getCpf());
@@ -168,7 +168,7 @@ public class CorsIntegrationJsonTest extends AbstractIntegrationTest {
         var content = RestAssured.given()
             .spec(specification)
             .contentType(TestConfigs.CONTENT_TYPE_JSON)
-                .pathParam("chave", pessoaDtoOut.getChave())
+                .pathParam("chave", pessoaDtoOut.getKey())
             .when()
                 .get("{chave}")
             .then()

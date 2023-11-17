@@ -6,6 +6,7 @@ import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 
+@Builder
 @Entity
 @Table(name = "emails")
 @NoArgsConstructor
