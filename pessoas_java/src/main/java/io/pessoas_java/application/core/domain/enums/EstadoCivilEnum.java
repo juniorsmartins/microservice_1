@@ -8,9 +8,9 @@ public enum EstadoCivilEnum {
     SOLTEIRO("Solteiro"),
     CASADO("Casado"),
     DIVORCIADO("Divorciado"),
-    VIÚVO("Viúvo"),
+    VIUVO("Viuvo"),
     SEPARADO("Separado"),
-    UNIÃO_ESTÁVEL("União Estável"),
+    UNIAO_ESTAVEL("Uniao Estavel"),
     OUTRO("Outro");
 
     private String tipo;

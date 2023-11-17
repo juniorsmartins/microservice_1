@@ -46,9 +46,9 @@ public class PessoaController {
 
     private final PessoaPesquisarInputPort pessoaPesquisarInputPort;
 
-    private final PessoaDeletarPorChaveInputPort pessoaDeletarPorChaveInputPort;
-
     private final PessoaEditarInputPort pessoaEditarInputPort;
+
+    private final PessoaDeletarPorChaveInputPort pessoaDeletarPorChaveInputPort;
 
     private final PessoaCadastrarDtoInMapper pessoaCadastrarDtoInMapper;
 
