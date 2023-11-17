@@ -9,7 +9,7 @@ public enum NivelEducacionalEnum {
     ENSINO_FUNDAMENTAL_COMPLETO("Ensino Fundamental Completo"),
     ENSINO_MEDIO_COMPLETO("Ensino Medio Completo"),
     ENSINO_SUPERIOR_COMPLETO("Ensino Superior Completo"),
-    POS_GRADUACAO_LATO_SENSU_COMPLETA("Pos-graduação Lato Sensu Completa"),
+    POS_GRADUACAO_LATO_SENSU_COMPLETA("Pos-graduacao Lato Sensu Completa"),
     MESTRADO_COMPLETO("Mestrado Completo"),
     DOUTORADO_COMPLETO("Doutorado Completo");
 

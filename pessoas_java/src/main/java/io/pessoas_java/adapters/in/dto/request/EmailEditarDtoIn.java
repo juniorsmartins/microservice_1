@@ -1,13 +1,13 @@
 package io.pessoas_java.adapters.in.dto.request;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
 @Builder
 public record EmailEditarDtoIn(
 
-    @NotNull
-    @Positive
     Long id,
 
     @NotBlank
