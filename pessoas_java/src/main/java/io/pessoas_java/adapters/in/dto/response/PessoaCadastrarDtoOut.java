@@ -20,6 +20,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode(of = {"cpf"}, callSuper = false)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"chave", "nome", "sobrenome", "cpf", "dataNascimento", "sexo", "genero", "nivelEducacional", "nacionalidade", "estadoCivil", "telefones", "emails", "endereco"})
 public class PessoaCadastrarDtoOut extends RepresentationModel<PessoaCadastrarDtoOut> implements Serializable {
