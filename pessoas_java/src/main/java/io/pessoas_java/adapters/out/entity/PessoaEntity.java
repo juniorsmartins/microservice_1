@@ -72,7 +72,7 @@ public final class PessoaEntity implements Serializable {
     private Set<EmailEntity> emails;
 
     @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "endereco_id")
+    @JoinColumn(name = "endereco_id", nullable = true)
     private EnderecoEntity endereco;
 }
 
