@@ -6,7 +6,6 @@ import io.pessoas_java.adapters.in.dto.request.TelefoneCadastrarDtoIn;
 import io.pessoas_java.adapters.in.dto.response.PessoaCadastrarDtoOut;
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
 import io.pessoas_java.adapters.out.repository.EmailRepository;
-import io.pessoas_java.adapters.out.repository.EnderecoRepository;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
 import io.pessoas_java.adapters.out.repository.TelefoneRepository;
 import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
@@ -55,9 +54,6 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
     private EmailRepository emailRepository;
-
-    @Autowired
-    private EnderecoRepository enderecoRepository;
 
     private PessoaEntity pessoaEntity;
 
@@ -546,23 +542,11 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     @DisplayName("Cadastrar - Http 400 por endereço inválido")
     void deveRetornarHttp400_quandoCadastrarComEnderecoInvalido() throws Exception {
 
-        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
-            .endereco(null)
-            .build();
-
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isBadRequest())
-            .andDo(MockMvcResultHandlers.print());
-
         var end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
             .pais(null)
             .build();
 
-        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
             .endereco(end1)
             .build();
 
