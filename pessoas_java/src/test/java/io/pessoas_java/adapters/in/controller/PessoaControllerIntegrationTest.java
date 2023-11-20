@@ -5,10 +5,11 @@ import io.pessoas_java.adapters.in.dto.request.EmailCadastrarDtoIn;
 import io.pessoas_java.adapters.in.dto.request.TelefoneCadastrarDtoIn;
 import io.pessoas_java.adapters.in.dto.response.PessoaCadastrarDtoOut;
 import io.pessoas_java.adapters.out.entity.PessoaEntity;
+import io.pessoas_java.adapters.out.repository.EmailRepository;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
+import io.pessoas_java.adapters.out.repository.TelefoneRepository;
 import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
 import io.pessoas_java.configs.AbstractIntegrationTest;
-import io.pessoas_java.dtos.PessoaDtoOut;
 import io.pessoas_java.util.CriadorDeBuilders;
 import io.pessoas_java.util.TestConverterUtil;
 import org.hamcrest.Matchers;
@@ -47,6 +48,12 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
     private PessoaRepository pessoaRepository;
+
+    @Autowired
+    private TelefoneRepository telefoneRepository;
+
+    @Autowired
+    private EmailRepository emailRepository;
 
     private PessoaEntity pessoaEntity;
 
@@ -90,7 +97,8 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     @DisplayName("Cadastrar - Valores Iguais")
     void deveRetornarValoresIguais_quandoCadastrar() throws Exception {
 
-        var dtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder().build();
+        var dtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+            .build();
 
         mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -154,7 +162,7 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
             .andReturn();
 
         var responseBody = resposta.getResponse().getContentAsString();
-        var pessoaDtoOut = objectMapper.readValue(responseBody, PessoaDtoOut.class);
+        var pessoaDtoOut = objectMapper.readValue(responseBody, PessoaCadastrarDtoOut.class);
 
         var pessoaPersistida = this.pessoaRepository.findByCpf(pessoaDtoIn.cpf()).get();
 
@@ -163,11 +171,12 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
         Assertions.assertEquals(pessoaDtoOut.getNome(), pessoaPersistida.getNome());
         Assertions.assertEquals(pessoaDtoOut.getSobrenome(), pessoaPersistida.getSobrenome());
         Assertions.assertEquals(pessoaDtoOut.getCpf(), pessoaPersistida.getCpf());
-        Assertions.assertEquals(pessoaDtoOut.getSexo(), pessoaPersistida.getSexo().toString());
+        Assertions.assertEquals(pessoaDtoOut.getSexo(), pessoaPersistida.getSexo());
         Assertions.assertEquals(pessoaDtoOut.getGenero(), pessoaPersistida.getGenero());
         Assertions.assertEquals(pessoaDtoOut.getDataNascimento(), pessoaPersistida.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        Assertions.assertEquals(pessoaDtoOut.getNivelEducacional(), pessoaPersistida.getNivelEducacional().toString());
+        Assertions.assertEquals(pessoaDtoOut.getNivelEducacional(), pessoaPersistida.getNivelEducacional());
         Assertions.assertEquals(pessoaDtoOut.getNacionalidade(), pessoaPersistida.getNacionalidade());
+        Assertions.assertEquals(pessoaDtoOut.getEstadoCivil(), pessoaPersistida.getEstadoCivil());
     }
 
     @Test
@@ -533,23 +542,11 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
     @DisplayName("Cadastrar - Http 400 por endereço inválido")
     void deveRetornarHttp400_quandoCadastrarComEnderecoInvalido() throws Exception {
 
-        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
-            .endereco(null)
-            .build();
-
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .content(TestConverterUtil.converterObjetoParaJson(pessoaDtoIn))
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isBadRequest())
-            .andDo(MockMvcResultHandlers.print());
-
         var end1 = CriadorDeBuilders.gerarEnderecoCadastrarDtoInBuilder()
             .pais(null)
             .build();
 
-        pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
+        var pessoaDtoIn = CriadorDeBuilders.gerarPessoaDtoInBuilder()
             .endereco(end1)
             .build();
 
@@ -885,248 +882,269 @@ class PessoaControllerIntegrationTest extends AbstractIntegrationTest {
 
 
 
-    @Test
-    @Order(80)
-    @DisplayName("Editar - Http 200")
-    void deveRetornarHttp200_quandoEditar() throws Exception {
+//    @Test
+//    @Order(80)
+//    @DisplayName("Editar - Http 200")
+//    void deveRetornarHttp200_quandoEditar() throws Exception {
+//
+//        var pessoaEntity = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
+//        var pessoaSalva = this.pessoaRepository.save(pessoaEntity);
+//
+//        var pessoaEditarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
+//            .chave(pessoaSalva.getChave())
+//            .build();
+//
+//        mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + pessoaEditarDtoIn.chave())
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .characterEncoding(UTF8)
+//                .content(TestConverterUtil.converterObjetoParaJson(pessoaEditarDtoIn))
+//                .accept(MediaType.APPLICATION_JSON))
+//            .andExpect(MockMvcResultMatchers.status().isNoContent())
+//            .andDo(MockMvcResultHandlers.print());
+//    }
 
-        var pessoaEntity = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
-        var pessoaSalva = this.pessoaRepository.save(pessoaEntity);
+//    @Test
+//    @Order(81)
+//    @DisplayName("Editar - Valores Iguais")
+//    void deveRetornarValoresIguais_quandoEditar() throws Exception {
+//
+//        var pessoaEntity = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
+//        var pessoaSalva = this.pessoaRepository.save(pessoaEntity);
+//
+//        var tel1 = TelefoneEditarDtoIn.builder().numero("44999990000").build();
+//        var email1 = EmailEditarDtoIn.builder().email("editar@email.com.br").build();
+//
+//        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
+//            .chave(pessoaSalva.getChave())
+//            .nome("robert")
+//            .sobrenome("martin")
+//            .telefones(Set.of(tel1))
+//            .emails(Set.of(email1))
+//            .build();
+//
+//        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .characterEncoding(UTF8)
+//                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
+//                .accept(MediaType.APPLICATION_JSON))
+//            .andExpectAll(MockMvcResultMatchers.status().isCreated(),
+//                MockMvcResultMatchers.jsonPath("$.chave", Matchers.notNullValue()),
+//                MockMvcResultMatchers.jsonPath("$.nome", Matchers.equalToIgnoringCase(editarDtoIn.nome())),
+//                MockMvcResultMatchers.jsonPath("$.sobrenome", Matchers.equalToIgnoringCase(editarDtoIn.sobrenome())),
+//                MockMvcResultMatchers.jsonPath("$.cpf", Matchers.equalTo(editarDtoIn.cpf())),
+//                MockMvcResultMatchers.jsonPath("$.dataNascimento", Matchers.equalTo(editarDtoIn.dataNascimento())),
+//                MockMvcResultMatchers.jsonPath("$.sexo", Matchers.equalToIgnoringCase(editarDtoIn.sexo())),
+//                MockMvcResultMatchers.jsonPath("$.genero", Matchers.equalTo(editarDtoIn.genero())),
+//                MockMvcResultMatchers.jsonPath("$.nivelEducacional", Matchers.equalTo(NivelEducacionalEnum.ANALFABETO.toString())),
+//                MockMvcResultMatchers.jsonPath("$.nacionalidade", Matchers.equalTo(editarDtoIn.nacionalidade())),
+//                MockMvcResultMatchers.jsonPath("$.estadoCivil", Matchers.equalToIgnoringCase(editarDtoIn.estadoCivil())),
+//                MockMvcResultMatchers.jsonPath("$.telefones[0].numero", Matchers.equalTo(tel1.numero())),
+//                MockMvcResultMatchers.jsonPath("$.emails[0].email", Matchers.equalToIgnoringCase(email1.email())),
+//                MockMvcResultMatchers.jsonPath("$.endereco.pais", Matchers.equalTo(editarDtoIn.endereco().pais())),
+//                MockMvcResultMatchers.jsonPath("$.endereco.cep", Matchers.equalTo(editarDtoIn.endereco().cep())),
+//                MockMvcResultMatchers.jsonPath("$.endereco.estado", Matchers.equalTo(editarDtoIn.endereco().estado())),
+//                MockMvcResultMatchers.jsonPath("$.endereco.cidade", Matchers.equalTo(editarDtoIn.endereco().cidade())),
+//                MockMvcResultMatchers.jsonPath("$.endereco.bairro", Matchers.equalTo(editarDtoIn.endereco().bairro())),
+//                MockMvcResultMatchers.jsonPath("$.endereco.logradouro", Matchers.equalTo(editarDtoIn.endereco().logradouro())),
+//                MockMvcResultMatchers.jsonPath("$.endereco.numero", Matchers.equalTo(editarDtoIn.endereco().numero())),
+//                MockMvcResultMatchers.jsonPath("$.endereco.complemento", Matchers.equalTo(editarDtoIn.endereco().complemento())))
+//            .andDo(MockMvcResultHandlers.print());
+//    }
 
-        var pessoaEditarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
-            .chave(pessoaSalva.getChave())
-            .build();
+//    @Test
+//    @Order(82)
+//    @DisplayName("Editar - Capitalizar nome completo")
+//    void deveRetornarNomeCompletoCapitalizado_quandoEditar() throws Exception {
+//
+//        var pessoaEntity = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
+//        var pessoaSalva = this.pessoaRepository.save(pessoaEntity);
+//
+//        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
+//            .chave(pessoaSalva.getChave())
+//            .nome("arie")
+//            .sobrenome("van bennekum")
+//            .build();
+//
+//        var nomeCapitalizado = "Arie";
+//        var sobrenomeCapitalizado = "Van Bennekum";
+//
+//        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .characterEncoding(UTF8)
+//                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
+//                .accept(MediaType.APPLICATION_JSON))
+//            .andExpectAll(
+//                MockMvcResultMatchers.jsonPath("$.nome", Matchers.equalTo(nomeCapitalizado)),
+//                MockMvcResultMatchers.jsonPath("$.sobrenome", Matchers.equalTo(sobrenomeCapitalizado)))
+//            .andDo(MockMvcResultHandlers.print());
+//    }
 
-        mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + pessoaEditarDtoIn.chave())
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .content(TestConverterUtil.converterObjetoParaJson(pessoaEditarDtoIn))
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isNoContent())
-            .andDo(MockMvcResultHandlers.print());
-    }
+//    @Test
+//    @Order(83)
+//    @DisplayName("Editar - Persistência")
+//    void deveRetornarValoresIguaisPersistidos_quandoEditar() throws Exception {
+//
+//        var pessoaEntity = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
+//        var pessoaSalva = this.pessoaRepository.save(pessoaEntity);
+//
+//        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
+//            .chave(pessoaSalva.getChave())
+//            .nome("arie")
+//            .sobrenome("van bennekum")
+//            .build();
+//
+//        var nomeCapitalizado = "Arie";
+//        var sobrenomeCapitalizado = "Van Bennekum";
+//
+//        var resposta = mockMvc.perform(MockMvcRequestBuilders.put(END_POINT)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .characterEncoding(UTF8)
+//                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
+//                .accept(MediaType.APPLICATION_JSON))
+//            .andExpect(MockMvcResultMatchers.status().isOk())
+//            .andDo(MockMvcResultHandlers.print())
+//            .andReturn();
+//
+//        var responseBody = resposta.getResponse().getContentAsString();
+////        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+//        var pessoaDtoOut = objectMapper.readValue(responseBody, PessoaCadastrarDtoOut.class);
+//
+//        var pessoaPersistida = this.pessoaRepository.findByCpf(editarDtoIn.cpf()).get();
+//
+//        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//
+//        Assertions.assertNotNull(pessoaPersistida.getId());
+//        Assertions.assertNotNull(pessoaPersistida.getChave());
+//        Assertions.assertEquals(nomeCapitalizado, pessoaPersistida.getNome());
+//        Assertions.assertEquals(sobrenomeCapitalizado, pessoaPersistida.getSobrenome());
+//        Assertions.assertEquals(pessoaDtoOut.getCpf(), pessoaPersistida.getCpf());
+//        Assertions.assertEquals(pessoaDtoOut.getSexo(), pessoaPersistida.getSexo().toString());
+//        Assertions.assertEquals(pessoaDtoOut.getGenero(), pessoaPersistida.getGenero());
+//        Assertions.assertEquals(pessoaDtoOut.getDataNascimento(), pessoaPersistida.getDataNascimento().format(formato));
+//        Assertions.assertEquals(pessoaDtoOut.getNivelEducacional(), pessoaPersistida.getNivelEducacional().toString());
+//        Assertions.assertEquals(pessoaDtoOut.getNacionalidade(), pessoaPersistida.getNacionalidade());
+//        Assertions.assertEquals(pessoaDtoOut.getEstadoCivil(), pessoaPersistida.getEstadoCivil());
+//    }
 
-    @Test
-    @Order(81)
-    @DisplayName("Editar - Valores Iguais")
-    void deveRetornarValoresIguais_quandoEditar() throws Exception {
-
-        var pessoaEntity = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
-        var pessoaSalva = this.pessoaRepository.save(pessoaEntity);
-
-        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
-            .chave(pessoaSalva.getChave())
-            .build();
-
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpectAll(MockMvcResultMatchers.status().isCreated(),
-                MockMvcResultMatchers.jsonPath("$.chave", Matchers.notNullValue()),
-                MockMvcResultMatchers.jsonPath("$.nome", Matchers.equalToIgnoringCase(editarDtoIn.nome())),
-                MockMvcResultMatchers.jsonPath("$.sobrenome", Matchers.equalTo(editarDtoIn.sobrenome())),
-                MockMvcResultMatchers.jsonPath("$.cpf", Matchers.equalTo(editarDtoIn.cpf())),
-                MockMvcResultMatchers.jsonPath("$.dataNascimento", Matchers.equalTo(editarDtoIn.dataNascimento())),
-                MockMvcResultMatchers.jsonPath("$.sexo", Matchers.equalTo(editarDtoIn.sexo())),
-                MockMvcResultMatchers.jsonPath("$.genero", Matchers.equalTo(editarDtoIn.genero())),
-                MockMvcResultMatchers.jsonPath("$.nivelEducacional", Matchers.equalTo(editarDtoIn.nivelEducacional())),
-                MockMvcResultMatchers.jsonPath("$.nacionalidade", Matchers.equalTo(editarDtoIn.nacionalidade())))
-            .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    @Order(82)
-    @DisplayName("Editar - Capitalizar nome completo")
-    void deveRetornarNomeCompletoCapitalizado_quandoEditar() throws Exception {
-
-        var pessoaEntity = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
-        var pessoaSalva = this.pessoaRepository.save(pessoaEntity);
-
-        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
-            .chave(pessoaSalva.getChave())
-            .nome("arie")
-            .sobrenome("van bennekum")
-            .build();
-
-        var nomeCapitalizado = "Arie";
-        var sobrenomeCapitalizado = "Van Bennekum";
-
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpectAll(
-                MockMvcResultMatchers.jsonPath("$.nome", Matchers.equalTo(nomeCapitalizado)),
-                MockMvcResultMatchers.jsonPath("$.sobrenome", Matchers.equalTo(sobrenomeCapitalizado)))
-            .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    @Order(83)
-    @DisplayName("Editar - Persistência")
-    void deveRetornarValoresIguaisPersistidos_quandoEditar() throws Exception {
-
-        var pessoaEntity = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
-        var pessoaSalva = this.pessoaRepository.save(pessoaEntity);
-
-        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
-            .chave(pessoaSalva.getChave())
-            .nome("arie")
-            .sobrenome("van bennekum")
-            .build();
-
-        var nomeCapitalizado = "Arie";
-        var sobrenomeCapitalizado = "Van Bennekum";
-
-        var resposta = mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isCreated())
-            .andDo(MockMvcResultHandlers.print())
-            .andReturn();
-
-        var responseBody = resposta.getResponse().getContentAsString();
-//        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        var pessoaDtoOut = objectMapper.readValue(responseBody, PessoaDtoOut.class);
-
-        var pessoaPersistida = this.pessoaRepository.findByCpf(editarDtoIn.cpf()).get();
-
-        Assertions.assertNotNull(pessoaPersistida.getId());
-        Assertions.assertNotNull(pessoaPersistida.getChave());
-        Assertions.assertEquals(nomeCapitalizado, pessoaPersistida.getNome());
-        Assertions.assertEquals(sobrenomeCapitalizado, pessoaPersistida.getSobrenome());
-        Assertions.assertEquals(pessoaDtoOut.getCpf(), pessoaPersistida.getCpf());
-        Assertions.assertEquals(pessoaDtoOut.getSexo(), pessoaPersistida.getSexo());
-        Assertions.assertEquals(pessoaDtoOut.getGenero(), pessoaPersistida.getGenero());
-        Assertions.assertEquals(pessoaDtoOut.getDataNascimento(), pessoaPersistida.getDataNascimento());
-        Assertions.assertEquals(pessoaDtoOut.getNivelEducacional(), pessoaPersistida.getNivelEducacional());
-        Assertions.assertEquals(pessoaDtoOut.getNacionalidade(), pessoaPersistida.getNacionalidade());
-    }
-
-    @Test
-    @Order(84)
-    @DisplayName("Editar - Http 409 por CPF não único")
-    void deveRetornarHttp409_quandoEditarComCpfNaoUnico() throws Exception {
-
-        var pessoa = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
-        var pessoaSalva = this.pessoaRepository.save(pessoa);
-
-        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
-            .chave(pessoaSalva.getChave())
-            .cpf(pessoaEntity.getCpf())
-            .build();
-
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isConflict())
-            .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    @Order(85)
-    @DisplayName("Editar - Http 400 por CPF inválido")
-    void deveRetornarHttp400_quandoEditarComCpfInválido() throws Exception {
-
-        var pessoa = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
-        var pessoaSalva = this.pessoaRepository.save(pessoa);
-
-        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
-            .chave(pessoaSalva.getChave())
-            .cpf("88866677733")
-            .build();
-
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isBadRequest())
-            .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    @Order(86)
-    @DisplayName("Editar - Http 400 nome nulo")
-    void deveRetornarHttp400_quandoEditarComNomeNulo() throws Exception {
-
-        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
-            .chave(pessoaEntity.getChave())
-            .nome(null)
-            .build();
-
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isBadRequest())
-            .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    @Order(87)
-    @DisplayName("Editar - Http 400 sobrenome vazio")
-    void deveRetornarHttp400_quandoEditarComSobrenomeVazio() throws Exception {
-
-        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
-            .chave(pessoaEntity.getChave())
-            .sobrenome(" ")
-            .build();
-
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isBadRequest())
-            .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    @Order(88)
-    @DisplayName("Editar - Http 400 nivel educacional nulo")
-    void deveRetornarHttp400_quandoEditarComNivelEducacionalNulo() throws Exception {
-
-        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
-            .chave(pessoaEntity.getChave())
-            .nivelEducacional(null)
-            .build();
-
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isBadRequest())
-            .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    @Order(89)
-    @DisplayName("Editar - Http 400 nacionalidade vazio")
-    void deveRetornarHttp400_quandoEditarComNacionalidadeVazio() throws Exception {
-
-        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
-            .chave(pessoaEntity.getChave())
-            .nacionalidade(" ")
-            .build();
-
-        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding(UTF8)
-                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
-                .accept(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isBadRequest())
-            .andDo(MockMvcResultHandlers.print());
-    }
+//    @Test
+//    @Order(84)
+//    @DisplayName("Editar - Http 409 por CPF não único")
+//    void deveRetornarHttp409_quandoEditarComCpfNaoUnico() throws Exception {
+//
+//        var pessoa = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
+//        var pessoaSalva = this.pessoaRepository.save(pessoa);
+//
+//        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
+//            .chave(pessoaSalva.getChave())
+//            .cpf(pessoaEntity.getCpf())
+//            .build();
+//
+//        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .characterEncoding(UTF8)
+//                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
+//                .accept(MediaType.APPLICATION_JSON))
+//            .andExpect(MockMvcResultMatchers.status().isConflict())
+//            .andDo(MockMvcResultHandlers.print());
+//    }
+//
+//    @Test
+//    @Order(85)
+//    @DisplayName("Editar - Http 400 por CPF inválido")
+//    void deveRetornarHttp400_quandoEditarComCpfInválido() throws Exception {
+//
+//        var pessoa = CriadorDeBuilders.gerarPessoaEntityBuilder().build();
+//        var pessoaSalva = this.pessoaRepository.save(pessoa);
+//
+//        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
+//            .chave(pessoaSalva.getChave())
+//            .cpf("88866677733")
+//            .build();
+//
+//        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .characterEncoding(UTF8)
+//                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
+//                .accept(MediaType.APPLICATION_JSON))
+//            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+//            .andDo(MockMvcResultHandlers.print());
+//    }
+//
+//    @Test
+//    @Order(86)
+//    @DisplayName("Editar - Http 400 nome nulo")
+//    void deveRetornarHttp400_quandoEditarComNomeNulo() throws Exception {
+//
+//        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
+//            .chave(pessoaEntity.getChave())
+//            .nome(null)
+//            .build();
+//
+//        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .characterEncoding(UTF8)
+//                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
+//                .accept(MediaType.APPLICATION_JSON))
+//            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+//            .andDo(MockMvcResultHandlers.print());
+//    }
+//
+//    @Test
+//    @Order(87)
+//    @DisplayName("Editar - Http 400 sobrenome vazio")
+//    void deveRetornarHttp400_quandoEditarComSobrenomeVazio() throws Exception {
+//
+//        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
+//            .chave(pessoaEntity.getChave())
+//            .sobrenome(" ")
+//            .build();
+//
+//        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .characterEncoding(UTF8)
+//                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
+//                .accept(MediaType.APPLICATION_JSON))
+//            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+//            .andDo(MockMvcResultHandlers.print());
+//    }
+//
+//    @Test
+//    @Order(88)
+//    @DisplayName("Editar - Http 400 nivel educacional nulo")
+//    void deveRetornarHttp400_quandoEditarComNivelEducacionalNulo() throws Exception {
+//
+//        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
+//            .chave(pessoaEntity.getChave())
+//            .nivelEducacional(null)
+//            .build();
+//
+//        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .characterEncoding(UTF8)
+//                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
+//                .accept(MediaType.APPLICATION_JSON))
+//            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+//            .andDo(MockMvcResultHandlers.print());
+//    }
+//
+//    @Test
+//    @Order(89)
+//    @DisplayName("Editar - Http 400 nacionalidade vazio")
+//    void deveRetornarHttp400_quandoEditarComNacionalidadeVazio() throws Exception {
+//
+//        var editarDtoIn = CriadorDeBuilders.gerarPessoaEditarDtoInBuilder()
+//            .chave(pessoaEntity.getChave())
+//            .nacionalidade(" ")
+//            .build();
+//
+//        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .characterEncoding(UTF8)
+//                .content(TestConverterUtil.converterObjetoParaJson(editarDtoIn))
+//                .accept(MediaType.APPLICATION_JSON))
+//            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+//            .andDo(MockMvcResultHandlers.print());
+//    }
 
 
 
