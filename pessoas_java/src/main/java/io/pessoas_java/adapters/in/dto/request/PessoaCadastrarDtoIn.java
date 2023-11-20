@@ -48,11 +48,11 @@ public record PessoaCadastrarDtoIn(
         @Valid
         Set<TelefoneCadastrarDtoIn> telefones,
 
+        @NotNull
         @NotEmpty
         @Valid
         Set<EmailCadastrarDtoIn> emails,
 
-        @NotNull
         @Valid
         EnderecoCadastrarDtoIn endereco
 ) { }
