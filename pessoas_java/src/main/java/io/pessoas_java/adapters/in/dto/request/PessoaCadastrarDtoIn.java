@@ -54,6 +54,10 @@ public record PessoaCadastrarDtoIn(
         Set<EmailCadastrarDtoIn> emails,
 
         @Valid
-        EnderecoCadastrarDtoIn endereco
+        EnderecoCadastrarDtoIn endereco,
+
+        @NotNull
+        @Valid
+        UsuarioCadastrarDtoIn usuario
 ) { }
 
