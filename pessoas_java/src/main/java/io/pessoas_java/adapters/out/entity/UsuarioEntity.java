@@ -29,5 +29,9 @@ public final class UsuarioEntity implements Serializable {
 
     @Column(name = "password", nullable = false, length = 50)
     private String password;
+
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "pessoa_id", nullable = false)
+    private PessoaEntity pessoa;
 }
 
