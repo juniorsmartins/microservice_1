@@ -74,5 +74,8 @@ public final class PessoaEntity implements Serializable {
     @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "endereco_id", nullable = true)
     private EnderecoEntity endereco;
+
+    @Transient
+    private UsuarioEntity usuario;
 }
 

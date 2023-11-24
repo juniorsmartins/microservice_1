@@ -34,8 +34,6 @@ public class PessoaCadastrarUseCase implements PessoaCadastrarInputPort {
 
         logger.info("UseCase - iniciado serviço de cadastrar uma pessoa.");
 
-        System.out.println(pessoa.getUsuario());
-
         var pessoaCadastrada = Optional.of(pessoa)
             .map(people -> {
                 this.listaRegrasCadastrar.forEach(regra -> regra.executar(people));
