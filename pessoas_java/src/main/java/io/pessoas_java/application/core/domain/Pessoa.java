@@ -3,10 +3,7 @@ package io.pessoas_java.application.core.domain;
 import io.pessoas_java.application.core.domain.enums.EstadoCivilEnum;
 import io.pessoas_java.application.core.domain.enums.NivelEducacionalEnum;
 import io.pessoas_java.application.core.domain.enums.SexoEnum;
-import io.pessoas_java.application.core.domain.value_object.CadastroPessoaFisica;
-import io.pessoas_java.application.core.domain.value_object.CorreioEletronico;
-import io.pessoas_java.application.core.domain.value_object.Endereco;
-import io.pessoas_java.application.core.domain.value_object.Telefone;
+import io.pessoas_java.application.core.domain.value_object.*;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -41,6 +38,8 @@ public final class Pessoa {
     private Set<CorreioEletronico> emails;
 
     private Endereco endereco;
+
+    private Usuario usuario;
 
     public Long getId() {
         return id;
@@ -152,6 +151,14 @@ public final class Pessoa {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

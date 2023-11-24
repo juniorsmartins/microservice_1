@@ -2,14 +2,9 @@ package io.pessoas_java.application.core.domain.value_object;
 
 import io.pessoas_java.config.exceptions.http_400.TelefoneInvalidoException;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.regex.Pattern;
 
-public final class Telefone implements Serializable {
-
-  @Serial
-  private static final long serialVersionUID = 1L;
+public final class Telefone {
 
   private static final Pattern VALID_PHONE_NUMBER = Pattern.compile("^\\d{10,11}$");
 
