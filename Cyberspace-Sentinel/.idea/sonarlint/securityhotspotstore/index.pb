@@ -1,0 +1,9 @@
+
+7
+pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
+J
+src/main/java/io/Main.java,1/a/1a843c743f77e9d24ad24581b9190cb9da272cb6
+r
+BMicro-Texto/src/main/java/io/MicroTexto/MicroTextoApplication.java,8/d/8d1b8d2bffff8ab3cb1d4c17482c7049491365d8
+C
+Micro-Texto/pom.xml,6/f/6fc9085060e14792cf4522e9f1f9e902b087a05d

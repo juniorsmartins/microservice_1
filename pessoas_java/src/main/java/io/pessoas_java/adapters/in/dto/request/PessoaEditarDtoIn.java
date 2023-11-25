@@ -58,6 +58,10 @@ public record PessoaEditarDtoIn(
 
         @NotNull
         @Valid
-        EnderecoEditarDtoIn endereco
+        EnderecoEditarDtoIn endereco,
+
+        @NotNull
+        @Valid
+        UsuarioEditarDtoIn usuario
 ) { }
 
