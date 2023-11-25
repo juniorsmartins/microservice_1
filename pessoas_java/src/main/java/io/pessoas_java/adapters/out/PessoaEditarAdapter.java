@@ -7,6 +7,7 @@ import io.pessoas_java.adapters.out.mapper.TelefoneEntityMapper;
 import io.pessoas_java.adapters.out.repository.EmailRepository;
 import io.pessoas_java.adapters.out.repository.PessoaRepository;
 import io.pessoas_java.adapters.out.repository.TelefoneRepository;
+import io.pessoas_java.adapters.out.repository.UsuarioRepository;
 import io.pessoas_java.application.core.domain.Pessoa;
 import io.pessoas_java.application.ports.out.PessoaEditarOutputPort;
 import io.pessoas_java.config.exceptions.http_500.FailedToEditException;
@@ -35,6 +36,8 @@ public class PessoaEditarAdapter implements PessoaEditarOutputPort {
 
     private final EmailRepository emailRepository;
 
+    private final UsuarioRepository usuarioRepository;
+
     @Transactional
     @Override
     public Pessoa editar(Pessoa pessoa) {
@@ -51,6 +54,7 @@ public class PessoaEditarAdapter implements PessoaEditarOutputPort {
                 BeanUtils.copyProperties(pessoa.getEndereco(), people.getEndereco());
                 return people;
             })
+//            .map(peopleEntity -> this.atualizarUsuario(pessoa, peopleEntity))
             .map(this.pessoaEntityMapper::toPessoa)
             .orElseThrow(FailedToEditException::new);
 
@@ -82,5 +86,19 @@ public class PessoaEditarAdapter implements PessoaEditarOutputPort {
 
         return people;
     }
+
+//    private PessoaEntity atualizarUsuario(Pessoa pessoa, PessoaEntity pessoaEntity) {
+//
+//        var idPessoa = pessoaEntity.getId();
+//        var usuarioDoBanco = this.usuarioRepository.findByPessoaId(idPessoa)
+//            .orElseThrow(NoSuchElementException::new);
+//
+//        BeanUtils.copyProperties(pessoa.getUsuario(), usuarioDoBanco, "id", "pessoa");
+//        usuarioDoBanco.setPessoa(pessoaEntity);
+//        pessoaEntity.setUsuario(usuarioDoBanco);
+//        usuarioDoBanco = this.usuarioRepository.save(usuarioDoBanco);
+//
+//        return pessoaEntity;
+//    }
 }
 
