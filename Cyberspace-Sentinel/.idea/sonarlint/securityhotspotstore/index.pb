@@ -11,3 +11,13 @@ y
 IMicro-Texto/src/main/java/io/MicroTexto/config/bean/DatabaseH2Config.java,7/b/7b5c8eac54e12e39a055cc4df5d58668b64089af
 z
 JMicro-Texto/src/main/java/io/micro_texto/config/bean/DatabaseH2Config.java,1/b/1b0f92ac14222ac8aaeb3609b53c5f17621ec094
+„
+TMicro-Texto/src/main/java/io/micro_texto/adapters/in/controller/TextoController.java,8/b/8bf10f6d7e1255397015d97cc751123a007d6580
+“
+cMicro-Texto/src/test/java/io/micro_texto/adapters/in/controller/TextoControllerIntegrationTest.java,5/0/50fe124d78ca294da7e3a1f781aae18858bd1a57
+}
+MMicro-Texto/src/main/java/io/micro_texto/adapters/out/entity/TextoEntity.java,0/9/097f37325a51d946db5d24178d8b502b21f42774
+€
+PMicro-Texto/src/main/java/io/micro_texto/adapters/out/entity/NoticiasEntity.java,5/c/5c833eeb309e019eb56a182b6118c9e9e3fccb34
+
+OMicro-Texto/src/main/java/io/micro_texto/adapters/out/entity/NoticiaEntity.java,9/2/928428a3463e2ebb3ed8b989692503c0bccd8f10
