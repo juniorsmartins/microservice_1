@@ -53,3 +53,7 @@ PMicro-Noticia/src/main/java/io/micro_texto/config/bean/NoticiaUseCaseConfig.jav
 QMicro-Noticia/src/main/java/io/micro_texto/adapters/out/NoticiaSalvarAdapter.java,9/5/9542f0e16711932253505fac3fafe4360af287ec
 ê
 `Micro-Noticia/src/main/java/io/micro_texto/application/ports/output/NoticiaSalvarOutputPort.java,d/5/d5d3a2368fc6d57f558bdf9baa0f194622a91295
+á
+WMicro-Noticia/src/main/java/io/micro_texto/adapters/out/mapper/NoticiaEntityMapper.java,4/8/48f895e82642f1b2bfb23d7ce3ec36c32e2f794d
+z
+JMicro-Noticia/src/main/java/io/micro_texto/config/bean/TimeZoneConfig.java,8/6/865fe71afc72185f25250ce40d6b7de805b737fc

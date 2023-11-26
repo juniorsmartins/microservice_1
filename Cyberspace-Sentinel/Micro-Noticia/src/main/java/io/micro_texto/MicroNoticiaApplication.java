@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MicroTextoApplication {
+public class MicroNoticiaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MicroTextoApplication.class, args);
+		SpringApplication.run(MicroNoticiaApplication.class, args);
 	}
 
 }
