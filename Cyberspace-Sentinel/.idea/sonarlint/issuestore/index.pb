@@ -57,3 +57,5 @@ QMicro-Noticia/src/main/java/io/micro_texto/adapters/out/NoticiaSalvarAdapter.ja
 WMicro-Noticia/src/main/java/io/micro_texto/adapters/out/mapper/NoticiaEntityMapper.java,4/8/48f895e82642f1b2bfb23d7ce3ec36c32e2f794d
 z
 JMicro-Noticia/src/main/java/io/micro_texto/config/bean/TimeZoneConfig.java,8/6/865fe71afc72185f25250ce40d6b7de805b737fc
+x
+HMicro-Noticia/src/main/java/io/micro_texto/config/bean/LocaleConfig.java,7/4/745dc85833c3f7d807fcd72c64b2eed1171b44e4
