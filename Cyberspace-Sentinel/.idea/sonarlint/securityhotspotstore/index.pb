@@ -43,3 +43,13 @@ SMicro-Noticia/src/main/java/io/micro_texto/adapters/in/mapper/NoticiaDtoMapper.
 [Micro-Noticia/src/main/java/io/micro_texto/adapters/in/dto/response/NoticiaCriarDtoOut.java,a/c/acabec2f2e231fff8de7c6585a2cf8ffb06405ff
 â
 YMicro-Noticia/src/main/java/io/micro_texto/adapters/in/dto/request/NoticiaCriarDtoIn.java,7/e/7e287b68a32e7dd88953884bb6d7203ca342abba
+å
+\Micro-Noticia/src/main/java/io/micro_texto/application/core/usecase/NoticiaCriarUseCase.java,4/3/4319e563042c6e05e50d78f95f700a1a9509b41f
+è
+_Micro-Noticia/src/main/java/io/micro_texto/application/ports/output/NoticiaCriarOutputPort.java,0/6/0622e07a004f71bf5dc30e12f019a142b9676038
+Ä
+PMicro-Noticia/src/main/java/io/micro_texto/config/bean/NoticiaUseCaseConfig.java,3/9/39c23e16ef8788f14aab28fb6734f89443d8dbd0
+Å
+QMicro-Noticia/src/main/java/io/micro_texto/adapters/out/NoticiaSalvarAdapter.java,9/5/9542f0e16711932253505fac3fafe4360af287ec
+ê
+`Micro-Noticia/src/main/java/io/micro_texto/application/ports/output/NoticiaSalvarOutputPort.java,d/5/d5d3a2368fc6d57f558bdf9baa0f194622a91295
