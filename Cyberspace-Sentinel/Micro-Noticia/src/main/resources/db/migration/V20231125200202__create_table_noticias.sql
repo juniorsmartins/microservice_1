@@ -7,6 +7,8 @@ create table if not exists noticias(
     corpo TEXT NOT NULL,
     nome_autor VARCHAR(50),
     fonte VARCHAR(250),
+    data_hora_criacao TIMESTAMP NOT NULL,
+    data_hora_edicao TIMESTAMP,
     CONSTRAINT pk_textos PRIMARY KEY(id)
 );
 

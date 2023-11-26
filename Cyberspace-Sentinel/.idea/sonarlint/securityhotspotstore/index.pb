@@ -61,3 +61,9 @@ x
 HMicro-Noticia/src/main/java/io/micro_texto/config/bean/LocaleConfig.java,7/4/745dc85833c3f7d807fcd72c64b2eed1171b44e4
 „
 TMicro-Noticia/src/main/java/io/micro_texto/config/bean/ContentNegotiationConfig.java,f/1/f1ca0b325b696c99097473dee510f12f043d2677
+
+OMicro-Noticia/src/main/java/io/micro_texto/adapters/out/auditing/Auditoria.java,0/1/01e81a31ee8e3ffd5430f751a333f0a91144cc8c
+Œ
+\Micro-Noticia/src/main/java/io/micro_texto/adapters/out/auditing/AbstractAuditingEntity.java,2/a/2a01382bfd1c9be419b3928c8878d1dcdf69c1f9
+w
+GMicro-Noticia/src/main/java/io/micro_texto/MicroNoticiaApplication.java,d/d/dde48063281f4b724c5e4b41926826c6da93a5b1

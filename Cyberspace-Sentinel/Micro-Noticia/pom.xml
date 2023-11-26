@@ -20,6 +20,7 @@
 		<flyway.version>9.22.3</flyway.version>
 		<javafaker.version>1.0.2</javafaker.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
+		<hibernate.envers.version>6.4.0.Final</hibernate.envers.version>
 	</properties>
 
 	<dependencies>
@@ -43,6 +44,8 @@
 			<scope>runtime</scope>
 		</dependency>
 
+
+		<!-- Migration -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
@@ -78,10 +81,21 @@
 			<version>${mapstruct.version}</version>
 		</dependency>
 
+
+		<!-- Content Negotiation -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
+
+
+		<!-- Auditoria -->
+<!--		<dependency>-->
+<!--			<groupId>org.hibernate</groupId>-->
+<!--			<artifactId>hibernate-core</artifactId>-->
+<!--			<version>${hibernate.envers.version}</version>-->
+<!--			<type>pom</type>-->
+<!--		</dependency>-->
 
 
 		<!-- Testes -->
@@ -96,6 +110,8 @@
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 
+
+		<!-- Gerar Dados para Testes -->
 		<dependency>
 			<groupId>com.github.javafaker</groupId>
 			<artifactId>javafaker</artifactId>

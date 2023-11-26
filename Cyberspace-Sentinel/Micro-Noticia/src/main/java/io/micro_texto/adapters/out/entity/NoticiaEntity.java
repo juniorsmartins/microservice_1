@@ -1,5 +1,6 @@
 package io.micro_texto.adapters.out.entity;
 
+import io.micro_texto.adapters.out.auditing.AbstractAuditingEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,8 +15,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"id"})
-public final class NoticiaEntity implements Serializable {
+@EqualsAndHashCode(of = {"id"}, callSuper = false)
+public final class NoticiaEntity extends AbstractAuditingEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
