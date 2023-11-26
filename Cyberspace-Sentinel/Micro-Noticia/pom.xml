@@ -10,9 +10,9 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>Micro-Texto</artifactId>
+	<artifactId>Micro-Noticia</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Micro-Texto</name>
+	<name>Micro-Noticia</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
