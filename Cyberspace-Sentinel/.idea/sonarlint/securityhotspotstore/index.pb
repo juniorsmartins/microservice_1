@@ -21,3 +21,15 @@ MMicro-Texto/src/main/java/io/micro_texto/adapters/out/entity/TextoEntity.java,
 PMicro-Texto/src/main/java/io/micro_texto/adapters/out/entity/NoticiasEntity.java,5/c/5c833eeb309e019eb56a182b6118c9e9e3fccb34
 
 OMicro-Texto/src/main/java/io/micro_texto/adapters/out/entity/NoticiaEntity.java,9/2/928428a3463e2ebb3ed8b989692503c0bccd8f10
+–
+fMicro-Texto/src/test/java/io/micro_texto/adapters/in/controller/NoticiasControllerIntegrationTest.java,6/6/666ca2cd58076cfe883498438971f0df5cc6e626
+‡
+WMicro-Texto/src/main/java/io/micro_texto/adapters/in/controller/NoticiasController.java,3/3/33b49f07bd063ee15cced5153b3b90e74bc5578b
+‡
+WMicro-Texto/src/main/java/io/micro_texto/adapters/in/dto/request/NoticiaCriarDtoIn.java,2/6/267a2602a57a2983a0f8bd079d0221101d67bcdc
+‰
+YMicro-Texto/src/main/java/io/micro_texto/adapters/in/dto/response/NoticiaCriarDtoOut.java,f/4/f4c90aa3bfb8f1de4aa12b34f4f8a73e0d4894bb
+u
+EMicro-Texto/src/test/java/io/micro_texto/utils/CriadorDeBuilders.java,9/f/9f59f2144123c63761be24c5ab3e1488b635d2d5
+‡
+WMicro-Texto/src/main/java/io/micro_texto/adapters/out/repository/NoticiaRepository.java,7/7/77a4131a8024bdb3a77be5439e744552eb15e833
