@@ -4,18 +4,19 @@
 
 ## Tecnologias:
 
-1. Java (21 LTS);
-2. Spring Boot (3.1.5);
+### Micro-Texto
+> - [x] Java (21 LTS);
+> - [x] Spring Boot (3.2.0);
 3. Spring Security e JWT;
-4. Flyway;
-5. Spring Data JPA;
+> - [x] Flyway;
+> - [x] Spring Data JPA;
 6. Spring Doc (2.2.0);
 7. Spring Hateoas;
 8. Bean Validation;
 9. Mapstruct (1.5.5.Final);
 10. Jackson Dataform;
-11. Lombok;
-12. DevTools;
+> - [x] Lombok;
+> - [x] DevTools;
 13. PostgreSQL;
 14. Mockito (5.6.0);
 15. Testcontainers (1.19.1);
