@@ -7,3 +7,7 @@ r
 BMicro-Texto/src/main/java/io/MicroTexto/MicroTextoApplication.java,8/d/8d1b8d2bffff8ab3cb1d4c17482c7049491365d8
 C
 Micro-Texto/pom.xml,6/f/6fc9085060e14792cf4522e9f1f9e902b087a05d
+y
+IMicro-Texto/src/main/java/io/MicroTexto/config/bean/DatabaseH2Config.java,7/b/7b5c8eac54e12e39a055cc4df5d58668b64089af
+z
+JMicro-Texto/src/main/java/io/micro_texto/config/bean/DatabaseH2Config.java,1/b/1b0f92ac14222ac8aaeb3609b53c5f17621ec094
