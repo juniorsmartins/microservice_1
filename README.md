@@ -1,13 +1,11 @@
 # Microservice_1
 
 
-
-## Tecnologias:
-
 ### Micro-Texto
 > - [x] Java (21 LTS);
 > - [x] Spring Boot (3.2.0);
 3. Spring Security e JWT;
+> - [x] Spring Profiles;
 > - [x] Flyway;
 > - [x] Spring Data JPA;
 6. Spring Doc (2.2.0);
@@ -22,6 +20,7 @@
 15. Testcontainers (1.19.1);
 16. Rest-assured (5.3.2);
 17. JavaFaker (1.0.2).
+
 
 # CHECKLIST
 
