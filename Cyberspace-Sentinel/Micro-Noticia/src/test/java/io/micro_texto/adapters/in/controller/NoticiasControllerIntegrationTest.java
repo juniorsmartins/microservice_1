@@ -13,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(scripts = "/sql/noticias/noticias-insert.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(scripts = "/sql/noticias/noticias-delete.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
@@ -33,23 +35,24 @@ class NoticiasControllerIntegrationTest {
 
         var dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder().build();
 
-        var resposta = this.webTestClient.post()
+        this.webTestClient.post()
             .uri(END_POINT)
             .contentType(MediaType.APPLICATION_JSON)
             .bodyValue(dtoIn)
             .exchange()
             .expectStatus().isCreated()
             .expectBody(NoticiaCriarDtoOut.class)
-            .returnResult().getResponseBody();
-
-        org.assertj.core.api.Assertions.assertThat(resposta).isNotNull();
-        org.assertj.core.api.Assertions.assertThat(dtoIn.chapeu()).isEqualTo(resposta.chapeu());
-        org.assertj.core.api.Assertions.assertThat(dtoIn.titulo()).isEqualTo(resposta.titulo());
-        org.assertj.core.api.Assertions.assertThat(dtoIn.linhaFina()).isEqualTo(resposta.linhaFina());
-        org.assertj.core.api.Assertions.assertThat(dtoIn.lide()).isEqualTo(resposta.lide());
-        org.assertj.core.api.Assertions.assertThat(dtoIn.corpo()).isEqualTo(resposta.corpo());
-        org.assertj.core.api.Assertions.assertThat(dtoIn.nomeAutor()).isEqualTo(resposta.nomeAutor());
-        org.assertj.core.api.Assertions.assertThat(dtoIn.fonte()).isEqualTo(resposta.fonte());
+            .consumeWith(response -> {
+                assertThat(response.getResponseBody()).isNotNull();
+                assertThat(response.getResponseBody().chapeu()).isEqualTo(dtoIn.chapeu());
+                assertThat(response.getResponseBody().titulo()).isEqualTo(dtoIn.titulo());
+                assertThat(response.getResponseBody().linhaFina()).isEqualTo(dtoIn.linhaFina());
+                assertThat(response.getResponseBody().lide()).isEqualTo(dtoIn.lide());
+                assertThat(response.getResponseBody().corpo()).isEqualTo(dtoIn.corpo());
+                assertThat(response.getResponseBody().nomeAutor()).isEqualTo(dtoIn.nomeAutor());
+                assertThat(response.getResponseBody().fonte()).isEqualTo(dtoIn.fonte());
+                assertThat(response.getResponseBody().dataHoraCriacao()).isNotNull();
+            });
     }
 
     @Test
@@ -69,14 +72,15 @@ class NoticiasControllerIntegrationTest {
 
         var noticiaDoBanco = this.noticiaRepository.findById(resposta.id()).get();
 
-        org.assertj.core.api.Assertions.assertThat(noticiaDoBanco).isNotNull();
-        org.assertj.core.api.Assertions.assertThat(dtoIn.chapeu()).isEqualTo(noticiaDoBanco.getChapeu());
-        org.assertj.core.api.Assertions.assertThat(dtoIn.titulo()).isEqualTo(noticiaDoBanco.getTitulo());
-        org.assertj.core.api.Assertions.assertThat(dtoIn.linhaFina()).isEqualTo(noticiaDoBanco.getLinhaFina());
-        org.assertj.core.api.Assertions.assertThat(dtoIn.lide()).isEqualTo(noticiaDoBanco.getLide());
-        org.assertj.core.api.Assertions.assertThat(dtoIn.corpo()).isEqualTo(noticiaDoBanco.getCorpo());
-        org.assertj.core.api.Assertions.assertThat(dtoIn.nomeAutor()).isEqualTo(noticiaDoBanco.getNomeAutor());
-        org.assertj.core.api.Assertions.assertThat(dtoIn.fonte()).isEqualTo(noticiaDoBanco.getFonte());
+        assertThat(noticiaDoBanco).isNotNull();
+        assertThat(dtoIn.chapeu()).isEqualTo(noticiaDoBanco.getChapeu());
+        assertThat(dtoIn.titulo()).isEqualTo(noticiaDoBanco.getTitulo());
+        assertThat(dtoIn.linhaFina()).isEqualTo(noticiaDoBanco.getLinhaFina());
+        assertThat(dtoIn.lide()).isEqualTo(noticiaDoBanco.getLide());
+        assertThat(dtoIn.corpo()).isEqualTo(noticiaDoBanco.getCorpo());
+        assertThat(dtoIn.nomeAutor()).isEqualTo(noticiaDoBanco.getNomeAutor());
+        assertThat(dtoIn.fonte()).isEqualTo(noticiaDoBanco.getFonte());
+        assertThat(noticiaDoBanco.getDataHoraCriacao()).isNotNull();
     }
 }
 
