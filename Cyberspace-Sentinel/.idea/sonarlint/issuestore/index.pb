@@ -29,3 +29,17 @@ YMicro-Noticia/src/main/java/io/micro_texto/adapters/in/controller/NoticiasContr
 hMicro-Noticia/src/test/java/io/micro_texto/adapters/in/controller/NoticiasControllerIntegrationTest.java,1/0/1058878c4c7860349852f28a2a195e873dedb217
 E
 Micro-Noticia/pom.xml,9/0/90a0cf00182fd3635e21e8f65759ee87b1be5b96
+ç
+]Micro-Noticia/src/main/java/io/micro_texto/application/ports/input/NoticiaCriarInputPort.java,e/0/e0318de516bf3e6ea3c2a68c362720ddb5c489e9
+á
+WMicro-Noticia/src/main/java/io/micro_texto/application/core/domain/NoticiaBusiness.java,c/5/c5c9614824423196f377623f353d78edf8cfc5fa
+Å
+QMicro-Noticia/src/main/java/io/micro_texto/adapters/out/entity/NoticiaEntity.java,0/4/0400e71466032dceeb4af1066fa7fafcffe3bc45
+Ñ
+TMicro-Noticia/src/main/java/io/micro_texto/adapters/in/mapper/NoticiaDtosMapper.java,7/c/7c88aa481d277a991332b38d9451d58449be12d8
+É
+SMicro-Noticia/src/main/java/io/micro_texto/adapters/in/mapper/NoticiaDtoMapper.java,e/5/e506583536754037c4d58a64e8f4c6ddf39316ce
+ã
+[Micro-Noticia/src/main/java/io/micro_texto/adapters/in/dto/response/NoticiaCriarDtoOut.java,a/c/acabec2f2e231fff8de7c6585a2cf8ffb06405ff
+â
+YMicro-Noticia/src/main/java/io/micro_texto/adapters/in/dto/request/NoticiaCriarDtoIn.java,7/e/7e287b68a32e7dd88953884bb6d7203ca342abba
