@@ -59,3 +59,5 @@ z
 JMicro-Noticia/src/main/java/io/micro_texto/config/bean/TimeZoneConfig.java,8/6/865fe71afc72185f25250ce40d6b7de805b737fc
 x
 HMicro-Noticia/src/main/java/io/micro_texto/config/bean/LocaleConfig.java,7/4/745dc85833c3f7d807fcd72c64b2eed1171b44e4
+„
+TMicro-Noticia/src/main/java/io/micro_texto/config/bean/ContentNegotiationConfig.java,f/1/f1ca0b325b696c99097473dee510f12f043d2677
