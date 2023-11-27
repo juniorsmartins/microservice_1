@@ -1,5 +1,7 @@
-create table if not exists noticias(
-    id SERIAL NOT NULL,
+create table if not exists rev_noticias_aud(
+    id BIGINT NOT NULL,
+    rev BIGINT NOT NULL,
+    revtype SMALLINT NOT NULL,
     chapeu VARCHAR(20) NOT NULL,
     titulo VARCHAR(100) NOT NULL,
     linha_fina VARCHAR(150) NOT NULL,
@@ -10,6 +12,7 @@ create table if not exists noticias(
     data_hora_criacao TIMESTAMP NOT NULL,
     data_hora_edicao TIMESTAMP,
     version INTEGER,
-    CONSTRAINT pk_textos PRIMARY KEY(id)
+    CONSTRAINT pk_noticias PRIMARY KEY(id, rev),
+    CONSTRAINT fk_noticias_revinfo FOREIGN KEY (rev) REFERENCES revinfo(id)
 );
 

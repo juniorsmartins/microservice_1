@@ -1,5 +1,6 @@
 package io.micro_texto.application.core.domain;
 
+import java.time.Instant;
 import java.util.Objects;
 
 public final class NoticiaBusiness {
@@ -19,6 +20,10 @@ public final class NoticiaBusiness {
     private String nomeAutor;
 
     private String fonte;
+
+    private Instant dataHoraCriacao;
+
+    private Instant dataHoraEdicao;
 
     public Long getId() {
         return id;
@@ -82,6 +87,22 @@ public final class NoticiaBusiness {
 
     public void setFonte(String fonte) {
         this.fonte = fonte;
+    }
+
+    public Instant getDataHoraCriacao() {
+        return dataHoraCriacao;
+    }
+
+    public void setDataHoraCriacao(Instant dataHoraCriacao) {
+        this.dataHoraCriacao = dataHoraCriacao;
+    }
+
+    public Instant getDataHoraEdicao() {
+        return dataHoraEdicao;
+    }
+
+    public void setDataHoraEdicao(Instant dataHoraEdicao) {
+        this.dataHoraEdicao = dataHoraEdicao;
     }
 
     @Override

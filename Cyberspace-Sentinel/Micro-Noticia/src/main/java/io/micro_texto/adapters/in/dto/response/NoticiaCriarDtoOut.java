@@ -2,23 +2,29 @@ package io.micro_texto.adapters.in.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.time.Instant;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record NoticiaCriarDtoOut(
 
-    Long id,
+        Long id,
 
-    String chapeu,
+        String chapeu,
 
-    String titulo,
+        String titulo,
 
-    String linhaFina,
+        String linhaFina,
 
-    String lide,
+        String lide,
 
-    String corpo,
+        String corpo,
 
-    String nomeAutor,
+        String nomeAutor,
 
-    String fonte
+        String fonte,
+
+        Instant dataHoraCriacao,
+
+        Instant dataHoraEdicao
 ) { }
 

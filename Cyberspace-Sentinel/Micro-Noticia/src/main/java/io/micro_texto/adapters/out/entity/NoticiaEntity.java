@@ -1,12 +1,14 @@
 package io.micro_texto.adapters.out.entity;
 
-import io.micro_texto.adapters.out.auditing.AbstractAuditingEntity;
+import io.micro_texto.adapters.out.audit.AbstractAuditingEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import java.io.Serial;
 import java.io.Serializable;
 
+@Audited
 @Entity
 @Table(name = "noticias")
 @Builder
@@ -20,6 +22,9 @@ public final class NoticiaEntity extends AbstractAuditingEntity implements Seria
 
     @Serial
     private static final long serialVersionUID = 1L;
+
+    @Version
+    private Long version;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
