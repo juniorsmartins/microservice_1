@@ -19,8 +19,12 @@ public record NoticiaCriarDtoIn(
     @Length(max = 150)
     String linhaFina,
 
+    @NotBlank
+    @Length(max = 500)
     String lide,
 
+    @NotBlank
+    @Length(max = 5000)
     String corpo,
 
     @Length(max = 50)
