@@ -6,7 +6,6 @@ import lombok.*;
 import org.hibernate.envers.DefaultRevisionEntity;
 import org.hibernate.envers.RevisionEntity;
 
-
 @Entity
 @Table(name = "revinfo")
 @Getter
@@ -17,6 +16,7 @@ import org.hibernate.envers.RevisionEntity;
 public class CustomRevisionEntity extends DefaultRevisionEntity {
 
 //    private String ipAddress;
+
     private String usuario;
 }
 
