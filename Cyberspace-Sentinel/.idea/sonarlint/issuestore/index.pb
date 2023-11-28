@@ -57,3 +57,11 @@ cMicro-Noticia/src/main/java/io/micro_texto/application/ports/output/NoticiaRevi
 TMicro-Noticia/src/main/java/io/micro_texto/adapters/out/NoticiaRevisionsAdapter.java,e/a/ea1b9bd327ed8a329628fd18142be27da9b93f56
 ‡
 WMicro-Noticia/src/main/java/io/micro_texto/adapters/out/audit/CustomRevisionEntity.java,3/4/3430b91015b8400a945fec139976a2124cd13395
+™
+iMicro-Noticia/src/main/java/io/micro_texto/config/exception/http_400/RequisicaoMalFormuladaException.java,2/7/27b6d22677bfc2c9f3f7e7ff031711e3d54cbbd2
+™
+iMicro-Noticia/src/main/java/io/micro_texto/config/exception/http_400/DadoComTamanhoInvalidoException.java,5/a/5acef7c87d5f4710398395e61a85ba2af58e89e4
+”
+dMicro-Noticia/src/main/java/io/micro_texto/config/exception/http_400/DadoComCampoVazioException.java,6/a/6a114046c2789c19fcecdeecb374893b5f6c7b1d
+“
+cMicro-Noticia/src/main/java/io/micro_texto/config/exception/http_400/DadoComCampoNuloException.java,3/d/3d507f7833def1b693f82a37d5a587631ba0c7ec

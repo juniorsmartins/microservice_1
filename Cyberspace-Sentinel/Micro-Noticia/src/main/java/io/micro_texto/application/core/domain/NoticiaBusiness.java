@@ -1,7 +1,12 @@
 package io.micro_texto.application.core.domain;
 
+import io.micro_texto.config.exception.http_400.DadoComCampoNuloException;
+import io.micro_texto.config.exception.http_400.DadoComTamanhoInvalidoException;
+import org.springframework.util.ObjectUtils;
+
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Optional;
 
 public final class NoticiaBusiness {
 
@@ -38,7 +43,18 @@ public final class NoticiaBusiness {
     }
 
     public void setChapeu(String chapeu) {
-        this.chapeu = chapeu;
+
+        Optional.ofNullable(chapeu)
+            .ifPresentOrElse(capelo -> {
+                    if (capelo.length() > 20) {
+                        throw new DadoComTamanhoInvalidoException(String
+                            .format("Chapéu possui limite máximo de 20 caracteres, mas você enviou %s.",
+                                capelo.length()));
+                    }
+                    this.chapeu = capelo;
+                },
+                () -> {throw new DadoComCampoNuloException("O campo chapéu não pode ser nulo.");}
+            );
     }
 
     public String getTitulo() {
@@ -46,7 +62,18 @@ public final class NoticiaBusiness {
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+
+        Optional.ofNullable(titulo)
+            .ifPresentOrElse(title -> {
+                    if (title.length() > 100) {
+                        throw new DadoComTamanhoInvalidoException(String
+                            .format("Título possui limite máximo de 100 caracteres, mas você enviou %s.",
+                                title.length()));
+                    }
+                    this.titulo = title;
+                },
+                () -> {throw new DadoComCampoNuloException("O campo título não pode ser nulo.");}
+            );
     }
 
     public String getLinhaFina() {
@@ -54,7 +81,18 @@ public final class NoticiaBusiness {
     }
 
     public void setLinhaFina(String linhaFina) {
-        this.linhaFina = linhaFina;
+
+        Optional.ofNullable(linhaFina)
+            .ifPresentOrElse(linha -> {
+                    if (linha.length() > 150) {
+                        throw new DadoComTamanhoInvalidoException(String
+                            .format("Linha Fina possui limite máximo de 150 caracteres, mas você enviou %s.",
+                                linha.length()));
+                    }
+                    this.linhaFina = linha;
+                },
+                () -> {throw new DadoComCampoNuloException("O campo linhaFina não pode ser nulo.");}
+            );
     }
 
     public String getLide() {
@@ -78,7 +116,18 @@ public final class NoticiaBusiness {
     }
 
     public void setNomeAutor(String nomeAutor) {
-        this.nomeAutor = nomeAutor;
+
+        Optional.ofNullable(nomeAutor)
+            .ifPresentOrElse(autor -> {
+                    if (autor.length() > 50) {
+                        throw new DadoComTamanhoInvalidoException(String
+                            .format("Nome do Autor possui limite máximo de 50 caracteres, mas você enviou %s.",
+                                autor.length()));
+                    }
+                    this.nomeAutor = autor;
+                },
+                () -> {throw new DadoComCampoNuloException("O campo nomeAutor não pode ser nulo.");}
+            );
     }
 
     public String getFonte() {
@@ -86,6 +135,12 @@ public final class NoticiaBusiness {
     }
 
     public void setFonte(String fonte) {
+
+        if (!ObjectUtils.isEmpty(fonte) && fonte.length() > 250) {
+            throw new DadoComTamanhoInvalidoException(String
+                .format("Fonte possui limite máximo de 250 caracteres, mas você enviou %s.",
+                    fonte.length()));
+        }
         this.fonte = fonte;
     }
 
