@@ -117,17 +117,12 @@ public final class NoticiaBusiness {
 
     public void setNomeAutor(String nomeAutor) {
 
-        Optional.ofNullable(nomeAutor)
-            .ifPresentOrElse(autor -> {
-                    if (autor.length() > 50) {
-                        throw new DadoComTamanhoInvalidoException(String
-                            .format("Nome do Autor possui limite máximo de 50 caracteres, mas você enviou %s.",
-                                autor.length()));
-                    }
-                    this.nomeAutor = autor;
-                },
-                () -> {throw new DadoComCampoNuloException("O campo nomeAutor não pode ser nulo.");}
-            );
+        if (!ObjectUtils.isEmpty(nomeAutor) && nomeAutor.length() > 50) {
+            throw new DadoComTamanhoInvalidoException(String
+                .format("Nome do Autor possui limite máximo de 50 caracteres, mas você enviou %s.",
+                    nomeAutor.length()));
+        }
+        this.nomeAutor = nomeAutor;
     }
 
     public String getFonte() {
