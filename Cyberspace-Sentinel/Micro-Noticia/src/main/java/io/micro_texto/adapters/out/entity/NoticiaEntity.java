@@ -44,7 +44,7 @@ public final class NoticiaEntity extends AbstractAuditingEntity implements Seria
     private String lide;
 
     @Lob
-    @Column(name = "corpo", nullable = false)
+    @Column(name = "corpo", nullable = false, length = 5000)
     private String corpo;
 
     @Column(name = "nome_autor", length = 50)

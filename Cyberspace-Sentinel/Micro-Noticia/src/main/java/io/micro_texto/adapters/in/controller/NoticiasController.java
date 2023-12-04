@@ -5,6 +5,7 @@ import io.micro_texto.adapters.in.dto.response.NoticiaCriarDtoOut;
 import io.micro_texto.adapters.in.mapper.NoticiaDtoMapper;
 import io.micro_texto.application.ports.input.NoticiaCriarInputPort;
 import io.micro_texto.application.ports.input.NoticiaRevisionsInputPort;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class NoticiasController {
         consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
-    public ResponseEntity<NoticiaCriarDtoOut> criar(@RequestBody NoticiaCriarDtoIn dtoIn) {
+    public ResponseEntity<NoticiaCriarDtoOut> criar(@RequestBody @Valid NoticiaCriarDtoIn dtoIn) {
         log.info("Controller - recebida requisição para Criar Notícia.");
 
         var resposta = Optional.of(dtoIn)

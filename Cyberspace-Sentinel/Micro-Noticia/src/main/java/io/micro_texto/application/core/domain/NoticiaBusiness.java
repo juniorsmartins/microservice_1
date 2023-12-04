@@ -100,7 +100,18 @@ public final class NoticiaBusiness {
     }
 
     public void setLide(String lide) {
-        this.lide = lide;
+
+        Optional.ofNullable(lide)
+            .ifPresentOrElse(lead -> {
+                    if (lead.length() > 500) {
+                        throw new DadoComTamanhoInvalidoException(String
+                            .format("Lide possui limite máximo de 500 caracteres, mas você enviou %s.",
+                                lead.length()));
+                    }
+                    this.lide = lead;
+                },
+                () -> {throw new DadoComCampoNuloException("O campo lide não pode ser nulo.");}
+            );
     }
 
     public String getCorpo() {
@@ -108,7 +119,18 @@ public final class NoticiaBusiness {
     }
 
     public void setCorpo(String corpo) {
-        this.corpo = corpo;
+
+        Optional.ofNullable(corpo)
+            .ifPresentOrElse(texto -> {
+                    if (texto.length() > 5000) {
+                        throw new DadoComTamanhoInvalidoException(String
+                            .format("Corpo possui limite máximo de 5000 caracteres, mas você enviou %s.",
+                                texto.length()));
+                    }
+                    this.corpo = texto;
+                },
+                () -> {throw new DadoComCampoNuloException("O campo texto não pode ser nulo.");}
+            );
     }
 
     public String getNomeAutor() {
@@ -117,17 +139,12 @@ public final class NoticiaBusiness {
 
     public void setNomeAutor(String nomeAutor) {
 
-        Optional.ofNullable(nomeAutor)
-            .ifPresentOrElse(autor -> {
-                    if (autor.length() > 50) {
-                        throw new DadoComTamanhoInvalidoException(String
-                            .format("Nome do Autor possui limite máximo de 50 caracteres, mas você enviou %s.",
-                                autor.length()));
-                    }
-                    this.nomeAutor = autor;
-                },
-                () -> {throw new DadoComCampoNuloException("O campo nomeAutor não pode ser nulo.");}
-            );
+        if (!ObjectUtils.isEmpty(nomeAutor) && nomeAutor.length() > 50) {
+            throw new DadoComTamanhoInvalidoException(String
+                .format("Nome do Autor possui limite máximo de 50 caracteres, mas você enviou %s.",
+                    nomeAutor.length()));
+        }
+        this.nomeAutor = nomeAutor;
     }
 
     public String getFonte() {
