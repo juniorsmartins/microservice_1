@@ -63,3 +63,9 @@ iMicro-Noticia/src/main/java/io/micro_texto/config/exception/http_400/Requisicao
 iMicro-Noticia/src/main/java/io/micro_texto/config/exception/http_400/DadoComTamanhoInvalidoException.java,5/a/5acef7c87d5f4710398395e61a85ba2af58e89e4
 “
 cMicro-Noticia/src/main/java/io/micro_texto/config/exception/http_400/DadoComCampoNuloException.java,3/d/3d507f7833def1b693f82a37d5a587631ba0c7ec
+‡
+WMicro-Noticia/src/main/java/io/micro_texto/config/exception/GlobalExceptionHandler.java,8/a/8a0251f0a4355276032dffab905d963263680176
+y
+IMicro-Noticia/src/main/java/io/micro_texto/config/exception/ApiError.java,d/0/d0d6e127c64abc27b003d9f5ab3d8120855ba9ed
+
+OMicro-Noticia/src/main/java/io/micro_texto/config/exception/TipoDeErroEnum.java,9/2/9256d45705649e2ecc01d8526a506607d8d0416a
