@@ -1,18 +1,23 @@
 package io.micro_texto.config.exception;
 
-import io.micro_texto.config.exception.http_400.RequisicaoMalFormuladaException;
+import io.micro_texto.config.exception.http_400.DadoInvalidoException;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.Instant;
+import java.util.List;
 
 @RestControllerAdvice
 public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
@@ -23,11 +28,10 @@ public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler
         this.mensagemInternacionalizada = mensagemInternacionalizada;
     }
 
-    @ExceptionHandler(value = RequisicaoMalFormuladaException.class)
-    public ResponseEntity<Object> tratarRequisicaoMalFormulada(RequisicaoMalFormuladaException ex,
-                                                               WebRequest webRequest) {
+    @ExceptionHandler(value = DadoInvalidoException.class)
+    public ResponseEntity<Object> tratarDadoInvalido(DadoInvalidoException ex, WebRequest webRequest) {
 
-        var tipoErroEnum = TipoDeErroEnum.REQUISICAO_MAL_FORMULADA;
+        var tipoErroEnum = TipoDeErroEnum.DADOS_INVALIDOS;
         var httpStatus = HttpStatus.BAD_REQUEST;
         var detail = ex.getMessage();
 
@@ -82,19 +86,19 @@ public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler
 
 
 //     BadRequestException
-//
+
 //     NotFoundException
-//
+
 //     Exception
-//
+
 //     NullPointerException
-//
+
 //     JsonMappingException
-//
+
 //     RuntimeException
-//
+
 //     BindException
-//
+
 //     EntityControlException
 
     // ConstraintViolationException
@@ -103,6 +107,59 @@ public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler
 
     // AccessDeniedException
 
-    //
+    // Sobrescrição de um método comum de ResponseEntityExceptionHandler. Captura exceção quando o tipo de mediaType
+    // for incompatível.
+    @Override
+    protected ResponseEntity<Object> handleHttpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException ex,
+                                                                      HttpHeaders headers, HttpStatusCode status,
+                                                                      WebRequest request) {
+        return ResponseEntity
+            .status(status)
+            .headers(headers)
+            .build();
+    }
+
+
+    // Aqui o tratamendo de anotações de BeanValidation
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException argumentNotValid,
+                                                                  HttpHeaders headers, HttpStatusCode status,
+                                                                  WebRequest request) {
+        return this.construirResponseComMensagemDeErros(argumentNotValid, argumentNotValid.getBindingResult(),
+            new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    private ResponseEntity<Object> construirResponseComMensagemDeErros(Exception exception, BindingResult bindingResult,
+                                                                       HttpHeaders headers, HttpStatusCode status,
+                                                                       WebRequest request) {
+        var tipoDeErroEnum = TipoDeErroEnum.REQUISICAO_MAL_FORMULADA;
+        var httpStatus = HttpStatus.BAD_REQUEST;
+        var detalhe = "A requisição contém um ou mais dados inválidos. Preencha corretamente e tente novamente.";
+
+        List<ApiError.ParametroInvalido> erros = bindingResult.getAllErrors()
+            .stream()
+            .map(error -> {
+                var mensagem = mensagemInternacionalizada.getMessage(error, LocaleContextHolder.getLocale());
+
+                var name = error.getObjectName();
+
+                if (error instanceof FieldError) {
+                    name = ((FieldError) error).getField();
+                }
+
+                return ApiError.ParametroInvalido.builder()
+                    .anotacaoViolada(error.getCode())
+                    .localDeErro(name)
+                    .motivo(mensagem)
+                    .build();
+            })
+            .toList();
+
+        var problema = this.criarMensagemDeRetorno(tipoDeErroEnum, httpStatus, detalhe)
+            .parametrosInvalidos(erros)
+            .build();
+
+        return handleExceptionInternal(exception, problema, headers, status, request);
+    }
 }
 
