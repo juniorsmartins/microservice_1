@@ -73,3 +73,5 @@ OMicro-Noticia/src/main/java/io/micro_texto/config/exception/TipoDeErroEnum.java
 _Micro-Noticia/src/main/java/io/micro_texto/config/exception/http_400/DadoInvalidoException.java,6/d/6d61860c613e643377b1d2e97a4bec9b56347128
 w
 GMicro-Noticia/src/test/java/io/micro_texto/utils/CriadorDeBuilders.java,d/5/d53f160bcc1cee7283ff1fa50a3357723e602513
+H
+Micro-Noticia/Dockerfile,8/f/8ffc9157a5030877f7648cd3f5f0436cfb58f4f2
