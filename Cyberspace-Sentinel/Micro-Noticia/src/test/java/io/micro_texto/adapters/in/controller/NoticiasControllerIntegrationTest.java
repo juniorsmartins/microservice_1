@@ -2,6 +2,7 @@ package io.micro_texto.adapters.in.controller;
 
 import io.micro_texto.adapters.in.dto.response.NoticiaCriarDtoOut;
 import io.micro_texto.adapters.out.repository.NoticiaRepository;
+import io.micro_texto.config.exception.ApiError;
 import io.micro_texto.utils.CriadorDeBuilders;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -81,6 +83,267 @@ class NoticiasControllerIntegrationTest {
         assertThat(dtoIn.nomeAutor()).isEqualTo(noticiaDoBanco.getNomeAutor());
         assertThat(dtoIn.fonte()).isEqualTo(noticiaDoBanco.getFonte());
         assertThat(noticiaDoBanco.getDataHoraCriacao()).isNotNull();
+    }
+
+    @Test
+    @Order(3)
+    void criarNoticia_ComDadosInvalidos_RetornarApiErrorComHttpBadRequest() {
+
+        var dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .chapeu(null)
+            .build();
+
+        var resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .chapeu("")
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .chapeu(" ")
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .chapeu("limite-máximo-de-20-caracteres-superado")
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .titulo(null)
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .titulo("")
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .titulo(" ")
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .titulo("-----Limite-máximo-de-100-caracteres-ultrapassado-para-lançar-exceção-de-bean-validation-com-http-400-BadRequest.-----")
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .linhaFina(null)
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .linhaFina("")
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .linhaFina(" ")
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .linhaFina("Limite-máximo-de-150-caracteres-superado-para-gerar-lançamento-de-exceção-de-bean-validation-com-httpStatus-400-BadRequest-e-ser-capturado-pelo-tratamento-global-de-exceção.")
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .lide(null)
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .lide("")
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .lide(" ")
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .lide(CriadorDeBuilders.faker.lorem().characters(501, 600))
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
     }
 }
 
