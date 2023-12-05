@@ -344,6 +344,102 @@ class NoticiasControllerIntegrationTest {
 
         assertThat(resposta).isNotNull();
         assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .corpo(null)
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .corpo("")
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .corpo(" ")
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .corpo(CriadorDeBuilders.faker.lorem().characters(5001, 6000))
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .nomeAutor(CriadorDeBuilders.faker.lorem().characters(51, 60))
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
+
+        dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder()
+            .fonte(CriadorDeBuilders.faker.lorem().characters(251, 300))
+            .build();
+
+        resposta = this.webTestClient.post()
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isBadRequest()
+            .expectBody(ApiError.class)
+            .returnResult().getResponseBody();
+
+        assertThat(resposta).isNotNull();
+        assertThat(resposta.getStatus()).isEqualTo(400);
     }
 }
 
