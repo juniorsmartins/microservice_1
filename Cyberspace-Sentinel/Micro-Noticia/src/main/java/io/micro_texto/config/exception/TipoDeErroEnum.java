@@ -11,9 +11,9 @@ public enum TipoDeErroEnum {
   DADOS_INVALIDOS("Dados inválidos.", "/dados-invalidos"),
   MIDIA_NAO_SUPORTADA("Tipo de mídia não suportada.", "/midia-nao-suportada");
 
-  private String titulo;
+  private final String titulo;
 
-  private String caminho;
+  private final String caminho;
 
   TipoDeErroEnum(String titulo, String caminho) {
     this.titulo = titulo;
