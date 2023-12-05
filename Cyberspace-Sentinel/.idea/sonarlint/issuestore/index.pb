@@ -69,3 +69,5 @@ y
 IMicro-Noticia/src/main/java/io/micro_texto/config/exception/ApiError.java,d/0/d0d6e127c64abc27b003d9f5ab3d8120855ba9ed
 
 OMicro-Noticia/src/main/java/io/micro_texto/config/exception/TipoDeErroEnum.java,9/2/9256d45705649e2ecc01d8526a506607d8d0416a
+è
+_Micro-Noticia/src/main/java/io/micro_texto/config/exception/http_400/DadoInvalidoException.java,6/d/6d61860c613e643377b1d2e97a4bec9b56347128

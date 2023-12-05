@@ -1,6 +1,6 @@
 package io.micro_texto.config.exception;
 
-import io.micro_texto.config.exception.http_400.RequisicaoMalFormuladaException;
+import io.micro_texto.config.exception.http_400.DadoInvalidoException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
@@ -28,11 +28,10 @@ public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler
         this.mensagemInternacionalizada = mensagemInternacionalizada;
     }
 
-    @ExceptionHandler(value = RequisicaoMalFormuladaException.class)
-    public ResponseEntity<Object> tratarRequisicaoMalFormulada(RequisicaoMalFormuladaException ex,
-                                                               WebRequest webRequest) {
+    @ExceptionHandler(value = DadoInvalidoException.class)
+    public ResponseEntity<Object> tratarDadoInvalido(DadoInvalidoException ex, WebRequest webRequest) {
 
-        var tipoErroEnum = TipoDeErroEnum.REQUISICAO_MAL_FORMULADA;
+        var tipoErroEnum = TipoDeErroEnum.DADOS_INVALIDOS;
         var httpStatus = HttpStatus.BAD_REQUEST;
         var detail = ex.getMessage();
 
@@ -133,7 +132,7 @@ public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler
     private ResponseEntity<Object> construirResponseComMensagemDeErros(Exception exception, BindingResult bindingResult,
                                                                        HttpHeaders headers, HttpStatusCode status,
                                                                        WebRequest request) {
-        var tipoDeErroEnum = TipoDeErroEnum.DADOS_INVALIDOS;
+        var tipoDeErroEnum = TipoDeErroEnum.REQUISICAO_MAL_FORMULADA;
         var httpStatus = HttpStatus.BAD_REQUEST;
         var detalhe = "A requisição contém um ou mais dados inválidos. Preencha corretamente e tente novamente.";
 
