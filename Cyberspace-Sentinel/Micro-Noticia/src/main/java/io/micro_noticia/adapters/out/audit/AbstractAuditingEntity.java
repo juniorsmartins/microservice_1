@@ -25,11 +25,11 @@ public abstract class AbstractAuditingEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @CreatedDate
-    @Column(name = "data_hora_criacao", nullable = false, updatable = false)
+    @Column(name = "data_hora_criacao", nullable = false, insertable = true, updatable = false)
     private Instant dataHoraCriacao;
 
     @LastModifiedDate
-    @Column(name = "data_hora_edicao")
+    @Column(name = "data_hora_edicao", nullable = true, insertable = false, updatable = true)
     private Instant dataHoraEdicao;
 }
 
