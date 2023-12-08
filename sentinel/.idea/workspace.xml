@@ -4,7 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="104ce9eb-638f-48a9-af61-45d4c51eb7a1" name="Changes" comment="" />
+    <list default="true" id="104ce9eb-638f-48a9-af61-45d4c51eb7a1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/0/d/0dc21bee599c128190ac281e53d94d25baf4bc9c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/5/4/54ad9a310d222c398c4001f498962922ef19b57e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/5/9/5953d480a2a019c9c0c4f15b6f909ff9af29bf35" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/6/1/61159d3f6602c88ab1e21259f760fd67ca69464c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/6/e/6e3dec1e8d7aad412a276ec6b8757f0a11eb6945" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/7/b/7b49e04415b63820958b2c20265dd5233ecfad86" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/c/2/c248e633d1ec061ce701a5684e78017eb55c7bf6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/c/6/c62fe0be06c53de466f8d0dfc5782f1809de47fd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/c/f/cf265e5db980b581134f0f8a8f7abae34f68d309" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/0/d/0dc21bee599c128190ac281e53d94d25baf4bc9c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/5/4/54ad9a310d222c398c4001f498962922ef19b57e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/5/9/5953d480a2a019c9c0c4f15b6f909ff9af29bf35" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/6/1/61159d3f6602c88ab1e21259f760fd67ca69464c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/6/e/6e3dec1e8d7aad412a276ec6b8757f0a11eb6945" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/7/b/7b49e04415b63820958b2c20265dd5233ecfad86" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/c/2/c248e633d1ec061ce701a5684e78017eb55c7bf6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/c/6/c62fe0be06c53de466f8d0dfc5782f1809de47fd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/c/f/cf265e5db980b581134f0f8a8f7abae34f68d309" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
