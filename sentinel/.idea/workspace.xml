@@ -4,85 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="104ce9eb-638f-48a9-af61-45d4c51eb7a1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/4/442292b8a7efeabbe4cc176709b833b1792140ec" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/4/442292b8a7efeabbe4cc176709b833b1792140ec" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/0/4/0400e71466032dceeb4af1066fa7fafcffe3bc45" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/1/0/1058878c4c7860349852f28a2a195e873dedb217" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/2/7/27b6d22677bfc2c9f3f7e7ff031711e3d54cbbd2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/3/4/3430b91015b8400a945fec139976a2124cd13395" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/3/9/39c23e16ef8788f14aab28fb6734f89443d8dbd0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/3/d/3d507f7833def1b693f82a37d5a587631ba0c7ec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/4/2/42c1867fe23592fe30a9dfef0b41423dfd4d892d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/4/3/4319e563042c6e05e50d78f95f700a1a9509b41f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/4/8/48f895e82642f1b2bfb23d7ce3ec36c32e2f794d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/5/a/5acef7c87d5f4710398395e61a85ba2af58e89e4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/6/d/6d61860c613e643377b1d2e97a4bec9b56347128" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/7/4/745dc85833c3f7d807fcd72c64b2eed1171b44e4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/7/d/7d75f7d46f74f5570394d30e667e291e33db32d7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/7/e/7e287b68a32e7dd88953884bb6d7203ca342abba" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/8/6/865fe71afc72185f25250ce40d6b7de805b737fc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/8/a/8a0251f0a4355276032dffab905d963263680176" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/8/d/8d4a2607ac39a43e442fde5fe18099fb2df0a31b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/9/2/9256d45705649e2ecc01d8526a506607d8d0416a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/9/5/9542f0e16711932253505fac3fafe4360af287ec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/a/c/acabec2f2e231fff8de7c6585a2cf8ffb06405ff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/b/4/b4aed9b79de8fee0683579fb677366b28d296f96" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/c/5/c5c9614824423196f377623f353d78edf8cfc5fa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/d/0/d0d6e127c64abc27b003d9f5ab3d8120855ba9ed" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/d/5/d53f160bcc1cee7283ff1fa50a3357723e602513" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/d/5/d5d3a2368fc6d57f558bdf9baa0f194622a91295" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/d/d/dde48063281f4b724c5e4b41926826c6da93a5b1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/e/0/e0318de516bf3e6ea3c2a68c362720ddb5c489e9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/e/5/e506583536754037c4d58a64e8f4c6ddf39316ce" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/e/9/e90d69bcdc54c30eca3df371a14aed85f15080a5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/e/a/ea1b9bd327ed8a329628fd18142be27da9b93f56" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/e/b/eb194db0b3945eeaa9095bcbe2a083668dbefcac" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/e/f/ef700fcb3e0440d35438b643f544e91e0ea71b16" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/f/1/f1ca0b325b696c99097473dee510f12f043d2677" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/f/d/fd872d52c5f17e4fc6f5a8fc1e157a30e5ace21e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/0/4/0400e71466032dceeb4af1066fa7fafcffe3bc45" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/1/0/1058878c4c7860349852f28a2a195e873dedb217" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/2/7/27b6d22677bfc2c9f3f7e7ff031711e3d54cbbd2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/3/4/3430b91015b8400a945fec139976a2124cd13395" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/3/9/39c23e16ef8788f14aab28fb6734f89443d8dbd0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/3/d/3d507f7833def1b693f82a37d5a587631ba0c7ec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/4/2/42c1867fe23592fe30a9dfef0b41423dfd4d892d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/4/3/4319e563042c6e05e50d78f95f700a1a9509b41f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/4/8/48f895e82642f1b2bfb23d7ce3ec36c32e2f794d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/5/a/5acef7c87d5f4710398395e61a85ba2af58e89e4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/6/d/6d61860c613e643377b1d2e97a4bec9b56347128" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/7/4/745dc85833c3f7d807fcd72c64b2eed1171b44e4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/7/d/7d75f7d46f74f5570394d30e667e291e33db32d7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/7/e/7e287b68a32e7dd88953884bb6d7203ca342abba" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/8/6/865fe71afc72185f25250ce40d6b7de805b737fc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/8/a/8a0251f0a4355276032dffab905d963263680176" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/8/d/8d4a2607ac39a43e442fde5fe18099fb2df0a31b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/9/2/9256d45705649e2ecc01d8526a506607d8d0416a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/9/5/9542f0e16711932253505fac3fafe4360af287ec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/a/c/acabec2f2e231fff8de7c6585a2cf8ffb06405ff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/b/4/b4aed9b79de8fee0683579fb677366b28d296f96" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/c/5/c5c9614824423196f377623f353d78edf8cfc5fa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/d/0/d0d6e127c64abc27b003d9f5ab3d8120855ba9ed" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/d/5/d53f160bcc1cee7283ff1fa50a3357723e602513" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/d/5/d5d3a2368fc6d57f558bdf9baa0f194622a91295" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/d/d/dde48063281f4b724c5e4b41926826c6da93a5b1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/e/0/e0318de516bf3e6ea3c2a68c362720ddb5c489e9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/e/5/e506583536754037c4d58a64e8f4c6ddf39316ce" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/e/9/e90d69bcdc54c30eca3df371a14aed85f15080a5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/e/a/ea1b9bd327ed8a329628fd18142be27da9b93f56" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/e/b/eb194db0b3945eeaa9095bcbe2a083668dbefcac" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/e/f/ef700fcb3e0440d35438b643f544e91e0ea71b16" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/f/1/f1ca0b325b696c99097473dee510f12f043d2677" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/f/d/fd872d52c5f17e4fc6f5a8fc1e157a30e5ace21e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-    </list>
+    <list default="true" id="104ce9eb-638f-48a9-af61-45d4c51eb7a1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,23 +16,23 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2ZEXJDW6u2S9ryBKFnHcyp4Uuz7" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.MicroNoticiasApplication.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "develop",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MicroNoticiasApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="MicroNoticiasApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="io.micronoticias.MicroNoticiasApplication" />
