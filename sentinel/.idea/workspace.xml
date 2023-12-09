@@ -7,9 +7,7 @@
     <list default="true" id="104ce9eb-638f-48a9-af61-45d4c51eb7a1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/c/2c3af0aacc411c1429b31fcb0b35b91479e7d2b0" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/c/2c3af0aacc411c1429b31fcb0b35b91479e7d2b0" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/application/core/domain/NoticiaBusiness.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/application/core/domain/NoticiaBusiness.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +75,20 @@
       <recent name="io.micronoticias.application.core.domain" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.java in micro-noticias">
+  <component name="RunManager" selected="Application.MicroNoticiasApplication">
+    <configuration name="MicroNoticiasApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="io.micronoticias.MicroNoticiasApplication" />
+      <module name="micro-noticias" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.micronoticias.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="NoticiaControllerIntegrationTest.criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="micro-noticias" />
       <extension name="coverage">
@@ -90,21 +101,6 @@
       <option name="MAIN_CLASS_NAME" value="io.micronoticias.adapter.in.controller.NoticiaControllerIntegrationTest" />
       <option name="METHOD_NAME" value="criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400" />
       <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NoticiaCriarControllerUnitTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="micro-noticias" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.micronoticias.adapter.in.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="io.micronoticias.adapter.in.controller" />
-      <option name="MAIN_CLASS_NAME" value="io.micronoticias.adapter.in.controller.NoticiaCriarControllerUnitTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -149,11 +145,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MicroNoticiasApplication" />
         <item itemvalue="JUnit.java in micro-noticias" />
         <item itemvalue="JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400" />
         <item itemvalue="JUnit.NoticiaCriarUseCaseUnitTest" />
         <item itemvalue="JUnit.NoticiaSalvarAdapterUnitTest" />
-        <item itemvalue="JUnit.NoticiaCriarControllerUnitTest" />
       </list>
     </recent_temporary>
   </component>
