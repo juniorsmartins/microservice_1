@@ -35,6 +35,24 @@ class NoticiaControllerIntegrationTest {
 
     @Test
     @Order(1)
+    void criarNoticia_ComContentNegotiationXML_RetornarHttp201() {
+
+        var dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder().build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .accept(MediaType.APPLICATION_XML)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isCreated()
+                .expectHeader().contentType(MediaType.APPLICATION_XML)
+                .expectBody().consumeWith(response -> {
+                    assertThat(response.getResponseBody()).isNotNull();
+                });
+    }
+
+    @Test
+    @Order(2)
     void criarNoticia_ComDadosValidos_RetornarNoticiaDtoOutAndHttp201() {
 
         var dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder().build();
@@ -60,7 +78,7 @@ class NoticiaControllerIntegrationTest {
     }
 
     @Test
-    @Order(2)
+    @Order(3)
     void criarNoticia_ComDadosValidos_RetornarNoticiaPersistida() {
 
         var dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder().build();
@@ -88,7 +106,7 @@ class NoticiaControllerIntegrationTest {
     }
 
     @Test
-    @Order(3)
+    @Order(4)
     void criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400() {
 
         var dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
