@@ -2,7 +2,7 @@ package io.micronoticias.adapter.in.controller;
 
 import io.micronoticias.adapter.in.dto.response.NoticiaCriarDtoOut;
 import io.micronoticias.adapter.out.repository.NoticiaRepository;
-import io.micronoticias.util.CriadorDeBuilders;
+import io.micronoticias.util.CriadorDeObjetos;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(scripts = "/sql/noticias/insert-noticia.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -34,7 +33,7 @@ class NoticiaControllerIntegrationTest {
     @Order(1)
     void criarNoticia_ComDadosValidos_RetornarNoticiaDtoOutAndHttp201() {
 
-        var dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder().build();
+        var dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder().build();
 
         this.webTestClient.post()
                 .uri(END_POINT)
@@ -60,7 +59,7 @@ class NoticiaControllerIntegrationTest {
     @Order(2)
     void criarNoticia_ComDadosValidos_RetornarNoticiaPersistida() {
 
-        var dtoIn = CriadorDeBuilders.gerarNoticiaCriarDtoInBuilder().build();
+        var dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder().build();
 
         var resposta = this.webTestClient.post()
                 .uri(END_POINT)
