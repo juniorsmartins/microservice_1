@@ -1,6 +1,7 @@
 package io.micronoticias.application.core.domain;
 
-import io.micronoticias.config.exception.http_400.CampoComValorNuloProibidoException;
+import io.micronoticias.config.exception.http_400.CampoNuloProibidoException;
+import io.micronoticias.config.exception.http_400.CampoVazioProibidoException;
 import io.micronoticias.config.exception.http_400.DadoComTamanhoMaximoInvalidoException;
 
 import java.time.Instant;
@@ -44,12 +45,15 @@ public final class NoticiaBusiness {
     public void setChapeu(String chapeu) {
         Optional.ofNullable(chapeu)
             .ifPresentOrElse(boina -> {
+                if (boina.isBlank()) {
+                    throw new CampoVazioProibidoException("Chapéu");
+                }
                 if (boina.length() > 20) {
                     throw new DadoComTamanhoMaximoInvalidoException("Chapéu", 20, boina.length());
                 }
                 this.chapeu = boina;
             },
-            () -> {throw new CampoComValorNuloProibidoException("Chapéu");}
+            () -> {throw new CampoNuloProibidoException("Chapéu");}
         );
     }
 
@@ -60,12 +64,15 @@ public final class NoticiaBusiness {
     public void setTitulo(String titulo) {
         Optional.ofNullable(titulo)
             .ifPresentOrElse(title -> {
+                if (title.isBlank()) {
+                    throw new CampoVazioProibidoException("Título");
+                }
                 if (title.length() > 100) {
                     throw new DadoComTamanhoMaximoInvalidoException("Título", 100, title.length());
                 }
                 this.titulo = title;
             },
-            () -> {throw new CampoComValorNuloProibidoException("Título");}
+            () -> {throw new CampoNuloProibidoException("Título");}
         );
     }
 
@@ -76,12 +83,15 @@ public final class NoticiaBusiness {
     public void setLinhaFina(String linhaFina) {
         Optional.ofNullable(linhaFina)
             .ifPresentOrElse(linha -> {
+                if (linha.isBlank()) {
+                    throw new CampoVazioProibidoException("Linha Fina");
+                }
                 if (linha.length() > 150) {
                     throw new DadoComTamanhoMaximoInvalidoException("Linha Fina", 150, linha.length());
                 }
                 this.linhaFina = linha;
             },
-            () -> {throw new CampoComValorNuloProibidoException("Linha Fina");}
+            () -> {throw new CampoNuloProibidoException("Linha Fina");}
         );
     }
 
@@ -92,12 +102,15 @@ public final class NoticiaBusiness {
     public void setLide(String lide) {
         Optional.ofNullable(lide)
             .ifPresentOrElse(lead -> {
+                if (lead.isBlank()) {
+                    throw new CampoVazioProibidoException("Lide");
+                }
                 if (lead.length() > 500) {
                     throw new DadoComTamanhoMaximoInvalidoException("Lide", 500, lead.length());
                 }
                 this.lide = lead;
             },
-            () -> {throw new CampoComValorNuloProibidoException("Lide");}
+            () -> {throw new CampoNuloProibidoException("Lide");}
         );
     }
 
@@ -108,12 +121,15 @@ public final class NoticiaBusiness {
     public void setCorpo(String corpo) {
         Optional.ofNullable(corpo)
             .ifPresentOrElse(corpus -> {
+                    if (corpus.isBlank()) {
+                        throw new CampoVazioProibidoException("Corpo");
+                    }
                     if (corpus.length() > 5000) {
                         throw new DadoComTamanhoMaximoInvalidoException("Corpo", 5000, corpus.length());
                     }
                     this.corpo = corpus;
                 },
-                () -> {throw new CampoComValorNuloProibidoException("Corpo");}
+                () -> {throw new CampoNuloProibidoException("Corpo");}
             );
     }
 

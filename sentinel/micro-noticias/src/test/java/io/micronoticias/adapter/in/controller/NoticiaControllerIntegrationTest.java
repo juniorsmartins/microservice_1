@@ -2,6 +2,7 @@ package io.micronoticias.adapter.in.controller;
 
 import io.micronoticias.adapter.in.dto.response.NoticiaCriarDtoOut;
 import io.micronoticias.adapter.out.repository.NoticiaRepository;
+import io.micronoticias.config.exception.ApiError;
 import io.micronoticias.util.CriadorDeObjetos;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -9,10 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -81,6 +85,385 @@ class NoticiaControllerIntegrationTest {
         assertThat(dtoIn.nomeAutor()).isEqualTo(noticiaDoBanco.getNomeAutor());
         assertThat(dtoIn.fonte()).isEqualTo(noticiaDoBanco.getFonte());
         assertThat(noticiaDoBanco.getDataHoraCriacao()).isNotNull();
+    }
+
+    @Test
+    @Order(3)
+    void criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400() {
+
+        var dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .chapeu(null)
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .chapeu("")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .chapeu("   ")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .chapeu("123456789112345678921")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .titulo(null)
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .titulo("")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .titulo("   ")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .titulo("12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .linhaFina(null)
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .linhaFina("")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .linhaFina("   ")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .linhaFina("12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .lide(null)
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .lide("")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .lide("   ")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .lide("12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .corpo(null)
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .corpo("")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .corpo("   ")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .corpo("12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890 12345678901234567890123456789012345678901234567890")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .nomeAutor("123456789012345678901234567890123456789012345678901")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
+
+        dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder()
+                .fonte("123456789012345678901234567890123456789012345678901 123456789012345678901234567890123456789012345678901 123456789012345678901234567890123456789012345678901 123456789012345678901234567890123456789012345678901 123456789012345678901234567890123456789012345678901")
+                .build();
+
+        this.webTestClient.post()
+                .uri(END_POINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(dtoIn)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ApiError.class)
+                .consumeWith(response -> {
+                    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(response.getResponseBody().getClass()).isEqualTo(ApiError.class);
+                    assertThat(response.getResponseBody().getTitle()).isEqualTo("Dados inválidos.");
+                });
     }
 }
 
