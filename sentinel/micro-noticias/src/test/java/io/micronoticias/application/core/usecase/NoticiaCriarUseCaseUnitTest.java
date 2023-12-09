@@ -2,7 +2,6 @@ package io.micronoticias.application.core.usecase;
 
 import io.micronoticias.adapter.out.NoticiaSalvarAdapter;
 import io.micronoticias.application.core.domain.NoticiaBusiness;
-import io.micronoticias.application.port.out.NoticiaSalvarOutputPort;
 import io.micronoticias.util.CriadorDeObjetos;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,17 +16,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
 class NoticiaCriarUseCaseUnitTest {
 
     @MockBean
-    private NoticiaSalvarOutputPort salvarOutputPort;
-
-    @MockBean
-    public NoticiaSalvarAdapter salvarAdapter;
+    private NoticiaSalvarAdapter salvarAdapter;
 
     @Autowired
     private NoticiaCriarUseCase criarUseCase;
@@ -39,7 +33,7 @@ class NoticiaCriarUseCaseUnitTest {
         business.setId(2L);
         business.setDataHoraCriacao(Instant.now());
 
-        Mockito.when(salvarOutputPort.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(business);
+        Mockito.when(salvarAdapter.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(business);
 
         var resposta = this.criarUseCase.criar(business);
 
