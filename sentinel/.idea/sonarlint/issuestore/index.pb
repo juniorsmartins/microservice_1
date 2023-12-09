@@ -31,3 +31,15 @@ Ymicro-noticias/src/main/java/io/micronoticias/adapter/in/dto/request/NoticiaCri
 [micro-noticias/src/main/java/io/micronoticias/adapter/out/repository/NoticiaRepository.java,0/d/0de88f592004b47af9d160858cb506a5cd0155d7
 y
 Imicro-noticias/src/test/java/io/micronoticias/util/CriadorDeBuilders.java,6/f/6f156d5a30e584cccaa10f4b71b2e63028097b93
+Š
+Zmicro-noticias/src/main/java/io/micronoticias/application/core/domain/NoticiaBusiness.java,2/c/2c3af0aacc411c1429b31fcb0b35b91479e7d2b0
+x
+Hmicro-noticias/src/main/java/io/micronoticias/config/MensagemPadrao.java,2/b/2b1067b69f51b8a26d182e7c72f28deb3b798c2f
+œ
+lmicro-noticias/src/main/java/io/micronoticias/config/exception/http_400/DadoComTamanhoInvalidoException.java,9/6/9674c93cd7a4ce9e9dc5eef0a2749b85105a1ac2
+Ÿ
+omicro-noticias/src/main/java/io/micronoticias/config/exception/http_400/CampoComValorNuloProibidoException.java,2/e/2ed5f9c3cfafa73cc1c1faf8897138bb2d14a748
+’
+bmicro-noticias/src/main/java/io/micronoticias/config/exception/http_400/DadoInvalidoException.java,1/e/1e006b01f228fe0ca2e9901866e07f50ea610bcc
+¢
+rmicro-noticias/src/main/java/io/micronoticias/config/exception/http_400/DadoComTamanhoMaximoInvalidoException.java,2/9/293137885fe15c80f9d4e8b76d2af37a62cf986b
