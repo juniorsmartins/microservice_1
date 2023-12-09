@@ -45,12 +45,7 @@ public final class NoticiaBusiness {
     public void setChapeu(String chapeu) {
         Optional.ofNullable(chapeu)
             .ifPresentOrElse(boina -> {
-                if (boina.isBlank()) {
-                    throw new CampoVazioProibidoException("Chapéu");
-                }
-                if (boina.length() > 20) {
-                    throw new DadoComTamanhoMaximoInvalidoException("Chapéu", 20, boina.length());
-                }
+                this.validarCampo("Chapéu", boina, 20);
                 this.chapeu = boina;
             },
             () -> {throw new CampoNuloProibidoException("Chapéu");}
@@ -64,12 +59,7 @@ public final class NoticiaBusiness {
     public void setTitulo(String titulo) {
         Optional.ofNullable(titulo)
             .ifPresentOrElse(title -> {
-                if (title.isBlank()) {
-                    throw new CampoVazioProibidoException("Título");
-                }
-                if (title.length() > 100) {
-                    throw new DadoComTamanhoMaximoInvalidoException("Título", 100, title.length());
-                }
+                this.validarCampo("Título", title, 100);
                 this.titulo = title;
             },
             () -> {throw new CampoNuloProibidoException("Título");}
@@ -83,12 +73,7 @@ public final class NoticiaBusiness {
     public void setLinhaFina(String linhaFina) {
         Optional.ofNullable(linhaFina)
             .ifPresentOrElse(linha -> {
-                if (linha.isBlank()) {
-                    throw new CampoVazioProibidoException("Linha Fina");
-                }
-                if (linha.length() > 150) {
-                    throw new DadoComTamanhoMaximoInvalidoException("Linha Fina", 150, linha.length());
-                }
+                this.validarCampo("Linha Fina", linha, 150);
                 this.linhaFina = linha;
             },
             () -> {throw new CampoNuloProibidoException("Linha Fina");}
@@ -102,12 +87,7 @@ public final class NoticiaBusiness {
     public void setLide(String lide) {
         Optional.ofNullable(lide)
             .ifPresentOrElse(lead -> {
-                if (lead.isBlank()) {
-                    throw new CampoVazioProibidoException("Lide");
-                }
-                if (lead.length() > 500) {
-                    throw new DadoComTamanhoMaximoInvalidoException("Lide", 500, lead.length());
-                }
+                this.validarCampo("Lide", lead, 500);
                 this.lide = lead;
             },
             () -> {throw new CampoNuloProibidoException("Lide");}
@@ -121,12 +101,7 @@ public final class NoticiaBusiness {
     public void setCorpo(String corpo) {
         Optional.ofNullable(corpo)
             .ifPresentOrElse(corpus -> {
-                    if (corpus.isBlank()) {
-                        throw new CampoVazioProibidoException("Corpo");
-                    }
-                    if (corpus.length() > 5000) {
-                        throw new DadoComTamanhoMaximoInvalidoException("Corpo", 5000, corpus.length());
-                    }
+                    this.validarCampo("Corpo", corpus, 5000);
                     this.corpo = corpus;
                 },
                 () -> {throw new CampoNuloProibidoException("Corpo");}
@@ -169,6 +144,15 @@ public final class NoticiaBusiness {
 
     public void setDataHoraAtualizacao(Instant dataHoraAtualizacao) {
         this.dataHoraAtualizacao = dataHoraAtualizacao;
+    }
+
+    private void validarCampo(String nomeCampo, String valorCampo, int tamanhoMaximno) {
+        if (valorCampo.isBlank()) {
+            throw new CampoVazioProibidoException(nomeCampo);
+        }
+        if (valorCampo.length() > tamanhoMaximno) {
+            throw new DadoComTamanhoMaximoInvalidoException(nomeCampo, tamanhoMaximno, valorCampo.length());
+        }
     }
 
     @Override
