@@ -73,3 +73,5 @@ Lmicro-noticias/src/main/java/io/micronoticias/config/exception/ApiError.java,1
 pmicro-noticias/src/main/java/io/micronoticias/config/exception/http_400/CampoComValorVazioProibidoException.java,a/1/a12decdcf7f1f196992a7219b1a2c2c9fc26a213
 ˜
 hmicro-noticias/src/main/java/io/micronoticias/config/exception/http_400/CampoVazioProibidoException.java,a/0/a0277774c016b772750820fa64288895762885ec
+x
+Hmicro-noticias/src/main/java/io/micronoticias/config/bean/WebConfig.java,5/8/58c4605f7905479edd2e1e4270bb4295bd375a3a
