@@ -7,3 +7,13 @@ E
 Micro-Noticia/pom.xml,9/0/90a0cf00182fd3635e21e8f65759ee87b1be5b96
 H
 Micro-Noticia/Dockerfile,8/f/8ffc9157a5030877f7648cd3f5f0436cfb58f4f2
+š
+jMicro-Noticia/src/test/java/io/micro_noticia/adapters/in/controller/NoticiasControllerIntegrationTest.java,f/2/f25a0fa73358767560e9aa707b00aa49e84e7b46
+ƒ
+SMicro-Noticia/src/main/java/io/micro_noticia/adapters/out/entity/NoticiaEntity.java,0/d/0dee23cc44f1bc73541801fa38c1064372eb3e5c
+‹
+[Micro-Noticia/src/main/java/io/micro_noticia/adapters/out/audit/AbstractAuditingEntity.java,a/4/a42c6129171ace4a9e971256d269d293e637207f
+y
+IMicro-Noticia/src/test/java/io/micro_noticia/utils/CriadorDeBuilders.java,9/e/9e2c5f34839b7670d8ca67f0dc3411cf96d0948e
+~
+NMicro-Noticia/src/main/java/io/micro_noticia/config/bean/DatabaseH2Config.java,9/2/9252dcd0ec7b977413ec13eb9008eabd103852d6
