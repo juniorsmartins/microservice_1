@@ -61,3 +61,5 @@ v
 Fmicro-noticias/src/test/java/io/micronoticias/util/CriadorDeDatas.java,1/3/136404ec4ad40af451509e4696512c8398f69b71
 x
 Hmicro-noticias/src/test/java/io/micronoticias/util/CriadorDeObjetos.java,1/b/1bb5ebcbe2378a69298b3f5d059e823f44a3dd03
+—
+gmicro-noticias/src/test/java/io/micronoticias/application/core/usecase/NoticiaCriarUseCaseUnitTest.java,1/8/1815422e36343cbf75dc44b408fdb144cf19aedd
