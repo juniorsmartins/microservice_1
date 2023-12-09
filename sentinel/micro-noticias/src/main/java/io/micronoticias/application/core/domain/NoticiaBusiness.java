@@ -1,6 +1,7 @@
 package io.micronoticias.application.core.domain;
 
-import io.micronoticias.config.exception.http_400.CampoComValorNuloProibidoException;
+import io.micronoticias.config.exception.http_400.CampoNuloProibidoException;
+import io.micronoticias.config.exception.http_400.CampoVazioProibidoException;
 import io.micronoticias.config.exception.http_400.DadoComTamanhoMaximoInvalidoException;
 
 import java.time.Instant;
@@ -44,12 +45,10 @@ public final class NoticiaBusiness {
     public void setChapeu(String chapeu) {
         Optional.ofNullable(chapeu)
             .ifPresentOrElse(boina -> {
-                if (boina.length() > 20) {
-                    throw new DadoComTamanhoMaximoInvalidoException("Chapéu", 20, boina.length());
-                }
+                this.validarCampo("Chapéu", boina, 20);
                 this.chapeu = boina;
             },
-            () -> {throw new CampoComValorNuloProibidoException("Chapéu");}
+            () -> {throw new CampoNuloProibidoException("Chapéu");}
         );
     }
 
@@ -60,12 +59,10 @@ public final class NoticiaBusiness {
     public void setTitulo(String titulo) {
         Optional.ofNullable(titulo)
             .ifPresentOrElse(title -> {
-                if (title.length() > 100) {
-                    throw new DadoComTamanhoMaximoInvalidoException("Título", 100, title.length());
-                }
+                this.validarCampo("Título", title, 100);
                 this.titulo = title;
             },
-            () -> {throw new CampoComValorNuloProibidoException("Título");}
+            () -> {throw new CampoNuloProibidoException("Título");}
         );
     }
 
@@ -76,12 +73,10 @@ public final class NoticiaBusiness {
     public void setLinhaFina(String linhaFina) {
         Optional.ofNullable(linhaFina)
             .ifPresentOrElse(linha -> {
-                if (linha.length() > 150) {
-                    throw new DadoComTamanhoMaximoInvalidoException("Linha Fina", 150, linha.length());
-                }
+                this.validarCampo("Linha Fina", linha, 150);
                 this.linhaFina = linha;
             },
-            () -> {throw new CampoComValorNuloProibidoException("Linha Fina");}
+            () -> {throw new CampoNuloProibidoException("Linha Fina");}
         );
     }
 
@@ -92,12 +87,10 @@ public final class NoticiaBusiness {
     public void setLide(String lide) {
         Optional.ofNullable(lide)
             .ifPresentOrElse(lead -> {
-                if (lead.length() > 500) {
-                    throw new DadoComTamanhoMaximoInvalidoException("Lide", 500, lead.length());
-                }
+                this.validarCampo("Lide", lead, 500);
                 this.lide = lead;
             },
-            () -> {throw new CampoComValorNuloProibidoException("Lide");}
+            () -> {throw new CampoNuloProibidoException("Lide");}
         );
     }
 
@@ -108,12 +101,10 @@ public final class NoticiaBusiness {
     public void setCorpo(String corpo) {
         Optional.ofNullable(corpo)
             .ifPresentOrElse(corpus -> {
-                    if (corpus.length() > 5000) {
-                        throw new DadoComTamanhoMaximoInvalidoException("Corpo", 5000, corpus.length());
-                    }
+                    this.validarCampo("Corpo", corpus, 5000);
                     this.corpo = corpus;
                 },
-                () -> {throw new CampoComValorNuloProibidoException("Corpo");}
+                () -> {throw new CampoNuloProibidoException("Corpo");}
             );
     }
 
@@ -153,6 +144,15 @@ public final class NoticiaBusiness {
 
     public void setDataHoraAtualizacao(Instant dataHoraAtualizacao) {
         this.dataHoraAtualizacao = dataHoraAtualizacao;
+    }
+
+    private void validarCampo(String nomeCampo, String valorCampo, int tamanhoMaximno) {
+        if (valorCampo.isBlank()) {
+            throw new CampoVazioProibidoException(nomeCampo);
+        }
+        if (valorCampo.length() > tamanhoMaximno) {
+            throw new DadoComTamanhoMaximoInvalidoException(nomeCampo, tamanhoMaximno, valorCampo.length());
+        }
     }
 
     @Override

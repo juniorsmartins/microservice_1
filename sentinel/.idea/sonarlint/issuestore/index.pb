@@ -63,3 +63,13 @@ x
 Hmicro-noticias/src/test/java/io/micronoticias/util/CriadorDeObjetos.java,1/b/1bb5ebcbe2378a69298b3f5d059e823f44a3dd03
 —
 gmicro-noticias/src/test/java/io/micronoticias/application/core/usecase/NoticiaCriarUseCaseUnitTest.java,1/8/1815422e36343cbf75dc44b408fdb144cf19aedd
+Š
+Zmicro-noticias/src/main/java/io/micronoticias/config/exception/GlobalExceptionHandler.java,f/4/f415df1838343ffb8a6f2ab7f1b3e8993652df6d
+‚
+Rmicro-noticias/src/main/java/io/micronoticias/config/exception/TipoDeErroEnum.java,5/b/5b18a851035b6e9d991d2ef557722cd7ef535ee8
+|
+Lmicro-noticias/src/main/java/io/micronoticias/config/exception/ApiError.java,1/7/17a60549e872e2b50129a2b1871081e39133cbf6
+ 
+pmicro-noticias/src/main/java/io/micronoticias/config/exception/http_400/CampoComValorVazioProibidoException.java,a/1/a12decdcf7f1f196992a7219b1a2c2c9fc26a213
+˜
+hmicro-noticias/src/main/java/io/micronoticias/config/exception/http_400/CampoVazioProibidoException.java,a/0/a0277774c016b772750820fa64288895762885ec
