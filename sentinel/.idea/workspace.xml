@@ -5,31 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="104ce9eb-638f-48a9-af61-45d4c51eb7a1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/0/d/0dc21bee599c128190ac281e53d94d25baf4bc9c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/5/4/54ad9a310d222c398c4001f498962922ef19b57e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/5/9/5953d480a2a019c9c0c4f15b6f909ff9af29bf35" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/6/1/61159d3f6602c88ab1e21259f760fd67ca69464c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/6/e/6e3dec1e8d7aad412a276ec6b8757f0a11eb6945" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/7/b/7b49e04415b63820958b2c20265dd5233ecfad86" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/c/2/c248e633d1ec061ce701a5684e78017eb55c7bf6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/c/6/c62fe0be06c53de466f8d0dfc5782f1809de47fd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/c/f/cf265e5db980b581134f0f8a8f7abae34f68d309" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/f/2/f25a0fa73358767560e9aa707b00aa49e84e7b46" beforeDir="false" afterPath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/f/2/f25a0fa73358767560e9aa707b00aa49e84e7b46" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/0/d/0dc21bee599c128190ac281e53d94d25baf4bc9c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/5/4/54ad9a310d222c398c4001f498962922ef19b57e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/5/9/5953d480a2a019c9c0c4f15b6f909ff9af29bf35" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/6/1/61159d3f6602c88ab1e21259f760fd67ca69464c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/6/e/6e3dec1e8d7aad412a276ec6b8757f0a11eb6945" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/7/b/7b49e04415b63820958b2c20265dd5233ecfad86" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/c/2/c248e633d1ec061ce701a5684e78017eb55c7bf6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/c/6/c62fe0be06c53de466f8d0dfc5782f1809de47fd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/c/f/cf265e5db980b581134f0f8a8f7abae34f68d309" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../Cyberspace-Sentinel/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-noticias/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-pessoas/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/micro-pessoas/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Record" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -41,20 +42,34 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2ZEXJDW6u2S9ryBKFnHcyp4Uuz7" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.MicroNoticiasApplication.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MicroNoticiasApplication.executor": "Run",
+    "JUnit.All in micro-noticias.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "develop",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
-  <component name="RunManager">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="io.micronoticias.adapter.in.controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.All in micro-noticias">
     <configuration name="MicroNoticiasApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="io.micronoticias.MicroNoticiasApplication" />
       <module name="micro-noticias" />
@@ -68,8 +83,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="All in micro-noticias" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="micro-noticias" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in micro-noticias" />
         <item itemvalue="Application.MicroNoticiasApplication" />
       </list>
     </recent_temporary>
