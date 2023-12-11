@@ -59,3 +59,5 @@ x
 Hmicro-noticias/src/main/java/io/micronoticias/config/bean/WebConfig.java,5/8/58c4605f7905479edd2e1e4270bb4295bd375a3a
 {
 Kmicro-noticias/src/main/java/io/micronoticias/config/bean/LocaleConfig.java,3/2/323f893495d9d325c6c68a1d13b8b579fcababec
+}
+Mmicro-noticias/src/main/java/io/micronoticias/config/bean/TimezoneConfig.java,0/f/0f1ead4c33f09fc0d743f68b8953b1d6ba052478
