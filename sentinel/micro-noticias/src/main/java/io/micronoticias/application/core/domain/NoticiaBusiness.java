@@ -1,5 +1,6 @@
 package io.micronoticias.application.core.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.micronoticias.config.exception.http_400.CampoNuloProibidoException;
 import io.micronoticias.config.exception.http_400.CampoVazioProibidoException;
 import io.micronoticias.config.exception.http_400.DadoComTamanhoMaximoInvalidoException;
@@ -8,6 +9,7 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public final class NoticiaBusiness {
 
     private Long id;
