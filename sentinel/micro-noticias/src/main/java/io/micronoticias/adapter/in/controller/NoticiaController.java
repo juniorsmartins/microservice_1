@@ -2,7 +2,7 @@ package io.micronoticias.adapter.in.controller;
 
 import io.micronoticias.adapter.in.dto.request.NoticiaCriarDtoIn;
 import io.micronoticias.adapter.in.dto.response.NoticiaCriarDtoOut;
-import io.micronoticias.adapter.mapper.NoticiaMapper;
+import io.micronoticias.adapter.in.mapper.NoticiaMapperDto;
 import io.micronoticias.application.port.in.NoticiaCriarInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class NoticiaController {
 
     private final NoticiaCriarInputPort criarInputPort;
 
-    private final NoticiaMapper mapper;
+    private final NoticiaMapperDto mapper;
 
     @PostMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
@@ -32,9 +32,25 @@ public class NoticiaController {
     public ResponseEntity<NoticiaCriarDtoOut> criar(@RequestBody @Valid NoticiaCriarDtoIn dtoIn) {
 
         var resposta = Optional.of(dtoIn)
+                .map(teste -> {
+                    System.out.println(teste);
+                    return teste;
+                })
                 .map(this.mapper::toNoticiaBusiness)
+                .map(teste -> {
+                    System.out.println(teste);
+                    return teste;
+                })
                 .map(this.criarInputPort::criar)
-                .map(this.mapper::fromNoticiaBusiness)
+                .map(teste -> {
+                    System.out.println(teste);
+                    return teste;
+                })
+                .map(this.mapper::toNoticiaCriarDtoOut)
+                .map(teste -> {
+                    System.out.println(teste);
+                    return teste;
+                })
                 .orElseThrow(NoSuchElementException::new);
 
         return ResponseEntity

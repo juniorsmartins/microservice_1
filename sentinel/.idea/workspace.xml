@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="104ce9eb-638f-48a9-af61-45d4c51eb7a1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/9/39e3c37ad1ec8b62c78d6e954c824009a363a18b" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/9/39e3c37ad1ec8b62c78d6e954c824009a363a18b" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/a/6a3a0d6171f993158ab44da5e5466085efc77f4a" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/a/6a3a0d6171f993158ab44da5e5466085efc77f4a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/in/controller/NoticiaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/in/controller/NoticiaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/mapper/NoticiaMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/in/mapper/NoticiaMapperDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/out/NoticiaSalvarAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/out/NoticiaSalvarAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/application/core/domain/NoticiaBusiness.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/application/core/domain/NoticiaBusiness.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/resources/application-dev.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/resources/application-prod.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,28 +50,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.MicroNoticiasApplication.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in micro-noticias.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComContentNegotiationXML_RetornarHttp201.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.NoticiaControllerUnitTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.NoticiaCriarControllerUnitTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.NoticiaCriarUseCaseUnitTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.NoticiaSalvarAdapterUnitTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.NoticiaSalvarAdapterUnitTest.salvarNoticia_ComDadosValidos_RetornarNoticiaBusiness.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.java in micro-noticias.executor&quot;: &quot;Coverage&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/juniormartins/Workspace/microservice_1/sentinel&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MicroNoticiasApplication.executor": "Debug",
+    "JUnit.All in micro-noticias.executor": "Run",
+    "JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComContentNegotiationXML_RetornarHttp201.executor": "Run",
+    "JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400.executor": "Run",
+    "JUnit.NoticiaControllerUnitTest.executor": "Run",
+    "JUnit.NoticiaCriarControllerUnitTest.executor": "Run",
+    "JUnit.NoticiaCriarUseCaseUnitTest.executor": "Run",
+    "JUnit.NoticiaSalvarAdapterUnitTest.executor": "Run",
+    "JUnit.NoticiaSalvarAdapterUnitTest.salvarNoticia_ComDadosValidos_RetornarNoticiaBusiness.executor": "Run",
+    "JUnit.java in micro-noticias.executor": "Run",
+    "Maven.micro-noticias [org.apache.maven.plugins:maven-clean-plugin:3.3.2:clean].executor": "Run",
+    "Maven.micro-noticias [org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile].executor": "Run",
+    "Maven.micro-noticias [org.apache.maven.plugins:maven-install-plugin:3.1.1:install].executor": "Run",
+    "Maven.micro-noticias [org.apache.maven.plugins:maven-jar-plugin:3.3.0:jar].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "develop",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/juniormartins/Workspace/microservice_1/sentinel",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -73,6 +89,7 @@
       <recent name="io.micronoticias.adapter.in.controller" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.micronoticias.adapter.out.mapper" />
       <recent name="io.micronoticias.config.exception.http_400" />
       <recent name="io.micronoticias.config.exception" />
       <recent name="io.micronoticias.application.core.domain" />
@@ -92,18 +109,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NoticiaControllerIntegrationTest.criarNoticia_ComContentNegotiationXML_RetornarHttp201" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in micro-noticias" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="micro-noticias" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.micronoticias.adapter.in.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="io.micronoticias.adapter.in.controller" />
-      <option name="MAIN_CLASS_NAME" value="io.micronoticias.adapter.in.controller.NoticiaControllerIntegrationTest" />
-      <option name="METHOD_NAME" value="criarNoticia_ComContentNegotiationXML_RetornarHttp201" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -151,9 +160,9 @@
       <list>
         <item itemvalue="Application.MicroNoticiasApplication" />
         <item itemvalue="JUnit.java in micro-noticias" />
-        <item itemvalue="JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComContentNegotiationXML_RetornarHttp201" />
-        <item itemvalue="JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400" />
+        <item itemvalue="JUnit.All in micro-noticias" />
         <item itemvalue="JUnit.NoticiaCriarUseCaseUnitTest" />
+        <item itemvalue="JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400" />
       </list>
     </recent_temporary>
   </component>
@@ -174,6 +183,13 @@
       <updated>1701988140284</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <inline-watch fileUrl="file://$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/out/NoticiaSalvarAdapter.java" line="30">
+        <watch expression="((NoticiaSalvarAdapter)this).mapper" language="JAVA" custom="io.micronoticias.adapter.out.NoticiaSalvarAdapter" />
+      </inline-watch>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sentinel$java_in_micro_noticias.ic" NAME="java in micro-noticias Coverage Results" MODIFIED="1702212780228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
