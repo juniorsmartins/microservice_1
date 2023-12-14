@@ -24,20 +24,8 @@ public class NoticiaSalvarAdapter implements NoticiaSalvarOutputPort {
     public NoticiaBusiness salvar(NoticiaBusiness noticiaBusiness) {
 
         return Optional.of(noticiaBusiness)
-                .map(teste -> {
-                    System.out.println(teste);
-                    return teste;
-                })
                 .map(this.mapper::toNoticiaEntity)
-                .map(teste -> {
-                    System.out.println(teste);
-                    return teste;
-                })
                 .map(this.repository::save)
-                .map(teste -> {
-                    System.out.println(teste);
-                    return teste;
-                })
                 .map(this.mapper::toNoticiaBusiness)
                 .orElseThrow(NoSuchElementException::new);
     }
