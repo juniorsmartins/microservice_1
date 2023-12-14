@@ -5,18 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="104ce9eb-638f-48a9-af61-45d4c51eb7a1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/9/39e3c37ad1ec8b62c78d6e954c824009a363a18b" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/9/39e3c37ad1ec8b62c78d6e954c824009a363a18b" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/a/6a3a0d6171f993158ab44da5e5466085efc77f4a" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/a/6a3a0d6171f993158ab44da5e5466085efc77f4a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/3/130eca15d07ee1c598d001340471bf40c345d56e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/c/3c3cc171e45d75b1773802eb1f1cac714c9b670b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/b/eb00545a19d00bb0c939567318f920f3e5d12982" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/3/130eca15d07ee1c598d001340471bf40c345d56e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/c/3c3cc171e45d75b1773802eb1f1cac714c9b670b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/b/eb00545a19d00bb0c939567318f920f3e5d12982" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/in/controller/NoticiaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/in/controller/NoticiaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/mapper/NoticiaMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/in/mapper/NoticiaMapperDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/out/NoticiaSalvarAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/out/NoticiaSalvarAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/application/core/domain/NoticiaBusiness.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/application/core/domain/NoticiaBusiness.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/resources/application-dev.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/resources/application-prod.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +51,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.MicroNoticiasApplication.executor": "Debug",
+    "Application.MicroNoticiasApplication.executor": "Run",
     "JUnit.All in micro-noticias.executor": "Run",
     "JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComContentNegotiationXML_RetornarHttp201.executor": "Run",
     "JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400.executor": "Run",
@@ -95,7 +94,7 @@
       <recent name="io.micronoticias.application.core.domain" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MicroNoticiasApplication">
+  <component name="RunManager" selected="JUnit.java in micro-noticias">
     <configuration name="MicroNoticiasApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="io.micronoticias.MicroNoticiasApplication" />
       <module name="micro-noticias" />
@@ -158,8 +157,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MicroNoticiasApplication" />
         <item itemvalue="JUnit.java in micro-noticias" />
+        <item itemvalue="Application.MicroNoticiasApplication" />
         <item itemvalue="JUnit.All in micro-noticias" />
         <item itemvalue="JUnit.NoticiaCriarUseCaseUnitTest" />
         <item itemvalue="JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400" />
@@ -186,7 +185,7 @@
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
-      <inline-watch fileUrl="file://$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/out/NoticiaSalvarAdapter.java" line="30">
+      <inline-watch fileUrl="file://$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/out/NoticiaSalvarAdapter.java" line="26">
         <watch expression="((NoticiaSalvarAdapter)this).mapper" language="JAVA" custom="io.micronoticias.adapter.out.NoticiaSalvarAdapter" />
       </inline-watch>
     </watches-manager>

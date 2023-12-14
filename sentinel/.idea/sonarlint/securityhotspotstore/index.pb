@@ -35,8 +35,6 @@ _micro-noticias/src/main/java/io/micronoticias/application/core/usecase/NoticiaC
 gmicro-noticias/src/test/java/io/micronoticias/adapter/in/controller/NoticiaCriarControllerUnitTest.java,2/6/26f9aaa90d0d29d8695c8776545712188a7d6b30
 É
 Smicro-noticias/src/main/java/io/micronoticias/adapter/out/NoticiaSalvarAdapter.java,6/a/6a3a0d6171f993158ab44da5e5466085efc77f4a
-
-Omicro-noticias/src/main/java/io/micronoticias/adapter/mapper/NoticiaMapper.java,e/b/eb00545a19d00bb0c939567318f920f3e5d12982
 É
 Smicro-noticias/src/main/java/io/micronoticias/config/bean/NoticiaUseCaseConfig.java,a/e/aed3b489591fe74733092913611c0f804d366015
 è
@@ -67,10 +65,6 @@ G
 micro-noticias/mvnw.cmd,a/f/af19aebbf57a4f82cecc9019467f17fa0baf4989
 {
 Kmicro-noticias/src/main/java/io/micronoticias/MicroNoticiasApplication.java,8/7/8739af5a92ecfdd790bc0142186b5fe4d6c2a5c7
-Ç
-Rmicro-noticias/src/main/java/io/micronoticias/adapter/in/mapper/NoticiaMapper.java,1/3/130eca15d07ee1c598d001340471bf40c345d56e
-É
-Smicro-noticias/src/main/java/io/micronoticias/adapter/out/mapper/NoticiaMapper.java,3/c/3c3cc171e45d75b1773802eb1f1cac714c9b670b
 Ö
 Umicro-noticias/src/main/java/io/micronoticias/adapter/in/mapper/NoticiaMapperDto.java,8/9/899326d0b53d13d94ca1a3634943df791e14f80e
 â
