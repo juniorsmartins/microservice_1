@@ -14,7 +14,6 @@ import java.time.Instant;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode(of = {"id"})
 public final class NoticiaEntity implements Serializable {
 

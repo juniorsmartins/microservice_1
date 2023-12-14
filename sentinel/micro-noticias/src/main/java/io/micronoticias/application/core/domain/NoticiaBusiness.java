@@ -12,6 +12,20 @@ import java.util.Optional;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public final class NoticiaBusiness {
 
+    public static final int CHAPEU_CARACTERES_MAXIMO = 20;
+
+    public static final int TITULO_CARACTERES_MAXIMO = 100;
+
+    public static final int LINHA_FINA_CARACTERES_MAXIMO = 150;
+
+    public static final int LIDE_CARACTERES_MAXIMO = 500;
+
+    public static final int CORPO_CARACTERES_MAXIMO = 5000;
+
+    public static final int NOME_AUTOR_CARACTERES_MAXIMO = 50;
+
+    public static final int FONTE_CARACTERES_MAXIMO = 250;
+
     private Long id;
 
     private String chapeu;
@@ -32,6 +46,22 @@ public final class NoticiaBusiness {
 
     private Instant dataHoraAtualizacao;
 
+    public NoticiaBusiness() {}
+
+    public NoticiaBusiness(Long id, String chapeu, String titulo, String linhaFina,
+                           String lide, String corpo, String nomeAutor, String fonte,
+                           Instant dataHoraCriacao) {
+        this.setId(id);
+        this.setChapeu(chapeu);
+        this.setTitulo(titulo);
+        this.setLinhaFina(linhaFina);
+        this.setLide(lide);
+        this.setCorpo(corpo);
+        this.setNomeAutor(nomeAutor);
+        this.setFonte(fonte);
+        this.setDataHoraCriacao(dataHoraCriacao);
+    }
+
     public Long getId() {
         return id;
     }
@@ -45,12 +75,14 @@ public final class NoticiaBusiness {
     }
 
     public void setChapeu(String chapeu) {
+        final String CHAPEU = "Chapéu";
+
         Optional.ofNullable(chapeu)
             .ifPresentOrElse(boina -> {
-                this.validarCampo("Chapéu", boina, 20);
+                this.validarCampo(CHAPEU, boina, CHAPEU_CARACTERES_MAXIMO);
                 this.chapeu = boina;
             },
-            () -> {throw new CampoNuloProibidoException("Chapéu");}
+            () -> {throw new CampoNuloProibidoException(CHAPEU);}
         );
     }
 
@@ -59,12 +91,14 @@ public final class NoticiaBusiness {
     }
 
     public void setTitulo(String titulo) {
+        final String TITULO = "Título";
+
         Optional.ofNullable(titulo)
             .ifPresentOrElse(title -> {
-                this.validarCampo("Título", title, 100);
+                this.validarCampo(TITULO, title, TITULO_CARACTERES_MAXIMO);
                 this.titulo = title;
             },
-            () -> {throw new CampoNuloProibidoException("Título");}
+            () -> {throw new CampoNuloProibidoException(TITULO);}
         );
     }
 
@@ -73,12 +107,14 @@ public final class NoticiaBusiness {
     }
 
     public void setLinhaFina(String linhaFina) {
+        final String LINHA_FINA = "Linha Fina";
+
         Optional.ofNullable(linhaFina)
             .ifPresentOrElse(linha -> {
-                this.validarCampo("Linha Fina", linha, 150);
+                this.validarCampo(LINHA_FINA, linha, LINHA_FINA_CARACTERES_MAXIMO);
                 this.linhaFina = linha;
             },
-            () -> {throw new CampoNuloProibidoException("Linha Fina");}
+            () -> {throw new CampoNuloProibidoException(LINHA_FINA);}
         );
     }
 
@@ -87,12 +123,14 @@ public final class NoticiaBusiness {
     }
 
     public void setLide(String lide) {
+        final String LIDE = "Lide";
+
         Optional.ofNullable(lide)
             .ifPresentOrElse(lead -> {
-                this.validarCampo("Lide", lead, 500);
+                this.validarCampo(LIDE, lead, LIDE_CARACTERES_MAXIMO);
                 this.lide = lead;
             },
-            () -> {throw new CampoNuloProibidoException("Lide");}
+            () -> {throw new CampoNuloProibidoException(LIDE);}
         );
     }
 
@@ -101,12 +139,14 @@ public final class NoticiaBusiness {
     }
 
     public void setCorpo(String corpo) {
+        final String CORPO = "Corpo";
+
         Optional.ofNullable(corpo)
             .ifPresentOrElse(corpus -> {
-                    this.validarCampo("Corpo", corpus, 5000);
+                    this.validarCampo(CORPO, corpus, CORPO_CARACTERES_MAXIMO);
                     this.corpo = corpus;
                 },
-                () -> {throw new CampoNuloProibidoException("Corpo");}
+                () -> {throw new CampoNuloProibidoException(CORPO);}
             );
     }
 
@@ -115,8 +155,9 @@ public final class NoticiaBusiness {
     }
 
     public void setNomeAutor(String nomeAutor) {
-        if (Objects.nonNull(nomeAutor) && nomeAutor.length() > 50) {
-            throw new DadoComTamanhoMaximoInvalidoException("Nome do Autor", 50, nomeAutor.length());
+        if (Objects.nonNull(nomeAutor) && nomeAutor.length() > NOME_AUTOR_CARACTERES_MAXIMO) {
+            throw new DadoComTamanhoMaximoInvalidoException("Nome do Autor", NOME_AUTOR_CARACTERES_MAXIMO,
+                nomeAutor.length());
         }
         this.nomeAutor = nomeAutor;
     }
@@ -126,8 +167,8 @@ public final class NoticiaBusiness {
     }
 
     public void setFonte(String fonte) {
-        if (Objects.nonNull(fonte) && fonte.length() > 250) {
-            throw new DadoComTamanhoMaximoInvalidoException("Fonte", 250, fonte.length());
+        if (Objects.nonNull(fonte) && fonte.length() > FONTE_CARACTERES_MAXIMO) {
+            throw new DadoComTamanhoMaximoInvalidoException("Fonte", FONTE_CARACTERES_MAXIMO, fonte.length());
         }
         this.fonte = fonte;
     }
@@ -168,22 +209,6 @@ public final class NoticiaBusiness {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
-    }
-
-    @Override
-    public String toString() {
-        return "NoticiaBusiness{" +
-                "id=" + id +
-                ", chapeu='" + chapeu + '\'' +
-                ", titulo='" + titulo + '\'' +
-                ", linhaFina='" + linhaFina + '\'' +
-                ", lide='" + lide + '\'' +
-                ", corpo='" + corpo + '\'' +
-                ", nomeAutor='" + nomeAutor + '\'' +
-                ", fonte='" + fonte + '\'' +
-                ", dataHoraCriacao=" + dataHoraCriacao +
-                ", dataHoraAtualizacao=" + dataHoraAtualizacao +
-                '}';
     }
 }
 
