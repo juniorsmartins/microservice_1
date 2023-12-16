@@ -48,19 +48,22 @@ class NoticiaCriarControllerUnitTest {
 
         var resposta = this.controller.criar(dtoIn);
 
-        Assertions.assertEquals(ResponseEntity.class, resposta.getClass());
-        Assertions.assertEquals(NoticiaCriarDtoOut.class, resposta.getBody().getClass());
-        Assertions.assertEquals(HttpStatus.CREATED, resposta.getStatusCode());
-        Assertions.assertNotNull(resposta.getBody().id());
-        Assertions.assertEquals(dtoIn.chapeu(), resposta.getBody().chapeu());
-        Assertions.assertEquals(dtoIn.titulo(), resposta.getBody().titulo());
-        Assertions.assertEquals(dtoIn.linhaFina(), resposta.getBody().linhaFina());
-        Assertions.assertEquals(dtoIn.lide(), resposta.getBody().lide());
-        Assertions.assertEquals(dtoIn.corpo(), resposta.getBody().corpo());
-        Assertions.assertEquals(dtoIn.nomeAutor(), resposta.getBody().nomeAutor());
-        Assertions.assertEquals(dtoIn.fonte(), resposta.getBody().fonte());
-        Assertions.assertEquals(noticiaBusiness.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
-                resposta.getBody().dataHoraCriacao().truncatedTo(ChronoUnit.SECONDS));
+        Assertions.assertAll("Asserções Criar Controller",
+            () -> Assertions.assertEquals(ResponseEntity.class, resposta.getClass()),
+            () -> Assertions.assertEquals(NoticiaCriarDtoOut.class, resposta.getBody().getClass()),
+            () -> Assertions.assertEquals(HttpStatus.CREATED, resposta.getStatusCode()),
+
+            () -> Assertions.assertNotNull(resposta.getBody().id()),
+            () -> Assertions.assertEquals(dtoIn.chapeu(), resposta.getBody().chapeu()),
+            () -> Assertions.assertEquals(dtoIn.titulo(), resposta.getBody().titulo()),
+            () -> Assertions.assertEquals(dtoIn.linhaFina(), resposta.getBody().linhaFina()),
+            () -> Assertions.assertEquals(dtoIn.lide(), resposta.getBody().lide()),
+            () -> Assertions.assertEquals(dtoIn.corpo(), resposta.getBody().corpo()),
+            () -> Assertions.assertEquals(dtoIn.nomeAutor(), resposta.getBody().nomeAutor()),
+            () -> Assertions.assertEquals(dtoIn.fonte(), resposta.getBody().fonte()),
+            () -> Assertions.assertEquals(noticiaBusiness.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
+                    resposta.getBody().dataHoraCriacao().truncatedTo(ChronoUnit.SECONDS))
+        );
     }
 
 }

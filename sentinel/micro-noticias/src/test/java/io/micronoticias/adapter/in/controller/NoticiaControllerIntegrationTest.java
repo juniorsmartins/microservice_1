@@ -4,6 +4,7 @@ import io.micronoticias.adapter.in.dto.response.NoticiaCriarDtoOut;
 import io.micronoticias.adapter.out.repository.NoticiaRepository;
 import io.micronoticias.config.exception.ApiError;
 import io.micronoticias.util.CriadorDeObjetos;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -40,15 +41,15 @@ class NoticiaControllerIntegrationTest {
         var dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder().build();
 
         this.webTestClient.post()
-                .uri(END_POINT)
-                .accept(MediaType.APPLICATION_XML)
-                .bodyValue(dtoIn)
-                .exchange()
-                .expectStatus().isCreated()
-                .expectHeader().contentType(MediaType.APPLICATION_XML)
-                .expectBody().consumeWith(response -> {
-                    assertThat(response.getResponseBody()).isNotNull();
-                });
+            .uri(END_POINT)
+            .accept(MediaType.APPLICATION_XML)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isCreated()
+            .expectHeader().contentType(MediaType.APPLICATION_XML)
+            .expectBody().consumeWith(response -> {
+                assertThat(response.getResponseBody()).isNotNull();
+            });
     }
 
     @Test
@@ -58,23 +59,23 @@ class NoticiaControllerIntegrationTest {
         var dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder().build();
 
         this.webTestClient.post()
-                .uri(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(dtoIn)
-                .exchange()
-                .expectStatus().isCreated()
-                .expectBody(NoticiaCriarDtoOut.class)
-                .consumeWith(response -> {
-                    assertThat(response.getResponseBody()).isNotNull();
-                    assertThat(response.getResponseBody().chapeu()).isEqualTo(dtoIn.chapeu());
-                    assertThat(response.getResponseBody().titulo()).isEqualTo(dtoIn.titulo());
-                    assertThat(response.getResponseBody().linhaFina()).isEqualTo(dtoIn.linhaFina());
-                    assertThat(response.getResponseBody().lide()).isEqualTo(dtoIn.lide());
-                    assertThat(response.getResponseBody().corpo()).isEqualTo(dtoIn.corpo());
-                    assertThat(response.getResponseBody().nomeAutor()).isEqualTo(dtoIn.nomeAutor());
-                    assertThat(response.getResponseBody().fonte()).isEqualTo(dtoIn.fonte());
-                    assertThat(response.getResponseBody().dataHoraCriacao()).isNotNull();
-                });
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isCreated()
+            .expectBody(NoticiaCriarDtoOut.class)
+            .consumeWith(response -> {
+                assertThat(response.getResponseBody()).isNotNull();
+                assertThat(response.getResponseBody().chapeu()).isEqualTo(dtoIn.chapeu());
+                assertThat(response.getResponseBody().titulo()).isEqualTo(dtoIn.titulo());
+                assertThat(response.getResponseBody().linhaFina()).isEqualTo(dtoIn.linhaFina());
+                assertThat(response.getResponseBody().lide()).isEqualTo(dtoIn.lide());
+                assertThat(response.getResponseBody().corpo()).isEqualTo(dtoIn.corpo());
+                assertThat(response.getResponseBody().nomeAutor()).isEqualTo(dtoIn.nomeAutor());
+                assertThat(response.getResponseBody().fonte()).isEqualTo(dtoIn.fonte());
+                assertThat(response.getResponseBody().dataHoraCriacao()).isNotNull();
+            });
     }
 
     @Test
@@ -84,13 +85,13 @@ class NoticiaControllerIntegrationTest {
         var dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder().build();
 
         var resposta = this.webTestClient.post()
-                .uri(END_POINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(dtoIn)
-                .exchange()
-                .expectStatus().isCreated()
-                .expectBody(NoticiaCriarDtoOut.class)
-                .returnResult().getResponseBody();
+            .uri(END_POINT)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(dtoIn)
+            .exchange()
+            .expectStatus().isCreated()
+            .expectBody(NoticiaCriarDtoOut.class)
+            .returnResult().getResponseBody();
 
         var noticiaDoBanco = this.noticiaRepository.findById(resposta.id()).get();
 

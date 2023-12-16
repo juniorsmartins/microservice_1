@@ -45,16 +45,18 @@ class NoticiaSalvarAdapterUnitTest {
 
         var resposta = this.salvarAdapter.salvar(businessIn);
 
-        Assertions.assertNotNull(resposta.getId());
-        Assertions.assertEquals(businessIn.getChapeu(), resposta.getChapeu());
-        Assertions.assertEquals(businessIn.getTitulo(), resposta.getTitulo());
-        Assertions.assertEquals(businessIn.getLinhaFina(), resposta.getLinhaFina());
-        Assertions.assertEquals(businessIn.getLide(), resposta.getLide());
-        Assertions.assertEquals(businessIn.getCorpo(), resposta.getCorpo());
-        Assertions.assertEquals(businessIn.getNomeAutor(), resposta.getNomeAutor());
-        Assertions.assertEquals(businessIn.getFonte(), resposta.getFonte());
-        Assertions.assertEquals(noticiaEntity.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
-                resposta.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS));
+        Assertions.assertAll("Asserções Salvar Adapter",
+            () -> Assertions.assertNotNull(resposta.getId()),
+            () -> Assertions.assertEquals(businessIn.getChapeu(), resposta.getChapeu()),
+            () -> Assertions.assertEquals(businessIn.getTitulo(), resposta.getTitulo()),
+            () -> Assertions.assertEquals(businessIn.getLinhaFina(), resposta.getLinhaFina()),
+            () -> Assertions.assertEquals(businessIn.getLide(), resposta.getLide()),
+            () -> Assertions.assertEquals(businessIn.getCorpo(), resposta.getCorpo()),
+            () -> Assertions.assertEquals(businessIn.getNomeAutor(), resposta.getNomeAutor()),
+            () -> Assertions.assertEquals(businessIn.getFonte(), resposta.getFonte()),
+            () -> Assertions.assertEquals(noticiaEntity.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
+                    resposta.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS))
+        );
     }
 }
 

@@ -46,16 +46,18 @@ class NoticiaCriarUseCaseUnitTest {
 
         var resposta = this.criarUseCase.criar(business);
 
-        Assertions.assertNotNull(resposta.getId());
-        Assertions.assertEquals(business.getChapeu(), resposta.getChapeu());
-        Assertions.assertEquals(business.getTitulo(), resposta.getTitulo());
-        Assertions.assertEquals(business.getLinhaFina(), resposta.getLinhaFina());
-        Assertions.assertEquals(business.getLide(), resposta.getLide());
-        Assertions.assertEquals(business.getCorpo(), resposta.getCorpo());
-        Assertions.assertEquals(business.getNomeAutor(), resposta.getNomeAutor());
-        Assertions.assertEquals(business.getFonte(), resposta.getFonte());
-        Assertions.assertEquals(business.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
-                resposta.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS));
+        Assertions.assertAll("Asserções Criar UseCase",
+            () -> Assertions.assertNotNull(resposta.getId()),
+            () -> Assertions.assertEquals(business.getChapeu(), resposta.getChapeu()),
+            () -> Assertions.assertEquals(business.getTitulo(), resposta.getTitulo()),
+            () -> Assertions.assertEquals(business.getLinhaFina(), resposta.getLinhaFina()),
+            () -> Assertions.assertEquals(business.getLide(), resposta.getLide()),
+            () -> Assertions.assertEquals(business.getCorpo(), resposta.getCorpo()),
+            () -> Assertions.assertEquals(business.getNomeAutor(), resposta.getNomeAutor()),
+            () -> Assertions.assertEquals(business.getFonte(), resposta.getFonte()),
+            () -> Assertions.assertEquals(business.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
+                    resposta.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS))
+        );
     }
 
 //    @Test
