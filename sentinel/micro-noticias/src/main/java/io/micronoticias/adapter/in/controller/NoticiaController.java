@@ -2,7 +2,8 @@ package io.micronoticias.adapter.in.controller;
 
 import io.micronoticias.adapter.in.dto.request.NoticiaCriarDtoIn;
 import io.micronoticias.adapter.in.dto.response.NoticiaCriarDtoOut;
-import io.micronoticias.adapter.in.mapper.NoticiaMapperDto;
+import io.micronoticias.adapter.in.mapper.NoticiaMapperDtoIn;
+import io.micronoticias.adapter.in.mapper.NoticiaMapperDtoOut;
 import io.micronoticias.application.port.in.NoticiaCriarInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,9 @@ public class NoticiaController {
 
     private final NoticiaCriarInputPort criarInputPort;
 
-    private final NoticiaMapperDto mapper;
+    private final NoticiaMapperDtoIn mapperIn;
+
+    private final NoticiaMapperDtoOut mapperOut;
 
     @PostMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
@@ -32,9 +35,9 @@ public class NoticiaController {
     public ResponseEntity<NoticiaCriarDtoOut> criar(@RequestBody @Valid NoticiaCriarDtoIn dtoIn) {
 
         var resposta = Optional.of(dtoIn)
-                .map(this.mapper::toNoticiaBusiness)
+                .map(this.mapperIn::toNoticiaBusiness)
                 .map(this.criarInputPort::criar)
-                .map(this.mapper::toNoticiaCriarDtoOut)
+                .map(this.mapperOut::toNoticiaCriarDtoOut)
                 .orElseThrow(NoSuchElementException::new);
 
         return ResponseEntity

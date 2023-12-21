@@ -41,8 +41,6 @@ Smicro-noticias/src/main/java/io/micronoticias/config/bean/NoticiaUseCaseConfig.
 _micro-noticias/src/main/java/io/micronoticias/application/port/out/NoticiaSalvarOutputPort.java,0/d/0d4b8c9773f9a1569986491440e0b46ac791fd0a
 ‹
 [micro-noticias/src/test/java/io/micronoticias/adapter/out/NoticiaSalvarAdapterUnitTest.java,1/d/1d7aec1a6b9d939a253ab143a62bad0614c045f8
-x
-Hmicro-noticias/src/test/java/io/micronoticias/util/CriadorDeObjetos.java,1/b/1bb5ebcbe2378a69298b3f5d059e823f44a3dd03
 —
 gmicro-noticias/src/test/java/io/micronoticias/application/core/usecase/NoticiaCriarUseCaseUnitTest.java,1/8/1815422e36343cbf75dc44b408fdb144cf19aedd
 Š
@@ -65,9 +63,22 @@ G
 micro-noticias/mvnw.cmd,a/f/af19aebbf57a4f82cecc9019467f17fa0baf4989
 {
 Kmicro-noticias/src/main/java/io/micronoticias/MicroNoticiasApplication.java,8/7/8739af5a92ecfdd790bc0142186b5fe4d6c2a5c7
-…
-Umicro-noticias/src/main/java/io/micronoticias/adapter/in/mapper/NoticiaMapperDto.java,8/9/899326d0b53d13d94ca1a3634943df791e14f80e
 ‰
 Ymicro-noticias/src/main/java/io/micronoticias/adapter/out/mapper/NoticiaMapperEntity.java,6/1/61f70f3b87b8d44e399600b65aa29c0e51eafc83
+<<<<<<< HEAD
 
 Omicro-noticias/src/test/java/io/micronoticias/util/FabricaDeObjetosDeTeste.java,d/4/d4d37dcd74431e3cdffc1967d76d3f1714df915d
+=======
+’
+bmicro-noticias/src/test/java/io/micronoticias/application/core/domain/NoticiaBusinessUnitTest.java,a/a/aaa96482602b8f5c050c488927da28995c9b8540
+
+Omicro-noticias/src/test/java/io/micronoticias/util/FabricaDeObjetosDeTeste.java,d/4/d4d37dcd74431e3cdffc1967d76d3f1714df915d
+ˆ
+Xmicro-noticias/src/main/java/io/micronoticias/adapter/in/mapper/NoticiaMapperDtoOut.java,7/5/75b77642f4c818df32eb31edd0f77122fae73724
+‡
+Wmicro-noticias/src/main/java/io/micronoticias/adapter/in/mapper/NoticiaMapperDtoIn.java,b/f/bf297c7c595a7bd4cf71022f14bc6ba74b03104b
+‹
+[micro-noticias/src/main/java/io/micronoticias/adapter/out/mapper/NoticiaMapperBusiness.java,9/5/9545b20a56ad7ddcb5c7dff33a54aa092969888a
+‡
+Wmicro-noticias/src/test/java/io/micronoticias/adapter/out/entity/NoticiaEntityTest.java,e/6/e6213805149863004f9140e01a7a41d7b4aaf029
+>>>>>>> develop
