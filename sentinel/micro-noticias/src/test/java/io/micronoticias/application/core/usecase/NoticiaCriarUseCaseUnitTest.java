@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@DisplayName("Notícia UseCase")
 class NoticiaCriarUseCaseUnitTest {
 
     @MockBean
@@ -28,31 +28,39 @@ class NoticiaCriarUseCaseUnitTest {
     @Autowired
     private NoticiaCriarUseCase criarUseCase;
 
-    @Test
-    @Order(1)
-    void criarNoticia_ComDadosValidos_RetornarNoticiaBusiness() {
+    @Nested
+    @DisplayName("Método Criar")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class CriarTest {
 
-        var business = FabricaDeObjetosDeTeste.gerarNoticiaBusiness();
-        business.setId(2L);
-        business.setDataHoraCriacao(Instant.now());
+        @Test
+        @Order(1)
+        @DisplayName("Com Notícia válida")
+        void dadoNoticiaValida_QuandoCriar_EntaoRetornarNoticiaCriadaComDadosIguaisAosDaEntrada() {
+            var business = FabricaDeObjetosDeTeste.gerarNoticiaBusiness();
+            business.setId(2L);
+            business.setDataHoraCriacao(Instant.now());
 
-        Mockito.when(salvarAdapter.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(business);
+            Mockito.when(salvarAdapter.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(business);
 
-        var resposta = this.criarUseCase.criar(business);
+            var resposta = criarUseCase.criar(business);
 
-        Assertions.assertAll("Asserções Criar UseCase",
-            () -> Assertions.assertNotNull(resposta.getId()),
-            () -> Assertions.assertEquals(business.getChapeu(), resposta.getChapeu()),
-            () -> Assertions.assertEquals(business.getTitulo(), resposta.getTitulo()),
-            () -> Assertions.assertEquals(business.getLinhaFina(), resposta.getLinhaFina()),
-            () -> Assertions.assertEquals(business.getLide(), resposta.getLide()),
-            () -> Assertions.assertEquals(business.getCorpo(), resposta.getCorpo()),
-            () -> Assertions.assertEquals(business.getNomeAutor(), resposta.getNomeAutor()),
-            () -> Assertions.assertEquals(business.getFonte(), resposta.getFonte()),
-            () -> Assertions.assertEquals(business.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
-                    resposta.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS))
-        );
+            Assertions.assertAll("Asserções Criar UseCase",
+                () -> Assertions.assertNotNull(resposta.getId()),
+                () -> Assertions.assertEquals(business.getChapeu(), resposta.getChapeu()),
+                () -> Assertions.assertEquals(business.getTitulo(), resposta.getTitulo()),
+                () -> Assertions.assertEquals(business.getLinhaFina(), resposta.getLinhaFina()),
+                () -> Assertions.assertEquals(business.getLide(), resposta.getLide()),
+                () -> Assertions.assertEquals(business.getCorpo(), resposta.getCorpo()),
+                () -> Assertions.assertEquals(business.getNomeAutor(), resposta.getNomeAutor()),
+                () -> Assertions.assertEquals(business.getFonte(), resposta.getFonte()),
+                () -> Assertions.assertEquals(business.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
+                        resposta.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS))
+            );
+        }
     }
+
+
 
 //    @Test
 //    @Order(2)
