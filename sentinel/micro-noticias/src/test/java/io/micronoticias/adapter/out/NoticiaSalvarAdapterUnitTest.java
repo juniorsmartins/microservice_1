@@ -2,9 +2,8 @@ package io.micronoticias.adapter.out;
 
 import io.micronoticias.adapter.out.entity.NoticiaEntity;
 import io.micronoticias.adapter.out.repository.NoticiaRepository;
-import io.micronoticias.util.CriadorDeObjetos;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import io.micronoticias.util.FabricaDeObjetosDeTeste;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -18,6 +17,7 @@ import java.time.temporal.ChronoUnit;
 
 @SpringBootTest
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
+@DisplayName("Notícia Adapter")
 class NoticiaSalvarAdapterUnitTest {
 
     @MockBean
@@ -26,37 +26,44 @@ class NoticiaSalvarAdapterUnitTest {
     @Autowired
     private NoticiaSalvarAdapter salvarAdapter;
 
-    @Test
-    void salvarNoticia_ComDadosValidos_RetornarNoticiaBusiness() {
-        var businessIn = CriadorDeObjetos.gerarNoticiaBusiness();
+    @Nested
+    @DisplayName("Método Salvar")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class SalvarTest {
 
-        var noticiaEntity = new NoticiaEntity();
-        noticiaEntity.setId(2L);
-        noticiaEntity.setChapeu(businessIn.getChapeu());
-        noticiaEntity.setTitulo(businessIn.getTitulo());
-        noticiaEntity.setLinhaFina(businessIn.getLinhaFina());
-        noticiaEntity.setLide(businessIn.getLide());
-        noticiaEntity.setCorpo(businessIn.getCorpo());
-        noticiaEntity.setNomeAutor(businessIn.getNomeAutor());
-        noticiaEntity.setFonte(businessIn.getFonte());
-        noticiaEntity.setDataHoraCriacao(Instant.now());
+        @Test
+        @Order(1)
+        @DisplayName("Notícia Válida")
+        void dadoNoticiaValida_QuandoSalvar_EntaoRetornarNoticiaSalvaComDadosIguaisAosDaEntrada() {
+            var noticiaBusiness = FabricaDeObjetosDeTeste.gerarNoticiaBusiness();
+            var noticiaEntity = NoticiaEntity.builder()
+                .id(2L)
+                .chapeu(noticiaBusiness.getChapeu())
+                .titulo(noticiaBusiness.getTitulo())
+                .linhaFina(noticiaBusiness.getLinhaFina())
+                .lide(noticiaBusiness.getLide())
+                .corpo(noticiaBusiness.getCorpo())
+                .nomeAutor(noticiaBusiness.getNomeAutor())
+                .fonte(noticiaBusiness.getFonte())
+                .dataHoraCriacao(Instant.now())
+                .build();
 
-        Mockito.when(repository.save(Mockito.any(NoticiaEntity.class))).thenReturn(noticiaEntity);
+            Mockito.when(repository.save(Mockito.any(NoticiaEntity.class))).thenReturn(noticiaEntity);
+            var resposta = salvarAdapter.salvar(noticiaBusiness);
 
-        var resposta = this.salvarAdapter.salvar(businessIn);
-
-        Assertions.assertAll("Asserções Salvar Adapter",
-            () -> Assertions.assertNotNull(resposta.getId()),
-            () -> Assertions.assertEquals(businessIn.getChapeu(), resposta.getChapeu()),
-            () -> Assertions.assertEquals(businessIn.getTitulo(), resposta.getTitulo()),
-            () -> Assertions.assertEquals(businessIn.getLinhaFina(), resposta.getLinhaFina()),
-            () -> Assertions.assertEquals(businessIn.getLide(), resposta.getLide()),
-            () -> Assertions.assertEquals(businessIn.getCorpo(), resposta.getCorpo()),
-            () -> Assertions.assertEquals(businessIn.getNomeAutor(), resposta.getNomeAutor()),
-            () -> Assertions.assertEquals(businessIn.getFonte(), resposta.getFonte()),
-            () -> Assertions.assertEquals(noticiaEntity.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
-                    resposta.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS))
-        );
+            Assertions.assertAll("Asserções - Salvar Adapter",
+                () -> Assertions.assertNotNull(resposta.getId()),
+                () -> Assertions.assertEquals(noticiaBusiness.getChapeu(), resposta.getChapeu()),
+                () -> Assertions.assertEquals(noticiaBusiness.getTitulo(), resposta.getTitulo()),
+                () -> Assertions.assertEquals(noticiaBusiness.getLinhaFina(), resposta.getLinhaFina()),
+                () -> Assertions.assertEquals(noticiaBusiness.getLide(), resposta.getLide()),
+                () -> Assertions.assertEquals(noticiaBusiness.getCorpo(), resposta.getCorpo()),
+                () -> Assertions.assertEquals(noticiaBusiness.getNomeAutor(), resposta.getNomeAutor()),
+                () -> Assertions.assertEquals(noticiaBusiness.getFonte(), resposta.getFonte()),
+                () -> Assertions.assertEquals(noticiaEntity.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
+                        resposta.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS))
+            );
+        }
     }
 }
 

@@ -3,7 +3,7 @@ package io.micronoticias.adapter.in.controller;
 import io.micronoticias.adapter.in.dto.response.NoticiaCriarDtoOut;
 import io.micronoticias.application.core.domain.NoticiaBusiness;
 import io.micronoticias.application.port.in.NoticiaCriarInputPort;
-import io.micronoticias.util.CriadorDeObjetos;
+import io.micronoticias.util.FabricaDeObjetosDeTeste;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +31,7 @@ class NoticiaCriarControllerUnitTest {
 
     @Test
     void criarNoticia_ComDadosValidos_RetornarNoticiaCriarDtoOutAndHttp201() {
-        var dtoIn = CriadorDeObjetos.gerarNoticiaCriarDtoInBuilder().build();
+        var dtoIn = FabricaDeObjetosDeTeste.gerarNoticiaCriarDtoInBuilder().build();
 
         var noticiaBusiness = new NoticiaBusiness();
         noticiaBusiness.setId(2L);

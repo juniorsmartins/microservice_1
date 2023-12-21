@@ -2,11 +2,7 @@ package io.micronoticias.application.core.usecase;
 
 import io.micronoticias.adapter.out.NoticiaSalvarAdapter;
 import io.micronoticias.application.core.domain.NoticiaBusiness;
-import io.micronoticias.config.exception.ApiError;
-import io.micronoticias.config.exception.http_400.CampoNuloProibidoException;
-import io.micronoticias.config.exception.http_400.CampoVazioProibidoException;
-import io.micronoticias.config.exception.http_400.DadoInvalidoException;
-import io.micronoticias.util.CriadorDeObjetos;
+import io.micronoticias.util.FabricaDeObjetosDeTeste;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -14,8 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.Instant;
@@ -38,7 +32,7 @@ class NoticiaCriarUseCaseUnitTest {
     @Order(1)
     void criarNoticia_ComDadosValidos_RetornarNoticiaBusiness() {
 
-        var business = CriadorDeObjetos.gerarNoticiaBusiness();
+        var business = FabricaDeObjetosDeTeste.gerarNoticiaBusiness();
         business.setId(2L);
         business.setDataHoraCriacao(Instant.now());
 
