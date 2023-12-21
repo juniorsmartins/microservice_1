@@ -2,7 +2,6 @@ package io.micronoticias.adapter.in.controller;
 
 import io.micronoticias.adapter.in.dto.response.NoticiaCriarDtoOut;
 import io.micronoticias.adapter.out.repository.NoticiaRepository;
-import io.micronoticias.config.exception.ApiError;
 import io.micronoticias.util.FabricaDeObjetosDeTeste;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.reactive.server.WebTestClient;

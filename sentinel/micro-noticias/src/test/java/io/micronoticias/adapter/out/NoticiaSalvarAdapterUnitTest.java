@@ -53,7 +53,7 @@ class NoticiaSalvarAdapterUnitTest {
     @Nested
     @DisplayName("Dados válidos")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-    class DadoValido {
+    class DadosValidos {
 
         @Test
         @Order(1)
