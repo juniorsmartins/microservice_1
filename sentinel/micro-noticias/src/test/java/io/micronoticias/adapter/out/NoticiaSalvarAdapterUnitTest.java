@@ -62,7 +62,7 @@ class NoticiaSalvarAdapterUnitTest {
             Mockito.when(repository.save(Mockito.any(NoticiaEntity.class))).thenReturn(noticiaEntity);
             var resposta = salvarAdapter.salvar(noticiaBusiness);
 
-            Assertions.assertAll("Asserções - Salvar Adapter",
+            Assertions.assertAll("Asserções Salvar",
                 () -> Assertions.assertNotNull(resposta.getId()),
                 () -> Assertions.assertEquals(noticiaBusiness.getChapeu(), resposta.getChapeu()),
                 () -> Assertions.assertEquals(noticiaBusiness.getTitulo(), resposta.getTitulo()),

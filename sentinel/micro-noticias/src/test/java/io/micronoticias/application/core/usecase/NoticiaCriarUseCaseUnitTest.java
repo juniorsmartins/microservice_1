@@ -1,6 +1,7 @@
 package io.micronoticias.application.core.usecase;
 
 import io.micronoticias.adapter.out.NoticiaSalvarAdapter;
+import io.micronoticias.adapter.out.entity.NoticiaEntity;
 import io.micronoticias.application.core.domain.NoticiaBusiness;
 import io.micronoticias.util.FabricaDeObjetosDeTeste;
 import org.junit.jupiter.api.*;
@@ -19,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
-@DisplayName("Notícia UseCase")
+@DisplayName("Notícia UseCase - Criar")
 class NoticiaCriarUseCaseUnitTest {
 
     @MockBean
@@ -28,39 +29,73 @@ class NoticiaCriarUseCaseUnitTest {
     @Autowired
     private NoticiaCriarUseCase criarUseCase;
 
+    private NoticiaBusiness noticiaBusiness;
+
+    @BeforeEach
+    void criarCenario() {
+        noticiaBusiness = FabricaDeObjetosDeTeste.gerarNoticiaBusiness();
+    }
+
     @Nested
-    @DisplayName("Método Criar")
+    @DisplayName("Dados válidos")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-    class CriarTest {
+    class DadoValido {
 
         @Test
         @Order(1)
-        @DisplayName("Com Notícia válida")
+        @DisplayName("completos")
         void dadoNoticiaValida_QuandoCriar_EntaoRetornarNoticiaCriadaComDadosIguaisAosDaEntrada() {
-            var business = FabricaDeObjetosDeTeste.gerarNoticiaBusiness();
-            business.setId(2L);
-            business.setDataHoraCriacao(Instant.now());
+            noticiaBusiness.setId(2L);
+            noticiaBusiness.setDataHoraCriacao(Instant.now());
 
-            Mockito.when(salvarAdapter.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(business);
+            Mockito.when(salvarAdapter.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(noticiaBusiness);
+            var resposta = criarUseCase.criar(noticiaBusiness);
 
-            var resposta = criarUseCase.criar(business);
-
-            Assertions.assertAll("Asserções Criar UseCase",
+            Assertions.assertAll("Asserções Criar",
                 () -> Assertions.assertNotNull(resposta.getId()),
-                () -> Assertions.assertEquals(business.getChapeu(), resposta.getChapeu()),
-                () -> Assertions.assertEquals(business.getTitulo(), resposta.getTitulo()),
-                () -> Assertions.assertEquals(business.getLinhaFina(), resposta.getLinhaFina()),
-                () -> Assertions.assertEquals(business.getLide(), resposta.getLide()),
-                () -> Assertions.assertEquals(business.getCorpo(), resposta.getCorpo()),
-                () -> Assertions.assertEquals(business.getNomeAutor(), resposta.getNomeAutor()),
-                () -> Assertions.assertEquals(business.getFonte(), resposta.getFonte()),
-                () -> Assertions.assertEquals(business.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
+                () -> Assertions.assertEquals(noticiaBusiness.getChapeu(), resposta.getChapeu()),
+                () -> Assertions.assertEquals(noticiaBusiness.getTitulo(), resposta.getTitulo()),
+                () -> Assertions.assertEquals(noticiaBusiness.getLinhaFina(), resposta.getLinhaFina()),
+                () -> Assertions.assertEquals(noticiaBusiness.getLide(), resposta.getLide()),
+                () -> Assertions.assertEquals(noticiaBusiness.getCorpo(), resposta.getCorpo()),
+                () -> Assertions.assertEquals(noticiaBusiness.getNomeAutor(), resposta.getNomeAutor()),
+                () -> Assertions.assertEquals(noticiaBusiness.getFonte(), resposta.getFonte()),
+                () -> Assertions.assertEquals(noticiaBusiness.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
                         resposta.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS))
             );
         }
+
+        @Test
+        @Order(2)
+        @DisplayName("sem nome de autor")
+        void dadoNoticiaValidaSemNomeAutor_QuandoCriar_EntaoRetornarNoticiaSalvaComDadosIguaisAosDaEntrada() {
+            noticiaBusiness.setNomeAutor(null);
+
+            Mockito.when(salvarAdapter.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(noticiaBusiness);
+            var resposta = salvarAdapter.salvar(noticiaBusiness);
+
+            Assertions.assertNull(resposta.getNomeAutor());
+        }
+
+        @Test
+        @Order(3)
+        @DisplayName("sem fonte")
+        void dadoNoticiaValidaSemFonte_QuandoCriar_EntaoRetornarNoticiaSalvaComDadosIguaisAosDaEntrada() {
+            noticiaBusiness.setFonte(null);
+
+            Mockito.when(salvarAdapter.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(noticiaBusiness);
+            var resposta = salvarAdapter.salvar(noticiaBusiness);
+
+            Assertions.assertNull(resposta.getFonte());
+        }
     }
 
+    @Nested
+    @DisplayName("Dados válidos")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class NoticiaException {
 
+    }
 
 //    @Test
 //    @Order(2)
