@@ -110,8 +110,8 @@ class NoticiaSalvarAdapterUnitTest {
 
         @Test
         @Order(1)
-        @DisplayName("Com notícia nula")
-        void dadoNoticiaNula_QuandoSalvar_EntaoLancarNullPointerException() {
+        @DisplayName("com notícia nula")
+        void dadoNoticiaNula_QuandoSalvar_EntaoLancarException() {
             Executable acao = () -> salvarAdapter.salvar(null);
             Assertions.assertThrows(NoSuchElementException.class, acao);
         }

@@ -1,11 +1,11 @@
 package io.micronoticias.application.core.usecase;
 
 import io.micronoticias.adapter.out.NoticiaSalvarAdapter;
-import io.micronoticias.adapter.out.entity.NoticiaEntity;
 import io.micronoticias.application.core.domain.NoticiaBusiness;
 import io.micronoticias.util.FabricaDeObjetosDeTeste;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.NoSuchElementException;
 
 @SpringBootTest
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
@@ -72,7 +71,7 @@ class NoticiaCriarUseCaseUnitTest {
             noticiaBusiness.setNomeAutor(null);
 
             Mockito.when(salvarAdapter.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(noticiaBusiness);
-            var resposta = salvarAdapter.salvar(noticiaBusiness);
+            var resposta = criarUseCase.criar(noticiaBusiness);
 
             Assertions.assertNull(resposta.getNomeAutor());
         }
@@ -84,39 +83,24 @@ class NoticiaCriarUseCaseUnitTest {
             noticiaBusiness.setFonte(null);
 
             Mockito.when(salvarAdapter.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(noticiaBusiness);
-            var resposta = salvarAdapter.salvar(noticiaBusiness);
+            var resposta = criarUseCase.criar(noticiaBusiness);
 
             Assertions.assertNull(resposta.getFonte());
         }
     }
 
     @Nested
-    @DisplayName("Dados válidos")
+    @DisplayName("Exceções")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class NoticiaException {
 
+        @Test
+        @Order(1)
+        @DisplayName("com notícia nula")
+        void dadoNoticiaNula_QuandoCriar_EntaoLancarException() {
+            Executable acao = () -> criarUseCase.criar(noticiaBusiness);
+            Assertions.assertThrows(NoSuchElementException.class, acao);
+        }
     }
-
-//    @Test
-//    @Order(2)
-//    void criarNoticia_ComDadosInvalidos_RetornarExceptions() {
-
-//        final var business = new NoticiaBusiness(1L, null, "Título", "Linha Fina", "Lide", "Corpo",
-//                "NomeAutor", "Fonte", Instant.now());
-//
-//        Mockito.when(salvarAdapter.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(business);
-//
-//        Assertions.assertThrows(CampoNuloProibidoException.class, () -> this.criarUseCase.criar(business));
-
-
-//        final var business2 = new NoticiaBusiness(2L, "Chapéu", null, "Linha Fina", "Lide", "Corpo",
-//                "NomeAutor", "Fonte", Instant.now());
-//
-//        Mockito.when(salvarAdapter.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(business2);
-//
-//        Assertions.assertThrows(CampoVazioProibidoException.class, () -> this.criarUseCase.criar(business2));
-
-
-//    }
 }
 

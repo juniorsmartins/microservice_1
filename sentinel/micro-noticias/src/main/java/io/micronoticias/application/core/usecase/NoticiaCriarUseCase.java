@@ -4,7 +4,6 @@ import io.micronoticias.application.core.domain.NoticiaBusiness;
 import io.micronoticias.application.port.in.NoticiaCriarInputPort;
 import io.micronoticias.application.port.out.NoticiaSalvarOutputPort;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class NoticiaCriarUseCase implements NoticiaCriarInputPort {
@@ -20,7 +19,7 @@ public class NoticiaCriarUseCase implements NoticiaCriarInputPort {
 
         return Optional.of(noticiaBusiness)
                 .map(this.salvarOutputPort::salvar)
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 }
 
