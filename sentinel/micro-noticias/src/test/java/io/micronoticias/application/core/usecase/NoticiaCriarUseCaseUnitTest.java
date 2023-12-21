@@ -98,7 +98,7 @@ class NoticiaCriarUseCaseUnitTest {
         @Order(1)
         @DisplayName("com notícia nula")
         void dadoNoticiaNula_QuandoCriar_EntaoLancarException() {
-            Executable acao = () -> criarUseCase.criar(noticiaBusiness);
+            Executable acao = () -> criarUseCase.criar(null);
             Assertions.assertThrows(NoSuchElementException.class, acao);
         }
     }

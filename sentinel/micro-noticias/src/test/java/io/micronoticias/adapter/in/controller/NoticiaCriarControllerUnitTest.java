@@ -6,6 +6,7 @@ import io.micronoticias.application.port.in.NoticiaCriarInputPort;
 import io.micronoticias.util.FabricaDeObjetosDeTeste;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.NoSuchElementException;
 
 @SpringBootTest
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
@@ -71,6 +73,20 @@ class NoticiaCriarControllerUnitTest {
                 () -> Assertions.assertEquals(noticiaBusiness.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
                         resposta.getBody().dataHoraCriacao().truncatedTo(ChronoUnit.SECONDS))
             );
+        }
+    }
+
+    @Nested
+    @DisplayName("Exceções")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class NoticiaException {
+
+        @Test
+        @Order(1)
+        @DisplayName("com notícia nula")
+        void dadoNoticiaNula_QuandoSalvar_EntaoLancarException() {
+            Executable acao = () -> controller.criar(null);
+            Assertions.assertThrows(NoSuchElementException.class, acao);
         }
     }
 }
