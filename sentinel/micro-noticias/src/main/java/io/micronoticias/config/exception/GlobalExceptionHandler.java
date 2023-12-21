@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.time.Instant;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
@@ -36,6 +37,19 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         var mensagemDeErro = this.criarMensagemDeRetorno(tipoErroEnum, httpStatus, detail)
                 .build();
+
+        return this.handleExceptionInternal(ex, mensagemDeErro, new HttpHeaders(), httpStatus, webRequest);
+    }
+
+    @ExceptionHandler(value = NoSuchElementException.class)
+    public ResponseEntity<Object> tratarNoSuchElement(NoSuchElementException ex, WebRequest webRequest) {
+
+        var tipoErroEnum = TipoDeErroEnum.VALOR_NULO_PROIBIDO;
+        var httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        var detail = ex.getMessage();
+
+        var mensagemDeErro = this.criarMensagemDeRetorno(tipoErroEnum, httpStatus, detail)
+            .build();
 
         return this.handleExceptionInternal(ex, mensagemDeErro, new HttpHeaders(), httpStatus, webRequest);
     }

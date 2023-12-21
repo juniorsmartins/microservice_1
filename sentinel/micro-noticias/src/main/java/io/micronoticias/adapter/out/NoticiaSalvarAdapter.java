@@ -8,7 +8,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Repository
@@ -23,11 +22,11 @@ public class NoticiaSalvarAdapter implements NoticiaSalvarOutputPort {
     @Override
     public NoticiaBusiness salvar(NoticiaBusiness noticiaBusiness) {
 
-        return Optional.of(noticiaBusiness)
+        return Optional.ofNullable(noticiaBusiness)
                 .map(this.mapper::toNoticiaEntity)
                 .map(this.repository::save)
                 .map(this.mapper::toNoticiaBusiness)
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 }
 
