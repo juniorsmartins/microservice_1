@@ -5,8 +5,8 @@ import io.micronoticias.application.core.domain.NoticiaBusiness;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface NoticiaMapperEntity {
+public interface NoticiaMapperBusiness {
 
-    NoticiaEntity fromNoticiaBusiness(NoticiaBusiness noticiaBusiness);
+    NoticiaBusiness fromNoticiaEntity(NoticiaEntity noticiaEntity);
 }
 

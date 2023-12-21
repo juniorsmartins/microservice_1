@@ -79,7 +79,8 @@ class NoticiaControllerIntegrationTest {
     @Order(3)
     void criarNoticia_ComDadosValidos_RetornarNoticiaPersistida() {
 
-        var dtoIn = FabricaDeObjetosDeTeste.gerarNoticiaCriarDtoInBuilder().build();
+        var dtoIn = FabricaDeObjetosDeTeste.gerarNoticiaCriarDtoInBuilder()
+            .build();
 
         var resposta = this.webTestClient.post()
             .uri(END_POINT)

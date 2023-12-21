@@ -1,6 +1,7 @@
 package io.micronoticias.application.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.github.javafaker.Faker;
 import io.micronoticias.config.exception.http_400.CampoNuloProibidoException;
 import io.micronoticias.config.exception.http_400.CampoVazioProibidoException;
 import io.micronoticias.config.exception.http_400.DadoComTamanhoMaximoInvalidoException;
@@ -20,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
 @DisplayName("Classe NotíciaBusiness")
 class NoticiaBusinessUnitTest {
+
+    public static Faker faker = new Faker();
 
     private NoticiaBusiness noticiaBusiness;
 
@@ -82,15 +85,11 @@ class NoticiaBusinessUnitTest {
             Assertions.assertThrows(CampoVazioProibidoException.class, acao);
         }
 
-        @ParameterizedTest
-        @ValueSource(strings = {
-            "101_caracteres---------------------------------------------------------------------------------------",
-            "140_caracteres------------------------------------------------------------------------------------------------------------------------------"
-        })
+        @Test
         @Order(3)
         @DisplayName("com tamanho inválido")
-        void dadoTituloComTamanhoInvalido_QuandoSetTitulo_EntaoLancarException(String titulo) {
-            Executable acao = () -> noticiaBusiness.setTitulo(titulo);
+        void dadoTituloComTamanhoInvalido_QuandoSetTitulo_EntaoLancarException() {
+            Executable acao = () -> noticiaBusiness.setTitulo(faker.lorem().characters(101, 150));
             Assertions.assertThrows(DadoComTamanhoMaximoInvalidoException.class, acao);
         }
     }
@@ -121,7 +120,97 @@ class NoticiaBusinessUnitTest {
         @Order(3)
         @DisplayName("com tamanho inválido")
         void dadoLinhaFinaComTamanhoInvalido_QuandoSetLinhaFina_EntaoLancarException() {
-            Executable acao = () -> noticiaBusiness.setLinhaFina("151_caracteres-----------------------------------------------------------------------------------------------------------------------------------------");
+            Executable acao = () -> noticiaBusiness.setLinhaFina(faker.lorem().characters(151, 200));
+            Assertions.assertThrows(DadoComTamanhoMaximoInvalidoException.class, acao);
+        }
+    }
+
+    @Nested
+    @DisplayName("Lide")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class Lide {
+
+        @Test
+        @Order(1)
+        @DisplayName("nula")
+        void dadoLideNulo_QuandoSetLide_EntaoLancarException() {
+            Executable acao = () -> noticiaBusiness.setLide(null);
+            Assertions.assertThrows(CampoNuloProibidoException.class, acao);
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"", "   "})
+        @Order(2)
+        @DisplayName("vazio ou em branco")
+        void dadoLideVazioOuEmBranco_QuandoSetLide_EntaoLancarException(String lide) {
+            Executable acao = () -> noticiaBusiness.setLide(lide);
+            Assertions.assertThrows(CampoVazioProibidoException.class, acao);
+        }
+
+        @Test
+        @Order(3)
+        @DisplayName("com tamanho inválido")
+        void dadoLideComTamanhoInvalido_QuandoSetLide_EntaoLancarException() {
+            Executable acao = () -> noticiaBusiness.setLide(faker.lorem().characters(501, 600));
+            Assertions.assertThrows(DadoComTamanhoMaximoInvalidoException.class, acao);
+        }
+    }
+
+    @Nested
+    @DisplayName("Corpo")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class Corpo {
+
+        @Test
+        @Order(1)
+        @DisplayName("nulo")
+        void dadoCorpoNulo_QuandoSetCorpo_EntaoLancarException() {
+            Executable acao = () -> noticiaBusiness.setCorpo(null);
+            Assertions.assertThrows(CampoNuloProibidoException.class, acao);
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"", "   "})
+        @Order(2)
+        @DisplayName("vazio ou em branco")
+        void dadoCorpoVazioOuEmBranco_QuandoSetCorpo_EntaoLancarException(String corpo) {
+            Executable acao = () -> noticiaBusiness.setCorpo(corpo);
+            Assertions.assertThrows(CampoVazioProibidoException.class, acao);
+        }
+
+        @Test
+        @Order(3)
+        @DisplayName("com tamanho inválido")
+        void dadoCorpoComTamanhoInvalido_QuandoSetCorpo_EntaoLancarException() {
+            Executable acao = () -> noticiaBusiness.setCorpo(faker.lorem().characters(5001, 5100));
+            Assertions.assertThrows(DadoComTamanhoMaximoInvalidoException.class, acao);
+        }
+    }
+
+    @Nested
+    @DisplayName("Nome Autor")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class NomeAutor {
+
+        @Test
+        @Order(1)
+        @DisplayName("com tamanho inválido")
+        void dadoNomeAutorComTamanhoInvalido_QuandoSetNomeAutor_EntaoLancarException() {
+            Executable acao = () -> noticiaBusiness.setNomeAutor(faker.lorem().characters(51, 75));
+            Assertions.assertThrows(DadoComTamanhoMaximoInvalidoException.class, acao);
+        }
+    }
+
+    @Nested
+    @DisplayName("Fonte")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class Fonte {
+
+        @Test
+        @Order(1)
+        @DisplayName("com tamanho inválido")
+        void dadoFonteComTamanhoInvalido_QuandoSetFonte_EntaoLancarException() {
+            Executable acao = () -> noticiaBusiness.setFonte(faker.lorem().characters(251, 275));
             Assertions.assertThrows(DadoComTamanhoMaximoInvalidoException.class, acao);
         }
     }

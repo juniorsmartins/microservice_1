@@ -210,5 +210,21 @@ public final class NoticiaBusiness {
     public int hashCode() {
         return Objects.hash(getId());
     }
+
+    @Override
+    public String toString() {
+        return "NoticiaBusiness{" +
+                "id=" + id +
+                ", chapeu='" + chapeu + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", linhaFina='" + linhaFina + '\'' +
+                ", lide='" + lide + '\'' +
+                ", corpo='" + corpo + '\'' +
+                ", nomeAutor='" + nomeAutor + '\'' +
+                ", fonte='" + fonte + '\'' +
+                ", dataHoraCriacao=" + dataHoraCriacao +
+                ", dataHoraAtualizacao=" + dataHoraAtualizacao +
+                '}';
+    }
 }
 
