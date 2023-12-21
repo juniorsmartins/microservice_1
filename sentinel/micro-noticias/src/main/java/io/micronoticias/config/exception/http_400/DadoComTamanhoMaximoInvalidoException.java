@@ -9,7 +9,7 @@ public final class DadoComTamanhoMaximoInvalidoException extends DadoInvalidoExc
     }
 
     public DadoComTamanhoMaximoInvalidoException(String nomeCampo, int limiteMaximo, int quantiaCaracteres) {
-        super(String.format(MensagemPadrao.DADO_COM_TAMANHO_INVALIDO, nomeCampo, limiteMaximo, quantiaCaracteres));
+        this(String.format(MensagemPadrao.DADO_COM_TAMANHO_INVALIDO, nomeCampo, limiteMaximo, quantiaCaracteres));
     }
 }
 

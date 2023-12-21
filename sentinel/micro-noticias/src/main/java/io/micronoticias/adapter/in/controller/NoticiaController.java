@@ -35,20 +35,8 @@ public class NoticiaController {
     public ResponseEntity<NoticiaCriarDtoOut> criar(@RequestBody @Valid NoticiaCriarDtoIn dtoIn) {
 
         var resposta = Optional.of(dtoIn)
-                .map(d -> {
-                    System.out.println("\n Controller - " + d + "\n");
-                    return d;
-                })
                 .map(this.mapperIn::toNoticiaBusiness)
-                .map(d -> {
-                    System.out.println("\n" + d + "\n");
-                    return d;
-                })
                 .map(this.criarInputPort::criar)
-                .map(d -> {
-                    System.out.println("\n" + d + "\n");
-                    return d;
-                })
                 .map(this.mapperOut::toNoticiaCriarDtoOut)
                 .orElseThrow(NoSuchElementException::new);
 

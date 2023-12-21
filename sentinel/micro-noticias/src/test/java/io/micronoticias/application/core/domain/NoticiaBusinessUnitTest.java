@@ -1,6 +1,5 @@
 package io.micronoticias.application.core.domain;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.github.javafaker.Faker;
 import io.micronoticias.config.exception.http_400.CampoNuloProibidoException;
 import io.micronoticias.config.exception.http_400.CampoVazioProibidoException;
@@ -14,8 +13,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
@@ -212,6 +209,60 @@ class NoticiaBusinessUnitTest {
         void dadoFonteComTamanhoInvalido_QuandoSetFonte_EntaoLancarException() {
             Executable acao = () -> noticiaBusiness.setFonte(faker.lorem().characters(251, 275));
             Assertions.assertThrows(DadoComTamanhoMaximoInvalidoException.class, acao);
+        }
+    }
+
+    @Nested
+    @DisplayName("Métodos Padrão")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class MetodosPadrao {
+
+        @Test
+        @Order(1)
+        @DisplayName("toString")
+        void dadoNoticiaValida_QuandoToString_EntaoRetornarStringIgual() {
+            var resposta = "NoticiaBusiness{" +
+                    "id=" + noticiaBusiness.getId() +
+                    ", chapeu='" + noticiaBusiness.getChapeu() + '\'' +
+                    ", titulo='" + noticiaBusiness.getTitulo() + '\'' +
+                    ", linhaFina='" + noticiaBusiness.getLinhaFina() + '\'' +
+                    ", lide='" + noticiaBusiness.getLide() + '\'' +
+                    ", corpo='" + noticiaBusiness.getCorpo() + '\'' +
+                    ", nomeAutor='" + noticiaBusiness.getNomeAutor() + '\'' +
+                    ", fonte='" + noticiaBusiness.getFonte() + '\'' +
+                    ", dataHoraCriacao=" + noticiaBusiness.getDataHoraCriacao() +
+                    ", dataHoraAtualizacao=" + noticiaBusiness.getDataHoraAtualizacao() +
+                    '}';
+            Assertions.assertEquals(resposta, noticiaBusiness.toString());
+        }
+
+        @Test
+        @Order(2)
+        @DisplayName("equals")
+        void dadoDuasNoticiasValidas_QuandoEquals_EntaoRetornarNotEquals() {
+            var primeiraNoticia = FabricaDeObjetosDeTeste.gerarNoticiaBusiness();
+            primeiraNoticia.setId(1L);
+
+            var segundaNoticia = FabricaDeObjetosDeTeste.gerarNoticiaBusiness();
+            segundaNoticia.setId(2L);
+
+            Assertions.assertNotEquals(primeiraNoticia, segundaNoticia);
+        }
+
+        @Test
+        @Order(3)
+        @DisplayName("hashCode")
+        void dadoDoisHashCodeValidos_QuandoHashCode_EntaoRetornarNotEquals() {
+            var primeiraNoticia = FabricaDeObjetosDeTeste.gerarNoticiaBusiness();
+            primeiraNoticia.setId(1L);
+
+            var segundaNoticia = FabricaDeObjetosDeTeste.gerarNoticiaBusiness();
+            segundaNoticia.setId(2L);
+
+            var primeiroHash = primeiraNoticia.hashCode();
+            var segundoHash = segundaNoticia.hashCode();
+
+            Assertions.assertNotEquals(primeiroHash, segundoHash);
         }
     }
 }

@@ -46,22 +46,6 @@ public final class NoticiaBusiness {
 
     private Instant dataHoraAtualizacao;
 
-    public NoticiaBusiness() {}
-
-    public NoticiaBusiness(Long id, String chapeu, String titulo, String linhaFina,
-                           String lide, String corpo, String nomeAutor, String fonte,
-                           Instant dataHoraCriacao) {
-        this.setId(id);
-        this.setChapeu(chapeu);
-        this.setTitulo(titulo);
-        this.setLinhaFina(linhaFina);
-        this.setLide(lide);
-        this.setCorpo(corpo);
-        this.setNomeAutor(nomeAutor);
-        this.setFonte(fonte);
-        this.setDataHoraCriacao(dataHoraCriacao);
-    }
-
     public Long getId() {
         return id;
     }

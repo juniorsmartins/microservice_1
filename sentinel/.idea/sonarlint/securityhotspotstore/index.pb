@@ -75,3 +75,5 @@ Xmicro-noticias/src/main/java/io/micronoticias/adapter/in/mapper/NoticiaMapperDt
 Wmicro-noticias/src/main/java/io/micronoticias/adapter/in/mapper/NoticiaMapperDtoIn.java,b/f/bf297c7c595a7bd4cf71022f14bc6ba74b03104b
 ‹
 [micro-noticias/src/main/java/io/micronoticias/adapter/out/mapper/NoticiaMapperBusiness.java,9/5/9545b20a56ad7ddcb5c7dff33a54aa092969888a
+‡
+Wmicro-noticias/src/test/java/io/micronoticias/adapter/out/entity/NoticiaEntityTest.java,e/6/e6213805149863004f9140e01a7a41d7b4aaf029
