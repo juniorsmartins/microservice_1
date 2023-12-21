@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="104ce9eb-638f-48a9-af61-45d4c51eb7a1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/3/130eca15d07ee1c598d001340471bf40c345d56e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/c/3c3cc171e45d75b1773802eb1f1cac714c9b670b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/b/eb00545a19d00bb0c939567318f920f3e5d12982" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/c/2c3af0aacc411c1429b31fcb0b35b91479e7d2b0" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/c/2c3af0aacc411c1429b31fcb0b35b91479e7d2b0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/f/4f4ba438991297237989bd9c09da985698a55b04" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/f/4f4ba438991297237989bd9c09da985698a55b04" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/3/130eca15d07ee1c598d001340471bf40c345d56e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/c/3c3cc171e45d75b1773802eb1f1cac714c9b670b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/b/eb00545a19d00bb0c939567318f920f3e5d12982" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/in/controller/NoticiaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/in/controller/NoticiaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/out/NoticiaSalvarAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/main/java/io/micronoticias/adapter/out/NoticiaSalvarAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-noticias/src/test/java/io/micronoticias/adapter/in/controller/NoticiaControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/test/java/io/micronoticias/adapter/in/controller/NoticiaControllerIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +22,8 @@
       <list>
         <option value="Record" />
         <option value="Interface" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -53,6 +48,7 @@
   "keyToString": {
     "Application.MicroNoticiasApplication.executor": "Run",
     "JUnit.All in micro-noticias.executor": "Run",
+    "JUnit.NoticiaBusinessUnitTest.executor": "Run",
     "JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComContentNegotiationXML_RetornarHttp201.executor": "Run",
     "JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400.executor": "Run",
     "JUnit.NoticiaControllerUnitTest.executor": "Run",
@@ -83,6 +79,7 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="io.micronoticias.application.core.domain" />
       <recent name="io.micronoticias.application.core.usecase" />
       <recent name="io.micronoticias.adapter.out" />
       <recent name="io.micronoticias.adapter.in.controller" />
@@ -108,26 +105,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in micro-noticias" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="micro-noticias" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NoticiaControllerIntegrationTest.criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="NoticiaBusinessUnitTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="micro-noticias" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="io.micronoticias.adapter.in.controller.*" />
+          <option name="PATTERN" value="io.micronoticias.application.core.domain.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="io.micronoticias.adapter.in.controller" />
-      <option name="MAIN_CLASS_NAME" value="io.micronoticias.adapter.in.controller.NoticiaControllerIntegrationTest" />
-      <option name="METHOD_NAME" value="criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="io.micronoticias.application.core.domain" />
+      <option name="MAIN_CLASS_NAME" value="io.micronoticias.application.core.domain.NoticiaBusinessUnitTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -147,6 +135,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="NoticiaSalvarAdapterUnitTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="micro-noticias" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.micronoticias.adapter.out.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="io.micronoticias.adapter.out" />
+      <option name="MAIN_CLASS_NAME" value="io.micronoticias.adapter.out.NoticiaSalvarAdapterUnitTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="java in micro-noticias" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="micro-noticias" />
       <option name="TEST_OBJECT" value="directory" />
@@ -158,10 +161,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.java in micro-noticias" />
-        <item itemvalue="Application.MicroNoticiasApplication" />
-        <item itemvalue="JUnit.All in micro-noticias" />
+        <item itemvalue="JUnit.NoticiaBusinessUnitTest" />
         <item itemvalue="JUnit.NoticiaCriarUseCaseUnitTest" />
-        <item itemvalue="JUnit.NoticiaControllerIntegrationTest.criarNoticia_ComDadosInvalidos_RetornarApiErrosAndHttp400" />
+        <item itemvalue="JUnit.NoticiaSalvarAdapterUnitTest" />
+        <item itemvalue="Application.MicroNoticiasApplication" />
       </list>
     </recent_temporary>
   </component>

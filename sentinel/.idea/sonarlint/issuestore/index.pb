@@ -69,3 +69,5 @@ Kmicro-noticias/src/main/java/io/micronoticias/MicroNoticiasApplication.java,8/
 Umicro-noticias/src/main/java/io/micronoticias/adapter/in/mapper/NoticiaMapperDto.java,8/9/899326d0b53d13d94ca1a3634943df791e14f80e
 ‰
 Ymicro-noticias/src/main/java/io/micronoticias/adapter/out/mapper/NoticiaMapperEntity.java,6/1/61f70f3b87b8d44e399600b65aa29c0e51eafc83
+’
+bmicro-noticias/src/test/java/io/micronoticias/application/core/domain/NoticiaBusinessUnitTest.java,a/a/aaa96482602b8f5c050c488927da28995c9b8540
