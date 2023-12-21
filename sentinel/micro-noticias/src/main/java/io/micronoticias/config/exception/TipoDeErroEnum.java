@@ -9,7 +9,8 @@ public enum TipoDeErroEnum {
   RECURSO_NAO_ENCONTRADO("Recurso não encontrado!", "/recurso-nao-encontrado"),
   REQUISICAO_MAL_FORMULADA("Requisição mal formulada.", "/requisicao-mal-formulada"),
   DADOS_INVALIDOS("Dados inválidos.", "/dados-invalidos"),
-  MIDIA_NAO_SUPORTADA("Tipo de mídia não suportada.", "/midia-nao-suportada");
+  MIDIA_NAO_SUPORTADA("Tipo de mídia não suportada.", "/midia-nao-suportada"),
+  VALOR_NULO_PROIBIDO("Valor nulo em local proibido.", "/valor-nulo-proibido");
 
   private final String titulo;
 

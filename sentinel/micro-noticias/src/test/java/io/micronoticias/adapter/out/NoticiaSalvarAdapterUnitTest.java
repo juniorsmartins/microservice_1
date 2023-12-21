@@ -5,6 +5,7 @@ import io.micronoticias.adapter.out.repository.NoticiaRepository;
 import io.micronoticias.util.FabricaDeObjetosDeTeste;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.NoSuchElementException;
 
 @SpringBootTest
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
@@ -33,7 +35,7 @@ class NoticiaSalvarAdapterUnitTest {
 
         @Test
         @Order(1)
-        @DisplayName("Notícia Válida")
+        @DisplayName("Notícia válida")
         void dadoNoticiaValida_QuandoSalvar_EntaoRetornarNoticiaSalvaComDadosIguaisAosDaEntrada() {
             var noticiaBusiness = FabricaDeObjetosDeTeste.gerarNoticiaBusiness();
             var noticiaEntity = NoticiaEntity.builder()
@@ -63,6 +65,14 @@ class NoticiaSalvarAdapterUnitTest {
                 () -> Assertions.assertEquals(noticiaEntity.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
                         resposta.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS))
             );
+        }
+
+        @Test
+        @Order(2)
+        @DisplayName("Notícia nula")
+        void dadoNoticiaNula_QuandoSalvar_EntaoLancarNullPointerException() {
+            Executable acao = () -> salvarAdapter.salvar(null);
+            Assertions.assertThrows(NoSuchElementException.class, acao);
         }
     }
 }
