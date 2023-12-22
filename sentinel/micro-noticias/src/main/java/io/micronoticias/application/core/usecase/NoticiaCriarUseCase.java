@@ -17,7 +17,7 @@ public class NoticiaCriarUseCase implements NoticiaCriarInputPort {
     @Override
     public NoticiaBusiness criar(NoticiaBusiness noticiaBusiness) {
 
-        return Optional.of(noticiaBusiness)
+        return Optional.ofNullable(noticiaBusiness)
                 .map(this.salvarOutputPort::salvar)
                 .orElseThrow();
     }

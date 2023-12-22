@@ -34,11 +34,11 @@ public class NoticiaController {
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<NoticiaCriarDtoOut> criar(@RequestBody @Valid NoticiaCriarDtoIn dtoIn) {
 
-        var resposta = Optional.of(dtoIn)
+        var resposta = Optional.ofNullable(dtoIn)
                 .map(this.mapperIn::toNoticiaBusiness)
                 .map(this.criarInputPort::criar)
                 .map(this.mapperOut::toNoticiaCriarDtoOut)
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
 
         return ResponseEntity
                 .created(URI.create("/api/v1/noticias/" + resposta.id()))

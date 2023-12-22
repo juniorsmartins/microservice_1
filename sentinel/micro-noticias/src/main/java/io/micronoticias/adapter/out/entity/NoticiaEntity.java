@@ -1,5 +1,6 @@
 package io.micronoticias.adapter.out.entity;
 
+import io.micronoticias.application.core.domain.NoticiaBusiness;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -62,6 +63,38 @@ public final class NoticiaEntity implements Serializable {
     @PreUpdate
     private void acionarAntesDeAtualizar() {
         this.dataHoraAtualizacao = Instant.now();
+    }
+
+    public static NoticiaEntity converterParaEntity(NoticiaBusiness noticiaBusiness) {
+        return NoticiaEntity.builder()
+            .id(noticiaBusiness.getId())
+            .chapeu(noticiaBusiness.getChapeu())
+            .titulo(noticiaBusiness.getTitulo())
+            .linhaFina(noticiaBusiness.getLinhaFina())
+            .lide(noticiaBusiness.getLide())
+            .corpo(noticiaBusiness.getCorpo())
+            .nomeAutor(noticiaBusiness.getNomeAutor())
+            .fonte(noticiaBusiness.getFonte())
+            .dataHoraCriacao(noticiaBusiness.getDataHoraCriacao())
+            .dataHoraAtualizacao(noticiaBusiness.getDataHoraAtualizacao())
+            .build();
+    }
+
+    public static NoticiaBusiness converterParaBusiness(NoticiaEntity noticiaEntity) {
+
+        var noticiaBusiness = new NoticiaBusiness();
+        noticiaBusiness.setId(noticiaEntity.getId());
+        noticiaBusiness.setChapeu(noticiaEntity.getChapeu());
+        noticiaBusiness.setTitulo(noticiaEntity.getTitulo());
+        noticiaBusiness.setLinhaFina(noticiaEntity.getLinhaFina());
+        noticiaBusiness.setLide(noticiaEntity.getLide());
+        noticiaBusiness.setCorpo(noticiaEntity.getCorpo());
+        noticiaBusiness.setNomeAutor(noticiaEntity.getNomeAutor());
+        noticiaBusiness.setFonte(noticiaEntity.getFonte());
+        noticiaBusiness.setDataHoraCriacao(noticiaEntity.getDataHoraCriacao());
+        noticiaBusiness.setDataHoraAtualizacao(noticiaEntity.getDataHoraAtualizacao());
+
+        return noticiaBusiness;
     }
 }
 

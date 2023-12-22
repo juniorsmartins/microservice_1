@@ -1,7 +1,6 @@
 package io.micronoticias.adapter.out;
 
-import io.micronoticias.adapter.out.mapper.NoticiaMapperBusiness;
-import io.micronoticias.adapter.out.mapper.NoticiaMapperEntity;
+import io.micronoticias.adapter.out.entity.NoticiaEntity;
 import io.micronoticias.adapter.out.repository.NoticiaRepository;
 import io.micronoticias.application.core.domain.NoticiaBusiness;
 import io.micronoticias.application.port.out.NoticiaSalvarOutputPort;
@@ -17,18 +16,14 @@ public class NoticiaSalvarAdapter implements NoticiaSalvarOutputPort {
 
     private final NoticiaRepository repository;
 
-    private final NoticiaMapperEntity mapperEntity;
-
-    private final NoticiaMapperBusiness mapperBusiness;
-
     @Transactional
     @Override
     public NoticiaBusiness salvar(NoticiaBusiness noticiaBusiness) {
 
         return Optional.ofNullable(noticiaBusiness)
-                .map(mapperEntity::fromNoticiaBusiness)
+                .map(NoticiaEntity::converterParaEntity)
                 .map(this.repository::save)
-                .map(this.mapperBusiness::fromNoticiaEntity)
+                .map(NoticiaEntity::converterParaBusiness)
                 .orElseThrow();
     }
 }
