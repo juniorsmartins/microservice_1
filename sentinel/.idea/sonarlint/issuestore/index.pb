@@ -5,3 +5,15 @@ Smicro-noticias/src/main/java/io/micronoticias/adapter/out/NoticiaSalvarAdapter.
 Zmicro-noticias/src/main/java/io/micronoticias/adapter/in/controller/NoticiaController.java,3/9/39e3c37ad1ec8b62c78d6e954c824009a363a18b
 è
 _micro-noticias/src/main/java/io/micronoticias/application/core/usecase/NoticiaCriarUseCase.java,8/0/802d6f939daae39fb9b72da1007c9cfd9871d7fe
+ô
+imicro-noticias/src/test/java/io/micronoticias/adapter/in/controller/NoticiaControllerIntegrationTest.java,4/f/4f4ba438991297237989bd9c09da985698a55b04
+ã
+[micro-noticias/src/main/java/io/micronoticias/adapter/in/dto/request/NoticiaCriarDtoIn.java,6/b/6b1e9b16074645692e67efd3b53c33f07a94373e
+è
+_micro-noticias/src/test/java/io/micronoticias/adapter/in/dto/request/NoticiaCriarDtoInTest.java,3/a/3a48e87f20d0f3ff806ff55dac364023006acd85
+í
+bmicro-noticias/src/test/java/io/micronoticias/application/core/domain/NoticiaBusinessUnitTest.java,a/a/aaa96482602b8f5c050c488927da28995c9b8540
+ä
+Zmicro-noticias/src/main/java/io/micronoticias/config/exception/GlobalExceptionHandler.java,f/4/f415df1838343ffb8a6f2ab7f1b3e8993652df6d
+ä
+Zmicro-noticias/src/main/java/io/micronoticias/application/core/domain/NoticiaBusiness.java,2/c/2c3af0aacc411c1429b31fcb0b35b91479e7d2b0
