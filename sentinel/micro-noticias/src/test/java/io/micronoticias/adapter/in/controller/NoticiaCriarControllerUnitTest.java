@@ -1,5 +1,6 @@
 package io.micronoticias.adapter.in.controller;
 
+import io.micronoticias.adapter.in.dto.request.NoticiaCriarDtoIn;
 import io.micronoticias.adapter.in.dto.response.NoticiaCriarDtoOut;
 import io.micronoticias.application.core.domain.NoticiaBusiness;
 import io.micronoticias.application.port.in.NoticiaCriarInputPort;
@@ -54,7 +55,6 @@ class NoticiaCriarControllerUnitTest {
             noticiaBusiness.setDataHoraCriacao(Instant.now());
 
             Mockito.when(criarInputPort.criar(Mockito.any())).thenReturn(noticiaBusiness);
-
             var resposta = controller.criar(dtoIn);
 
             Assertions.assertAll("Asserções Criar",
@@ -73,6 +73,56 @@ class NoticiaCriarControllerUnitTest {
                 () -> Assertions.assertEquals(noticiaBusiness.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS),
                         resposta.getBody().dataHoraCriacao().truncatedTo(ChronoUnit.SECONDS))
             );
+        }
+
+        @Test
+        @Order(2)
+        @DisplayName("sem nome de autor")
+        void dadoNoticiaValidaSemNomeAutor_QuandoCriar_EntaoRetornarNoticiaComDadosIguaisAosDaEntrada() {
+            var dtoIn = FabricaDeObjetosDeTeste.gerarNoticiaCriarDtoInBuilder()
+                .nomeAutor(null)
+                .build();
+
+            var noticiaBusiness = new NoticiaBusiness();
+            noticiaBusiness.setId(2L);
+            noticiaBusiness.setChapeu(dtoIn.chapeu());
+            noticiaBusiness.setTitulo(dtoIn.titulo());
+            noticiaBusiness.setLinhaFina(dtoIn.linhaFina());
+            noticiaBusiness.setLide(dtoIn.lide());
+            noticiaBusiness.setCorpo(dtoIn.corpo());
+            noticiaBusiness.setNomeAutor(dtoIn.nomeAutor());
+            noticiaBusiness.setFonte(dtoIn.fonte());
+            noticiaBusiness.setDataHoraCriacao(Instant.now());
+
+            Mockito.when(criarInputPort.criar(Mockito.any())).thenReturn(noticiaBusiness);
+            var resposta = controller.criar(dtoIn);
+
+            Assertions.assertNull(resposta.getBody().nomeAutor());
+        }
+
+        @Test
+        @Order(3)
+        @DisplayName("sem fonte")
+        void dadoNoticiaValidaSemFonte_QuandoCriar_EntaoRetornarNoticiaComDadosIguaisAosDaEntrada() {
+            var dtoIn = FabricaDeObjetosDeTeste.gerarNoticiaCriarDtoInBuilder()
+                    .fonte(null)
+                    .build();
+
+            var noticiaBusiness = new NoticiaBusiness();
+            noticiaBusiness.setId(2L);
+            noticiaBusiness.setChapeu(dtoIn.chapeu());
+            noticiaBusiness.setTitulo(dtoIn.titulo());
+            noticiaBusiness.setLinhaFina(dtoIn.linhaFina());
+            noticiaBusiness.setLide(dtoIn.lide());
+            noticiaBusiness.setCorpo(dtoIn.corpo());
+            noticiaBusiness.setNomeAutor(dtoIn.nomeAutor());
+            noticiaBusiness.setFonte(dtoIn.fonte());
+            noticiaBusiness.setDataHoraCriacao(Instant.now());
+
+            Mockito.when(criarInputPort.criar(Mockito.any())).thenReturn(noticiaBusiness);
+            var resposta = controller.criar(dtoIn);
+
+            Assertions.assertNull(resposta.getBody().fonte());
         }
     }
 

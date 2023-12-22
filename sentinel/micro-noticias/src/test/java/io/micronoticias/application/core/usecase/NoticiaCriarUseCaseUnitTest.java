@@ -63,30 +63,6 @@ class NoticiaCriarUseCaseUnitTest {
                         resposta.getDataHoraCriacao().truncatedTo(ChronoUnit.SECONDS))
             );
         }
-
-        @Test
-        @Order(2)
-        @DisplayName("sem nome de autor")
-        void dadoNoticiaValidaSemNomeAutor_QuandoCriar_EntaoRetornarNoticiaSalvaComDadosIguaisAosDaEntrada() {
-            noticiaBusiness.setNomeAutor(null);
-
-            Mockito.when(salvarAdapter.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(noticiaBusiness);
-            var resposta = criarUseCase.criar(noticiaBusiness);
-
-            Assertions.assertNull(resposta.getNomeAutor());
-        }
-
-        @Test
-        @Order(3)
-        @DisplayName("sem fonte")
-        void dadoNoticiaValidaSemFonte_QuandoCriar_EntaoRetornarNoticiaSalvaComDadosIguaisAosDaEntrada() {
-            noticiaBusiness.setFonte(null);
-
-            Mockito.when(salvarAdapter.salvar(Mockito.any(NoticiaBusiness.class))).thenReturn(noticiaBusiness);
-            var resposta = criarUseCase.criar(noticiaBusiness);
-
-            Assertions.assertNull(resposta.getFonte());
-        }
     }
 
     @Nested

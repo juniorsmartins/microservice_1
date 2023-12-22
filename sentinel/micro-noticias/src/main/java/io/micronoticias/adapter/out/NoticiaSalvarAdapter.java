@@ -1,8 +1,6 @@
 package io.micronoticias.adapter.out;
 
 import io.micronoticias.adapter.out.entity.NoticiaEntity;
-import io.micronoticias.adapter.out.mapper.NoticiaMapperBusiness;
-import io.micronoticias.adapter.out.mapper.NoticiaMapperEntity;
 import io.micronoticias.adapter.out.repository.NoticiaRepository;
 import io.micronoticias.application.core.domain.NoticiaBusiness;
 import io.micronoticias.application.port.out.NoticiaSalvarOutputPort;
@@ -17,10 +15,6 @@ import java.util.Optional;
 public class NoticiaSalvarAdapter implements NoticiaSalvarOutputPort {
 
     private final NoticiaRepository repository;
-
-    private final NoticiaMapperEntity mapperEntity;
-
-    private final NoticiaMapperBusiness mapperBusiness;
 
     @Transactional
     @Override
