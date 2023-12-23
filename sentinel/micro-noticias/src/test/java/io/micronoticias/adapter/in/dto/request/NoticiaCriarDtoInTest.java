@@ -5,15 +5,12 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.Set;
 
@@ -96,6 +93,154 @@ class NoticiaCriarDtoInTest {
         void dadoTituloComMaisCaracteresQuePermitido_QuandoValidar_EntaoLancarException() {
             var titulo = faker.lorem().characters(101, 150);
             var dtoIn = new NoticiaCriarDtoIn("Chapéu", titulo, "Linha Fina", "Lide", "Corpo", "Nome Autor", "Fonte");
+            Set<ConstraintViolation<NoticiaCriarDtoIn>> violations = validator.validate(dtoIn);
+            Assertions.assertFalse(violations.isEmpty());
+            Assertions.assertEquals(1, violations.size());
+        }
+    }
+
+    @Nested
+    @DisplayName("Linha Fina")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class LinhaFina {
+
+        @Test
+        @Order(1)
+        @DisplayName("nulo")
+        void dadoLinhaFinaNulo_QuandoValidar_EntaoLancarException() {
+            var dtoIn = new NoticiaCriarDtoIn("Chapéu", "Título", null, "Lide", "Corpo", "Nome Autor", "Fonte");
+            Set<ConstraintViolation<NoticiaCriarDtoIn>> violations = validator.validate(dtoIn);
+            Assertions.assertFalse(violations.isEmpty());
+            Assertions.assertEquals(1, violations.size());
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"", "   "})
+        @Order(2)
+        @DisplayName("vazio ou em branco")
+        void dadoLinhaFinaValorVazio_QuandoValidar_EntaoLancarException(String linhaFina) {
+            var dtoIn = new NoticiaCriarDtoIn("Chapéu", "Título", linhaFina, "Lide", "Corpo", "Nome Autor", "Fonte");
+            Set<ConstraintViolation<NoticiaCriarDtoIn>> violations = validator.validate(dtoIn);
+            Assertions.assertFalse(violations.isEmpty());
+            Assertions.assertEquals(1, violations.size());
+        }
+
+        @Test
+        @Order(3)
+        @DisplayName("com tamanho inválido")
+        void dadoLinhaFinaComMaisCaracteresQuePermitido_QuandoValidar_EntaoLancarException() {
+            var linhaFina = faker.lorem().characters(151, 200);
+            var dtoIn = new NoticiaCriarDtoIn("Chapéu", "Título", linhaFina, "Lide", "Corpo", "Nome Autor", "Fonte");
+            Set<ConstraintViolation<NoticiaCriarDtoIn>> violations = validator.validate(dtoIn);
+            Assertions.assertFalse(violations.isEmpty());
+            Assertions.assertEquals(1, violations.size());
+        }
+    }
+
+    @Nested
+    @DisplayName("Lide")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class Lide {
+
+        @Test
+        @Order(1)
+        @DisplayName("nulo")
+        void dadoLideNulo_QuandoValidar_EntaoLancarException() {
+            var dtoIn = new NoticiaCriarDtoIn("Chapéu", "Título", "Linha Fina", null, "Corpo", "Nome Autor", "Fonte");
+            Set<ConstraintViolation<NoticiaCriarDtoIn>> violations = validator.validate(dtoIn);
+            Assertions.assertFalse(violations.isEmpty());
+            Assertions.assertEquals(1, violations.size());
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"", "   "})
+        @Order(2)
+        @DisplayName("vazio ou em branco")
+        void dadoLideValorVazio_QuandoValidar_EntaoLancarException(String lide) {
+            var dtoIn = new NoticiaCriarDtoIn("Chapéu", "Título", "Linha Fina", lide, "Corpo", "Nome Autor", "Fonte");
+            Set<ConstraintViolation<NoticiaCriarDtoIn>> violations = validator.validate(dtoIn);
+            Assertions.assertFalse(violations.isEmpty());
+            Assertions.assertEquals(1, violations.size());
+        }
+
+        @Test
+        @Order(3)
+        @DisplayName("com tamanho inválido")
+        void dadoLideComMaisCaracteresQuePermitido_QuandoValidar_EntaoLancarException() {
+            var lide = faker.lorem().characters(501, 550);
+            var dtoIn = new NoticiaCriarDtoIn("Chapéu", "Título", "Linha Fina", lide, "Corpo", "Nome Autor", "Fonte");
+            Set<ConstraintViolation<NoticiaCriarDtoIn>> violations = validator.validate(dtoIn);
+            Assertions.assertFalse(violations.isEmpty());
+            Assertions.assertEquals(1, violations.size());
+        }
+    }
+
+    @Nested
+    @DisplayName("Corpo")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class Corpo {
+
+        @Test
+        @Order(1)
+        @DisplayName("nulo")
+        void dadoCorpoNulo_QuandoValidar_EntaoLancarException() {
+            var dtoIn = new NoticiaCriarDtoIn("Chapéu", "Título", "Linha Fina", "Lide", null, "Nome Autor", "Fonte");
+            Set<ConstraintViolation<NoticiaCriarDtoIn>> violations = validator.validate(dtoIn);
+            Assertions.assertFalse(violations.isEmpty());
+            Assertions.assertEquals(1, violations.size());
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"", "   "})
+        @Order(2)
+        @DisplayName("vazio ou em branco")
+        void dadoCorpoValorVazio_QuandoValidar_EntaoLancarException(String lide) {
+            var dtoIn = new NoticiaCriarDtoIn("Chapéu", "Título", "Linha Fina", lide, "Corpo", "Nome Autor", "Fonte");
+            Set<ConstraintViolation<NoticiaCriarDtoIn>> violations = validator.validate(dtoIn);
+            Assertions.assertFalse(violations.isEmpty());
+            Assertions.assertEquals(1, violations.size());
+        }
+
+        @Test
+        @Order(3)
+        @DisplayName("com tamanho inválido")
+        void dadoCorpoComMaisCaracteresQuePermitido_QuandoValidar_EntaoLancarException() {
+            var corpo = faker.lorem().characters(5001, 5050);
+            var dtoIn = new NoticiaCriarDtoIn("Chapéu", "Título", "Linha Fina", "Lide", corpo, "Nome Autor", "Fonte");
+            Set<ConstraintViolation<NoticiaCriarDtoIn>> violations = validator.validate(dtoIn);
+            Assertions.assertFalse(violations.isEmpty());
+            Assertions.assertEquals(1, violations.size());
+        }
+    }
+
+    @Nested
+    @DisplayName("Nome Autor")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class NomeAutor {
+
+        @Test
+        @Order(1)
+        @DisplayName("com tamanho inválido")
+        void dadoNomeAutorComMaisCaracteresQuePermitido_QuandoValidar_EntaoLancarException() {
+            var nomeAutor = faker.lorem().characters(51, 60);
+            var dtoIn = new NoticiaCriarDtoIn("Chapéu", "Título", "Linha Fina", "Lide", "Corpo", nomeAutor, "Fonte");
+            Set<ConstraintViolation<NoticiaCriarDtoIn>> violations = validator.validate(dtoIn);
+            Assertions.assertFalse(violations.isEmpty());
+            Assertions.assertEquals(1, violations.size());
+        }
+    }
+
+    @Nested
+    @DisplayName("Fonte")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class Fonte {
+
+        @Test
+        @Order(1)
+        @DisplayName("com tamanho inválido")
+        void dadoFonteComMaisCaracteresQuePermitido_QuandoValidar_EntaoLancarException() {
+            var fonte = faker.lorem().characters(251, 260);
+            var dtoIn = new NoticiaCriarDtoIn("Chapéu", "Título", "Linha Fina", "Lide", "Corpo", "Nome Autor", fonte);
             Set<ConstraintViolation<NoticiaCriarDtoIn>> violations = validator.validate(dtoIn);
             Assertions.assertFalse(violations.isEmpty());
             Assertions.assertEquals(1, violations.size());
