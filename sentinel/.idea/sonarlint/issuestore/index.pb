@@ -17,3 +17,11 @@ bmicro-noticias/src/test/java/io/micronoticias/application/core/domain/NoticiaBu
 Zmicro-noticias/src/main/java/io/micronoticias/config/exception/GlobalExceptionHandler.java,f/4/f415df1838343ffb8a6f2ab7f1b3e8993652df6d
 ä
 Zmicro-noticias/src/main/java/io/micronoticias/application/core/domain/NoticiaBusiness.java,2/c/2c3af0aacc411c1429b31fcb0b35b91479e7d2b0
+å
+\micro-noticias/src/main/java/io/micronoticias/application/port/in/NoticiaCriarInputPort.java,a/f/af1d4aa769c256d50fcad37a0e501f6d6e7dcb25
+è
+_micro-noticias/src/main/java/io/micronoticias/application/port/out/NoticiaSalvarOutputPort.java,0/d/0d4b8c9773f9a1569986491440e0b46ac791fd0a
+É
+Smicro-noticias/src/main/java/io/micronoticias/adapter/out/entity/NoticiaEntity.java,d/2/d2b6aee5c5081bd28019df6624a2519869517c7c
+Ä
+Pmicro-noticias/src/main/java/io/micronoticias/adapter/out/entity/FotoEntity.java,8/a/8a7e450f8013cfb2647bead6c3c7876ea31320d5
