@@ -5,12 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="688094f5-308a-4aa6-a787-cbc6db65741d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-noticias/src/test/java/io/micronoticias/adapter/in/controller/NoticiaControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-noticias/src/test/java/io/micronoticias/adapter/in/controller/NoticiaControllerIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageOptionsProvider">
+    <option name="myAddOrReplace" value="0" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -18,15 +29,41 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "JUnit.All in micro-noticias.executor": "Run",
-    "JUnit.java in micro-noticias.executor": "Run",
-    "git-widget-placeholder": "master"
+    "JUnit.NoticiaCriarDtoInTest.executor": "Run",
+    "JUnit.java in micro-noticias.executor": "Coverage",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "develop"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.All in micro-noticias">
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="io.micronoticias.adapter.in.dto.request" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.java in micro-noticias">
     <configuration name="All in micro-noticias" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="micro-noticias" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NoticiaCriarDtoInTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="micro-noticias" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.micronoticias.adapter.in.dto.request.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="io.micronoticias.adapter.in.dto.request" />
+      <option name="MAIN_CLASS_NAME" value="io.micronoticias.adapter.in.dto.request.NoticiaCriarDtoInTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -41,8 +78,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in micro-noticias" />
         <item itemvalue="JUnit.java in micro-noticias" />
+        <item itemvalue="JUnit.NoticiaCriarDtoInTest" />
+        <item itemvalue="JUnit.All in micro-noticias" />
       </list>
     </recent_temporary>
   </component>
@@ -53,7 +91,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/sentinel$java_in_micro_noticias.ic" NAME="java in micro-noticias Coverage Results" MODIFIED="1703281692574" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/sentinel$java_in_micro_noticias.ic" NAME="java in micro-noticias Coverage Results" MODIFIED="1703289627943" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/sentinel$All_in_micro_noticias.ic" NAME="All in micro-noticias Coverage Results" MODIFIED="1703254082863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
