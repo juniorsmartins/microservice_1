@@ -7,6 +7,7 @@ import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "noticias")
@@ -15,7 +16,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"fotos"})
 @EqualsAndHashCode(of = {"id"})
 public final class NoticiaEntity implements Serializable {
 
@@ -48,6 +49,11 @@ public final class NoticiaEntity implements Serializable {
 
     @Column(name = "fonte", length = 250)
     private String fonte;
+
+    @OneToMany
+    @JoinColumn(name = "noticia_id", nullable = false, referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_noticia_foto"))
+    private List<FotoEntity> fotos;
 
     @Column(name = "data_hora_criacao", insertable = true, updatable = false, nullable = false)
     private Instant dataHoraCriacao;

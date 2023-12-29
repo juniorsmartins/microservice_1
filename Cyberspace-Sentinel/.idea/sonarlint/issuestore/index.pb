@@ -45,3 +45,13 @@ YMicro-Noticia/src/main/java/io/micro_noticia/config/exception/GlobalExceptionHa
 KMicro-Noticia/src/main/java/io/micro_noticia/config/exception/ApiError.java,0/0/0061d151283501c62fe039cb6470246a3e297dd5
 Å
 QMicro-Noticia/src/main/java/io/micro_noticia/config/exception/TipoDeErroEnum.java,a/3/a37faba3bc08af4cd921a84ef45950fc3961a9b2
+ì
+cMicro-Noticia/src/main/java/io/micro_noticia/application/ports/input/NoticiaRevisionsInputPort.java,3/5/355b49d5c7e15252fe628ae5a4af6a410c3bf6ab
+í
+bMicro-Noticia/src/main/java/io/micro_noticia/application/core/usecase/NoticiaRevisionsUseCase.java,7/4/74d26295c12e68e75f6b27abcf1d8cf7cc134502
+ï
+eMicro-Noticia/src/main/java/io/micro_noticia/application/ports/output/NoticiaRevisionsOutputPort.java,7/f/7f74a95d13a87de804e20509cf3d28cdecfd86cf
+Ü
+VMicro-Noticia/src/main/java/io/micro_noticia/adapters/out/NoticiaRevisionsAdapter.java,b/c/bc9269e6032dee470333fbd3f48ffedc2585de6f
+ã
+[Micro-Noticia/src/main/java/io/micro_noticia/adapters/out/repository/NoticiaRepository.java,b/d/bd8bf213a00e7148aaa96d3ac717b9a1e63564e9
