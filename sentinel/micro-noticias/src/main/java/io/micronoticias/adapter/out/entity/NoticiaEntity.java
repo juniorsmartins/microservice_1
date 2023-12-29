@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"fotos"})
 @EqualsAndHashCode(of = {"id"})
 public final class NoticiaEntity implements Serializable {
 
