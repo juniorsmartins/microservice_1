@@ -1,7 +1,7 @@
 package io.micronoticias.adapter.in.controller;
 
-import io.micronoticias.adapter.in.dto.request.NoticiaCriarDtoIn;
 import io.micronoticias.adapter.in.dto.filtro.NoticiaFiltroDtoIn;
+import io.micronoticias.adapter.in.dto.request.NoticiaCriarDtoIn;
 import io.micronoticias.adapter.in.dto.response.NoticiaCriarDtoOut;
 import io.micronoticias.adapter.in.dto.response.NoticiaPesquisarDtoOut;
 import io.micronoticias.adapter.in.mapper.NoticiaMapperDtoIn;
@@ -10,7 +10,8 @@ import io.micronoticias.application.port.in.NoticiaCriarInputPort;
 import io.micronoticias.application.port.in.NoticiaPesquisarInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -22,11 +23,12 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.Optional;
 
-@Slf4j
 @RestController
 @RequestMapping(path = "/api/v1/noticias")
 @RequiredArgsConstructor
 public class NoticiaController {
+
+    private static final Logger log = LoggerFactory.getLogger(NoticiaController.class);
 
     private final NoticiaCriarInputPort criarInputPort;
 

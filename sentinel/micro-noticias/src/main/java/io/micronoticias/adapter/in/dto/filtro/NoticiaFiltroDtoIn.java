@@ -7,6 +7,8 @@ import org.hibernate.validator.constraints.Length;
 @Builder
 public record NoticiaFiltroDtoIn(
 
+    String id,
+
     @Length(max = NoticiaBusiness.CHAPEU_CARACTERES_MAXIMO)
     String chapeu,
 

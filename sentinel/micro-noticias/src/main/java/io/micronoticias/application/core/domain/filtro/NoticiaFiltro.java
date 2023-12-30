@@ -2,6 +2,8 @@ package io.micronoticias.application.core.domain.filtro;
 
 public final class NoticiaFiltro {
 
+    private String id;
+
     private String chapeu;
 
     private String titulo;
@@ -15,6 +17,14 @@ public final class NoticiaFiltro {
     private String nomeAutor;
 
     private String fonte;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getChapeu() {
         return chapeu;
