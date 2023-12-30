@@ -25,16 +25,20 @@ public final class FotoEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "nome")
     private String nome;
 
+    @Column(name = "descricao")
     private String descricao;
 
     @Lob
-    @Column(length = Length.LOB_DEFAULT)
+    @Column(name = "imagem", length = Length.LOB_DEFAULT)
     private byte[] imagem;
 
+    @Column(name = "tipo")
     private String tipo;
 
+    @Column(name = "tamanho")
     private String tamanho;
 }
 
